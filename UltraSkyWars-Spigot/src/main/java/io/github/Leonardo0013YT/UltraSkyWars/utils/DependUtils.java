@@ -15,7 +15,7 @@ import java.net.URLConnection;
 
 public class DependUtils {
 
-    private UltraSkyWars plugin;
+    private final UltraSkyWars plugin;
 
     public DependUtils(UltraSkyWars plugin) {
         this.plugin = plugin;
@@ -45,9 +45,9 @@ public class DependUtils {
             } else {
                 loadJarFile(commons);
             }
-            File mongo = new File(plugin.getDataFolder(), "libs/mongo-java-driver-3.9.1.jar");
+            File mongo = new File(plugin.getDataFolder(), "libs/mongo-java-driver-3.12.10.jar");
             if (!mongo.exists()) {
-                this.download(new URL("https://repo1.maven.org/maven2/org/mongodb/mongo-java-driver/3.9.1/mongo-java-driver-3.9.1.jar"), "mongo-java-driver-3.9.1.jar");
+                this.download(new URL("https://repo1.maven.org/maven2/org/mongodb/mongo-java-driver/3.12.10/mongo-java-driver-3.12.10.jar"), "mongo-java-driver-3.12.10.jar");
             } else {
                 loadJarFile(mongo);
             }

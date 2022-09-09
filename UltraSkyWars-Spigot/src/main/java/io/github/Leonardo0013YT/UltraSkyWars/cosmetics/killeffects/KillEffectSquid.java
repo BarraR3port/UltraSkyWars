@@ -5,7 +5,6 @@ import io.github.Leonardo0013YT.UltraSkyWars.enums.CustomSound;
 import io.github.Leonardo0013YT.UltraSkyWars.interfaces.KillEffect;
 import org.bukkit.Effect;
 import org.bukkit.Location;
-import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Squid;
 import org.bukkit.metadata.FixedMetadataValue;
@@ -43,20 +42,15 @@ public class KillEffectSquid implements KillEffect, Cloneable {
                     return;
                 }
                 pased++;
-                if (pased >= 20) {
+                if(pased >= 20){
                     squid.remove();
                     cancel();
                     return;
                 }
                 Location loc = squid.getLocation().clone().add(0, 0.3 * pased, 0);
                 squid.teleport(loc);
-                if (plugin.getVc().is1_12() || plugin.getVc().is1_13to17()) {
-                    loc.getWorld().spawnParticle(Particle.EXPLOSION_NORMAL, loc, explosionAmount);
-                    loc.getWorld().spawnParticle(Particle.DRIP_LAVA, loc, lavaAmount);
-                } else {
-                    loc.getWorld().playEffect(loc, Effect.EXPLOSION, explosionAmount);
-                    loc.getWorld().playEffect(loc, Effect.LAVADRIP, lavaAmount);
-                }
+                loc.getWorld().playEffect(loc, Effect.EXPLOSION, explosionAmount);
+                loc.getWorld().playEffect(loc, Effect.LAVADRIP, lavaAmount);
                 CustomSound.KILLEFFECTS_SQUID.reproduce(p);
             }
         }.runTaskTimer(plugin, 0, 2);

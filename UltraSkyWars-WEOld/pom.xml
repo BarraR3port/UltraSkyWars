@@ -25,5 +25,16 @@
         </plugins>
     </build>
 
+    <dependencies>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>UltraSkyWars</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- FAWE Core API -->
+
+
+    </dependencies>
 
 </project>

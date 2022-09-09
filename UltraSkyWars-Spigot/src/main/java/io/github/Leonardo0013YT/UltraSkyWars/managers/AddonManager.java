@@ -1,18 +1,13 @@
 package io.github.Leonardo0013YT.UltraSkyWars.managers;
 
+import com.podcrash.commissions.yandere.core.spigot.Main;
 import io.github.Leonardo0013YT.UltraSkyWars.UltraSkyWars;
 import io.github.Leonardo0013YT.UltraSkyWars.addons.PartiesAddon;
 import io.github.Leonardo0013YT.UltraSkyWars.addons.SlimeWorldManagerAddon;
-import io.github.Leonardo0013YT.UltraSkyWars.addons.economy.CoinsAddon;
-import io.github.Leonardo0013YT.UltraSkyWars.addons.economy.PlayerPointsAddon;
-import io.github.Leonardo0013YT.UltraSkyWars.addons.economy.VaultAddon;
-import io.github.Leonardo0013YT.UltraSkyWars.addons.holograms.HologramsAddon;
+import io.github.Leonardo0013YT.UltraSkyWars.addons.economy.YandereAddon;
 import io.github.Leonardo0013YT.UltraSkyWars.addons.holograms.HolographicDisplaysAddon;
-import io.github.Leonardo0013YT.UltraSkyWars.addons.holograms.TrHologramAddon;
 import io.github.Leonardo0013YT.UltraSkyWars.addons.leaderheads.*;
-import io.github.Leonardo0013YT.UltraSkyWars.addons.nametags.NametagEditAddon;
-import io.github.Leonardo0013YT.UltraSkyWars.addons.nametags.TabAPI;
-import io.github.Leonardo0013YT.UltraSkyWars.addons.placeholders.MVdWPlaceholderAPIAddon;
+import io.github.Leonardo0013YT.UltraSkyWars.addons.nametags.TabAPIAddon;
 import io.github.Leonardo0013YT.UltraSkyWars.addons.placeholders.PlaceholderAPIAddon;
 import io.github.Leonardo0013YT.UltraSkyWars.data.SWPlayer;
 import io.github.Leonardo0013YT.UltraSkyWars.interfaces.EconomyAddon;
@@ -29,8 +24,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.List;
 
 public class AddonManager {
-
-    private EconomyAddon economy;
+    
+    public static EconomyAddon economy;
     private HologramAddon ha;
     private NametagAddon tag;
     private PartiesAddon parties;
@@ -40,8 +35,10 @@ public class AddonManager {
     public boolean check(String pluginName) {
         UltraSkyWars plugin = UltraSkyWars.get();
         if (plugin.getConfig().isSet("addons." + pluginName) && plugin.getConfig().getBoolean("addons." + pluginName)) {
-            if (Bukkit.getPluginManager().isPluginEnabled(pluginName)) {
+            if (Bukkit.getPluginManager().isPluginEnabled(pluginName)){
                 plugin.sendLogMessage("Hooked into §a" + pluginName + "§e!");
+                plugin.getConfig().set("addons." + pluginName, true);
+                plugin.saveConfig();
                 return true;
             } else {
                 plugin.getConfig().set("addons." + pluginName, false);
@@ -54,67 +51,46 @@ public class AddonManager {
 
     public void reload() {
         UltraSkyWars plugin = UltraSkyWars.get();
-        if (check("LeaderHeads")) {
-            new SkyWarsElo(plugin);
-            new SkyWarsSoloKills(plugin);
-            new SkyWarsTeamKills(plugin);
-            new SkyWarsRankedKills(plugin);
-            new SkyWarsSoloWins(plugin);
-            new SkyWarsTeamWins(plugin);
-            new SkyWarsRankedWins(plugin);
-            new SkyWarsSoloDeaths(plugin);
-            new SkyWarsTeamDeaths(plugin);
-            new SkyWarsRankedDeaths(plugin);
-            new SkyWarsCoins(plugin);
-            new SkyWarsKills(plugin);
-            new SkyWarsWins(plugin);
-            new SkyWarsDeaths(plugin);
-        }
         if (check("SlimeWorldManager")) {
             slime = new SlimeWorldManagerAddon(plugin);
-        }
-        if (check("MVdWPlaceholderAPI")) {
-            placeholder = new MVdWPlaceholderAPIAddon();
         }
         if (check("PlaceholderAPI")) {
             placeholder = new PlaceholderAPIAddon();
         }
         if (check("TAB")) {
-            tag = new TabAPI();
-        }
-        if (check("NametagEdit")) {
-            tag = new NametagEditAddon();
+            tag = new TabAPIAddon();
         }
         if (check("Parties")) {
             parties = new PartiesAddon();
         }
-        if (check("Vault")) {
-            economy = new VaultAddon();
-        }
-        if (check("PlayerPoints")) {
-            economy = new PlayerPointsAddon();
-        }
-        if (check("Coins")) {
-            economy = new CoinsAddon();
-        }
+    
         if (!plugin.isDisabled()) {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    if (check("TrHologram")) {
-                        remove();
-                        ha = new TrHologramAddon();
-                        reloadHologram();
-                    }
-                    if (check("Holograms")) {
-                        remove();
-                        ha = new HologramsAddon();
-                        reloadHologram();
-                    }
-                    if (check("HolographicDisplays")) {
+                    if(check("HolographicDisplays")){
                         remove();
                         ha = new HolographicDisplaysAddon();
                         reloadHologram();
+                    }
+                    if(check("YandereCore")){
+                        economy = new YandereAddon((Main) Bukkit.getPluginManager().getPlugin("YandereCore"));
+                    }
+                    if(check("LeaderHeadsRevamped")){
+                        new SkyWarsElo(plugin);
+                        new SkyWarsSoloKills(plugin);
+                        new SkyWarsTeamKills(plugin);
+                        new SkyWarsRankedKills(plugin);
+                        new SkyWarsSoloWins(plugin);
+                        new SkyWarsTeamWins(plugin);
+                        new SkyWarsRankedWins(plugin);
+                        new SkyWarsSoloDeaths(plugin);
+                        new SkyWarsTeamDeaths(plugin);
+                        new SkyWarsRankedDeaths(plugin);
+                        new SkyWarsCoins(plugin);
+                        new SkyWarsKills(plugin);
+                        new SkyWarsWins(plugin);
+                        new SkyWarsDeaths(plugin);
                     }
                 }
             }.runTaskLater(plugin, 80);
@@ -242,7 +218,6 @@ public class AddonManager {
     }
 
     public String parsePlaceholders(Player p, String value) {
-        UltraSkyWars plugin = UltraSkyWars.get();
         if (placeholder != null) {
             return placeholder.parsePlaceholders(p, value);
         }

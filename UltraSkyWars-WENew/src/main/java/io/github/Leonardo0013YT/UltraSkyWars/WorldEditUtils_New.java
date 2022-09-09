@@ -1,7 +1,6 @@
 package io.github.Leonardo0013YT.UltraSkyWars;
 
-import com.boydti.fawe.FaweAPI;
-import com.boydti.fawe.wrappers.WorldWrapper;
+import com.fastasyncworldedit.core.FaweAPI;
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.extent.clipboard.Clipboard;
 import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormat;

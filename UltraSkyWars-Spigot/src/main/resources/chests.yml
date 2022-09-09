@@ -1,216 +1,235 @@
 chests:
-  normal:
-    chainmail_helmet_1_0_0:
-      item:
-        ==: org.bukkit.inventory.ItemStack
-        type: CHAINMAIL_HELMET
-      chance: 25
-      center: false
-    chainmail_chestplate_1_0_0:
-      item:
-        ==: org.bukkit.inventory.ItemStack
-        type: CHAINMAIL_CHESTPLATE
-      chance: 25
-      center: false
-    chainmail_leggings_1_0_0:
-      item:
-        ==: org.bukkit.inventory.ItemStack
-        type: CHAINMAIL_LEGGINGS
-      chance: 25
-      center: false
-    chainmail_boots_1_0_0:
-      item:
-        ==: org.bukkit.inventory.ItemStack
-        type: CHAINMAIL_BOOTS
-      chance: 25
-      center: false
-    wood_32_0_0:
-      item:
-        ==: org.bukkit.inventory.ItemStack
-        type: WOOD
-        amount: 32
-      chance: 25
-      center: false
-    wood_16_0_0:
-      item:
-        ==: org.bukkit.inventory.ItemStack
-        type: WOOD
-        amount: 16
-      chance: 25
-      center: false
-    wood_8_0_0:
-      item:
-        ==: org.bukkit.inventory.ItemStack
-        type: WOOD
-        amount: 8
-      chance: 25
-      center: false
-    cobblestone_32_0_0:
-      item:
-        ==: org.bukkit.inventory.ItemStack
-        type: COBBLESTONE
-        amount: 32
-      chance: 25
-      center: false
-    cobblestone_16_0_0:
-      item:
-        ==: org.bukkit.inventory.ItemStack
-        type: COBBLESTONE
-        amount: 16
-      chance: 25
-      center: false
-    cobblestone_8_0_0:
-      item:
-        ==: org.bukkit.inventory.ItemStack
-        type: COBBLESTONE
-        amount: 8
-      chance: 25
-      center: false
-    iron_helmet_1_0_0:
-      item:
-        ==: org.bukkit.inventory.ItemStack
-        type: IRON_HELMET
-      chance: 25
-      center: true
-    iron_chestplate_1_0_0:
-      item:
-        ==: org.bukkit.inventory.ItemStack
-        type: IRON_CHESTPLATE
-      chance: 25
-      center: true
-    iron_boots_1_0_0:
-      item:
-        ==: org.bukkit.inventory.ItemStack
-        type: IRON_BOOTS
-      chance: 25
-      center: true
-    iron_leggings_1_0_0:
-      item:
-        ==: org.bukkit.inventory.ItemStack
-        type: IRON_LEGGINGS
-      chance: 25
-      center: true
-    golden_apple_3_0_0:
-      item:
-        ==: org.bukkit.inventory.ItemStack
-        type: GOLDEN_APPLE
-        amount: 3
-      chance: 25
-      center: true
-    golden_apple_2_0_0:
-      item:
-        ==: org.bukkit.inventory.ItemStack
-        type: GOLDEN_APPLE
-        amount: 2
-      chance: 25
-      center: true
-    golden_apple_1_0_0:
-      item:
-        ==: org.bukkit.inventory.ItemStack
-        type: GOLDEN_APPLE
-      chance: 25
-      center: true
-  basic:
-    leather_helmet_1_0_0:
-      item:
-        ==: org.bukkit.inventory.ItemStack
-        type: LEATHER_HELMET
-      chance: 25
-      center: false
-    leather_chestplate_1_0_0:
-      item:
-        ==: org.bukkit.inventory.ItemStack
-        type: LEATHER_CHESTPLATE
-      chance: 25
-      center: false
-    leather_leggings_1_0_0:
-      item:
-        ==: org.bukkit.inventory.ItemStack
-        type: LEATHER_LEGGINGS
-      chance: 25
-      center: false
-    leather_boots_1_0_0:
-      item:
-        ==: org.bukkit.inventory.ItemStack
-        type: LEATHER_BOOTS
-      chance: 25
-      center: false
-    stone_sword_1_0_0:
-      item:
-        ==: org.bukkit.inventory.ItemStack
-        type: STONE_SWORD
-      chance: 25
-      center: false
-    wood_32_0_0:
-      item:
-        ==: org.bukkit.inventory.ItemStack
-        type: WOOD
-        amount: 32
-      chance: 25
-      center: false
-    wood_16_0_0:
-      item:
-        ==: org.bukkit.inventory.ItemStack
-        type: WOOD
-        amount: 16
-      chance: 25
-      center: false
-    wood_8_0_0:
-      item:
-        ==: org.bukkit.inventory.ItemStack
-        type: WOOD
-        amount: 8
-      chance: 25
-      center: false
   op:
-    diamond_helmet_1_0_0:
-      item:
-        ==: org.bukkit.inventory.ItemStack
-        type: DIAMOND_HELMET
-      chance: 25
-      center: false
-    diamond_chestplate_1_0_0:
-      item:
-        ==: org.bukkit.inventory.ItemStack
-        type: DIAMOND_CHESTPLATE
-      chance: 25
-      center: false
-    diamond_leggings_1_0_0:
-      item:
-        ==: org.bukkit.inventory.ItemStack
-        type: DIAMOND_LEGGINGS
-      chance: 25
-      center: false
-    diamond_boots_1_0_0:
-      item:
-        ==: org.bukkit.inventory.ItemStack
-        type: DIAMOND_BOOTS
-      chance: 25
-      center: false
-    diamond_sword_1_0_0:
+    diamond_sword_1_0_0_576:
       item:
         ==: org.bukkit.inventory.ItemStack
         type: DIAMOND_SWORD
       chance: 25
       center: false
-    wood_32_0_0:
+      min: 1
+      max: 1
+    diamond_boots_1_0_0_750:
       item:
         ==: org.bukkit.inventory.ItemStack
-        type: WOOD
-        amount: 32
+        type: DIAMOND_BOOTS
       chance: 25
       center: false
-    wood_16_0_0:
+      min: 1
+      max: 1
+    diamond_helmet_1_0_0_169:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: DIAMOND_HELMET
+      chance: 25
+      center: false
+      min: 1
+      max: 1
+    diamond_leggings_1_0_0_752:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: DIAMOND_LEGGINGS
+      chance: 25
+      center: false
+      min: 1
+      max: 1
+    wood_16_0_0_92:
       item:
         ==: org.bukkit.inventory.ItemStack
         type: WOOD
         amount: 16
       chance: 25
       center: false
-    wood_8_0_0:
+      min: 16
+      max: 16
+    wood_32_0_0_135:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: WOOD
+        amount: 32
+      chance: 25
+      center: false
+      min: 32
+      max: 32
+    wood_8_0_0_496:
       item:
         ==: org.bukkit.inventory.ItemStack
         type: WOOD
         amount: 8
       chance: 25
       center: false
+      min: 8
+      max: 8
+  normal:
+    iron_sword_1_0_0_283:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_SWORD
+      chance: 25
+      center: false
+      min: 1
+      max: 1
+    bow_1_0_0_361:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: BOW
+      chance: 25
+      center: false
+      min: 1
+      max: 1
+    iron_boots_1_0_0_899:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_BOOTS
+      chance: 25
+      center: false
+      min: 1
+      max: 1
+    iron_helmet_1_0_0_323:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_HELMET
+      chance: 25
+      center: false
+      min: 1
+      max: 1
+    iron_leggings_1_0_0_804:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_LEGGINGS
+      chance: 25
+      center: false
+      min: 1
+      max: 1
+    fishing_rod_1_0_0_830:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: FISHING_ROD
+      chance: 25
+      center: false
+      min: 1
+      max: 1
+    golden_apple_2_0_0_565:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: GOLDEN_APPLE
+        amount: 2
+      chance: 25
+      center: false
+      min: 1
+      max: 2
+    iron_axe_1_0_0_429:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_AXE
+      chance: 25
+      center: false
+      min: 1
+      max: 1
+    iron_pickaxe_1_0_0_145:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_PICKAXE
+      chance: 25
+      center: false
+      min: 1
+      max: 1
+    water_bucket_1_0_0_694:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: WATER_BUCKET
+      chance: 25
+      center: false
+      min: 1
+      max: 1
+    wood_64_0_0_530:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: WOOD
+        amount: 64
+      chance: 25
+      center: false
+      min: 16
+      max: 64
+    arrow_15_0_0_558:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: ARROW
+        amount: 15
+      chance: 25
+      center: false
+      min: 1
+      max: 15
+    egg_8_0_0_274:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: EGG
+        amount: 8
+      chance: 20
+      center: false
+      min: 1
+      max: 1
+    iron_sword_1_0_0_524:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_SWORD
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          enchants:
+            DAMAGE_ALL: 3
+      chance: 30
+      center: true
+      min: 1
+      max: 1
+    iron_helmet_1_0_0_671:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_HELMET
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          enchants:
+            PROTECTION_ENVIRONMENTAL: 3
+      chance: 60
+      center: true
+      min: 1
+      max: 1
+    iron_chestplate_1_0_0_395:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_CHESTPLATE
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          enchants:
+            PROTECTION_ENVIRONMENTAL: 3
+      chance: 60
+      center: true
+      min: 1
+      max: 1
+    iron_leggings_1_0_0_413:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_LEGGINGS
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          enchants:
+            PROTECTION_ENVIRONMENTAL: 3
+      chance: 60
+      center: true
+      min: 1
+      max: 1
+    iron_boots_1_0_0_319:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_BOOTS
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          enchants:
+            PROTECTION_ENVIRONMENTAL: 3
+      chance: 60
+      center: true
+      min: 1
+      max: 1

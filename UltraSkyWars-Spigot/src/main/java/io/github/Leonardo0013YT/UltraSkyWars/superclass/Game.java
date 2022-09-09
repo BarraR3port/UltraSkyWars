@@ -218,7 +218,7 @@ public abstract class Game {
         playerTeam.remove(p.getUniqueId());
         if (isState(State.WAITING) || isState(State.STARTING)) {
             sendGameSound(CustomSound.QUIT_PLAYER);
-            sendGameMessage(plugin.getLang().get(p, "messages.quit").replace("<suffix>", plugin.getAdm().getPlayerSuffix(p)).replace("<prefix>", plugin.getAdm().getPlayerPrefix(p)).replaceAll("<player>", p.getName()).replaceAll("<players>", String.valueOf(players.size())).replaceAll("<max>", String.valueOf(getMax())));
+            sendGameMessage(plugin.getLang().get(p, "messages.quit").replaceAll("<player>", p.getName()).replaceAll("<players>", String.valueOf(players.size())).replaceAll("<max>", String.valueOf(getMax())));
         }
         plugin.getGm().updateGame(name, color, state.name(), gameType, players.size(), max);
         plugin.getGem().updateInventories(gameType, "none");
@@ -309,11 +309,7 @@ public abstract class Game {
 
     public void setSpect(Player p) {
         UltraSkyWars plugin = UltraSkyWars.get();
-        if (plugin.getVc().getVersion().equals("v1_8_R3")) {
-            p.spigot().setCollidesWithEntities(false);
-        } else {
-            p.setCollidable(false);
-        }
+        p.spigot().setCollidesWithEntities(false);
         if (gamePlayer.containsKey(p.getUniqueId())) {
             gamePlayer.get(p.getUniqueId()).setDead(true);
         } else {

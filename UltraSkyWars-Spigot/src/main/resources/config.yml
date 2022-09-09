@@ -45,13 +45,13 @@ chat:
   broadcastRankLevelUp: true
   broadcastRankLevelDown: true
 soulWellPrice: 10
-disableKitLevels: false
+disableKitLevels: true
 disableVotesRanked: true
-mainLobbyWorld: LobbyWorld
+mainLobbyWorld: world
 savingDataSync: false
 signsRotation: false
 lobbyScoreboard: true
-preLobbySystem: true
+preLobbySystem: false
 progressBarAmount: 10
 autoLapiz: true
 updatePlayersPlaceholder: 5
@@ -72,20 +72,13 @@ modules:
   soulwell: false
   specialitems: false
 addons:
-  AnimatedNames: false
-  TrHologram: false
-  Vault: false
-  PlayerPoints: false
-  Coins: false
-  Holograms: false
   HolographicDisplays: true
-  NametagEdit: false
-  Parties: false
-  TAB: false
+  Parties: true
+  TAB: true
   PlaceholderAPI: true
-  MVdWPlaceholderAPI: false
-  LeaderHeads: false
-  SlimeWorldManager: false
+  LeaderHeads: true
+  YandereCore: true
+  SlimeWorldManager: true
   SlimeWorldManager-Loader: file
 mysql:
   enabled: false
@@ -95,12 +88,12 @@ mysql:
   username: Spigot
   password: Plugin
 mongodb:
-  enabled: false
-  host: 127.0.0.1
+  enabled: true
+  host: 172.18.0.1
   port: 27017
-  database: Leonardo
-  username: Spigot
-  password: Plugin
+  database: skywars
+  username: skywars
+  password: SKDK20ASLDLalsdjj2adKDAJK
 redis:
   enabled: false
   host: 127.0.0.1

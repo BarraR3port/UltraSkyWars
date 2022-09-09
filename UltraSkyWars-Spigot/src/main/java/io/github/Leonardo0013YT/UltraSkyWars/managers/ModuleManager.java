@@ -112,9 +112,6 @@ public class ModuleManager {
             if (plugin.getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
                 eloRank.loadPlaceholders();
             }
-            if (plugin.getServer().getPluginManager().isPluginEnabled("MVdWPlaceholderAPI")) {
-                eloRank.loadMVdWPlaceholders();
-            }
             plugin.sendLogMessage("§eInjection §bUltraSkyWars §aEloRanks§e loaded correctly!");
         }
         if (plugin.getConfig().getBoolean("modules.signs")) {

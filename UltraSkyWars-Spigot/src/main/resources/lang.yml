@@ -1,492 +1,441 @@
-activated: '&aActivated'
-deactivated: '&cDeactivated'
+activated: '&aActivado'
+deactivated: '&cDesactivado'
 injections:
-  eloRank: '&cEloRank injection is not found.'
-  party: '&cParty injection is not found.'
-  perks: '&cPerks injection is not found.'
-  cubelets: '&cCubelets injection is not found.'
-  signs: '&cSigns injection is not found.'
-  mobfriends: '&cMobFriends injection is not found.'
+  eloRank: '&cLa inyección EloRank no se encuentra.'
+  perks: '&cLa inyección de Perks no se encuentra.'
+  cubelets: '&cLa inyección de Cubelets no se encuentra.'
+  signs: '&cLa inyección de Signs no se encuentra.'
+  mobfriends: '&cLa inyección de MobFriends no se encuentra.'
+  party: '&cLa inyección de Party no se encuentra.'
 motds:
-  WAITING: '&aWaiting... &9Info: &e<map> &b<players>&7/&b<max>'
-  STARTING: '&eStarting... &9Info: &e<map> &b<players>&7/&b<max>'
-  PREGAME: '&aPre Game... &9Info: &e<map> &b<players>&7/&b<max>'
-  GAME: '&4In Game... &9Info: &e<map> &b<players>&7/&b<max>'
-  FINISH: '&9Finish... &9Info: &e<map> &b<players>&7/&b<max>'
-  RESTARTING: '&5Restarting... &9Info: &e<map> &b<players>&7/&b<max>'
+  WAITING: '&aEsperando... &9Info: &e<map> &b<players>&7/&b<max>'
+  STARTING: '&eIniciando... &9Info: &e<map> &b<players>&7/&b<max>'
+  PREGAME: '&aPre Juego... &9Info: &e<map> &b<players>&7/&b<max>'
+  GAME: '&4En Juego... &9Info: &e<map> &b<players>&7/&b<max>'
+  FINISH: '&9Terminando... &9Info: &e<map> &b<players>&7/&b<max>'
+  RESTARTING: '&5Reiniciando... &9Info: &e<map> &b<players>&7/&b<max>'
 progressBar:
   symbol: '|'
   in: '&3'
   out: '&7'
   finish: '&8[<progress>&8] &e<percent>%'
-  max: '&cMax'
-mobTitle: '&eMy Friend: &b<name>'
-assists: "&6\u2694 &eAssisted by &6<name> &ein &b<percent>% &6\u2694"
+  max: '&cMáximo'
+mobTitle: '&eMi amigo: &b<name>'
+assists: '&6⚔ &eAsistido por &6<name> &een un &b<percent>% &6⚔'
 team: '&a[&e<#>&a]'
 parties:
-  noJoin: '&cYou can''t get in if you''re not a leader in the party you''re in.'
+  noJoin: '&cNo puedes unirte a esta party en este momento.'
   join: |-
     &7&m-----------------------------------------
-    &aYour whole party will be brought to your party.
+    &aTu party se ha unido.
     &7&m-----------------------------------------
   joinGame: |-
     &7&m-----------------------------------------
-    &aYou've been taken to your leader's game.
-    &7&m-----------------------------------------
+    &aHas sido llevado al juego de tu líder.
+    &7&m---------------------------------------------------------
 chat:
-  mainLobby: "&f<player> &8\xbb &7<msg>"
-  spectator: "&8[Spectator] <player> &8\xbb &7<msg>"
-  lobby: "<player> &8\xbb &7<msg>"
-  lobbyRanked: "<rank> <player> &8\xbb &7<msg>"
-  game: "<player> &8\xbb &7<msg>"
-  team: "<team> <player> &8\xbb &7<msg>"
-  global: "&6[GLOBAL] <team> <player> &8\xbb &7<msg>"
-  ranked: "<rank> <player> &8\xbb &7<msg>"
+  mainLobby: '&f<player> &b» &7<msg>'
+  spectator: '&8[Espectador] <player> &b» &7<msg>'
+  lobby: <player> &8» &7<msg>
+  lobbyRanked: '&8[Espectador] <player> &b» &7<msg>'
+  game: <player> &b» &7<msg>
+  team: <team> <player> &b» &7<msg>
+  global: '&6[GLOBAL] <team> <player> &b» &7<msg>'
+  ranked: <rank> <player> &b» &7<msg>
 fancy:
-  message: '&aThe game &e<game> &ais starting!'
-  click: '&6&l Click here to join!'
-  hover: '&fClick to join!'
+  message: '&aEl juego &e<game> &aesta comenzando!'
+  click: '&6&l ¡Haga clic aquí para unirse!'
+  hover: '&f¡Click para unirse!'
 winCubelet: |-
-  &e&lCongratulations:
-  &aYou have won a cubelet!
+  &e&Felicidades:
+  &a¡Has ganado un cubelet!
 cubeletReward: |-
   &e&lCUBELETS
-  &aYou found <reward>&a rarity <rarity>
+  &aHas encontrado <reward>&a rareza <rarity>
 xp:
   add:
-    you: '&aYou''ve added &e<xp> &axp to player &e<player>&a.'
-    receiver: |-
-      &8&l+ &e<xp> &3XP
-      &aDelivered by &b<sender>&a.
+    you: '&aHas añadido &e<xp> &axp al jugador &e<player>&a.'
+    receiver: '&8&l+ &e<xp> &3XP'
   remove:
-    you: '&aYou''ve removed &e<xp> &axp to player &e<player>&a.'
-    receiver: |-
-      &8&l- &e<xp> &3XP
-      &aRemoved by &b<sender>&a.
+    you: '&aHas removido &e<xp> &axp al jugador &e<player>&a.'
+    receiver: '&8&l- &e<xp> &3XP'
   set:
-    you: '&aYou''ve set &e<xp> &axp to player &e<player>&a.'
+    you: '&aHas establecido &e<xp> &axp al jugador &e<player>&a.'
     receiver: |-
       &8&l= &e<xp> &3XP
-      &aEstablished by &b<sender>&a.
+      &aEstablecido por &b<sender>&a.
 coins:
   add:
-    you: '&aYou''ve added &e<coins> &acoins to player &e<player>&a.'
-    receiver: |-
-      &8&l+ &e<coins> &6Coins
-      &aDelivered by &b<sender>&a.
+    you: '&aHas agregado &e<coins> &acoins al jugador &e<player>&a.'
+    receiver: '&8&l+ &e<coins> &6Coins'
   remove:
-    you: '&aYou''ve removed &e<coins> &acoins to player &e<player>&a.'
-    receiver: |-
-      &8&l- &e<coins> &6Coins
-      &aRemoved by &b<sender>&a.
+    you: '&aHas removido &e<coins> &acoins al jugador &e<player>&a.'
+    receiver: '&8&l- &e<coins> &6Coins'
   set:
-    you: '&aYou''ve set &e<coins> &acoins to player &e<player>&a.'
-    receiver: |-
-      &8&l= &e<coins> &6Coins
-      &aEstablished by &b<sender>&a.
+    you: '&aHas establecido &e<coins> &amonedas al jugador &e<player>&a.'
+    receiver: '&8&l= &e<coins> &6Coins'
 souls:
   add:
-    you: '&aYou''ve added &e<souls> &asouls to player &e<player>&a.'
-    receiver: |-
-      &8&l+ &e<souls> &bSouls
-      &aDelivered by &b<sender>&a.
+    you: '&aHas añadido &e<souls> &asouls al jugador &e<player>&a.'
+    receiver: '&8&l+ &e<souls> &bSouls'
   remove:
-    you: '&aYou''ve removed &e<souls> &asouls to player &e<player>&a.'
-    receiver: |-
-      &8&l- &e<souls> &bSouls
-      &aRemoved by &b<sender>&a.
+    you: '&aHas removido &e<souls> &asouls al jugador &e<player>&a.'
+    receiver: '&8&l- &e<souls> &bSouls'
   set:
-    you: '&aYou''ve set &e<souls> &asouls to player &e<player>&a.'
-    receiver: |-
-      &8&l= &e<souls> &bSouls
-      &aEstablished by &b<sender>&a.
+    you: '&aHas establecido &e<souls> &asouls al jugador &e<player>&a.'
+    receiver: '&8&l= &e<souls> &bSouls'
 cubelets:
   add:
-    you: '&aYou''ve added &e<cubelets> &acubelets to player &e<player>&a.'
-    receiver: |-
-      &8&l+ &e<cubelets> &aCubelets
-      &aDelivered by &b<sender>&a.
+    you: '&aHas añadido &e<cubelets> &acubelets al jugador &e<player>&a.'
+    receiver: '&8&l+ &e<cubelets> &aCubelets'
   remove:
-    you: '&aYou''ve removed &e<cubelets> &acubelets to player &e<player>&a.'
-    receiver: |-
-      &8&l- &e<cubelets> &aCubelets
-      &aRemoved by &b<sender>&a.
+    you: '&aHas removido &e<cubelets> &acubelets al jugador &e<player>&a.'
+    receiver: '&8&l- &e<cubelets> &aCubelets'
   set:
-    you: '&aYou''ve set &e<cubelets> &acubelets to player &e<player>&a.'
-    receiver: |-
-      &8&l= &e<cubelets> &aCubelets
-      &aEstablished by &b<sender>&a.
+    you: '&aHas establecido &e<cubelets> &acubelets al jugador &e<player>&a.'
+    receiver: '&8&l= &e<cubelets> &aCubelets'
 messages:
-  perks:
-    perkLocked: "&cThis perk is locked for you yet."
-    maxedPerk: "&cThis perk is already at the highest level."
-    noCoins: "&cYou don't have enough coins."
-    buyed: "&aLevel &e<level>&a has been purchased from this perk."
-    toggle: "&eThis perk is now: <state>"
-    offState: "&cOFF"
-    onState: "&aON"
-  levels:
-    prestigeNoHas: "&cYou don't have this prestige icon."
-    selectPrestige: "&aYou selected the &e<name>&a prestige icon."
-    alreadySelected: "&eYou have already selected this icon."
-  changeEloMinor: "&cPerdiste &e<elo>"
-  changeEloMayor: "&aGanaste &e<elo>"
-  alreadyReward: '&eYou already have this reward, so you got other things.'
-  noCommandInPreview: '&cYou can''t get into a game if you''re in Preview.'
-  spectatorChatDisabled: '&cSpectator chat is disabled.'
-  noLevelToRanked: '&cYou don''t have enough level to get into ranked, you need level
-    <level>.'
-  noEnderCountdown: '&cYou have to wait <time> seconds to re-launch EnderPearl.'
-  noGameRankedWithParty: '&aYou can''t go into ranked games in a party.'
-  healthShow: '&e<player> life is now <health>HP!'
-  maxMobFriends: '&cYou can''t have more than &e<max>&c mob friend.'
-  maxSouls: '&cYou can''t buy this because it exceeds the limit of souls.'
-  canUseSoulWell: '&aYou can use this SoulWell.'
-  noAvailable: '&cNo soul wells available.'
-  tauntPreview:
-    killer: InsiderAnh
-    lines: |-
-      <center>&e&lTAUNT PREVIEW &7- &a<taunt>
-      &7
-      <lines>
-      &7
-  noMapReset: '&cThe map could not be restarted because there are people inside.'
-  showPrefix: '&eNow the level prefix is: <status>'
-  perkTypes: '&aSupported perk types are SOLO, TEAM, RANKED.'
-  kitTypes: '&aSupported kit types are SOLO, TEAM, RANKED.'
-  gameFull: '&aThe game has been filled, the time has been reduced.'
-  alreadyAnimation: '&aYou''ve already chosen this animation.'
-  selectAnimation: '&aHave selected SoulWell &e<type> &aanimation.'
+  showPrefix: '&eAhora el prefijo del nivel esta: <status>'
+  perkTypes: '&aLos tipos de perks soportados son SOLO, TEAM, RANKED.'
+  kitTypes: '&aLos tipos de kits soportados son SOLO, TEAM, RANKED.'
+  gameFull: '&aLa partida se ha llenado, reduciendo tiempo de espera'
+  alreadyAnimation: '&aYa tienes seleccionada esta animación.'
+  selectAnimation: '&aHas seleccionado SoulWell &e<type> &aanimación.'
   cosmetics:
-    alreadyHas: '&cThe player already has this cosmetic.'
-    noHas: '&cThe player doesn''t have this cosmetic.'
-    add: '&aAdded the &e<type>&a with id &e<id> &ato the &e<player> &aplayer.'
-    remove: '&aRemoved the &e<type>&a with id &e<id> &ato the &e<player> &aplayer.'
-  closeWithClick: '&cClose the menu with left click.'
-  favoriteAdd: '&aThe map &e<map>&a was added to your favorite maps.'
-  favoriteRemove: '&cThe map &e<map>&c was removed to your favorite maps.'
-  updatedTops: '&aTops updated correctly.'
-  buyLastLevel: '&cYou must buy the previous level.'
-  noIngame: '&cYou can''t execute that command in a game.'
-  theGameNotStart: '&cThe game hasn''t started yet.'
-  noMinPlayers: '&cThe minimum of players must be reached.'
-  forceStart: '&aThe game has been forced to start. &6By <player>'
-  joinTeam: '&aYou''ve joined the team &e<id>&a.'
-  teamFull: '&cThat team is already full, try another one.'
-  noPermit: '&cYou need a permit to be able to buy this cosmetics.'
-  noSelected: '&cNot selected'
-  selected: '&aYou have selected this animation.'
-  alreadySelect: '&cYou have already selected this animation.'
-  noCubelets: '&cYou don''t have any cubelets.'
-  noArenaGroup: '&cThere is no game available from this group.'
-  noGroup: '&cThere is no arena group with that name.'
-  noRandom: '&cNo such game is available.'
-  teleported: '&aYou''ve teleported to &e<player>&a.'
-  noRewards: '&cHe doesn''t have any rewards set.'
-  alreadyUse: '&cThis SoulWell is already in use.'
-  cubeletsUse: '&cThis Cubelets is already in use.'
-  fullGame: '&cThat game is already full.'
-  alreadyStart: '&cThat game''s already started.'
-  alreadyGame: '&cYou''re already in a game.'
-  noPermission: '&cYou dont have permission for this.'
-  join: '&7<suffix><player> &ehas join the game. &b(&e<players>&b/&e<max>&b)'
-  quit: '&7<suffix><player> &ehas left the game. &b(&e<players>&b/&e<max>&b)'
-  minPlayers: '&aMinimum players reached. &6Starting game.'
-  starting: '&eThe game starts in &c<time> &esecond<s>.'
-  pregame: '&eThe cages opens in &c<time> &esecond<s>.'
-  cancelStart: '&cThe game start has been canceled.'
-  noGameExists: '&cThere is no game by that name.'
-  noGameType: '&cThat game isn''t like this.'
-  leaveGame: '&cYou''re leave of the game.'
-  alreadyVoted: '&cYou''ve already voted for &a<type>&c.'
-  voted: '&7<player> &fhas voted for &a<category> <type>&f. &6Votes <votes>.'
-  deselect: '&aYou''ve deselected your current kit.'
-  deselectTrail: '&aYou''ve deselected your current trail.'
-  deselectTaunt: '&aYou''ve deselected your current taunt.'
-  deselectParting: '&aYou''ve deselected your current parting.'
-  deselectGlass: '&aYou''ve deselected your current glass.'
-  deselectBalloon: '&aYou''ve deselected your current balloon.'
-  deselectWinEffect: '&aYou''ve deselected your current wineffect.'
-  deselectKillEffect: '&aYou''ve deselected your current killeffect.'
-  deselectWinDance: '&aYou''ve deselected your current windances.'
-  noSelect: '&cYou don''t have a kit selected.'
-  select: '&aYou''ve selected the kit: &e<kit>'
-  selectTrail: '&aYou''ve selected the trail: &e<trail>'
-  selectTaunt: '&aYou''ve selected the taunt: &e<taunt>'
-  selectParting: '&aYou''ve selected the parting: &e<parting>'
-  selectKillSound: '&aYou''ve selected the killsound: &e<killsound>'
-  selectKillEffect: '&aYou''ve selected the killeffect: &e<killeffect>'
-  selectGlass: '&aYou''ve selected the glass: &e<glass>'
-  selectBalloon: '&aYou''ve selected the balloon: &e<balloon>'
-  selectWinEffect: '&aYou''ve selected the wineffect: &e<wineffect>'
-  selectWinDance: '&aYou''ve selected the windance: &e<windance>'
-  multiplier: '&aThe &b<type> &amultiplier has been activated by &6<name> &aof &x<amount>
-    &afor &e<time>&a.'
-  multiplierFinish: '&aThe &b<type> &amultiplier of &6<name> &ahas been end.'
-  multiplierReceived: '&aYou have received an &ex<amount> &6<type>&a multiplier for&b
-    <time>&a.'
-  addRemoveBlock: '&aRight-click to add &7/ &cLeft click to remove!'
-  soulWell: '&aThis block has been selected.'
-  cubelets: '&aThis block has been selected.'
-  soulWellRemove: '&cThis block has been removed.'
-  cubeletsRemove: '&cThis block has been removed.'
-  reward: '&aYou found &e<name> &aof rarity &e<rarity> &ain &bSoulWell&a.'
-  minSouls: '&cYou need to have at least 10 souls.'
-  maxRows: '&cYou''ve reached the maximum of rows.'
-  minRows: '&cYou''ve reached the minimum of rows.'
-  noInGame: '&cYou''re not in any game.'
-  noBuy: '&cThis cannot be purchased by users.'
-  noCoins: '&cYou don''t have enough coins.'
-  bought: '&aYou bought &6<name>&a correctly.'
-  setFirstPerson: '&aFirst Person is now <state>&a.'
-  setSpectator: '&aSpectators Visibility is now <state>&a.'
-  setNightVision: '&aNight vision is now <state>&a.'
-  setSpeed: '&aYou''ve set your speed to &e<speed>&a.'
-  removedSing: '&cYou removed a sign.'
+    alreadyHas: '&cEste jugador ya tiene este cosmetico.'
+    noHas: '&cEl jugador no tiene este cosmetico.'
+    add: '&aAñadido &e<type>&a con id &e<id> &aal jugador &e<player>&a.'
+    remove: '&aEliminado &e<type>&a con id &e<id> &aal jugador &e<player>&a.'
+  closeWithClick: '&cCierra el menú con click izquierdo.'
+  favoriteAdd: '&aEl mapa &e<map>&a fue añadido a tus mapas favoritos.'
+  favoriteRemove: '&cEl mapa &e<map>&c fue eliminado de tus mapas favoritos.'
+  updatedTops: '&aTops actualizados correctamente.'
+  buyLastLevel: '&cDebes comprar el nivel anterior.'
+  noIngame: '&cNo puedes usar este comando en partida.'
+  theGameNotStart: '&cLa partida no ha comenzado aún.'
+  noMinPlayers: '&cNo se ha alcanzado el mínimo de jugadores.'
+  forceStart: '&aLa partida ha sido forzada a iniciar por el jugador &6<player>'
+  joinTeam: '&aTe has unido al equipo &e<id>&a.'
+  teamFull: '&cEste equipo ya esta lleno, prueba con otro.'
+  noPermit: '&cNo puedes comprar este cosmetico por falta de permisos.'
+  noSelected: '&cNo seleccionado'
+  selected: '&aHas seleccionado esta animación.'
+  alreadySelect: '&cYa has seleccionado esta animación.'
+  noCubelets: '&cNo tienes ningún cubelet.'
+  noArenaGroup: '&cNo hay ninguna arena disponible para este grupo.'
+  noGroup: '&cNo hay ningún grupo de arena con ese nombre.'
+  noRandom: '&cNo hay ninguna arena disponible.'
+  teleported: '&aHas sido teletransportado al jugador &e<player>&a.'
+  noRewards: '&cNo tienes ninguna recompensa establecida.'
+  alreadyUse: '&cEsta SoulWell esta actualmente en uso.'
+  cubeletsUse: '&cEste Cubelet esta actualmente en uso.'
+  fullGame: '&cEste mapa esta lleno.'
+  alreadyStart: '&cEste mapa ya ha comenzado.'
+  alreadyGame: '&cYa estas en partida.'
+  noPermission: '&cNo tienes permisos.'
+  join: '&7<suffix><player> &ese ha unido a la partida. &b(&e<players>&b/&e<max>&b)'
+  quit: '&7<suffix><player> &eabandonó la partida. &b(&e<players>&b/&e<max>&b)'
+  minPlayers: '&aJugadores mínimos alcanzados. &6Iniciando partida.'
+  starting: '&eLa partida comenzará en &c<time> &esegundo(s).'
+  pregame: '&eLas cajas se abrirán en &c<time> &esegundo(s).'
+  cancelStart: '&cEl comienzo de la partida ha sido cancelado.'
+  noGameExists: '&cNo hay ninguna partida con ese nombre.'
+  noGameType: '&cNo hay ningún juego de este tipo.'
+  leaveGame: '&cHas salido de la partida.'
+  alreadyVoted: '&cYa has votado por &a<type>&c.'
+  voted: '&7<player> &fha votado por &a<category> <type>&f. &6Votos <votes>.'
+  deselect: '&aTe has desequipado tu kit actual.'
+  deselectTrail: '&aTe has desequipado tu rastro actual.'
+  deselectTaunt: '&aTe has desequipado tu mofa actual.'
+  deselectParting: '&aTe has deseleccionado tu despedida actual.'
+  deselectGlass: '&aTe has desequipado tu caja actual.'
+  deselectBalloon: '&aTe has desequipado tu globo actual.'
+  deselectWinEffect: '&aTe has deseleccionado tu efecto de victoria actual.'
+  deselectKillEffect: '&aTe has deseleccionado tu efecto de asesinato actual.'
+  deselectWinDance: '&aTe has deseleccionado tu baile de victoria actual.'
+  noSelect: '&cNo tienes ningún kit seleccionado.'
+  select: '&aHas seleccionado el kit: &e<kit>'
+  selectTrail: '&aHas seleccionado el rastro: &e<trail>'
+  selectTaunt: '&aHas seleccionado la mofa: &e<taunt>'
+  selectParting: '&aHas seleccionado la despedida: &e<parting>'
+  selectKillSound: '&aHas seleccionado el sonido de asesinato: &e<killsound>'
+  selectKillEffect: '&aHas seleccionado el efecto de asesinato: &e<killeffect>'
+  selectGlass: '&aHas seleccionado el cristal: &e<glass>'
+  selectBalloon: '&aHas seleccionado el globo: &e<balloon>'
+  selectWinEffect: '&aHas seleccionado el efecto de victoria: &e<wineffect>'
+  selectWinDance: '&aHas seleccionado el baile de victoria: &e<windance>'
+  multiplier: '&aMultiplicador &b<type> &aha sido activado &6<name> &ade &x<amount>
+    &adurante &e<time>&a.'
+  multiplierFinish: '&aMultiplicador &b<type> &ade &6<name> &aha finalizado.'
+  addRemoveBlock: '&aClick derecho para añadir &7/ &cClick izquierdo para eliminar'
+  soulWell: '&aEste bloque ha sido seleccionado.'
+  cubelets: '&aEste bloque ha sido seleccionado.'
+  soulWellRemove: '&cEste bloque ha sido eliminado.'
+  cubeletsRemove: '&cEste bloque ha sido eliminado.'
+  reward: '&aEncontraste &e<name> &acon rareza &e<rarity> &aen &bSoulWell&a.'
+  minSouls: '&cNecesitas al menos 10 souls.'
+  maxRows: '&cHas alcanzado el máximo de filas.'
+  minRows: '&cHas alcanzado el mínimo de filas.'
+  noInGame: '&cNo estas en ninguna partida.'
+  noBuy: '&cEsto no esta disponible para ti.'
+  noCoins: '&cNo tienes suficientes monedas.'
+  bought: '&aHas comprado &6<name>&a correctamente.'
+  setFirstPerson: '&aPrimera persona <state>&a.'
+  setSpectator: '&aEspectador <state>&a.'
+  setNightVision: '&aVisión nocturna <state>&a.'
+  setSpeed: '&aHas establecido tu velocidad a &e<speed>&a.'
+  removedSing: '&cHas eliminado un cartel.'
   voteType:
-    noType: '&aThere were no alterations &bRank &ain the game.'
-    time: '&fTime: &a<time> &5- &6Votes <vtime>'
-    projectile: '&fProjectiles: &a<proyectile> &5- &6Votes <vproyectile>'
-    chest: '&fChest: &a<chest> &5- &6Votes <vchest>'
-    health: '&fHealth: &a<health> &5- &6Votes <vhealth>'
-    final: '&fFinal: &a<final> &5- &6Votes <vfinal>'
-    items: '&fItems: &a<items> &5- &6Votes <vitems>'
-    scenario: '&fScenario: &a<scenario> &5- &6Votes <vscenario>'
+    noType: '&aNo hay alteraciones por &bRango VIP &aen la partida.'
+    time: '&fTiempo: &a<time> &5- &6Votos <vtime>'
+    projectile: '&fProjectiles: &a<proyectile> &5- &6Votos <vproyectile>'
+    chest: '&fCofres: &a<chest> &5- &6Votos <vchest>'
+    health: '&fVida: &a<health> &5- &6Votos <vhealth>'
+    final: '&fFinal: &a<final> &5- &6Votos <vfinal>'
+    items: '&fItems: &a<items> &5- &6Votos <vitems>'
+    scenario: '&fEscenario: &a<scenario> &5- &6Votes <vscenario>'
   start: |-
-    &a&m&l---------------------------------------------
+    &7&m&l------------------------------------------
+    &b&lSkyWars
     &7
-    &f&lSkyWars
-    &7
-    &e&lCollect resources and equipment on your island
-    &e&lIn order to eliminate any other player.
-    &e&lGo to the central island for special chests
-    &e&lwith special items!
-    &7
-    &a&m&l---------------------------------------------
+    &7Equipate lo más rápido que puedas en tu &aisla
+    &7y &celimina &7a todos los jugadores vivos.
+    &7En el &2centro &7encontrarás armaduras &dmejoradas.
+    &7&m&l------------------------------------------
   win: |-
-    &a&m&l---------------------------------------------
+    &7&m&l------------------------------------------
+    &b&lGanador &7- <winner>
     &7
-    &f&lSkyWars
-    &7
-    &aWinner &7- <winner>
-    &7
-    &a&l1st Killer &7- <top1> &7- <number1>
-    &6&l2nd Killer &7- <top2> &7- <number2>
-    &c&l3rt Killer &7- <top3> &7- <number3>
-    &7
-    &a&m&l---------------------------------------------
+    &a&l1º Asesino &7- <top1> &7- <number1>
+    &6&l2º Asesino &7- <top2> &7- <number2>
+    &c&l3º Asesino &7- <top3> &7- <number3>
+    &7&m&l------------------------------------------
   votes: |-
-    &a&m&l---------------------------------------------
-    &f
-    &f&lVotes:
-    &7
+    &7&m&l------------------------------------------
+    &7&lPartida:
     <votes>
-    &7
-    &a&m&l---------------------------------------------
+    &7&m&l------------------------------------------
   summonary: |-
-    <center>&a&m&l---------------------------------------------
-    <center>&7
-    <center>&f&lRewards
-    <center>&7
-    &7Total XP: &3<xp>
-    <xpGame>
-    <multiplierXP>
-    <multiplierXPYou>
-    &7Total Almas: &b<souls>
-    <soulsGame>
-    <multiplierSouls>
-    <multiplierSoulsYou>
-    &7Total Coins: &6<coins>
-    <coinsGame>
-    <multiplierCoins>
-    <multiplierCoinsYou>
-    <center>&7
-    <center>&a&m&l---------------------------------------------
-  xpGame: '&f    &3+<amount> &fwon in game.'
-  coinsGame: '&f    &6+<amount> &fwon in game.'
-  soulsGame: '&f    &b+<amount> &fwon in game.'
-  xp: '&f    &3+<amount> &fmultiplier &a<player> &cx<value>'
-  coins: '&f    &6+<amount> &fmultiplier &a<player> &cx<value>'
-  souls: '&f    &b+<amount> &fmultiplier &a<player> &cx<value>'
-  xpYou: '&f    &3+<amount> &fby your multiplier &cx<value>'
-  coinsYou: '&f    &6+<amount> &fby your multiplier &cx<value>'
-  soulsYou: '&f    &b+<amount> &fby your multiplier &cx<value>'
+    &r  &7&m&l------------------------------------------
+    &r  &7Total Souls: &b<souls>
+    &r  &7Total Coins: &6<coins>
+    &r  &7&m&l------------------------------------------
+  xpGame: '&f    &3+<amount> &fxp ganado en la partida.'
+  coinsGame: '&f    &6+<amount> &fmonedas ganado en la partida.'
+  soulsGame: '&f    &b+<amount> &falmas ganado en la partida.'
+  xp: '&f    &3+<amount> &fmultiplicador &a<player> &cx<value>'
+  coins: '&f    &6+<amount> &fmultiplicador &a<player> &cx<value>'
+  souls: '&f    &b+<amount> &fmultiplicador &a<player> &cx<value>'
+  xpYou: '&f    &3+<amount> &fpor tu multiplicador &cx<value>'
+  coinsYou: '&f    &6+<amount> &fpor tu multiplicador &cx<value>'
+  soulsYou: '&f    &b+<amount> &fpor tu multiplicador &cx<value>'
   winXPAndCoins: |-
-    &8+ &6<coins> Coins.
-    &8+ &b<souls> Souls.
+    &8+ &6<coins> Monedas.
+    &8+ &b<souls> Almas.
     &8+ &3<xp> XP.
   promote:
-    msg: '&aYou have gone up the ranks in &eLeague &ayour new rank is <eloRank>&a.'
-    broadcast: '&6[SkyWars Ranked] &aThe player &6<player> &ahas been promoted to
-      <eloRank>&a.'
+    msg: '&aHas subido tu rango en &eLiga&a, tu nuevo rango es <eloRank>&a.'
+    broadcast: '&6[SkyWars Ranked] &aEl jugador &6<player> &aha subido al rango <eloRank>&a.'
   demote:
-    msg: '&cYou have gone down the ranks in &eLeague &cyour new rank is <eloRank>&a.'
-    broadcast: '&6[SkyWars Ranked] &cThe player &6<player> &chas been promoted to
-      <eloRank>&a.'
+    msg: '&cHas descendido de rango en &eLiga&a, &ctu nuevo rango es <eloRank>&a.'
+    broadcast: '&6[SkyWars Ranked] &cEl jugador &6<player> &cha descendido de rango
+      a <eloRank>&a.'
   levelUp:
-    msg: '&aYou level up &b<level>&a.'
-    broadcast: '&6[Levels] &aThe player &6<player> &ahas been level up to &b<level>&a.'
+    msg: '&aHas subido de nivel a &b<level>&a.'
+    broadcast: '&6[SkyWars Niveles] &aEl jugador &6<player> &aha subido de nivel a
+      &b<level>&a.'
   events:
-    refill: '&aThe chests have been filled!.'
-    dragon: '&cThe dragon has appeared!.'
-    tnt: '&cThe rain has started, leave the camp.'
-    wither: '&cThe wither has appeared!.'
-    zombie: '&aThe end of humanity has come!.'
-    none: '&cThere is no final event.'
+    refill: '&aLos cofres han sido rellenados.'
+    dragon: '&cEl dragón ha aparecido en la partida.'
+    tnt: '&cLa lluvia de TnT ha comenzado, deja de campear.'
+    wither: '&cEl wither ha aparecido en la partida.'
+    zombie: '&aUna invasión zombie ha llegado...'
+    none: '&cNo hay evento de final de partida.'
   signs:
-    addSign: '&aA sign mode &e<type> &ahas been added.'
-    noType: '&cThat kind of game doesn''t exist.'
+    addSign: '&aCartel de modo &e<type> &aha sido añadido.'
+    noType: '&cEste tipo de modo no existe.'
   challenges:
-    enabled: '&aThe <challenge>&a has been activated in this game.'
-    disabled: '&cThe <challenge>&c has been deactivated in this game.'
-    noChest: '&cYou can''t open chests while you have the &eNo Chest Challenge&c.'
+    enabled: '&aEl reto <challenge>&a ha sido activado en la partida.'
+    disabled: '&cEl reto <challenge>&c ha sido desactivado en la partida.'
+    noChest: '&cNo puedes abrir cofres mientras haces el reto &eSin Cofres&c.'
+    failedOnChallenge: '&a<player> &cha fallado el reto &a<challenges>&c! R.I.P.'
+    UHC: '&eUHC'
+    NO_CHEST: '&eSin Cofres'
+    ARCHERY: '&eArquero'
+    PAPER: '&ePapel'
+    HEARTS: '&eCorazones'
+    WARRIOR: '&eGuerrero'
+    NO_BLOCKS: '&eSin Bloques'
+    NOOB: '&eNoob'
     noBow: '&cYou can''t hurt Melee with the Archery challenge.'
     warriorSword: '&cYou can''t hurt any other kind of sword other than STONE_SWORD.'
     warriorNoBow: '&cYou can''t do arc damage with the Warrior Challenge.'
     warriorNoArmor: '&cYou can''t wear armor with the Warrior challenge.'
-    failedOnChallenge: '&a<player> &chas failed to challenges &a<challenges>&c! R.I.P.'
-    completedChallenge: '&e<player> &ahas completed to challenges &e<challenges>&a! WTF.'
-    UHC: '&eUHC'
-    NO_CHEST: '&eNo Chest'
-    ARCHERY: '&eArchery'
-    PAPER: '&ePaper'
-    HEARTS: '&eHearts'
-    WARRIOR: '&eWarrior'
-    NO_BLOCKS: '&eNo Blocks'
-    NOOB: '&eNoob'
+    completedChallenge: '&e<player> &ahas completed to challenges &e<challenges>&a!
+      WTF.'
+  perks:
+    perkLocked: '&cThis perk is locked for you yet.'
+    maxedPerk: '&cThis perk is already at the highest level.'
+    noCoins: '&cYou don''t have enough coins.'
+    buyed: '&aLevel &e<level>&a has been purchased from this perk.'
+    toggle: '&eThis perk is now: <state>'
+    offState: '&cAPAGADO'
+    onState: '&aENCENDIDO'
+  levels:
+    prestigeNoHas: '&cYou don''t have this prestige icon.'
+    selectPrestige: '&aYou selected the &e<name>&a prestige icon.'
+    alreadySelected: '&eYou have already selected this icon.'
+  changeEloMinor: '&cPerdiste &e<elo>'
+  changeEloMayor: '&aGanaste &e<elo>'
+  alreadyReward: '&eYa posees esta recompensa, por eso has recibido otra diferente.'
+  noCommandInPreview: '&cNo puedes unirte a una partida desde el modo previsualizador.'
+  spectatorChatDisabled: '&cEl chat de espectador está deshabilitado.'
+  noLevelToRanked: '&cNo tienes suficiente nivel para entrar a una partida Ranked,
+    necesitas nivel <level>.'
+  noEnderCountdown: '&cDebes esperar <time> segundo(s) para usar de nuevo la EnderPearl.'
+  noGameRankedWithParty: '&aNo puedes unirte a una partida Ranked mientras estás en
+    una Party.'
+  healthShow: '&e<player> tiene ahora <health>HP de vida'
+  maxMobFriends: '&cNo puedes tener más de &e<max>&c mob compañero.'
+  maxSouls: '&cNo puedes comprar más Souls porque alcanzaste el límite.'
+  canUseSoulWell: '&aPuedes usar esto en la SoulWell.'
+  noAvailable: '&cNo hay SoulWells disponibles.'
+  tauntPreview:
+    killer: InsiderAnh
+    lines: |-
+      <empty>
+      <center>&e&lVISTA DE PRUEBA &7- &a<taunt>
+      <empty>
+      <lines>
+      <empty>
+  noMapReset: '&cEl mapa no puede ser reiniciado porque hay jugadores dentro.'
+  multiplierReceived: '&aYou have received an &ex<amount> &6<type>&a multiplier for&b
+    <time>&a.'
 action:
-  spectating: '&fSpectating &a&l<player> &7- &fDistance &a&l<distance>m &7- &fHealth
+  spectating: '&fEspecteando &a&l<player> &7- &fDistancia &a&l<distance>m &7- &fVida
     &a&l<health>'
-  kill: '&aNow are &c<players> &aremaining players!'
-  selected: '&aSelected kit: &e<kit>'
-  noSelected: '&eYou can select a kit with the bow!'
+  kill: '&aAhora hay &c<players> &ajugadores restantes'
+  selected: '&aKit seleccionado: &e<kit>'
+  noSelected: '&ePuedes seleccionar un kit con el arco'
 topFormat: '&e&l<top> &7- <name> &7- &6<amount>'
 rankedTopFormat: '&e&l<top> &7- <color>[<rank>] &7<name> &7- &6<amount>'
-chestEmpty: '&cEmpty!'
-timer: "&a<time>"
+chestEmpty: '&cVacío'
 holograms:
   soulwell:
     - '&e&lSoulWell'
-    - '&bRight Click!'
+    - '&bClick Derecho'
   cubelets:
     - '&e&lCubelets'
-    - '&dClick to open!'
+    - '&dClick para abrir'
   rewards:
-    - '&e&lYou Found'
+    - '&e&lHas encontrado'
     - '&6<name>'
     - <item>
-    - '&dRarity: <rarity>'
+    - '&dRareza: <rarity>'
   tops:
     kills:
-      - '&e&lTop SkyWars Kills'
-      - '&7(Best Top 10 Kills)'
+      - '&e&lTop SkyWars Asesinatos'
+      - '&7( Top 10 )'
       - <top>
     wins:
-      - '&e&lTop SkyWars Wins'
-      - '&7(Best Top 10 Wins)'
+      - '&e&lTop SkyWars Victorias'
+      - '&7( Top 10 )'
       - <top>
     deaths:
-      - '&e&lTop SkyWars Deaths'
-      - '&7(Best Top 10 Deaths)'
+      - '&e&lTop SkyWars Muertes'
+      - '&7( Top 10 )'
       - <top>
     coins:
       - '&e&lTop SkyWars Coins'
-      - '&7(Best Top 10 Coins)'
+      - '&7( Top 10 )'
       - <top>
     elo:
       - '&e&lTop SkyWars Ranked'
-      - '&7(Best Top 10 Ranked)'
+      - '&7( Top 10 )'
       - <top>
 votes:
   time:
-    name: Time
-    dawn: Dawn
-    day: Day
-    afternoon: Afternoon
-    night: Night
+    name: Tiempo
+    dawn: Amanecer
+    day: Día
+    afternoon: Atardecer
+    night: Noche
   projectile:
     name: Projectiles
     noproj: 'No'
-    yesproj: 'Yes'
-    exproj: Explosive
-    desproj: Destroyer
-    teleproj: Teleport
+    yesproj: Si
+    exproj: Explosivos
+    desproj: Destructores
+    teleproj: Teletransportadores
   health:
-    name: Health
-    health5: 5 Hearts
-    health10: 10 Hearts
-    health20: 20 Hearts
-    uhc: No Regen
+    name: Vida
+    health5: 5 Corazones
+    health10: 10 Corazones
+    health20: 20 Corazones
+    uhc: Sin regeneración
   final:
     name: Final
     dragon: Dragon
     wither: Wither
-    tnt: TNT Rain
-    none: None
+    tnt: Lluvia de TnT
+    none: Ninguno
     zombies: Zombies
-    border: Border
+    border: Borde
   items:
-    name: Items
-    special: Specials
-    normal: Normals
-    crazy: Crazy
+    name: Objetos
+    special: Especiales
+    normal: Normales
+    crazy: Locos
   scenario:
-    name: Scenario
-    nofall: NoFall
-    nocleanup: NoCleanUp
-    goldenhead: GoldenHead
-    vampire: Vampires
+    name: Escenario
+    nofall: Sin caida
+    nocleanup: Sin clean
+    goldenhead: Manzana dorada
+    vampire: Vampiros
 titles:
   first:
-    title: '&eFirst Person'
-    subtitle: '&a[Right Click to join]        &c[Sneak to leave]'
+    title: '&ePrimera Persona'
+    subtitle: '&a[Click derecho para unirte]        &c[Shift para salir]'
   cancel:
-    title: '&cCANCELLED'
+    title: '&cCANCELADO'
     subtitle: '&7'
   starting:
     title: '&c<time>'
     subtitle: '&7'
   pregame:
     title: '&c<time>'
-    subtitle: '&ePrepare to fight!'
+    subtitle: '&ePreparate para luchar'
   win:
-    title: '&6&lVICTORIA MAGISTAL'
-    solo: '&7Eres el ultimo en pie!'
-    tnt_madness: '&7Eres el ultimo en pie!'
-    team: '&7Tu equipo es el ultimo en pie!'
-    ranked: '&7Eres el mejor!'
+    title: '&a&l¡VICTORIA!'
+    solo: '&7¡Eres el último en pie!'
+    team: '&7¡Tu equipo es el último en pie!'
+    ranked: '&7¡Eres el mejor!'
+    tnt_madness: '&7¡Eres el último en pie!'
   endGame:
-    title: '&c&lJUEGO TERMINADO!'
-    subtitle: '&7La siguiente ser<a> mejor'
+    title: '&c&l¡JUEGO TERMINADO!'
+    subtitle: '&7La siguiente será mejor'
   refill:
     title: '&7'
-    subtitle: '&eThe chests have been filled!'
+    subtitle: '&eLos cofres han sido rellenados'
   dragon:
-    title: '&5DRAGON INCOMING'
-    subtitle: '&cCaution!'
+    title: '&5DRAGON'
+    subtitle: '&c¡Ten cuidado!'
   tnt:
     title: '&cTNT'
-    subtitle: '&eWatch where you''re walking!'
+    subtitle: '&eMira hacía donde caminas'
   wither:
     title: '&7Wither'
-    subtitle: '&eThe beast appeared!'
+    subtitle: '&eLa bestia apareció'
   zombie:
     title: '&2Zombies'
-    subtitle: '&eThe apocalypse!'
+    subtitle: '&eEl apocalipsis está aquí'
   border:
-    title: '&bBorder'
-    subtitle: '&fRun!'
+    title: '&bBorde'
+    subtitle: '&f¡Corre!'
   none:
     title: '&7'
     subtitle: '&7'
 setup:
-  clearedStats: "&cThese have been cleaned stats in &e<ms> &cms."
-  noClearStatPlayers: "&cThis command will cause memory consumption, do not run it when there are players on the server. There are currently &e<online>&c players."
-  alreadyPreview: '&cYou''re already looking at the preview of a cosmetic.'
-  noGlassPreview: '&cThe glass preview location has not been set.'
-  noBalloonPreview: '&cThe balloon preview location has not been set.'
-  noCosmeticLocation: '&cYou haven''t set the cosmetic place.'
-  noPlayerLocation: '&cYou haven''t set the player place.'
   help:
     separator: '&7&m---------------------------------'
     player:
@@ -510,18 +459,18 @@ setup:
       - '&e/sw animations &7- &aOpens the animations of cubelets.'
     admin:
       - '&e/sw menu solo/team/ranked &7- &aOpens the menu of type game.'
-      - '&e/sw perks add/remove <player> <id> &7- &aAdd or remove perk to player.'
-      - '&e/sw balloon add/remove <player> <id> &7- &aAdd or remove balloon to player.'
-      - '&e/sw glass add/remove <player> <id> &7- &aAdd or remove glass to player.'
+      - '&e/sw perks add/remove <player> <id> &7- &aAdd or remove perk al jugador.'
+      - '&e/sw balloon add/remove <player> <id> &7- &aAdd or remove balloon al jugador.'
+      - '&e/sw glass add/remove <player> <id> &7- &aAdd or remove glass al jugador.'
       - '&e/sw killeffect add/remove <player> <id> &7- &aAdd or remove killeffect to
       player.'
-      - '&e/sw killsound add/remove <player> <id> &7- &aAdd or remove killsound to player.'
-      - '&e/sw kit add/remove <player> <id> &7- &aAdd or remove kit to player.'
-      - '&e/sw parting add/remove <player> <id> &7- &aAdd or remove parting to player.'
-      - '&e/sw taunt add/remove <player> <id> &7- &aAdd or remove taunt to player.'
-      - '&e/sw trail add/remove <player> <id> &7- &aAdd or remove taunt to player.'
-      - '&e/sw windance add/remove <player> <id> &7- &aAdd or remove windance to player.'
-      - '&e/sw wineffect add/remove <player> <id> &7- &aAdd or remove wineffect to player.'
+      - '&e/sw killsound add/remove <player> <id> &7- &aAdd or remove killsound al jugador.'
+      - '&e/sw kit add/remove <player> <id> &7- &aAdd or remove kit al jugador.'
+      - '&e/sw parting add/remove <player> <id> &7- &aAdd or remove parting al jugador.'
+      - '&e/sw taunt add/remove <player> <id> &7- &aAdd or remove taunt al jugador.'
+      - '&e/sw trail add/remove <player> <id> &7- &aAdd or remove taunt al jugador.'
+      - '&e/sw windance add/remove <player> <id> &7- &aAdd or remove windance al jugador.'
+      - '&e/sw wineffect add/remove <player> <id> &7- &aAdd or remove wineffect al jugador.'
       - '&e/sw xp add/remove/set <player> <coins> &7- &aHandles the addition, removal
       and set of xp.'
       - '&e/sw coins add/remove/set <player> <coins> &7- &aHandles the addition, removal
@@ -533,17 +482,13 @@ setup:
       - '&e/sw multiplier <type> <player> <amount> <time> &7- &aCreate a multiplier
       of type with custom amount and duration.'
   noHasGame: '&It is not possible to enter as there are no games.'
-  noTypePreview: '&cPlease write a valid preview type: &eBALLOON &cor &eGLASS&c.'
-  setPlayer: '&cYou''ve set the player place in the preview.'
-  setCosmetic: '&cYou''ve set the cosmetic place in the preview.'
-  savePreview: '&aYou saved this preview location.'
   needOneGame: '&cYou need to have at least one arena created.'
-  setMainLobby: '&aYou''ve set up the main lobby.'
-  setTopKills: '&aYou''ve set up the top kills.'
-  setTopWins: '&aYou''ve set up the top wins.'
-  setTopDeaths: '&aYou''ve set up the top deaths.'
-  setTopCoins: '&aYou''ve set up the top coins.'
-  setTopElo: '&aYou''ve set up the top elo.'
+  setMainLobby: '&aHas establecido up the main lobby.'
+  setTopKills: '&aHas establecido up the top kills.'
+  setTopWins: '&aHas establecido up el top victorias.'
+  setTopDeaths: '&aHas establecido up el top muertes.'
+  setTopCoins: '&aHas establecido up el top monedas.'
+  setTopElo: '&aHas establecido up el top elo.'
   alreadyCreating: '&cYou are already creating an arena.'
   alreadyGlass: '&cYou are already creating a crystal, consider finishing it first.'
   noSchema: '&cThere is no schematic by that name.'
@@ -552,14 +497,14 @@ setup:
   reload: '&aPlugin reloaded correctly.'
   reloadLang: '&aPlugin lang reloaded correctly.'
   chesttype:
-    setRefillChange: '&eRefill Change now is <state>&e.'
-    setArmorAllTeam: '&eArmor All Team now is <state>&e.'
     setType: '&aWrite the text for this in the chat.'
     type: '&aThe rate has been set to &e<name>&a.'
     setSlot: '&aWrite the slot of chest in the chat.'
     minSlot: '&cThe minimum slot is 0.'
     maxSlot: '&cThe maximum slot is 53.'
     saved: '&aThe chest type has been saved.'
+    setRefillChange: '&eRefill Change now is <state>&e.'
+    setArmorAllTeam: '&eArmor All Team now is <state>&e.'
   parting:
     created: '&aYou have created a new parting with the name &e<name>&a.'
     setIcon: '&aThis item has been set as an icon.'
@@ -641,17 +586,17 @@ setup:
     noType: '&cEnter a valid game type.'
     addSign: '&aA sign of type &e<type> &awas added.'
   chests:
-    alreadyMode: "&cThis mode is already included."
-    writeChestMode: "&aWrite the mode you want to add."
-    noLastChest: "&cThere's no way to remove it."
-    removedChestMode: "&cThe last mode of this Batch has been removed."
-    addedChestMode: "&aAdded &e<mode> &amode to this batch of items."
-    noModeChest: "&cThere's no such game mode."
-    setRefill: '&eRefill now is <state>&e.'
     setCenter: '&eCenter now is <state>&e.'
     minChance: '&cThe minimum chance is 0.'
     setChance: '&aWrite the chance of item in the chat.'
     save: '&aYou saved the chest successfully.'
+    alreadyMode: '&cThis mode is already included.'
+    writeChestMode: '&aWrite the mode you want to add.'
+    noLastChest: '&cThere''s no way to remove it.'
+    removedChestMode: '&cThe last mode of this Batch has been removed.'
+    addedChestMode: '&aAdded &e<mode> &amode to this batch of items.'
+    noModeChest: '&cThere''s no such game mode.'
+    setRefill: '&eRefill now is <state>&e.'
   event:
     addSeconds: '&aAdded &6+<value> &ato time event.'
     removeSeconds: '&cAdded &6-<value> &cto time event.'
@@ -735,17 +680,6 @@ setup:
     noHand: '&cYou must have an item in hand.'
     save: '&aYou saved the glass in the config.'
   arena:
-    cloneMap: |-
-      &6&lARENA SETUP:
-      &aThe &e<map1> &amap has been cloned on the &e<map2> &amap.
-    alreadyMapEdit: |-
-      &6&lARENA SETUP:
-      &cThat map already exists, use the edit command, or clone the arena.
-    createMap: |-
-      &6&lARENA SETUP:
-      &aYou've created the map &e<name>&a.
-      &cNow you can paste your &eSchematic &cor start
-      &csetting up if you're already in the world.
     setLobby: |-
       &6&lARENA SETUP:
       &aThe lobby location has been established.
@@ -779,9 +713,6 @@ setup:
     saveIsland: |-
       &6&lISLAND MANAGER SETUP:
       &aYou saved the island in the arena.
-    removeIsland: |-
-      &6&lISLAND MANAGER SETUP:
-      &cIsland number &e<#> &chas been removed.
     setRanked: |-
       &6&lARENA SETUP:
       &eRanked mode now is <state>&e.
@@ -801,15 +732,9 @@ setup:
       &6&lARENA SETUP:
       &aYou saved the arena in the config.
     giveWand: '&aYou have been given the sand.'
-    detectedChest: "&e<amount>&a chests have been detected in this area."
-    noSetLocation: "&cThere hasn't been a place for that."
-    teleportedTo: "&aYou teleported to &e<to>&a place."
     createdIsland: |-
       &6&lISLAND MANAGER SETUP:
       &aYou have created a new island.
-    editIsland: |-
-      &6&lISLAND MANAGER SETUP:
-      &aYou now editing island <#>.
     noChest: '&cThis block is not a chest.'
     alreadyAdded: '&cThis chest has already been added.'
     addChest: '&aYou have added a chest.'
@@ -838,38 +763,44 @@ setup:
       noChest: |-
         &e&lARENA CHECK:
         &cThere must be at least one chest on the island.
+    cloneMap: |-
+      &6&lARENA SETUP:
+      &aThe &e<map1> &amap has been cloned on the &e<map2> &amap.
+    alreadyMapEdit: |-
+      &6&lARENA SETUP:
+      &cThat map already exists, use the edit command, or clone the arena.
+    createMap: |-
+      &6&lARENA SETUP:
+      &aYou've created the map &e<name>&a.
+      &cNow you can paste your &eSchematic &cor start
+      &csetting up if you're already in the world.
+    removeIsland: |-
+      &6&lISLAND MANAGER SETUP:
+      &cIsland number &e<#> &chas been removed.
+    detectedChest: '&e<amount>&a chests have been detected in this area.'
+    noSetLocation: '&cThere hasn''t been a place for that.'
+    teleportedTo: '&aYou teleported to &e<to>&a place.'
+    editIsland: |-
+      &6&lISLAND MANAGER SETUP:
+      &aYou now editing island <#>.
+  clearedStats: '&cThese have been cleaned stats in &e<ms> &cms.'
+  noClearStatPlayers: '&cThis command will cause memory consumption, do not run it
+    when there are players on the server. There are currently &e<online>&c players.'
+  alreadyPreview: '&cYa estas observando la previsualización de un cosmético.'
+  noGlassPreview: '&cThe glass preview location has not been set.'
+  noBalloonPreview: '&cThe balloon preview location has not been set.'
+  noCosmeticLocation: '&cYou haven''t set the cosmetic place.'
+  noPlayerLocation: '&cYou haven''t set the player place.'
+  noTypePreview: '&cPlease write a valid preview type: &eBALLOON &cor &eGLASS&c.'
+  setPlayer: '&aHas establecido the player place in the preview.'
+  setCosmetic: '&aHas establecido the cosmetic place in the preview.'
+  savePreview: '&aYou saved this preview location.'
 items:
-  instantTNT:
-    nameItem: "&cInstant TNT"
-    loreItem: |-
-      &7This TNT will turn on automatically
-      &7when you get on the ground.
-  soup:
-    nameItem: "&dSoup"
-    loreItem: |-
-      &7Clicking on this item
-      &7will regenerate hearts.
-  endBuff:
-    nameItem: "&aRush EnderPearl"
-    loreItem: |-
-      &7You'll go up to this ender
-      &7pearl and fly.
-  TNTLaunch:
-    nameItem: "&cTNT Launch"
-    loreItem: |-
-      &7This TNT drives you just
-      &7by putting it on.
-  compass:
-    nameItem: "&aPlayer Tracker"
-    loreItem: |-
-      &7This item will identify
-      &7you to the nearest players.
   lobby:
-    nameItem: '&eLobby Menu'
+    nameItem: '&eMenú de SkyWars &7(Click Derecho)'
     loreItem: |-
-      &7Click to open lobby menu.
       &7
-      &aClick to open!
+      &7Click para abrir el menú.
   setup:
     nameItem: '&eSetup Arena'
     loreItem: |-
@@ -877,7 +808,7 @@ items:
       &7
       &7Right click to open.
   center:
-    nameItem: '&eSet Center Chest'
+    nameItem: '&eSet Center Chest &7(Click Derecho)'
     loreItem: |-
       &7Item to setup center
       &7chest of arena.
@@ -885,7 +816,7 @@ items:
       &aRight click to add.
       &cLeft click to remove.
   island:
-    nameItem: '&eSet Island Chest'
+    nameItem: '&eSet Island Chest &7(Click Derecho)'
     loreItem: |-
       &7Item to setup center
       &7island of arena.
@@ -893,81 +824,126 @@ items:
       &aRight click to add.
       &cLeft click to remove.
   votes:
-    nameItem: '&eVotes'
+    nameItem: '&6Votos &7(Click Derecho)'
     loreItem: |-
-      &7Click to open menu to vote.
       &7
-      &aClick to open!
+      &7Click para abrir el menú.
   team:
-    nameItem: '&eTeam Selector'
+    nameItem: '&eSelector de equipo &7(Click Derecho)'
     loreItem: |-
-      &7Click to open team selector.
       &7
-      &aClick to open!
+      &7Click para abrir el menú.
   kits:
-    nameItem: '&eKits'
+    nameItem: '&bKits &7(Click Derecho)'
     loreItem: |-
-      &7Click to open kits menu.
       &7
-      &aClick to open!
+      &7Click para abrir el menú.
   spectate:
-    nameItem: '&aSpectate &7(Right Click)'
+    nameItem: '&aEspectear &7(Click Derecho)'
     loreItem: |-
-      &7Open the spectator menu
-      &7han teleport to other players.
       &7
-      &eClick to open!
+      &7Abre el menú de espectador
+      &7para teletransportarte a otros jugadores.
+      &7
+      &eClick para abrir
   options:
-    nameItem: '&aSpectate Settings &7(Right Click)'
+    nameItem: '&aAjustes de espectador &7(Click Derecho)'
     loreItem: |-
-      &7Open the spectator settings
-      &7menu.
       &7
-      &eClick to open!
+      &7Abre el menú de ajustes
+      &7del modo espectador.
+      &7
+      &eClick para abrir
   play:
-    nameItem: '&ePlay Again &7(Right Click)'
+    nameItem: '&3Jugar de nuevo &7(Click Derecho)'
     loreItem: |-
-      &7Click to join other game.
       &7
-      &eClick to join!
+      &7Click para unirte a otra partida.
   challenges:
-    nameItem: '&eChallenges &7(Right Click)'
+    nameItem: '&dRetos &7(Click Derecho)'
     loreItem: |-
-      &7Click to open skywars challenges
-      &7menu.
-  leave:
-    nameItem: '&cLeave'
-    loreItem: |-
-      &7Click to leave the game.
       &7
-      &eClick to leave!
+      &7Click para abrir el menú
+      &7de retos de SkyWars.
+  leave:
+    nameItem: '&cSalir &7(Click Derecho)'
+    loreItem: |-
+      &7
+      &7Click para salir de la partida.
+  instantTNT:
+    nameItem: '&cInstant TNT'
+    loreItem: |-
+      &7This TNT will turn on automatically
+      &7when you get on the ground.
+  soup:
+    nameItem: '&dSoup'
+    loreItem: |-
+      &7Clicking on this item
+      &7will regenerate hearts.
+  endBuff:
+    nameItem: '&aRush EnderPearl'
+    loreItem: |-
+      &7You'll go up to this ender
+      &7pearl and fly.
+  TNTLaunch:
+    nameItem: '&cTNT Launch'
+    loreItem: |-
+      &7This TNT drives you just
+      &7by putting it on.
+  compass:
+    nameItem: '&aPlayer Tracker'
+    loreItem: |-
+      &7This item will identify
+      &7you to the nearest players.
 menus:
-  setupPreview:
-    title: Setup Preview Location
-    player:
-      nameItem: '&aPlayer Location'
-      loreItem: |-
-        &7This is a player location:
-        &7
-        &ePlayer: &b<loc>
-        &7
-        &eClick to set!
-    cosmetic:
-      nameItem: '&aCosmetic Location'
-      loreItem: |-
-        &7This is a cosmetic location:
-        &7
-        &eCosmetic: &b<loc>
-        &7
-        &eClick to set!
-    save:
-      nameItem: '&eSave Preview'
-      loreItem: |-
-        &7Save this preview.
-        &7
-        &eClick to change!
   chestsetup:
     title: Setup Chests Type
+    name:
+      nameItem: '&eName Type'
+      loreItem: |-
+        &7This is name for type
+        &7
+        &eName: &b<name>
+        &7
+        &eClick para cambiar
+    key:
+      nameItem: '&eKey Type'
+      loreItem: |-
+        &7This is key for type
+        &7
+        &eKey: &b<key>
+        &7
+        &eClick para cambiar
+    edit:
+      nameItem: '&eEdit Type'
+      loreItem: |-
+        &7This is edit for type
+        &7
+        &eEdit: &b<edit>
+        &7
+        &eClick para cambiar
+    slotSetup:
+      nameItem: '&eSlotSetup Type'
+      loreItem: |-
+        &7This is slot for setup menu.
+        &7
+        &eSlotSetup: &b<slotSetup>
+        &7
+        &eClick para cambiar
+    slotVotes:
+      nameItem: '&eSlotSetup Typea'
+      loreItem: |-
+        &7Esto es un espacio para el menú de votos.
+        &7
+        &6SlotVotes: &e<slotSetup>
+        &7
+        &a¡Click para cambiar!
+    save:
+      nameItem: '&eGuardar Tipo'
+      loreItem: |-
+        &7Guardar este tipo.
+        &7
+        &e¡Haz clic para cambiar!
     armorAllTeams:
       nameItem: '&eArmor All teams'
       loreItem: |-
@@ -992,324 +968,269 @@ menus:
         &c&othe chests will appear empty.
         &7
         &eClick to change!
-    name:
-      nameItem: '&eName Type'
-      loreItem: |-
-        &7This is name for type
-        &7
-        &eName: &b<name>
-        &7
-        &eClick to change!
-    key:
-      nameItem: '&eKey Type'
-      loreItem: |-
-        &7This is key for type
-        &7
-        &eKey: &b<key>
-        &7
-        &eClick to change!
-    edit:
-      nameItem: '&eEdit Type'
-      loreItem: |-
-        &7This is edit for type
-        &7
-        &eEdit: &b<edit>
-        &7
-        &eClick to change!
-    slotSetup:
-      nameItem: '&eSlotSetup Type'
-      loreItem: |-
-        &7This is slot for setup menu.
-        &7
-        &eSlotSetup: &b<slotSetup>
-        &7
-        &eClick to change!
-    slotVotes:
-      nameItem: '&eSlotVotes Type'
-      loreItem: |-
-        &7This is slot for vote menu.
-        &7
-        &eSlotVotes: &b<slotSetup>
-        &7
-        &eClick to change!
-    save:
-      nameItem: '&eSave Type'
-      loreItem: |-
-        &7Save this type.
-        &7
-        &eClick to change!
   chesttypesetup:
-    title: Setup Type Chest
+    title: Configurar Tipo de Cofre
   preview:
-    title: Kit Preview
-  prestige:
-    title: "Prestige Icons"
-    status:
-      noHas: "&cYou don't have this icon."
-      select: "&eClick to select!"
-      selected: "&aAlready selected!"
+    title: Previsualizador de Kit
   levels:
-    title: SkyWars Level Progression
+    title: Progreso de Nivel SkyWars
     nowLevel:
-      nameItem: '&fLevel <level>'
-      loreItem: |-
-        &7This is your actual
-        &7level.
-    nextLevel:
-      nameItem: '&fLevel <level>'
-      loreItem: |-
-        &7This is the next
-        &7level.
-    glass:
-      nameItem: '&fLevel <level>'
+      nameItem: '&fNivel <level>'
       loreItem: |-
         &7
-        &7Progress: &b%usw_level_progress%&7/&a%usw_level_max%
+        &7Este es tu nivel
+        &7actual.
+    nextLevel:
+      nameItem: '&fNivel <level>'
+      loreItem: |-
+        &7
+        &7Este es el siguiente
+        &7nivel.
+    glass:
+      nameItem: '&fNivel <level>'
+      loreItem: |-
+        &7
+        &7Progreso: &b%usw_level_progress%&7/&a%usw_level_max%
         &f%usw_level_prefix% %usw_level_bar% &f%usw_level_nextprefix%
     prestige:
-      nameItem: '&6Prestige Icons'
+      nameItem: '&6Iconos de prestigio'
       loreItem: |-
-        &7Select a Prestige Icon to
-        &7display next to your name in
-        &7chat. You unlock new
-        &7Prestige Icons by prestiging
-        &7your SkyWars Level or by
-        &7donating coins to the Angel of
-        &7Death!
+        &7Selecciona un icono de prestigio
+        &7para mostrarlo en el chat.
+        &7
+        &7Desbloquearás nuevos iconos de
+        &7prestigio subiendo tu nivel
+        &7de SkyWars o donando coins al
+        &7Angel de la Muerte
         &7
         &f%usw_level_nextprefix% <player>
         &7
-        &eClick to view!
+        &eClick para ver
     hide:
-      nameItem: '&cHide Level'
+      nameItem: '&cOcultar nivel'
       loreItem: |-
-        &7Toggles whether your SkyWars
-        &7Level and Prestige Icon show
-        &7next to your name.
+        &7Oculta tu nivel y prestigio
+        &7en SkyWars
         &7
-        &eClick to hide!
+        &eClick para ocultar
     show:
-      nameItem: '&aShow Level'
+      nameItem: '&aMostrar nivel'
       loreItem: |-
-        &7Toggles whether your SkyWars
-        &7Level and Prestige Icon show
-        &7next to your name.
+        &7Haz visible tu nivel y prestigio
+        &7en SkyWars
         &7
-        &eClick to show!
+        &eClick para mostrar
   kitsperks:
     title: Kits y Perks
     kitsolo:
-      nameItem: '&aSolo Kits'
+      nameItem: '&aKits Modo Solo'
       loreItem: |-
-        &7Select unique game kits
-        &7in solo mode.
+        &7Selecciona Kits unicos
+        &7en el modo solo
         &7
-        &eClick to open!
+        &eClick para abrir
     kitteam:
-      nameItem: '&aTeam Kits'
+      nameItem: '&aKits Modo Team'
       loreItem: |-
-        &7Select unique game kits
-        &7in team mode.
+        &7Selecciona Kits unicos
+        &7en el modo team
         &7
-        &eClick to open!
+        &eClick para abrir
     kitranked:
-      nameItem: '&aRanked Kits'
+      nameItem: '&aKits Modo Ranked'
       loreItem: |-
-        &7Select unique game kits
-        &7in ranked mode.
+        &7Selecciona Kits unicos
+        &7en el modo ranked.
         &7
-        &eClick to open!
+        &eClick para abrir
     perksolo:
       nameItem: '&aSolo Perks'
       loreItem: |-
-        &7Select unique game perks
-        &7in solo mode.
+        &7Selecciona perks unicos
+        &7en el modo solo.
         &7
-        &eClick to open!
+        &eClick para abrir
     perkteam:
       nameItem: '&aTeam Perks'
       loreItem: |-
-        &7Select unique game perks
-        &7in team mode.
+        &7Selecciona perks unicos
+        &7en el modo team.
         &7
-        &eClick to open!
+        &eClick para abrir
     perkranked:
       nameItem: '&aRanked Perks'
       loreItem: |-
-        &7Select unique game perks
-        &7in ranked mode.
+        &7Selecciona perks unicos
+        &7en el modo ranked.
         &7
-        &eClick to open!
+        &eClick para abrir
     close:
-      nameItem: '&cClose'
+      nameItem: '&cCerrar'
       loreItem: |-
-        &7Close this
-        &7menu.
+        &7Cierra este
+        &7menú.
   heads:
-    title: Corrupted Heads
+    title: Cabezas corruptas
   angelofdeath:
-    title: SoulWell AngelOfDeath
+    title: SoulWell Angel de la Muerte
   soulwellupgrade:
-    title: SoulWell Upgrades
+    title: SoulWell Mejoras
   soulwellshop:
-    title: SoulWell Shop
+    title: SoulWell Tienda
   soulwells:
-    title: SoulWell Menu
+    title: SoulWell Menú
     shop:
-      nameItem: '&aSoulWell Shop'
+      nameItem: '&aTienda de SoulWell'
       loreItem: |-
-        &7In this menu you can
-        &7buy souls to be able to
-        &7open more soul well.
         &7
-        &eClick to open!
+        &7En este menú podrás comprar
+        &7souls para abrir en la
+        &7SoulWell.
+        &7
+        &eClick para abrir
     upgrades:
-      nameItem: '&aSoulWell Upgrades'
+      nameItem: '&aMejoras de SoulWell'
       loreItem: |-
-        &7In this menu you can improve
-        &7the maximum of Souls and
-        &7the extra amount of
-        &7Souls by winning.
         &7
-        &eClick to open!
+        &7En este menú podrás mejorar
+        &7el máximo de Souls que puedes
+        &7tener y las Souls extras que ganas
+        &7en tus victorias de SkyWars.
+        &7
+        &eClick para abrir
     heads:
-      nameItem: '&5Head Collection'
+      nameItem: '&5Colección de cabezas'
       loreItem: |-
-        &7View your collection of
-        &5Heads&7. &7Obtain Heads of
-        &7players by killing them
-        &7during &5Corrupt &7games!
         &7
-        &7Total Heads: &a<heads>
+        &7Muestra tu colección de cabezas
+        &7Obtén cabezas de jugadores mantandolos
+        &7en las &5Partidas Corruptas
         &7
-        &eClick to see!
+        &7Cabezas totales: &a<heads>
+        &7
+        &eClick para ver
     settings:
-      nameItem: '&6Soul Well Settings'
+      nameItem: '&6Ajustes de SoulWell'
       loreItem: |-
-        &7Open a menu of
-        &7SoulWell settings.
         &7
-        &eClick to open!
+        &7Abre el menú de ajustes
+        &7de SoulWell.
+        &7
+        &eClick para abrir
     soulwell:
       nameItem: '&aSoulWell'
       loreItem: |-
-        &7Open a SoulWell with
-        &7your settings.
         &7
-        &eClick to open!
+        &7Abre una SoulWell
+        &7con tus ajustes.
+        &7
+        &eClick para abrir
   challenges:
-    title: SkyWars Challenges
+    title: Retos de SkyWars
     uhc:
-      nameItem: '&eUHC Challenge'
+      nameItem: '&eReto UHC'
       loreItem: |-
-        &7You can't heal during
-        &7the game.
         &7
-        &7State: <status>
-        &7Times completed: &e<amount>
+        &7No puedes regenerarte
+        &7durante la partida.
         &7
-        &eClick to change!
+        &7Estado: <status>
+        &7
+        &eClick para cambiar
     nochest:
-      nameItem: '&eNoChest Challenge'
+      nameItem: '&eReto Sin Cofres'
       loreItem: |-
-        &7You cannot open any chests
-        &7during the game.
         &7
-        &7State: <status>
-        &7Times completed: &e<amount>
+        &7No puedes abrir ningún cofre
+        &7durante la partida.
         &7
-        &eClick to change!
+        &7Estado: <status>
+        &7
+        &eClick para cambiar
     archery:
-      nameItem: '&eArchery Challenge'
+      nameItem: '&eReto del Arco'
       loreItem: |-
-        &7You can't deal melee damage
-        &7during the game.
         &7
-        &7State: <status>
-        &7Times completed: &e<amount>
+        &7Solo puedes usar arco
+        &7durante la partida.
         &7
-        &eClick to change!
+        &7Estado: <status>
+        &7
+        &eClick para cambiar
     paper:
-      nameItem: '&ePaper Challenge'
+      nameItem: '&eReto del Papel'
       loreItem: |-
-        &7You're like a piece of paper, so you
-        &7get more backtracking when you get hit.
         &7
-        &7State: <status>
-        &7Times completed: &e<amount>
+        &7Eres como un trozo de papel, por tanto
+        &7retrocedes más cuando te golpean.
         &7
-        &eClick to change!
+        &7Estado: <status>
+        &7
+        &eClick para cambiar
     hearts:
-      nameItem: '&e5 Hearts Challenge'
+      nameItem: '&eReto de la Vida'
       loreItem: |-
-        &7You only have 5 hearts.
         &7
-        &7State: <status>
-        &7Times completed: &e<amount>
+        &7Solo tienes 5 corazones.
         &7
-        &eClick to change!
+        &7Estado: <status>
+        &7
+        &eClick para cambiar
     warrior:
-      nameItem: '&eSupreme Warrior Challenge'
-      loreItem: |-
-        &7You'll only start with a stone sword,
-        &7you won't be able to use other swords
-        &7or bows, and you won't be able
-        &7to use armor.
-        &7
-        &7State: <status>
-        &7Times completed: &e<amount>
-        &7
-        &eClick to change!
+      nameItem: '&eReto del Guerrero'
+      loreItem: "&7\n&7Comienzas con una espada de piedra,\n&7no podrás usar ninguna\\\
+        \ \\ otra arma o arco\n&7y no podrás equiparte ninguna \n&7armadura.\n&7\n\
+        &7Estado:\\ \\ <status>\n&7\n&eClick para cambiar"
     noblocks:
-      nameItem: '&eNo Blocks Challenge'
+      nameItem: '&eReto Sin Bloques'
       loreItem: |-
-        &7You can't use blocks
-        &7during the game.
         &7
-        &7State: <status>
-        &7Times completed: &e<amount>
+        &7No puedes usar bloques
+        &7durante la partida.
         &7
-        &eClick to change!
+        &7Estado: <status>
+        &7
+        &eClick para cambiar
     noob:
-      nameItem: '&eNoob Challenge'
+      nameItem: '&eReto del Noob'
       loreItem: |-
-        &7You can't use kits or skills.
         &7
-        &7State: <status>
-        &7Times completed: &e<amount>
+        &7No puedes usar Kits o Habilidades.
         &7
-        &eClick to change!
+        &7Estado: <status>
+        &7
+        &eClick para cambiar
   back:
-    nameItem: '&aBack'
+    nameItem: '&aVolver atrás'
     loreItem: |-
-      &7Click to back a last
-      &7menu.
+      &7
+      &7Click para volver
+      &7al menú anterior.
   last:
-    nameItem: '&aLast Page'
-    loreItem: |-
-      &7Click to back a last
-      &7page.
+    nameItem: '&aPágina anterior'
+    loreItem: "&7\n&7Click para volver \n&7a la página anterior."
   next:
-    nameItem: '&aNext Page'
+    nameItem: '&aSiguiente página'
     loreItem: |-
-      &7Click to back a last
-      &7page.
+      &7
+      &7Click para ir
+      &7a la siguiente página.
   close:
-    nameItem: '&cClose'
-    loreItem: '&7Close this menu.'
+    nameItem: '&cCerrar'
+    loreItem: '&7Cierra este menú.'
   cancel:
-    nameItem: '&cCancel'
-    loreItem: '&7Cancel buy and back.'
+    nameItem: '&cCancelar'
+    loreItem: '&7Cancelar compra y volver.'
   perks:
     title: '&aPerks'
     close:
-      nameItem: '&cClose'
-      loreItem: '&7Close this menu.'
+      nameItem: '&cCerrar'
+      loreItem: '&7Cierra este menú.'
   teamselector:
-    title: '&aTeam selection'
-    empty: '&aClick to join!'
-    inFull: '&eAlmost full!'
-    full: '&cTeam full!'
+    title: '&aSelector de equipos'
+    empty: '&aClick para unirte'
+    inFull: '&eCasi lleno...'
+    full: '&cEquipo completo'
     players: '&7- &8<name>'
     team:
       nameItem: <colorState>Team <#> &7- (&b<now>&7/&b<max>&7)
@@ -1318,189 +1239,184 @@ menus:
         - '&7'
         - <state>
   cubelets:
-    select: '&eClick to select!'
-    noPerm: '&cYou don''t have permission.'
-    selected: '&aSelected!'
-    title: '&aCubelet Animations'
+    select: '&eClick para seleccionar'
+    noPerm: '&cNo tienes permisos.'
+    selected: '&aSeleccionado'
+    title: '&aAnimaciones de cubelet'
     fireworks:
-      nameItem: '&aFirework Animation'
+      nameItem: '&aAnimación de Fuegos artificiales'
       loreItem: |-
-        &7This is an ancient animation
-        &7that creates downward-falling
-        &7fireworks.
+        &7Esta es una animación antigua que
+        &7que crea fuegos artificiales.
         &7
         <status>
     head:
-      nameItem: '&aCubeHead Animation'
+      nameItem: '&aAnimación CabezaCubo'
       loreItem: |-
-        &7Head that goes up spinning
-        &7and gives you a reward.
+        &7Una cabeza que da vueltas
+        &7y te da una recompensa.
         &7
         <status>
     flames:
-      nameItem: '&aFlames Animation'
+      nameItem: '&aAnimación de Fuego'
       loreItem: |-
-        &7He'll start spinning a flame circle
-        &7and when he's done he'll
-        &7give you a gift.
+        &7Un círculo de fuego te dará
+        &7tu recompensa
         &7
         <status>
   selector:
-    title: '&aGame Menu &7- &e<type>'
+    title: '&aMenú de Partidas &7- &e<type>'
     loreItem: |-
       &7
-      &fPlayers: &a<players>/<max>
-      &fState: <state>
-      &fMode: &a<mode>
+      &fJugadores: &a<players>/<max>
+      &fEstado: <state>
+      &fModo: &a<mode>
       &7
-      &eClick to join!
+      &eClick para unirte
       &7
-      &eRight-Click to alternate favorites!
+      &eClick derecho para cambiar a favoritos
     random:
-      nameItem: '&aRandom Map'
+      nameItem: '&aPartida aleatoria'
       loreItem: |-
-        &8<type> Mode
+        &8<type> Modo
         &7
-        &7It will choose a random
-        &7map among all of them in this way.
+        &7Escoge un mapa al azar
         &7
-        &eClick to play!
+        &eClick para jugar
     favorites:
-      nameItem: '&aPlay Favorites'
+      nameItem: '&aPartidas favoritas'
       loreItem: |-
-        &8<type> Mode
+        &8<type> Modo
         &7
-        &7It will choose a random map
-        &7among your favorites.
+        &7Escoge un mapa al azar
+        &7de tus mapas favoritos.
         &7
-        &eClick to play!
+        &eClick para jugar
   soulwellsettings:
-    title: '&6Soul Well Settings'
+    title: '&6Ajustes de SoulWell'
     status:
-      select: '&eClick to select!'
-      selected: '&aSelected!'
+      select: '&eClick para seleccionar'
+      selected: '&aSeleccionado'
     normal:
-      nameItem: '&aNormal Animation'
+      nameItem: '&aAnimación normal'
       loreItem: |-
-        &7Select the traditional
-        &7SoulWell animation.
+        &7Selecciona la animación
+        &7SoulWell por defecto.
         &7
         <status>
     blaze:
-      nameItem: '&aBlaze Animation'
+      nameItem: '&aAnimación de blaze'
       loreItem: |-
-        &7Select the Blaze
-        &7SoulWell animation.
+        &7Selecciona la animación
+        &7SoulWell Blaze.
         &7
         <status>
     3d:
-      nameItem: '&a3D Animation'
+      nameItem: '&aAnimación 3D'
       loreItem: |-
-        &7Select the 3D
-        &7SoulWell animation.
+        &7Selecciona la animación
+        &7SoulWell 3D.
         &7
         <status>
     add:
-      nameItem: '&aAdd &6+1'
+      nameItem: '&aAñadir &6+1'
       loreItem: |-
-        &7Add a row to your soulwell menu.
+        &7Añade una fila a tu SoulWell.
         &7
-        &eClick to add!
+        &eClick para añadir
     remove:
-      nameItem: '&cRemove &6-1'
+      nameItem: '&cEliminar &6-1'
       loreItem: |-
-        &7Remove a row to your soulwell menu.
+        &7Elimina una fila a tu SoulWell.
         &7
-        &eClick to add!
+        &eClick para eliminar
     yesHas:
-      nameItem: '&aRows: &e<rows>'
-      loreItem: '&7You currently have <rows> rows.'
+      nameItem: '&aFilas: &e<rows>'
+      loreItem: '&7Actualmente tienes <rows> filas.'
     notHas:
-      nameItem: '&cRow not used'
-      loreItem: '&7You''re not using this row.'
+      nameItem: '&cFila no usada'
+      loreItem: '&7No estas usando esta fila.'
   soulwellmenu:
     title: '&8Soul Well'
     item:
       loreItem: |-
-        &7Default description:
+        &7Descripción:
         &7
-        &eRarity: <rarity>
-        &eChance: &a<chance>%
+        &eRareza: <rarity>
+        &eProbabilidad: &a<chance>%
         &7
     confirm:
-      nameItem: '&aConfirm'
+      nameItem: '&aConfirmar'
       loreItem: |-
-        &7Click to confirm.
+        &7Click para confirmar.
         &7
-        &eClick to start!
+        &eClick para comenzar
     settings:
-      nameItem: '&6Soul Well Settings'
+      nameItem: '&6Ajustes de SoulWell'
       loreItem: |-
-        &7Open a menu of
-        &7SoulWell settings.
         &7
-        &eClick to open!
+        &7Abre el menú de ajustes
+        &7de SoulWell.
+        &7
+        &eClick para abrir
     deny:
-      nameItem: '&cCancel'
-      loreItem: |-
-        &7Click to cancel.
-        &7
-        &eClick to close!
+      nameItem: '&cCancelar'
+      loreItem: '&7Click para cancelar'
   soulwell:
-    title: '&eSetup SoulWell'
+    title: '&eConfiguración del SoulWell'
     rewards:
-      nameItem: '&eSoulWell Rewards'
+      nameItem: '&eRecompensas del SoulWell'
       loreItem: |-
-        &7Soulwell Rewards:
+        &7Recompensas del SoulWell:
         &7
-        &eClick to add!
-        &eRight click to remove last!
+        &e¡Click para añadir!
+        &e¡Click derecho para eliminar la duración!
     save:
-      nameItem: '&eSave'
+      nameItem: '&eGuardar'
       loreItem: |-
-        &7Saves this soulwell in config.
+        &7Guarda este SoulWell en la configuración.
         &7
-        &eClick to save!
+        &e¡Click para guardar!
   soulwellreward:
-    title: '&eSetup SoulWell Reward'
+    title: '&eConfigurar recompensa del SoulWell'
     name:
-      nameItem: '&aName SoulWell Reward'
+      nameItem: '&aNombre de la Recompensa del SoulWell'
       loreItem: |-
-        &7Name of this SoulWell Reward:
+        &7Nombre de esta recompensa del SoulWell
         &7
-        &eName: &b<name>
+        &eNombre: &b<name>
         &7
-        &eClick to write in chat!
+        &e¡Haz click para escribir en el chat!
     rarity:
-      nameItem: '&eRarity'
+      nameItem: '&eRareza'
       loreItem: |-
-        &7Sets the rarity of these commands.
+        &7Establece la rareza de estos comandos.
         &7
-        &eRarity: &b<rarity>
+        &eRareza: &b<rarity>
         &7
-        &bRarities:
-        &fCOMMON
-        &fUNCOMMON
-        &fRARE
-        &fEPIC
-        &fLEGENDARY
+        &bRarezas:
+        &fCOMMON -común
+        &fUNCOMMON -poco común
+        &fRARE -raro
+        &fEPIC -epico
+        &fLEGENDARY -legendario
         &7
-        &eClick to write in chat!
+        &e¡Click para escribir en el chat!
     rewards:
-      nameItem: '&eSoulWell Commands'
+      nameItem: '&eComandos del SoulWell'
       loreItem: |-
-        &aAdd commands to reward,
-        &7clicking type the
-        &7command into the chat.
+        &aAñadir comandos para recompensa,
+        &7escriba el comando
+        &7en el chat.
         &7
-        &eClick to add!
-        &eRight Click to remove last!
+        &e¡Click para añadir!
+        &e¡Click derecho para eliminar el último!
     icon:
-      nameItem: '&eSoulWell Reward Icon'
+      nameItem: '&eIcono de recompensa del SoulWell'
       loreItem: |-
         &7SoulWell icon in menu.
         &7
-        &eClick with item IN HAND to change!
+        &eClick with item in hand to change!
     chance:
       nameItem: '&eSoulWell Reward Chance'
       loreItem: |-
@@ -1508,21 +1424,21 @@ menus:
         &7
         &eChance: &b<chance>%
         &7
-        &eClick to change!
+        &eClick para cambiar
     save:
-      nameItem: '&eSave'
+      nameItem: '&eGuardar'
       loreItem: |-
         &7Saves this soulwell reward in soulwell.
         &7
         &eClick to save!
   parting:
-    title: '&eSetup Parting'
+    title: '&eConfiguración de Despedida'
     icon:
       nameItem: '&eParting Icon'
       loreItem: |-
         &7Parting icon in menu.
         &7
-        &eClick with item IN HAND to change!
+        &eClick with item in hand to change!
     price:
       nameItem: '&eParting Price'
       loreItem: |-
@@ -1530,7 +1446,7 @@ menus:
         &7
         &ePrice: &b<price>
         &7
-        &eClick to change!
+        &eClick para cambiar
     slot:
       nameItem: '&eParting Slot'
       loreItem: |-
@@ -1538,7 +1454,7 @@ menus:
         &7
         &eSlot: &b<slot>
         &7
-        &eClick to change!
+        &eClick para cambiar
     page:
       nameItem: '&eParting Page'
       loreItem: |-
@@ -1546,14 +1462,14 @@ menus:
         &7
         &ePage: &b<page>
         &7
-        &eClick to change!
+        &eClick para cambiar
     message:
       nameItem: '&eParting Message'
       loreItem: |-
         &7Messages of Parting:
         &7
         <messages>
-        &eClick to add!
+        &eClick para añadir
         &eRight Click to remove!
     permission:
       nameItem: '&ePermission of Parting'
@@ -1562,7 +1478,7 @@ menus:
         &7
         &ePermission: &b<permission>
         &7
-        &eClick to change!
+        &eClick para cambiar
     name:
       nameItem: '&aName Parting'
       loreItem: |-
@@ -1571,36 +1487,36 @@ menus:
         &eName: &b<name>
         &7
     isBuy:
-      nameItem: '&ePurchasable'
+      nameItem: '&eComprable'
       loreItem: |-
         &7Sets whether this Parting
         &7is purchaseable.
         &e
         &eValue: &b<purchasable>
         &7
-        &eClick to change!
+        &eClick para cambiar
     save:
-      nameItem: '&eSave'
+      nameItem: '&eGuardar'
       loreItem: |-
         &7Saves this Parting in config.
         &7
         &eClick to save!
   killsounds:
-    title: '&eSetup KillSound'
+    title: '&eConfigurar Sonido de Muerte'
     icon:
       nameItem: '&eKillSound Icon'
       loreItem: |-
         &7KillSound icon in menu.
         &7
-        &eClick with item IN HAND to change!
+        &eClick with item in hand to change!
     price:
       nameItem: '&eKillSound Price'
       loreItem: |-
-        &7Price of KillSound:
+        &7Precio del sonido de muerte:
         &7
-        &ePrice: &b<price>
+        &ePrecio: &b<price>
         &7
-        &eClick to change!
+        &e¡Click para cambiar!
     slot:
       nameItem: '&eKillSound Slot'
       loreItem: |-
@@ -1608,7 +1524,7 @@ menus:
         &7
         &eSlot: &b<slot>
         &7
-        &eClick to change!
+        &eClick para cambiar
     page:
       nameItem: '&eKillSound Page'
       loreItem: |-
@@ -1616,7 +1532,7 @@ menus:
         &7
         &ePage: &b<page>
         &7
-        &eClick to change!
+        &eClick para cambiar
     sound:
       nameItem: '&eKillSound Sound'
       loreItem: |-
@@ -1624,7 +1540,7 @@ menus:
         &7
         &eSound: &b<sound>
         &7
-        &eClick to change!
+        &eClick para cambiar
     vol1:
       nameItem: '&eKillSound Vol 1'
       loreItem: |-
@@ -1632,7 +1548,7 @@ menus:
         &7
         &eVol 1: &b<vol1>
         &7
-        &eClick to change!
+        &eClick para cambiar
     vol2:
       nameItem: '&eKillSound Vol 2'
       loreItem: |-
@@ -1640,7 +1556,7 @@ menus:
         &7
         &eVol 2: &b<vol2>
         &7
-        &eClick to change!
+        &eClick para cambiar
     permission:
       nameItem: '&ePermission of KillSound'
       loreItem: |-
@@ -1648,7 +1564,7 @@ menus:
         &7
         &ePermission: &b<permission>
         &7
-        &eClick to change!
+        &eClick para cambiar
     name:
       nameItem: '&aName KillSound'
       loreItem: |-
@@ -1664,7 +1580,7 @@ menus:
         &e
         &eValue: &b<purchasable>
         &7
-        &eClick to change!
+        &eClick para cambiar
     save:
       nameItem: '&eSave'
       loreItem: |-
@@ -1672,182 +1588,201 @@ menus:
         &7
         &eClick to save!
   players:
-    title: '&eSpectate Players'
+    title: '&eEspectear jugadores'
     close:
-      nameItem: '&cClose'
+      nameItem: '&cCerrar'
       loreItem: |-
-        &7Click to close
-        &7this menu.
-    order:
-      nameItem: '&aOrder By: &e<order>'
-      loreItem: |-
-        &7Click to alter the way
-        &7player heads are sorted.
         &7
-        &eClick to change!
+        &7Click para cerrar
+        &7este menú.
+    order:
+      nameItem: '&aOrdenar por: &e<order>'
+      loreItem: |-
+        &7
+        &7Click para alternar el orden
+        &7de los jugadores mostrados.
+        &7
+        &eClick para cambiar
     players:
       loreItem: |-
         &7
-        &eHealth: &b<health>
-        &eFood: &b<food>
-        &eKills: &b<kills>
+        &eVida: &b<health>
+        &eComida: &b<food>
+        &eAsesinatos: &b<kills>
         &7
-        &eClick to teleport!
+        &eClick para teletransportarte
   options:
-    title: '&eSpectator Options'
+    title: '&eAjustes de espectador'
     speedI:
-      nameItem: '&aSpeed I'
+      nameItem: '&aVelocidad I'
       loreItem: |-
-        &7Click to set speed I.
         &7
-        &eClick to change!
+        &7Click para establecer velocidad I.
+        &7
+        &eClick para cambiar
     speedII:
-      nameItem: '&aSpeed II'
+      nameItem: '&aVelocidad II'
       loreItem: |-
-        &7Click to set speed II.
         &7
-        &eClick to change!
+        &7Click para establecer velocidad II.
+        &7
+        &eClick para cambiar
     speedIII:
-      nameItem: '&aSpeed III'
+      nameItem: '&aVelocidad III'
       loreItem: |-
-        &7Click to set speed III.
         &7
-        &eClick to change!
+        &7Click para establecer velocidad III.
+        &7
+        &eClick para cambiar
     speedIV:
-      nameItem: '&aSpeed IV'
+      nameItem: '&aVelocidad IV'
       loreItem: |-
-        &7Click to set speed IV.
         &7
-        &eClick to change!
+        &7Click para establecer velocidad IV.
+        &7
+        &eClick para cambiar
     speedV:
-      nameItem: '&aSpeed V'
+      nameItem: '&aVelocidad V'
       loreItem: |-
-        &7Click to set speed V.
         &7
-        &eClick to change!
+        &7Click para establecer velocidad V.
+        &7
+        &eClick para cambiar
     nightvision:
-      nameItem: '&aNight Vision'
+      nameItem: '&aVisión nocturna'
       loreItem: |-
-        &7Alternate night vision for you.
         &7
-        &eClick to change!
+        &7Cambiar a visión nocturna.
+        &7
+        &eClick para cambiar
     spects:
-      nameItem: '&aSpectators'
+      nameItem: '&aEspectadores'
       loreItem: |-
-        &7Toggle visibility of the players.
         &7
-        &eClick to change!
+        &7Cambiar visibilidad de los jugadores.
+        &7
+        &eClick para cambiar
     first:
-      nameItem: '&aFirst Person'
+      nameItem: '&aPrimera persona'
       loreItem: |-
-        &7Toggles first person mode.
         &7
-        &eClick to change!
+        &7Cambiar a primera persona.
+        &7
+        &eClick para cambiar
   playagain:
-    title: '&ePlay Again'
+    title: '&eJugar de nuevo'
     close:
-      nameItem: '&cClose'
+      nameItem: '&cCerrar'
       loreItem: |-
-        &7Click to close
-        &7this menu.
+        &7
+        &7Click para cerrar
+        &7este menú.
     order:
-      nameItem: '&aOrder By: &e<order>'
+      nameItem: '&aOrdenar por: &e<order>'
       loreItem: |-
-        &7Click to alter the way
-        &7games are sorted.
         &7
-        &eClick to change!
+        &7Click para alternar el orden
+        &7de las partidas.
+        &7
+        &eClick para cambiar
   lobby:
-    title: '&eLobby Menu'
+    title: '&bMenú de SkyWars'
     levels:
-      nameItem: '&dSkyWars Level Progression'
+      nameItem: '&dProgreso de Nivel SkyWars'
       loreItem: |-
-        &7View information about your
-        &7SkyWars Level progression,
-        &7select your Prestige Icon, and
-        &7view level rewards.
         &7
-        &7Progress: &b%usw_level_progress%&7/&a%usw_level_max%
+        &7Muestra información sobre tu progreso
+        &7de niveles en SkyWars,
+        &7selecciona tu icono de prestigio, y
+        &7visualiza las recompensas de nivel.
+        &7
+        &7Progreso: &b%usw_level_progress%&7/&a%usw_level_max%
         &f%usw_level_prefix% %usw_level_bar% &f%usw_level_nextprefix%
         &7
-        &eClick to view!
+        &eClick para ver
     soulwell:
-      nameItem: '&aSoulWell Menu'
+      nameItem: '&aMenu de SoulWell'
       loreItem: |-
-        &7Open the soul well change
-        &7menu and options.
         &7
-        &eClick to open!
+        &7Abre el menú de ajustes
+        &7de SoulWell.
+        &7
+        &eClick para abrir
     perksKits:
-      nameItem: '&aKit And Perks Menu'
+      nameItem: '&aMenú de Kits & Perks'
       loreItem: |-
-        &7Open a menu to see
-        &7yours kits and perks.
         &7
-        &eClick to open!
+        &7Abre un menú para ver
+        &7tus kits y perks.
+        &7
+        &eClick para abrir
     trails:
-      nameItem: '&aTrails Menu'
+      nameItem: '&aMenú de Rastros'
       loreItem: |-
-        &7Open a menu to select
-        &7or purchase trails.
         &7
-        &eClick to open!
+        &7Selecciona tus rastros
+        &7adquiridos.
+        &7
+        &eClick para abrir
     taunts:
-      nameItem: '&aTaunts Menu'
+      nameItem: '&aMenú de Mofas'
       loreItem: |-
-        &7Open a menu to select
-        &7or purchase taunts.
         &7
-        &eClick to open!
+        &7Selecciona tus mofas
+        &7adquiridas.
+        &7
+        &eClick para abrir
     balloons:
-      nameItem: '&aBalloons Menu'
+      nameItem: '&aMenú de Globos'
       loreItem: |-
-        &7Open a menu to select
-        &7or purchase balloons.
         &7
-        &eClick to open!
+        &7Selecciona tus globos
+        &7adquiridos.
+        &7
+        &eClick para abrir
     glass:
-      nameItem: '&aGlass Menu'
+      nameItem: '&aMenú de Cristales'
       loreItem: |-
-        &7Open a menu to select
-        &7or purchase glasses.
+        &7Selecciona tu cristal
+        &7entre los adquiridos.
         &7
-        &eClick to open!
+        &eClick para abrir
     wineffects:
-      nameItem: '&aWinEffects Menu'
+      nameItem: '&aMenú de efectos de victoria'
       loreItem: |-
-        &7Open a menu to select
-        &7or purchase win effects.
         &7
-        &eClick to open!
+        &7Selecciona tus efectos
+        &7de victoria adquiridos.
+        &7
+        &eClick para abrir
     killeffects:
-      nameItem: '&aKillEffects Menu'
-      loreItem: |-
-        &7Open a menu to select
-        &7or purchase kill effects.
-        &7
-        &eClick to open!
+      nameItem: '&aMenú de efectos de muerte'
+      loreItem: "&7\n&7Selecciona tus efectos de \n&7muerte adquiridos.\n&7\n&eClick\\\
+        \ \\ para abrir"
     windances:
-      nameItem: '&aWinDances Menu'
+      nameItem: '&aMenú de bailes de victoria'
       loreItem: |-
-        &7Open a menu to select
-        &7or purchase win dances.
         &7
-        &eClick to open!
+        &7Selecciona tus bailes de
+        &7victoria adquiridos.
+        &7
+        &eClick para abrir
     killsound:
-      nameItem: '&aKillSound Menu'
+      nameItem: '&aMenú de sonidos de asesinato'
       loreItem: |-
-        &7Open a menu to select
-        &7or purchase kill sounds.
         &7
-        &eClick to open!
+        &7Selecciona tus sonidos de
+        &7asesinato adquiridos.
+        &7
+        &eClick para abrir
     parting:
-      nameItem: '&aParting Menu'
+      nameItem: '&aMenu de Despedidas'
       loreItem: |-
-        &7Open a menu to select
-        &7or purchase partings.
         &7
-        &eClick to open!
+        &7Selecciona tus despedidas
+        &7adquiridas.
+        &7
+        &eClick para abrir
   balloons:
     title: '&eSetup Balloons'
     icon:
@@ -1855,7 +1790,7 @@ menus:
       loreItem: |-
         &7Balloon icon in menu.
         &7
-        &eClick with item IN HAND to change!
+        &eClick with item in hand to change!
     price:
       nameItem: '&eBalloon Price'
       loreItem: |-
@@ -1863,7 +1798,7 @@ menus:
         &7
         &ePrice: &b<price>
         &7
-        &eClick to change!
+        &eClick para cambiar
     slot:
       nameItem: '&eBalloon Slot'
       loreItem: |-
@@ -1871,7 +1806,7 @@ menus:
         &7
         &eSlot: &b<slot>
         &7
-        &eClick to change!
+        &eClick para cambiar
     page:
       nameItem: '&eBalloon Page'
       loreItem: |-
@@ -1879,7 +1814,7 @@ menus:
         &7
         &ePage: &b<page>
         &7
-        &eClick to change!
+        &eClick para cambiar
     permission:
       nameItem: '&ePermission of Balloon'
       loreItem: |-
@@ -1887,7 +1822,7 @@ menus:
         &7
         &ePermission: &b<permission>
         &7
-        &eClick to change!
+        &eClick para cambiar
     name:
       nameItem: '&aName Balloon'
       loreItem: |-
@@ -1911,7 +1846,7 @@ menus:
         &e
         &eValue: &b<purchasable>
         &7
-        &eClick to change!
+        &eClick para cambiar
     save:
       nameItem: '&eSave'
       loreItem: |-
@@ -1925,7 +1860,7 @@ menus:
       loreItem: |-
         &7Trail icon in menu.
         &7
-        &eClick with item IN HAND to change!
+        &eClick with item in hand to change!
     speed:
       nameItem: '&eTrail Speed'
       loreItem: |-
@@ -1933,7 +1868,7 @@ menus:
         &7
         &eSpeed: &b<speed>
         &7
-        &eClick to change!
+        &eClick para cambiar
     offsetX:
       nameItem: '&eTrail OffSetX'
       loreItem: |-
@@ -1941,7 +1876,7 @@ menus:
         &7
         &eOffSetX: &b<offsetX>
         &7
-        &eClick to change!
+        &eClick para cambiar
     offsetY:
       nameItem: '&eTrail OffSetY'
       loreItem: |-
@@ -1949,7 +1884,7 @@ menus:
         &7
         &eOffSetY: &b<offsetY>
         &7
-        &eClick to change!
+        &eClick para cambiar
     offsetZ:
       nameItem: '&eTrail OffSetZ'
       loreItem: |-
@@ -1957,7 +1892,7 @@ menus:
         &7
         &eOffSetZ: &b<offsetZ>
         &7
-        &eClick to change!
+        &eClick para cambiar
     amount:
       nameItem: '&eTrail Amount'
       loreItem: |-
@@ -1965,7 +1900,7 @@ menus:
         &7
         &eAmount: &b<amount>
         &7
-        &eClick to change!
+        &eClick para cambiar
     range:
       nameItem: '&eTrail Range'
       loreItem: |-
@@ -1973,7 +1908,7 @@ menus:
         &7
         &eRange: &b<range>
         &7
-        &eClick to change!
+        &eClick para cambiar
     price:
       nameItem: '&eTrail Price'
       loreItem: |-
@@ -1981,7 +1916,7 @@ menus:
         &7
         &ePrice: &b<price>
         &7
-        &eClick to change!
+        &eClick para cambiar
     slot:
       nameItem: '&eTrail Slot'
       loreItem: |-
@@ -1989,7 +1924,7 @@ menus:
         &7
         &eSlot: &b<slot>
         &7
-        &eClick to change!
+        &eClick para cambiar
     page:
       nameItem: '&eTrail Page'
       loreItem: |-
@@ -1997,7 +1932,7 @@ menus:
         &7
         &ePage: &b<page>
         &7
-        &eClick to change!
+        &eClick para cambiar
     particle:
       nameItem: '&eParticle of Trail'
       loreItem: |-
@@ -2005,7 +1940,7 @@ menus:
         &7
         &eParticle: &b<particle>
         &7
-        &eClick to change!
+        &eClick para cambiar
     permission:
       nameItem: '&ePermission of Trail'
       loreItem: |-
@@ -2013,7 +1948,7 @@ menus:
         &7
         &ePermission: &b<permission>
         &7
-        &eClick to change!
+        &eClick para cambiar
     name:
       nameItem: '&aName Trail'
       loreItem: |-
@@ -2029,7 +1964,7 @@ menus:
         &e
         &eValue: &b<purchasable>
         &7
-        &eClick to change!
+        &eClick para cambiar
     save:
       nameItem: '&eSave'
       loreItem: |-
@@ -2037,304 +1972,335 @@ menus:
         &7
         &eClick to save!
   kitlevels:
-    title: '&eKit Levels'
+    title: '&eKit de Nivel'
     close:
-      nameItem: '&cClose'
+      nameItem: '&cCerrar'
       loreItem: |-
-        &7Close this inventory.
         &7
-        &eClick to close!
+        &7Cerrar este menú.
+        &7
+        &eClick para cerrar
   kitselector:
-    title: '&eKit Selector'
-    noPermission: '&cYou can''t buy this kit!'
-    hasBuy: '&aYou already have this kit!'
-    buy: '&eYou can buy this kit!'
-    noMoney: '&cYou don''t have money to buy.'
-    level: '&aLevel: &6<level>'
-    price: '&aPrice: &6<price>'
-    noBuyable: '&cNot buyable.'
-    buyed: '&6Bought'
+    title: '&eSelector de Kit'
+    noPermission: '&cNo tienes permiso para este kit'
+    hasBuy: '&aYa posees este kit'
+    buy: '&ePuedes comprar este kit'
+    noMoney: '&cNo tienes suficientes coins para este kit.'
+    level: '&aNivel: &6<level>'
+    price: '&aPrecio: &6<price>'
+    noBuyable: '&cNo disponible para comprar.'
+    buyed: '&6Comprado'
     deselect:
-      nameItem: '&eDeselect Kit'
+      nameItem: '&eDesequipar Kit'
       loreItem: |-
-        &7By clicking you will
-        &7deselect this kit.
         &7
-        &eClick to deselect!
+        &7Haz click para desequipar
+        &7este kit.
+        &7
+        &eClick para desequipar
     kit:
-      nameItem: '&eKit Selected'
+      nameItem: '&eKit Seleccionado'
       loreItem: |-
-        &7By clicking you can see
-        &7the contents of this kit.
         &7
-        &eClick to view!
+        &7Haz click para visualizar
+        &7el contenido de este kit.
+        &7
+        &eClick para ver
     close:
-      nameItem: '&cClose'
+      nameItem: '&cCerrar'
       loreItem: |-
-        &7Close this inventory.
         &7
-        &eClick to close!
+        &7Cerrar este menú.
+        &7
+        &eClick para cerrar
   killsoundsselector:
-    title: '&eKillSound Selector'
-    noPermission: '&cYou can''t buy this killsound!'
-    hasBuy: '&aYou already have this killsound!'
-    buy: '&eYou can buy this killsound!'
-    noMoney: '&cYou don''t have money to buy.'
-    price: '&aPrice: &6<price>'
-    noBuyable: '&cNot buyable.'
-    buyed: '&6Bought'
+    title: '&eSelector de sonido de asesinato'
+    noPermission: '&cNo tienes permiso para este sonido de asesinato'
+    hasBuy: '&aYa posees este sonido de asesinato'
+    buy: '&ePuedes comprar este sonido de asesinato'
+    noMoney: '&cNo tienes suficientes coins para este sonido de asesinato.'
+    price: '&aPrecio: &6<price>'
+    noBuyable: '&cNo disponible para comprar.'
+    buyed: '&6Comprado'
     deselect:
-      nameItem: '&eDeselect KillSound'
+      nameItem: '&eDesequipar sonido de asesinato'
       loreItem: |-
-        &7By clicking you will
-        &7deselect this killsound.
         &7
-        &eClick to deselect!
+        &7Haz click para
+        &7desequipar este sonido de asesinato.
+        &7
+        &eClick para desequipar
     killsound:
-      nameItem: '&eKillSound Selected'
+      nameItem: '&eSonido de asesinato seleccionado'
       loreItem: |-
-        &7By clicking you can see
-        &7the contents of this killsound.
         &7
-        &eClick to view!
+        &7Haz click para ver
+        &7el contenido de este sonido de asesinato.
+        &7
+        &eClick para ver
     close:
-      nameItem: '&cClose'
+      nameItem: '&cCerrar'
       loreItem: |-
-        &7Close this inventory.
         &7
-        &eClick to close!
+        &7Cerrar este menú.
+        &7
+        &eClick para cerrar
   wineffectsselector:
-    title: '&eWinEffect Selector'
-    noPermission: '&cYou can''t buy this wineffect!'
-    hasBuy: '&aYou already have this wineffect!'
-    buy: '&eYou can buy this wineffect!'
-    noMoney: '&cYou don''t have money to buy.'
-    price: '&aPrice: &6<price>'
-    noBuyable: '&cNot buyable.'
-    buyed: '&6Bought'
+    title: '&eSelecto de efecto de victoria'
+    noPermission: '&cNo tienes permiso para este efecto de victoria'
+    hasBuy: '&aYa posees este efecto de victoria'
+    buy: '&ePuedes comprar este efecto de victoria'
+    noMoney: '&cNo tienes suficientes coins para este efecto de victoria.'
+    price: '&aPrecio: &6<price>'
+    noBuyable: '&cNo disponible para comprar.'
+    buyed: '&6Comprado'
     deselect:
-      nameItem: '&eDeselect WinEffect'
+      nameItem: '&eDesequipar WinEffect'
       loreItem: |-
-        &7By clicking you will
-        &7deselect this wineffect.
         &7
-        &eClick to deselect!
+        &7Haz click para
+        &7desequipar este efecto de victoria.
+        &7
+        &eClick para desequipar
     wineffect:
-      nameItem: '&eWinEffect Selected'
+      nameItem: '&eEfecto de victoria seleccionado'
       loreItem: |-
-        &7By clicking you can see
-        &7the contents of this wineffect.
         &7
-        &eClick to view!
+        &7Haz click para ver
+        &7el contenido de este efecto de victoria.
+        &7
+        &eClick para ver
     close:
-      nameItem: '&cClose'
+      nameItem: '&cCerrar'
       loreItem: |-
-        &7Close this inventory.
         &7
-        &eClick to close!
+        &7Cerrar este menú.
+        &7
+        &eClick para cerrar
   killeffectsselector:
-    title: '&eKillEffect Selector'
-    noPermission: '&cYou can''t buy this killeffect!'
-    hasBuy: '&aYou already have this killeffect!'
-    buy: '&eYou can buy this killeffect!'
-    noMoney: '&cYou don''t have money to buy.'
-    price: '&aPrice: &6<price>'
-    noBuyable: '&cNot buyable.'
-    buyed: '&6Bought'
+    title: '&eSelector de efecto de asesinato'
+    noPermission: '&cNo tienes permiso para este efecto de asesinato'
+    hasBuy: '&aYa posees este efecto de asesinato'
+    buy: '&ePuedes comprar este efecto de asesinato'
+    noMoney: '&cNo tienes suficientes coins para este efecto de asesinato.'
+    price: '&aPrecio: &6<price>'
+    noBuyable: '&cNo disponible para comprar.'
+    buyed: '&6Comprado'
     deselect:
-      nameItem: '&eDeselect KillEffect'
+      nameItem: '&eDesequipar efecto de asesinato'
       loreItem: |-
-        &7By clicking you will
-        &7deselect this killeffect.
         &7
-        &eClick to deselect!
+        &7Haz click para
+        &7desequipar este efecto de asesinato.
+        &7
+        &eClick para desequipar
     killeffect:
-      nameItem: '&eKillEffect Selected'
+      nameItem: '&eEfecto de asesinato seleccionado'
       loreItem: |-
-        &7By clicking you can see
-        &7the contents of this killeffect.
         &7
-        &eClick to view!
+        &7Haz click para ver
+        &7el contenido de este efecto de asesinato.
+        &7
+        &eClick para ver
     close:
-      nameItem: '&cClose'
+      nameItem: '&cCerrar'
       loreItem: |-
-        &7Close this inventory.
         &7
-        &eClick to close!
+        &7Cerrar este menú.
+        &7
+        &eClick para cerrar
   windancesselector:
-    title: '&eWinDances Selector'
-    noPermission: '&cYou can''t buy this windances!'
-    hasBuy: '&aYou already have this windances!'
-    buy: '&eYou can buy this gwindanceslass!'
-    noMoney: '&cYou don''t have money to buy.'
-    price: '&aPrice: &6<price>'
-    noBuyable: '&cNot buyable.'
-    buyed: '&6Bought'
+    title: '&eSelector de bailes de victoria'
+    noPermission: '&cNo tienes permiso para este baile de victoria'
+    hasBuy: '&aYa posees este baile de victoria'
+    buy: '&ePuedes comprar este baile de victoria'
+    noMoney: '&cNo tienes suficientes coins para este baile de victoria.'
+    price: '&aPrecio: &6<price>'
+    noBuyable: '&cNo disponible para comprar.'
+    buyed: '&6Comprado'
     deselect:
-      nameItem: '&eDeselect WinDances'
+      nameItem: '&eDesequipar baile de victoria'
       loreItem: |-
-        &7By clicking you will
-        &7deselect this windances.
         &7
-        &eClick to deselect!
+        &7Haz click para
+        &7desequipar este baile de victoria.
+        &7
+        &eClick para desequipar
     windance:
-      nameItem: '&eWinDances Selected'
+      nameItem: '&eBaile de victoria seleccionado'
       loreItem: |-
-        &7By clicking you can see
-        &7the contents of this windances.
         &7
-        &eClick to view!
+        &7Haz click para ver
+        &7el contenido de este baile de victoria.
+        &7
+        &eClick para ver
     close:
-      nameItem: '&cClose'
+      nameItem: '&cCerrar'
       loreItem: |-
-        &7Close this inventory.
         &7
-        &eClick to close!
+        &7Cerrar este menú.
+        &7
+        &eClick para cerrar
   glassselector:
-    title: '&eGlass Selector'
-    noPermission: '&cYou can''t buy this glass!'
-    hasBuy: '&aYou already have this glass!'
-    buy: '&eYou can buy this glass!'
-    noMoney: '&cYou don''t have money to buy.'
-    price: '&aPrice: &6<price>'
-    noBuyable: '&cNot buyable.'
-    buyed: '&6Bought'
+    title: '&eSelector de cristal'
+    noPermission: '&cNo tienes permiso para este cristal'
+    hasBuy: '&aYa posees este cristal'
+    buy: '&ePuedes comprar este cristal'
+    noMoney: '&cNo tienes suficientes coins para este cristal.'
+    price: '&aPrecio: &6<price>'
+    noBuyable: '&cNo disponible para comprar.'
+    buyed: '&6Comprado'
     deselect:
-      nameItem: '&eDeselect Glass'
+      nameItem: '&eDesequipar cristal'
       loreItem: |-
-        &7By clicking you will
-        &7deselect this glass.
         &7
-        &eClick to deselect!
+        &7Haz click para
+        &7desequipar este cristal.
+        &7
+        &eClick para desequipar
     glass:
-      nameItem: '&eGlass Selected'
+      nameItem: '&eCristal seleccionado'
       loreItem: |-
-        &7By clicking you can see
-        &7the contents of this glass.
         &7
-        &eClick to view!
+        &7Haz click para ver
+        &7el contenido de este cristal.
+        &7
+        &eClick para ver
     close:
-      nameItem: '&cClose'
+      nameItem: '&cCerrar'
       loreItem: |-
-        &7Close this inventory.
         &7
-        &eClick to close!
+        &7Cerrar este menú.
+        &7
+        &eClick para cerrar
   balloonsselector:
-    title: '&eBalloons Selector'
-    noPermission: '&cYou can''t buy this balloons!'
-    hasBuy: '&aYou already have this balloons!'
-    buy: '&eYou can buy this balloons!'
-    noMoney: '&cYou don''t have money to buy.'
-    price: '&aPrice: &6<price>'
-    noBuyable: '&cNot buyable.'
-    buyed: '&6Bought'
+    title: '&eSelector de globos'
+    noPermission: '&cNo tienes permiso para este globo'
+    hasBuy: '&aYa posees este globo'
+    buy: '&ePuedes comprar este globo'
+    noMoney: '&cNo tienes suficientes coins para este globo.'
+    price: '&aPrecio: &6<price>'
+    noBuyable: '&cNo disponible para comprar.'
+    buyed: '&6Comprado'
     deselect:
-      nameItem: '&eDeselect Balloons'
+      nameItem: '&eDesequipar globos'
       loreItem: |-
-        &7By clicking you will
-        &7deselect this balloons.
         &7
-        &eClick to deselect!
+        &7Haz click para
+        &7desequipar este globo.
+        &7
+        &eClick para desequipar
     balloon:
-      nameItem: '&eBalloons Selected'
+      nameItem: '&eGlobo seleccionado'
       loreItem: |-
-        &7By clicking you can see
-        &7the contents of this balloons.
         &7
-        &eClick to view!
+        &7Haz click para ver
+        &7el contenido de este globo.
+        &7
+        &eClick para ver
     close:
-      nameItem: '&cClose'
+      nameItem: '&cCerrar'
       loreItem: |-
-        &7Close this inventory.
         &7
-        &eClick to close!
+        &7Cerrar este menú.
+        &7
+        &eClick para cerrar
   trailsselector:
-    title: '&eTrail Selector'
-    noPermission: '&cYou can''t buy this trail!'
-    hasBuy: '&aYou already have this trail!'
-    buy: '&eYou can buy this trail!'
-    noMoney: '&cYou don''t have money to buy.'
-    price: '&aPrice: &6<price>'
-    noBuyable: '&cNot buyable.'
-    buyed: '&6Bought'
+    title: '&eSelector de rastros'
+    noPermission: '&cNo tienes permiso para este rastro'
+    hasBuy: '&aYa posees este rastro'
+    buy: '&ePuedes comprar este rastro'
+    noMoney: '&cNo tienes suficientes coins para este rastro.'
+    price: '&aPrecio: &6<price>'
+    noBuyable: '&cNo disponible para comprar.'
+    buyed: '&6Comprado'
     deselect:
-      nameItem: '&eDeselect Trail'
+      nameItem: '&eDesequipar rastro'
       loreItem: |-
-        &7By clicking you will
-        &7deselect this trail.
         &7
-        &eClick to deselect!
+        &7Haz click para
+        &7desequipar este rastro.
+        &7
+        &eClick para desequipar
     trail:
-      nameItem: '&eTrail Selected'
+      nameItem: '&eRastro seleccionado'
       loreItem: |-
-        &7By clicking you can see
-        &7the contents of this trail.
         &7
-        &eClick to view!
+        &7Haz click para ver
+        &7el contenido de este rastro.
+        &7
+        &eClick para ver
     close:
-      nameItem: '&cClose'
+      nameItem: '&cCerrar'
       loreItem: |-
-        &7Close this inventory.
         &7
-        &eClick to close!
+        &7Cerrar este menú.
+        &7
+        &eClick para cerrar
   partingselector:
-    title: '&eParting Selector'
-    noPermission: '&cYou can''t buy this parting!'
-    hasBuy: '&aYou already have this parting!'
-    buy: '&eYou can buy this parting!'
-    noMoney: '&cYou don''t have money to buy.'
-    price: '&aPrice: &6<price>'
-    noBuyable: '&cNot buyable.'
-    buyed: '&6Bought'
+    title: '&eSelector de despedidas'
+    noPermission: '&cNo tienes permiso para esta despedida'
+    hasBuy: '&aYa posees esta despedida'
+    buy: '&ePuedes comprar esta despedida'
+    noMoney: '&cNo tienes suficientes coins para esta despedida.'
+    price: '&aPrecio: &6<price>'
+    noBuyable: '&cNo disponible para comprar.'
+    buyed: '&6Comprado'
     deselect:
-      nameItem: '&eDeselect Parting'
+      nameItem: '&eDesequipar despedida'
       loreItem: |-
-        &7By clicking you will
-        &7deselect this parting.
         &7
-        &eClick to deselect!
+        &7Haz click para
+        &7desequipar esta despedida.
+        &7
+        &eClick para desequipar
     parting:
-      nameItem: '&eParting Selected'
+      nameItem: '&eDespedida seleccionada'
       loreItem: |-
-        &7By clicking you can see
-        &7the contents of this parting.
         &7
-        &eClick to view!
+        &7Haz click para ver
+        &7el contenido de esta despedida.
+        &7
+        &eClick para ver
     close:
-      nameItem: '&cClose'
+      nameItem: '&cCerrar'
       loreItem: |-
-        &7Close this inventory.
         &7
-        &eClick to close!
+        &7Cerrar este menú.
+        &7
+        &eClick para cerrar
   tauntsselector:
-    title: '&eTaunt Selector'
-    noPermission: '&cYou can''t buy this taunt!'
-    hasBuy: '&aYou already have this taunt!'
-    buy: '&eYou can buy this taunt!'
-    noMoney: '&cYou don''t have money to buy.'
-    price: '&aPrice: &6<price>'
-    noBuyable: '&cNot buyable.'
-    buyed: '&6Bought'
+    title: '&eSelector de mofas'
+    noPermission: '&cNo tienes permiso para esta mofa'
+    hasBuy: '&aYa posees esta mofa'
+    buy: '&ePuedes comprar esta mofa'
+    noMoney: '&cNo tienes suficientes coins para esta mofa.'
+    price: '&aPrecio: &6<price>'
+    noBuyable: '&cNo disponible para comprar.'
+    buyed: '&6Comprado'
     deselect:
-      nameItem: '&eDeselect Taunt'
+      nameItem: '&eDesequipar mofa'
       loreItem: |-
-        &7By clicking you will
-        &7deselect this taunt.
         &7
-        &eClick to deselect!
+        &7Haz click para
+        &7desequipar esta mofa.
+        &7
+        &eClick para desequipar
     taunt:
-      nameItem: '&eTaunt Selected'
+      nameItem: '&eMofa seleccionada'
       loreItem: |-
-        &7By clicking you can see
-        &7the contents of this taunt.
         &7
-        &eClick to view!
+        &7Haz click para ver
+        &7el contenido de esta mofa.
+        &7
+        &eClick para ver
     close:
-      nameItem: '&cClose'
+      nameItem: '&cCerrar'
       loreItem: |-
-        &7Close this inventory.
         &7
-        &eClick to close!
+        &7Cerrar este menú.
+        &7
+        &eClick para cerrar
   typechest:
     title: '&eChest Type Setup'
     key:
@@ -2343,7 +2309,7 @@ menus:
         &7Click to change the
         &7key of this chest.
         &7
-        &eClick to change!
+        &eClick para cambiar
     voteslot:
       nameItem: '&aVote Slot'
       loreItem: |-
@@ -2352,7 +2318,7 @@ menus:
         &7
         &eVote Slot: &a<voteslot>
         &7
-        &eClick to change!
+        &eClick para cambiar
     setupslot:
       nameItem: '&aSetup Slot'
       loreItem: |-
@@ -2361,7 +2327,7 @@ menus:
         &7
         &eSetup Slot: &a<setupslot>
         &7
-        &eClick to change!
+        &eClick para cambiar
     editprefix:
       nameItem: '&aEdit Prefix'
       loreItem: |-
@@ -2371,7 +2337,7 @@ menus:
         &7
         &eEdit: &a<edit>
         &7
-        &eClick to change!
+        &eClick para cambiar
     save:
       nameItem: '&aSave Chest Type'
       loreItem: |-
@@ -2398,7 +2364,7 @@ menus:
         &7
         &eChance: &a<chance>
         &7
-        &eClick to change!
+        &eClick para cambiar
     center:
       nameItem: '&aCenter'
       loreItem: |-
@@ -2408,7 +2374,14 @@ menus:
         &7
         &eState: &a<center>
         &7
-        &eClick to change!
+        &eClick para cambiar
+    save:
+      nameItem: '&aSave Items'
+      loreItem: |-
+        &7Click to save type
+        &7and back to setup chest.
+        &7
+        &eClick to save!
     refill:
       nameItem: '&aRefill'
       loreItem: |-
@@ -2433,15 +2406,29 @@ menus:
         &7
         &eClick to add!
         &aRight click to remove last!
-    save:
-      nameItem: '&aSave Items'
-      loreItem: |-
-        &7Click to save type
-        &7and back to setup chest.
-        &7
-        &eClick to save!
   cheststype:
     title: '&eSetup Chest Type'
+    add:
+      nameItem: '&aAdd Items'
+      loreItem: |-
+        &7Clicking will open a
+        &7menu to add items.
+        &7
+        &eClick para abrir
+    remove:
+      nameItem: '&cRemove Items'
+      loreItem: |-
+        &7Clicking will open a
+        &7menu to remove items.
+        &7
+        &eClick para abrir
+    save:
+      nameItem: '&aSave Type'
+      loreItem: |-
+        &7Click to save type
+        &7and back to setup menu.
+        &7
+        &eClick to save!
     filter:
       nameItem: '&aFilter Items'
       loreItem: |-
@@ -2451,28 +2438,7 @@ menus:
         &7
         &eFilter: &a<filter>
         &7
-        &eClick to open!
-    add:
-      nameItem: '&aAdd Items'
-      loreItem: |-
-        &7Clicking will open a
-        &7menu to add items.
-        &7
-        &eClick to open!
-    remove:
-      nameItem: '&cRemove Items'
-      loreItem: |-
-        &7Clicking will open a
-        &7menu to remove items.
-        &7
-        &eClick to open!
-    save:
-      nameItem: '&aSave Type'
-      loreItem: |-
-        &7Click to save type
-        &7and back to setup menu.
-        &7
-        &eClick to save!
+        &eClick para abrir
   taunts:
     title: '&eSetup Taunts'
     settitle:
@@ -2523,13 +2489,13 @@ menus:
         &7menu to add messages
         &7by damage type.
         &7
-        &eClick to open!
+        &eClick para abrir
     icon:
       nameItem: '&eTaunt Icon'
       loreItem: |-
         &7Taunt icon in menu.
         &7
-        &eClick with item IN HAND to change!
+        &eClick with item in hand to change!
     price:
       nameItem: '&eTaunt Price'
       loreItem: |-
@@ -2537,7 +2503,7 @@ menus:
         &7
         &ePrice: &b<price>
         &7
-        &eClick to change!
+        &eClick para cambiar
     slot:
       nameItem: '&eTaunt Slot'
       loreItem: |-
@@ -2545,7 +2511,7 @@ menus:
         &7
         &eSlot: &b<slot>
         &7
-        &eClick to change!
+        &eClick para cambiar
     page:
       nameItem: '&eTaunt Page'
       loreItem: |-
@@ -2553,7 +2519,7 @@ menus:
         &7
         &ePage: &b<page>
         &7
-        &eClick to change!
+        &eClick para cambiar
     permission:
       nameItem: '&ePermission of Taunt'
       loreItem: |-
@@ -2561,7 +2527,7 @@ menus:
         &7
         &ePermission: &b<permission>
         &7
-        &eClick to change!
+        &eClick para cambiar
     name:
       nameItem: '&aName Taunt'
       loreItem: |-
@@ -2577,7 +2543,7 @@ menus:
         &e
         &eValue: &b<purchasable>
         &7
-        &eClick to change!
+        &eClick para cambiar
     save:
       nameItem: '&eSave'
       loreItem: |-
@@ -2596,7 +2562,7 @@ menus:
         &e<death> &7- &aFor the dead.
         &e<killer> &7- &aFor the killer.
         &7
-        &eClick to add!
+        &eClick para añadir
     save:
       nameItem: '&eSave Type'
       loreItem: |-
@@ -2619,7 +2585,7 @@ menus:
         &7
         &eSlot: &b<slot>
         &7
-        &eClick to change!
+        &eClick para cambiar
     page:
       nameItem: '&eKit Page'
       loreItem: |-
@@ -2627,7 +2593,7 @@ menus:
         &7
         &ePage: &b<page>
         &7
-        &eClick to change!
+        &eClick para cambiar
     permission:
       nameItem: '&ePermission of Kit'
       loreItem: |-
@@ -2635,13 +2601,13 @@ menus:
         &7
         &ePermission: &b<permission>
         &7
-        &eClick to change!
+        &eClick para cambiar
     levels:
       nameItem: '&eKit Levels'
       loreItem: |-
         &7Levels of Kit.
         &7
-        &eClick to open!
+        &eClick para abrir
     save:
       nameItem: '&eSave Kit'
       loreItem: |-
@@ -2655,7 +2621,7 @@ menus:
       loreItem: |-
         &7Kit Level icon in menu.
         &7
-        &eClick with item IN HAND to change!
+        &eClick with item in hand to change!
     price:
       nameItem: '&eKit Level Price'
       loreItem: |-
@@ -2663,7 +2629,7 @@ menus:
         &7
         &ePrice: &b<price>
         &7
-        &eClick to change!
+        &eClick para cambiar
     slot:
       nameItem: '&eKit Level Slot'
       loreItem: |-
@@ -2671,7 +2637,7 @@ menus:
         &7
         &eSlot: &b<slot>
         &7
-        &eClick to change!
+        &eClick para cambiar
     items:
       nameItem: '&eSet Items'
       loreItem: |-
@@ -2687,7 +2653,7 @@ menus:
         &e
         &eValue: &b<purchasable>
         &7
-        &eClick to change!
+        &eClick para cambiar
     save:
       nameItem: '&eSave Kit'
       loreItem: |-
@@ -2773,13 +2739,13 @@ menus:
         &7
         &ePermission: &b<permission>
         &7
-        &eClick to change!
+        &eClick para cambiar
     icon:
       nameItem: '&eGlass Icon'
       loreItem: |-
         &7Glass icon in menu.
         &7
-        &eClick with item IN HAND to change!
+        &eClick with item in hand to change!
     price:
       nameItem: '&eGlass Price'
       loreItem: |-
@@ -2787,7 +2753,7 @@ menus:
         &7
         &ePrice: &b<price>
         &7
-        &eClick to change!
+        &eClick para cambiar
     slot:
       nameItem: '&eGlass Slot'
       loreItem: |-
@@ -2795,7 +2761,7 @@ menus:
         &7
         &eSlot: &b<slot>
         &7
-        &eClick to change!
+        &eClick para cambiar
     page:
       nameItem: '&eGlass Page'
       loreItem: |-
@@ -2803,7 +2769,7 @@ menus:
         &7
         &ePage: &b<page>
         &7
-        &eClick to change!
+        &eClick para cambiar
     isBuy:
       nameItem: '&ePurchasable'
       loreItem: |-
@@ -2812,77 +2778,39 @@ menus:
         &e
         &eValue: &b<purchasable>
         &7
-        &eClick to change!
+        &eClick para cambiar
     save:
       nameItem: '&eSave Glass'
       loreItem: |-
         &7Save the Glass
         &7
         &eClick to save!
-  islands:
-    title: "&eIslands of Arena"
-    island:
-      nameItem: "&aIsland <#>"
-      loreItem: |-
-        &7This island has the following settings:
-        &7
-        &eSpawn: &b<spawn>
-        &eBalloon: &b<balloon>
-        &eFence: &b<fence>
-        &eChests:
-        <chests>
-        &7
-        &eClick to edit!
-        &cRight click to remove!
-    addIsland:
-      nameItem: "&aAdd Island"
-      loreItem: |-
-        &7Add an island to the game.
-        &7
-        &eClick to add!
   island:
     title: '&eSetup Island of Arena'
     spawn:
       nameItem: '&eSet Spawn'
       loreItem: |-
-        &7Setting the island's spawn
-        &7is important for you to be
-        &7in the center to prevent
-        &7players from getting off the glass.
+        &7Set the island spawn.
         &7
         &eSpawn: &b<spawn>
         &7
-        &c&oNote: For team mode, you don't
-        &c&oneed to set more spawns, they
-        &c&owill automatically create
-        &c&oevery 6 blocks in Y.
-        &7
         &eClick to set!
-        &aRight-Click to teleport!
     balloon:
       nameItem: '&eSet Balloon'
       loreItem: |-
-        &7Set the place of the balloon,
-        &7it should be set behind the
-        &7island, to 5 blocks, since
-        &7when appearing the giant
-        &7zombie interferes with users.
+        &7Set the island balloon.
         &7
         &eBalloon: &b<balloon>
         &7
         &eClick to set!
-        &aRight-Click to teleport!
     fence:
       nameItem: '&eSet Fence'
       loreItem: |-
-        &7Set the balloon fence, here
-        &7will tie the rope of the
-        &7balloon you have created.
+        &7Set the island fence.
         &7
         &eFence: &b<fence>
         &7
         &eClick to set!
-        &aRight-Click to teleport!
     chests:
       nameItem: '&eIsland Chest'
       loreItem: |-
@@ -2902,14 +2830,14 @@ menus:
     name:
       nameItem: '&eName of Arena'
       loreItem: |-
-        &7The arena name is:
+        &7The Arena name is:
         &7
         &eName: &b<name>
         &7
     schematic:
       nameItem: '&eName of Schematic'
       loreItem: |-
-        &7The schematic name is:
+        &7The Schematic name is:
         &7
         &eSchematic: &b<schematic>
         &7
@@ -2920,7 +2848,7 @@ menus:
         &7
         &eMin: &b<min>
         &7
-        &eClick to change!
+        &eClick para cambiar
     teamSize:
       nameItem: '&eTeamSize'
       loreItem: |-
@@ -2928,61 +2856,43 @@ menus:
         &7
         &eTeamSize: &b<teamSize>
         &7
-        &eClick to change!
+        &eClick para cambiar
     lobby:
       nameItem: '&eLobby Location'
       loreItem: |-
-        &7Set the lobby location,
-        &7here players will be teleported
-        &7when entering the game.
+        &7Sets the lobby location
         &7
         &eLobby: &b<lobby>
         &7
-        &c&oNote: If you disable the pre lobby,
-        &c&oyou must set this place the same way,
-        &c&oit will not be taken into account
-        &c&owhen entering the arena, but we avoid
-        &c&oerrors simply by setting it.
-        &7
         &eClick to set location!
-        &aRight-Click to teleport!
     spect:
       nameItem: '&eSpectator Location'
       loreItem: |-
-        &7Set the spectator's location,
-        &7this will be where players will
-        &7be teleported when they die.
+        &7Sets the spect location
         &7
         &eSpectator: &b<spect>
         &7
-        &c&oNote: This place is used for
-        &c&oother things must be established
-        &c&oin the same world.
-        &7
         &eClick to set location!
-        &aRight-Click to teleport!
     islands:
       nameItem: '&eIslands'
       loreItem: |-
         &7Opens the menu for set islands.
         &7
-        &eClick to open!
+        &eClick para abrir
     center:
       nameItem: '&eCenter Chests'
       loreItem: |-
-        &7It gives you the rod to set
-        &7the center chests, you can
-        &7set different loot for these chests.
+        &7Give the wand for
+        &7set center chests.
         &7
         &eClick to give!
-        &aRight click to inspect 3x radius blocks!
     events:
       nameItem: '&eArena Events'
       loreItem: |-
         &7Add or Remove events
         &7from this arena.
         &7
-        &eClick to open!
+        &eClick para abrir
     ranked:
       nameItem: '&eArena Ranked'
       loreItem: |-
@@ -2991,16 +2901,16 @@ menus:
         &7
         &eRanked: &b<ranked>
         &7
-        &eClick to change!
+        &eClick para cambiar
     votes:
       nameItem: '&eArena Votes'
       loreItem: |-
         &7Select whether the
         &7game is votes or not:
         &7
-        &eVotes: &b<votes>
+        &eVotos: &b<votes>
         &7
-        &eClick to change!
+        &eClick para cambiar
     color:
       nameItem: '&eColor of arena'
       loreItem: |-
@@ -3012,29 +2922,19 @@ menus:
     borderX:
       nameItem: '&eBorderX Location'
       loreItem: |-
-        &7Set the X coordinate of
-        &7the center of your map,
-        &7for border references.
+        &7Sets the border X location
         &7
         &eBorderX: &b<borderX>
         &7
-        &c&oNote: This location is
-        &c&ofor the final BORDER event only.
-        &7
-        &eClick to change!
+        &eClick para cambiar
     borderZ:
       nameItem: '&eBorderZ Location'
       loreItem: |-
-        &7Set the Z coordinate of
-        &7the center of your map,
-        &7for border references.
+        &7Sets the border Z location
         &7
         &eBorderZ: &b<borderZ>
         &7
-        &c&oNote: This location is
-        &c&ofor the final BORDER event only.
-        &7
-        &eClick to change!
+        &eClick para cambiar
     save:
       nameItem: '&eSave Arena'
       loreItem: |-
@@ -3042,501 +2942,559 @@ menus:
         &7
         &eClick to save!
   votes:
-    title: '&eVote Options'
+    title: '&eVotar'
     chest:
-      nameItem: '&eVote Chest'
+      nameItem: '&eVotar cofres'
       loreItem: |-
-        &7You'll open a voting menu
-        &7for the chests in game.
         &7
-        &eClick to open!
+        &7Vota por los cofres
+        &7de la partida.
+        &7
+        &eClick para abrir
     final:
-      nameItem: '&eVote Final'
+      nameItem: '&eVotar evento final'
       loreItem: |-
-        &7You'll open a voting menu
-        &7for the final in game.
         &7
-        &eClick to open!
+        &7Vota por el evento final
+        &7de la partida.
+        &7
+        &eClick para abrir
     health:
-      nameItem: '&eVote Health'
+      nameItem: '&eVotar vida'
       loreItem: |-
-        &7You'll open a voting menu
-        &7for the health in game.
         &7
-        &eClick to open!
+        &7Vota por la vida
+        &7que tendrás en la partida.
+        &7
+        &eClick para abrir
     projectile:
-      nameItem: '&eVote Projectile'
+      nameItem: '&eVotar proyectiles'
       loreItem: |-
-        &7You'll open a voting menu
-        &7for the projectile in game.
         &7
-        &eClick to open!
+        &7Vota por el tipo de proyectiles
+        &7de la partida.
+        &7
+        &eClick para abrir
     time:
-      nameItem: '&eVote Time'
+      nameItem: '&eVotar tiempo'
       loreItem: |-
-        &7You'll open a voting menu
-        &7for the time in game.
         &7
-        &eClick to open!
+        &7Vota por el tiempo
+        &7de la partida.
+        &7
+        &eClick para abrir
   final:
-    title: '&eVote Type Final'
+    title: '&eVotar evento final'
     dragon:
       nameItem: '&eDragon'
       loreItem: |-
-        &7A dragon will appear at
-        &7the end of the game time.
         &7
-        &eVotes: &b<dragonfinal>
+        &7Un ender dragon aparecerá
+        &7como evento de final de partida.
         &7
-        &eClick to vote!
+        &eVotos: &b<dragonfinal>
+        &7
+        &eClick para votar
     tnt:
       nameItem: '&eTNT'
       loreItem: |-
-        &7A rain of TNT reach the
-        &7end time of the game.
         &7
-        &eVotes: &b<tntfinal>
+        &7Una lluvia de TnT aparecerá
+        &7como evento de final de partida.
         &7
-        &eClick to vote!
+        &eVotos: &b<tntfinal>
+        &7
+        &eClick para votar
     zombie:
       nameItem: '&eZombies'
       loreItem: |-
-        &7A zombies will appears at
-        &7the end of the game time.
         &7
-        &eVotes: &b<zombiesfinal>
+        &7Una invasión zombie aparecerá
+        &7como evento de final de partida.
         &7
-        &eClick to vote!
+        &eVotos: &b<zombiesfinal>
+        &7
+        &eClick para votar
     wither:
       nameItem: '&eWither'
       loreItem: |-
-        &7A withers will appears at
-        &7the end of the game time.
         &7
-        &eVotes: &b<witherfinal>
+        &7La furia del Wither aparecerá
+        &7como evento de final de partida.
         &7
-        &eClick to vote!
+        &eVotos: &b<witherfinal>
+        &7
+        &eClick para votar
     border:
-      nameItem: '&eBorder'
+      nameItem: '&eBorde'
       loreItem: |-
-        &7There is a border in the
-        &7world that gets smaller.
         &7
-        &eVotes: &b<borderfinal>
+        &7El borde del mapa irá
+        &7encogiendo hasta el final.
         &7
-        &eClick to vote!
+        &eVotos: &b<borderfinal>
+        &7
+        &eClick para votar
     none:
-      nameItem: '&eNone'
-      loreItem: |-
-        &7There will be no events reaching
-        &7the end time of the game.
-        &7
-        &eVotes: &b<nonefinal>
-        &7
-        &eClick to vote!
+      nameItem: '&eNinguno'
+      loreItem: "&7\n&7No habrá evento de \n&7final de partida.\n&7\n&eVotos: &b<nonefinal>\n\
+        \\ &7\n&eClick para votar"
   time:
-    title: '&eVote Type Time'
+    title: '&eVotar tiempo'
     dawn:
-      nameItem: '&9Dawn Time'
+      nameItem: '&9Amanecer'
       loreItem: |-
-        &7The time of the map
-        &7will be Dawn.
-        &e
-        &eVotes: &b<dawntime>
         &7
-        &eClick to vote!
+        &7La partida se disputará
+        &7durante el amanecer.
+        &e
+        &eVotos: &b<dawntime>
+        &7
+        &eClick para votar
     day:
-      nameItem: '&eDay Time'
+      nameItem: '&eDe día'
       loreItem: |-
-        &7The time of the map
-        &7will be Day.
-        &e
-        &eVotes: &b<daytime>
         &7
-        &eClick to vote!
+        &7La partida se disputará
+        &7durante el día.
+        &e
+        &eVotos: &b<daytime>
+        &7
+        &eClick para votar
     afternoon:
-      nameItem: '&6Afternoon Time'
-      loreItem: |-
-        &7The time of the map
-        &7will be Afternoon.
-        &e
-        &eVotes: &b<afternoontime>
-        &7
-        &eClick to vote!
+      nameItem: '&6Atardecer'
+      loreItem: "&7\n&7La partida se disputará \n&7durante el atardecer.\n&e\n&eVotos:\\\
+        \ \\ &b<afternoontime>\n&7\n&eClick para votar"
     night:
-      nameItem: '&8Night Time'
+      nameItem: '&8De noche'
       loreItem: |-
-        &7The time of the map
-        &7will be Night.
+        &7
+        &7La partida se disputará
+        &7durante la noche.
         &e
-        &eVotes: &b<nighttime>
+        &eVotos: &b<nighttime>
         &7
-        &eClick to vote!
+        &eClick para votar
   health:
-    title: '&eVote Type Health'
+    title: '&eVotar vida'
     health5:
-      nameItem: '&e5 Hearts'
+      nameItem: '&e5 Corazones'
       loreItem: |-
-        &7Your live is reduced to
-        &75 hearts.
         &7
-        &eVotes: &b<health5>
+        &7Jugarás la partida
+        &7solo con 5 corazones.
         &7
-        &eClick to vote!
+        &eVotos: &b<health5>
+        &7
+        &eClick para votar
     health10:
-      nameItem: '&e10 Hearts'
+      nameItem: '&eVida normal'
       loreItem: |-
-        &7Your live is normal.
         &7
-        &eVotes: &b<health10>
+        &7Disputarás la partida
+        &7con la vida normal.
         &7
-        &eClick to vote!
+        &eVotos: &b<health10>
+        &7
+        &eClick para votar
     health20:
-      nameItem: '&e20 Hearts'
+      nameItem: '&eDoble vida'
       loreItem: |-
-        &7Your live is increased to
-        &720 hearts.
         &7
-        &eVotes: &b<health20>
+        &7Tendrás una fila extra
+        &7de corazones durante
+        &7la partida.
         &7
-        &eClick to vote!
+        &eVotos: &b<health20>
+        &7
+        &eClick para votar
     uhc:
-      nameItem: '&eUHC Health'
+      nameItem: '&eVida UHC'
       loreItem: |-
-        &7Your live is increased to
-        &720 hearts.
         &7
-        &eVotes: &b<healthuhc>
+        &7Estilo UHC, no regenerarás
+        &7vida naturalmente.
         &7
-        &eClick to vote!
+        &eVotos: &b<healthuhc>
+        &7
+        &eClick para votar
   projectile:
-    title: '&eVote Type Projectile'
+    title: '&eVotar proyectiles'
     noProj:
-      nameItem: '&eNo Projectiles'
+      nameItem: '&eSin proyectiles'
       loreItem: |-
-        &7No projectiles appear
-        &7in chests.
         &7
-        &eVotes: &b<noproj>
+        &7No aparecerán proyectiles
+        &7en los cofres.
         &7
-        &eClick to vote!
+        &eVotos: &b<noproj>
+        &7
+        &eClick para votar
     siProj:
-      nameItem: '&eYes Projectiles'
+      nameItem: '&eCon proyectiles'
       loreItem: |-
-        &7Projectiles appear
-        &7in chests.
         &7
-        &eVotes: &b<yesproj>
+        &7Podrás encontrar proyectiles
+        &7en los cofres.
         &7
-        &eClick to vote!
+        &eVotos: &b<yesproj>
+        &7
+        &eClick para votar
     exProj:
-      nameItem: '&eExplosive Projectiles'
+      nameItem: '&eProyectiles explosivos'
       loreItem: |-
-        &7The projectiles explode
-        &7the ground when it falls.
         &7
-        &eVotes: &b<exproj>
+        &7Los proyectiles explotan el
+        &7suelo al impactar.
         &7
-        &eClick to vote!
+        &eVotos: &b<exproj>
+        &7
+        &eClick para votar
     desProj:
-      nameItem: '&eDestroyer Projectiles'
-      loreItem: |-
-        &7The projectiles destroy
-        &7the ground when it falls.
-        &7
-        &eVotes: &b<desproj>
-        &7
-        &eClick to vote!
+      nameItem: '&eProyectiles destructivos'
+      loreItem: "&7\n&7Poderosos proyectiles que \n&7destruyen el suelo al impactar.\n\
+        \\ &7\n&eVotos: &b<desproj>\n&7\n&eClick para votar"
     teleProj:
-      nameItem: '&eTransporter projectiles'
+      nameItem: '&eProyectiles enderman'
       loreItem: |-
-        &7The projectiles teleport
-        &7you when you fall.
         &7
-        &eVotes: &b<teleproj>
+        &7Los proyectiles te teletransportan
+        &7en la partida al caer.
         &7
-        &eClick to vote!
+        &eVotos: &b<teleproj>
+        &7
+        &eClick para votar
+  setupPreview:
+    title: Setup Preview Location
+    player:
+      nameItem: '&aPlayer Location'
+      loreItem: |-
+        &7This is a player location:
+        &7
+        &ePlayer: &b<loc>
+        &7
+        &eClick to set!
+    cosmetic:
+      nameItem: '&aCosmetic Location'
+      loreItem: |-
+        &7This is a cosmetic location:
+        &7
+        &eCosmetic: &b<loc>
+        &7
+        &eClick to set!
+    save:
+      nameItem: '&eSave Preview'
+      loreItem: |-
+        &7Save this preview.
+        &7
+        &eClick para cambiar
+  prestige:
+    title: Prestige Icons
+    status:
+      noHas: '&cNo tienes este icono.'
+      select: '&e¡Clic para seleccionar!'
+      selected: '&aYa seleccionado!'
+  islands:
+    title: '&eIslands of Arena'
+    island:
+      nameItem: '&aIsland <#>'
+      loreItem: |-
+        &7This island has the following settings:
+        &7
+        &eSpawn: &b<spawn>
+        &eBalloon: &b<balloon>
+        &eFence: &b<fence>
+        &eChests:
+        <chests>
+        &7
+        &eClick to edit!
+        &cRight click to remove!
+    addIsland:
+      nameItem: '&aAdd Island'
+      loreItem: |-
+        &7Add an island to the game.
+        &7
+        &eClick to add!
 events:
-  refill: '&aRefill'
-  final: '&aFinish'
-  dragon: '&aDragon'
-  tnt: '&aTNT'
-  wither: '&aWither'
-  zombie: '&aZombies'
-  border: '&bBorder'
-  none: '&aEnd in'
-  noMore: '&aNo more events'
+  refill: '&fRellenado'
+  final: '&cFinal'
+  dragon: '&5Dragón'
+  tnt: '&cTNT'
+  wither: '&8Wither'
+  zombie: '&cZombies'
+  border: '&cBorde'
+  none: '&cFinzaliza en'
+  noMore: '&fSin eventos'
 modes:
   solo: Solo
-  tnt_madness: TNT Madness
   team: Team
   ranked: Ranked
+  tnt_madness: Lluvia de TNT
 scoreboards:
-  main-title: '&e&lLobby SkyWars'
+  main-title: '&6&lSKYWARS'
   main: |-
     &7
-    &eNick: &f%player_name%
+    &4• &f&lPERFIL:
+    &f  Rango: %yandere_rank_score_board%
+    &f  Monedas: &c%yandere_coins_formatted%
+    &f  Ganadas: &c%usw_wins%
+    &f  Asesinatos: &c%usw_kills%
+    &f  Nivel: &c%usw_level%
+    &f  Almas: &c%usw_souls%
     &7
-    &fCoins: &6%usw_coins%
-    &fSouls: &b%usw_souls%
-    &fXP: &3%usw_xp%
-    &fLevel: &e%usw_level% &f%usw_prestige_icon%
-    &fProgress:
-    %usw_level_bar%
+    &4• &f&lSERVIDOR:
+    &f  &f%yandere_server_type_name_formatted%: &c#%yandere_server_name_number%
+    &f  Conectados: &c%yandere_server_size%
     &7
-    &fAll Kills: &a%usw_total_stat_KILLS%
-    &fAll Wins: &a%usw_total_stat_WINS%
-    &fAll Deaths: &a%usw_total_stat_DEATHS%
     &7
-    &emc.spigot.net
-  lobby-title: '&e&lSkyWars'
+    &emc.yanderecraft.com
+    &7
+  lobby-title: '&6&lSKYWARS'
   lobby: |-
-    &7<date>
     &7
-    &fWaiting players...
+    &4• &f&lEstado:
+    &f  Esperando jugadores...
     &7
-    &fPlayers: &a<players>/<max>
+    &4• &f&lInformación:
+    &f  Jugadores: &c<players>&7/&c<max>
+    &f  Mapa: &c<map>
     &7
-    &fMap: &a<map>
-    &7
-    &emc.spigot.net
-  starting-title: '&e&lSkyWars'
+    &emc.yanderecraft.com
+  starting-title: '&6&lSKYWARS'
   starting: |-
-    &7<date>
     &7
-    &fStarting in &a<time><s>
+    &4• &f&lEstado:
+    &f  Comenzando en &c<time><s>
     &7
-    &fPlayers: &a<players>/<max>
+    &4• &f&lInformación:
+    &f  Jugadores: &c<players>&7/&c<max>
+    &f  Mapa: &c<map>
     &7
-    &fMap: &a<map>
-    &7
-    &emc.spigot.net
-  pregame-title: '&e&lSkyWars'
+    &emc.yanderecraft.com
+  pregame-title: '&6&lSKYWARS'
   pregame: |-
-    &7<date>
     &7
-    &fOpens in &a<time><s>
+    &4• &f&lInformación:
+    &f  Jugadores: &c<players>&7/&c<max>
+    &f  Mapa: &c<map>
     &7
-    &fPlayers: &a<players>/<max>
-    &7
-    &fMap: &a<map>
-    &7
-    &emc.spigot.net
-  game-title: '&e&lSkyWars'
+    &emc.yanderecraft.com
+  game-title: '&6&lSKYWARS'
   game: |-
-    &7<date>
     &7
-    &fNext Event:
-    &a<event> <eventTime>
+    &4• &f&lSiguiente Evento:
+    &7  <event> <eventTime>
     &7
-    &fPlayers left: &a<players>
+    &4• &f&lInformación:
+    &f  Jugadores vivos: &c<players>
+    &f  Asesinatos: &c<kills>
+    &f  Mapa: &c<map>
     &7
-    &fKills: &a<kills>
+    &4• &f&lModo:
+    &f  &c<mode>
     &7
-    &fMap: &a<map>
-    &fMode: &a<mode>
-    &7
-    &emc.spigot.net
-  team-title: '&e&lSkyWars'
+    &emc.yanderecraft.com
+  team-title: '&6&lSKYWARS'
   team: |-
-    &7<date>
     &7
-    &fNext Event:
-    &a<event> <eventTime>
+    &4• &f&lSiguiente Evento:
+    &7  <event> <eventTime>
     &7
-    &fPlayers left: &a<players>
+    &4• &f&lInformación:
+    &f  Jugadores vivos: &c<players>
+    &f  Asesinatos: &c<kills>
+    &f  Asesinatos de equipo: &c<teamkills>
+    &f  Mapa: &c<map>
     &7
-    &fKills: &a<kills>
-    &fTeam Kills: &a<teamkills>
+    &4• &f&lModo:
+    &f  &c<mode>
     &7
-    &fMap: &a<map>
-    &fMode: &a<mode>
-    &7
-    &emc.spigot.net
-  ranked-title: '&e&lSkyWars'
+    &emc.yanderecraft.com
+  ranked-title: '&6&lSKYWARS'
   ranked: |-
-    &7<date>
     &7
-    &fNext Event:
-    &a<event> <eventTime>
+    &4• &f&lSiguiente Evento:
+    &7  <event> <eventTime>
     &7
-    &fPlayers left: &a<players>
+    &4• &f&lInformación:
+    &f  Jugadores vivos: &c<players>
+    &f  Elo: &c<elo>
+    &f  Asesinatos: &c<kills>
+    &f  Mapa: &c<map>
     &7
-    &fElo: &a<elo>
-    &fKills: &a<kills>
+    &4• &f&lModo:
+    &f  &c<mode>
     &7
-    &fMap: &a<map>
-    &fMode: &a<mode>
-    &7
-    &emc.spigot.net
+    &emc.yanderecraft.com
   tnt_madness-title: '&e&lSkyWars'
   tnt_madness: |-
-    &7<date>
     &7
-    &fNext Event:
-    &a<event> <eventTime>
+    &4• &f&lSiguiente Evento:
+    &7  <event> <eventTime>
     &7
-    &fPlayers left: &a<players>
+    &4• &f&lInformación:
+    &f  Jugadores restantes: &c<players>
+    &f  Asesinatos: &c<kills>
+    &f  Mapa: &c<map>
     &7
-    &fKills: &a<kills>
+    &4• &f&lModo:
+    &f  &c<mode>
     &7
-    &fMap: &a<map>
-    &fMode: &a<mode>
-    &7
-    &emc.spigot.net
+    &emc.yanderecraft.com
 taunts:
-  CONTACT: <death> &ewas killed
-  ENTITY_ATTACK: <death> &ewas killed
-  PROJECTILE: <death> &ewas shot
-  SUFFOCATION: <death> &ewas suffocated
-  FALL: <death> &efell to his death
-  FIRE: <death> &eburned to death
-  FIRE_TICK: <death> &eburned to death
-  MELTING: <death> &ekilled embarrassingly
-  LAVA: <death> &edrowned in lava
-  DROWNING: <death> &edrowned in water
-  BLOCK_EXPLOSION: <death> &eexploded into a thousand pieces
-  ENTITY_EXPLOSION: <death> &eexploded into a thousand pieces
-  VOID: <death> &eshot himself into the void
-  LIGHTNING: <death> &ewas punished by zeus
-  SUICIDE: <death> &ewas rejected by his girlfriend and killed himself
-  STARVATION: <death> &estarved to death
-  POISON: <death> &edied magically
-  MAGIC: <death> &edied magically
-  WITHER: <death> &ekilled by a wither
-  FALLING_BLOCK: <death> &eI dropped a block in his head
-  THORNS: <death> &ekilled himself
-  CUSTOM: <death> &edied of unknown causes
-  FLY_INTO_WALL: <death> &ehit a wall
-  HOT_FLOOR: <death> &ewas slashed
-  CRAMMING: <death> &edied of overload
-  ENTITY_SWEEP_ATTACK: <death> &edied in an of entities
-  DRAGON_BREATH: <death> &eby dragon breath
-  DRYOUT: <death> &eby dry out
-  BY: '&e by &r<killer>&e.'
+  CONTACT: <death> &efue asesinado
+  ENTITY_ATTACK: <death> &efue asesinado
+  PROJECTILE: <death> &efue disparado
+  SUFFOCATION: <death> &ese asfixió
+  FALL: <death> &ese rompió las piernas
+  FIRE: <death> &ese quemó
+  FIRE_TICK: <death> &ese achicharró
+  MELTING: <death> &emurió embarazosamente
+  LAVA: <death> &eintentó nadar en lava
+  DROWNING: <death> &ese ahogó
+  BLOCK_EXPLOSION: <death> &eexplotó en mil pedazos
+  ENTITY_EXPLOSION: <death> &eexploto en mil pedazos
+  VOID: <death> &ecayó al vacío
+  LIGHTNING: <death> &efue atravesado por un rayo
+  SUICIDE: <death> &ese suicidó
+  STARVATION: <death> &ese murió de hambre
+  POISON: <death> &emurió envenenado
+  MAGIC: <death> &emurió magicamente
+  WITHER: <death> &efue asesinado por el wither
+  FALLING_BLOCK: <death> &efue aplastado
+  THORNS: <death> &ehizo la automurision
+  CUSTOM: <death> &emurió
+  FLY_INTO_WALL: <death> &ese estampó contra la pared
+  HOT_FLOOR: <death> &ese quemó las piernas
+  CRAMMING: <death> &emurió de sobrecarga
+  ENTITY_SWEEP_ATTACK: <death> &emurió extrañamente
+  DRAGON_BREATH: <death> &efue asesinado por el dragón
+  DRYOUT: <death> &ese secó y murió
+  BY: '&e por &r<killer>&e.'
   NONE: '&e.'
 soulwell:
-  rolling: '&7Rolling...'
+  rolling: '&7Girando...'
   rarity:
-    common: '&aCommon'
-    uncommon: '&eUnCommon'
-    rare: '&9Rare'
-    epic: '&5Epic'
-    legendary: '&6Legendary'
+    common: '&aComún'
+    uncommon: '&ePoco común'
+    rare: '&9Raro'
+    epic: '&5Epico'
+    legendary: '&6Legendario'
 selector:
   solo: Solo
   normal: Solo
-  tnt_madness: TNT Madness
   team: Team
-  all: All
   ranked: '&6Ranked'
-  waiting: '&aWaiting'
-  starting: '&eStarting'
-  pregame: '&dPre Game'
-  game: '&4In Game'
-  finish: '&9Finish'
-  restarting: '&5Restarting'
+  waiting: '&aEsperando'
+  starting: '&eComenzando'
+  pregame: '&dIniciando'
+  game: '&4En juego'
+  finish: '&9Finalizando'
+  restarting: '&5Reiniciando'
+  tnt_madness: Lluvia de TNT
+  all: All
 order:
-  KILLS: Kills
-  ALPHABETICALLY: Alphabetically
-  PLAYERS: Players
-  NONE: None
+  KILLS: Asesinatos
+  ALPHABETICALLY: Alfabeticamente
+  PLAYERS: Jugadores
+  NONE: Ninguno
 leaderheads:
   skywarsdeaths:
-    title: '&eUltraSkyWars Deaths'
+    title: '&eMuertes'
     lines:
       '0': '&c----------'
       '1': '&a{name}'
-      '2': '&e{amount} coins'
+      '2': '&e{amount} muertes'
       '3': '&c----------'
   skywarswins:
-    title: '&eUltraSkyWars Wins'
+    title: '&eVictorias'
     lines:
       '0': '&c----------'
       '1': '&a{name}'
-      '2': '&e{amount} coins'
+      '2': '&e{amount} victorias'
       '3': '&c----------'
   skywarskills:
-    title: '&eUltraSkyWars Kills'
+    title: '&eAsesinatos'
     lines:
       '0': '&c----------'
       '1': '&a{name}'
-      '2': '&e{amount} coins'
+      '2': '&e{amount} asesinatos'
       '3': '&c----------'
   skywarscoins:
-    title: '&eUltraSkyWars Coins'
+    title: '&eCoins'
     lines:
       '0': '&c----------'
       '1': '&a{name}'
       '2': '&e{amount} coins'
       '3': '&c----------'
   skywarselo:
-    title: '&eUltraSkyWars Elo'
+    title: '&eElo'
     lines:
       '0': '&c----------'
       '1': '&a{name}'
       '2': '&e{amount} elo'
       '3': '&c----------'
   skywarsSdeaths:
-    title: '&eUSW Solo Deaths'
+    title: '&eMuertes Solo'
     lines:
       '0': '&c----------'
       '1': '&a{name}'
-      '2': '&e{amount} deaths'
+      '2': '&e{amount} muertes'
       '3': '&c----------'
   skywarsSwins:
-    title: '&eUSW Solo Wins'
+    title: '&eVictorias Solo'
     lines:
       '0': '&c----------'
       '1': '&a{name}'
-      '2': '&e{amount} wins'
+      '2': '&e{amount} victorias'
       '3': '&c----------'
   skywarsSkills:
-    title: '&eUSW Solo Kills'
+    title: '&eAsesinatos Solo'
     lines:
       '0': '&c----------'
       '1': '&a{name}'
-      '2': '&e{amount} kills'
+      '2': '&e{amount} asesinatos'
       '3': '&c----------'
   skywarsTdeaths:
-    title: '&eUSW Team Deaths'
+    title: '&eMuertes Team'
     lines:
       '0': '&c----------'
       '1': '&a{name}'
-      '2': '&e{amount} deaths'
+      '2': '&e{amount} muertes'
       '3': '&c----------'
   skywarsTwins:
-    title: '&eUSW Team Wins'
+    title: '&eVictorias Team'
     lines:
       '0': '&c----------'
       '1': '&a{name}'
-      '2': '&e{amount} wins'
+      '2': '&e{amount} victorias'
       '3': '&c----------'
   skywarsTkills:
-    title: '&eUSW Team Kills'
+    title: '&eAsesinatos Team'
     lines:
       '0': '&c----------'
       '1': '&a{name}'
-      '2': '&e{amount} kills'
+      '2': '&e{amount} asesinatos'
       '3': '&c----------'
   skywarsRdeaths:
-    title: '&eUSW Ranked Deaths'
+    title: '&eMuertes Ranked'
     lines:
       '0': '&c----------'
       '1': '&a{name}'
-      '2': '&e{amount} deaths'
+      '2': '&e{amount} muertes'
       '3': '&c----------'
   skywarsRwins:
-    title: '&eUSW Ranked Wins'
+    title: '&eVictorias Ranked'
     lines:
       '0': '&c----------'
       '1': '&a{name}'
-      '2': '&e{amount} wins'
+      '2': '&e{amount} victorias'
       '3': '&c----------'
   skywarsRkills:
-    title: '&eUSW Ranked Kills'
+    title: '&eAsesinatos Ranked'
     lines:
       '0': '&c----------'
       '1': '&a{name}'
-      '2': '&e{amount} kills'
+      '2': '&e{amount} asesinatos'
       '3': '&c----------'
+timer: '&a<time>'

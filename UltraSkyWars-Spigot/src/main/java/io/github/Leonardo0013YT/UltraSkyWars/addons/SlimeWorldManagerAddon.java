@@ -11,17 +11,15 @@ import org.bukkit.Bukkit;
 import java.io.IOException;
 
 public class SlimeWorldManagerAddon {
-
-    private UltraSkyWars plugin;
-    private SlimePlugin slime;
-    private SlimeLoader loader;
-
+    
+    private final SlimePlugin slime;
+    private final SlimeLoader loader;
+    
     public SlimeWorldManagerAddon(UltraSkyWars plugin) {
-        this.plugin = plugin;
         this.slime = (SlimePlugin) Bukkit.getPluginManager().getPlugin("SlimeWorldManager");
         this.loader = slime.getLoader(plugin.getCm().getSlimeworldmanagerLoader());
     }
-
+    
     public void createWorld(String name) {
         SlimePropertyMap slimeProperties = new SlimePropertyMap();
         slimeProperties.setInt(SlimeProperties.SPAWN_X, 0);

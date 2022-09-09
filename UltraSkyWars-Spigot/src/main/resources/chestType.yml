@@ -1,17 +1,11 @@
 defaultType: NORMAL
 types:
-  basic:
-    key: basic
-    edit: '{CHESTBASIC}'
-    slots:
-      setup: 11
-      votes: 11
   normal:
     key: normal
     edit: '{CHESTNORMAL}'
     slots:
-      setup: 13
-      votes: 13
+      setup: 11
+      votes: 11
   op:
     key: op
     edit: '{CHESTOP}'
@@ -20,24 +14,14 @@ types:
       votes: 15
 votes:
   chest:
-    name: "Chest"
-    basic: "Basic"
-    normal: "Normal"
-    op: "Op"
+    name: Chest
+    normal: Normal
+    op: Op
 lang:
   chest:
-    title: "&eVote Type Chest"
-    basic:
-      nameItem: "&7Basic Chest"
-      loreItem: |-
-        &7The chests will contain
-        &7very simple things.
-        &7
-        &eVotes: &b<basicChest>
-        &7
-        &eClick to vote!
+    title: '&eVotar por el tipo de Cofres'
     normal:
-      nameItem: "&6Normal Chest"
+      nameItem: '&6Normal Chest'
       loreItem: |-
         &7The chests will contain
         &7very normal things.
@@ -46,7 +30,7 @@ lang:
         &7
         &eClick to vote!
     op:
-      nameItem: "&4Op Chest"
+      nameItem: '&4Op Chest'
       loreItem: |-
         &7The chests will contain
         &7very good things.
@@ -55,23 +39,16 @@ lang:
         &7
         &eClick to vote!
   chests:
-    title: "&eSetup Chest"
-    basic:
-      nameItem: "&7Basic Chest"
-      loreItem: |-
-        &7Click to open menu to
-        &7setup Basic Chest items.
-        &7
-        &eClick to open!
+    title: '&eSetup Chest'
     normal:
-      nameItem: "&6Normal Chest"
+      nameItem: '&6Normal Chest'
       loreItem: |-
         &7Click to open menu to
         &7setup Normal Chest items.
         &7
         &eClick to open!
     op:
-      nameItem: "&4OP Chest"
+      nameItem: '&4OP Chest'
       loreItem: |-
         &7Click to open menu to
         &7setup OP Chest items.
@@ -83,14 +60,6 @@ menus:
     items:
       '11':
         ==: org.bukkit.inventory.ItemStack
-        type: LEATHER_HELMET
-        meta:
-          ==: ItemMeta
-          meta-type: LEATHER_ARMOR
-          display-name: '{CHESTBASIC}'
-          repair-cost: 1
-      '13':
-        ==: org.bukkit.inventory.ItemStack
         type: IRON_HELMET
         meta:
           ==: ItemMeta
@@ -110,14 +79,6 @@ menus:
     items:
       '11':
         ==: org.bukkit.inventory.ItemStack
-        type: LEATHER_HELMET
-        meta:
-          ==: ItemMeta
-          meta-type: LEATHER_ARMOR
-          display-name: '{CHESTBASIC}'
-          repair-cost: 1
-      '13':
-        ==: org.bukkit.inventory.ItemStack
         type: IRON_HELMET
         meta:
           ==: ItemMeta
@@ -132,3 +93,219 @@ menus:
           meta-type: UNSPECIFIC
           display-name: '{CHESTOP}'
           repair-cost: 1
+chests:
+  normal:
+    chainmail_helmet_1_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: CHAINMAIL_HELMET
+      chance: 25
+      center: false
+    chainmail_chestplate_1_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: CHAINMAIL_CHESTPLATE
+      chance: 25
+      center: false
+    chainmail_leggings_1_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: CHAINMAIL_LEGGINGS
+      chance: 25
+      center: false
+    chainmail_boots_1_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: CHAINMAIL_BOOTS
+      chance: 25
+      center: false
+    wood_32_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: WOOD
+        amount: 32
+      chance: 25
+      center: false
+    wood_16_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: WOOD
+        amount: 16
+      chance: 25
+      center: false
+    wood_8_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: WOOD
+        amount: 8
+      chance: 25
+      center: false
+    cobblestone_32_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: COBBLESTONE
+        amount: 32
+      chance: 25
+      center: false
+    cobblestone_16_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: COBBLESTONE
+        amount: 16
+      chance: 25
+      center: false
+    cobblestone_8_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: COBBLESTONE
+        amount: 8
+      chance: 25
+      center: false
+    iron_helmet_1_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_HELMET
+      chance: 25
+      center: true
+    iron_chestplate_1_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_CHESTPLATE
+      chance: 25
+      center: true
+    iron_boots_1_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_BOOTS
+      chance: 25
+      center: true
+    iron_leggings_1_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_LEGGINGS
+      chance: 25
+      center: true
+    golden_apple_3_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: GOLDEN_APPLE
+        amount: 3
+      chance: 25
+      center: true
+    golden_apple_2_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: GOLDEN_APPLE
+        amount: 2
+      chance: 25
+      center: true
+    golden_apple_1_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: GOLDEN_APPLE
+      chance: 25
+      center: true
+  basic:
+    leather_helmet_1_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: LEATHER_HELMET
+      chance: 25
+      center: false
+    leather_chestplate_1_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: LEATHER_CHESTPLATE
+      chance: 25
+      center: false
+    leather_leggings_1_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: LEATHER_LEGGINGS
+      chance: 25
+      center: false
+    leather_boots_1_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: LEATHER_BOOTS
+      chance: 25
+      center: false
+    stone_sword_1_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: STONE_SWORD
+      chance: 25
+      center: false
+    wood_32_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: WOOD
+        amount: 32
+      chance: 25
+      center: false
+    wood_16_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: WOOD
+        amount: 16
+      chance: 25
+      center: false
+    wood_8_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: WOOD
+        amount: 8
+      chance: 25
+      center: false
+  op:
+    diamond_helmet_1_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: DIAMOND_HELMET
+      chance: 25
+      center: false
+    diamond_chestplate_1_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: DIAMOND_CHESTPLATE
+      chance: 25
+      center: false
+    diamond_leggings_1_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: DIAMOND_LEGGINGS
+      chance: 25
+      center: false
+    diamond_boots_1_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: DIAMOND_BOOTS
+      chance: 25
+      center: false
+    diamond_sword_1_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: DIAMOND_SWORD
+      chance: 25
+      center: false
+    wood_32_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: WOOD
+        amount: 32
+      chance: 25
+      center: false
+    wood_16_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: WOOD
+        amount: 16
+      chance: 25
+      center: false
+    wood_8_0_0:
+      item:
+        ==: org.bukkit.inventory.ItemStack
+        type: WOOD
+        amount: 8
+      chance: 25
+      center: false

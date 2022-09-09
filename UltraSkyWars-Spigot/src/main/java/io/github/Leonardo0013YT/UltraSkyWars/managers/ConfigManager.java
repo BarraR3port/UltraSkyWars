@@ -1,12 +1,12 @@
 package io.github.Leonardo0013YT.UltraSkyWars.managers;
 
 import io.github.Leonardo0013YT.UltraSkyWars.UltraSkyWars;
+import io.github.Leonardo0013YT.UltraSkyWars.api.USWSetupAPI;
 import io.github.Leonardo0013YT.UltraSkyWars.enums.CustomSound;
 import io.github.Leonardo0013YT.UltraSkyWars.utils.ItemBuilder;
 import io.github.Leonardo0013YT.UltraSkyWars.utils.Utils;
 import io.github.Leonardo0013YT.UltraSkyWars.xseries.XMaterial;
 import io.github.Leonardo0013YT.UltraSkyWars.xseries.XSound;
-import io.github.Leonardo0013YT.UltraSkyWarsSetup.api.USWSetupAPI;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;

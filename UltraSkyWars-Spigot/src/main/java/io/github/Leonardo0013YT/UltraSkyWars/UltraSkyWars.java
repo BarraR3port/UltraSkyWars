@@ -2,6 +2,7 @@ package io.github.Leonardo0013YT.UltraSkyWars;
 
 import com.google.gson.Gson;
 import io.github.Leonardo0013YT.UltraSkyWars.cmds.LeaveCMD;
+import io.github.Leonardo0013YT.UltraSkyWars.cmds.SetupCMD;
 import io.github.Leonardo0013YT.UltraSkyWars.cmds.SkyWarsCMD;
 import io.github.Leonardo0013YT.UltraSkyWars.config.Settings;
 import io.github.Leonardo0013YT.UltraSkyWars.controllers.VersionController;
@@ -13,10 +14,10 @@ import io.github.Leonardo0013YT.UltraSkyWars.interfaces.Database;
 import io.github.Leonardo0013YT.UltraSkyWars.listeners.*;
 import io.github.Leonardo0013YT.UltraSkyWars.managers.*;
 import io.github.Leonardo0013YT.UltraSkyWars.menus.GameMenu;
+import io.github.Leonardo0013YT.UltraSkyWars.menus.SetupMenu;
 import io.github.Leonardo0013YT.UltraSkyWars.menus.UltraInventoryMenu;
 import io.github.Leonardo0013YT.UltraSkyWars.migrators.SkyWarsMigrator;
 import io.github.Leonardo0013YT.UltraSkyWars.migrators.SkyWarsXMigrator;
-import io.github.Leonardo0013YT.UltraSkyWars.placeholders.MVdWPlaceholders;
 import io.github.Leonardo0013YT.UltraSkyWars.placeholders.Placeholders;
 import io.github.Leonardo0013YT.UltraSkyWars.superclass.Game;
 import io.github.Leonardo0013YT.UltraSkyWars.utils.DependUtils;
@@ -74,15 +75,17 @@ public class UltraSkyWars extends JavaPlugin {
     private boolean debugMode, stop = false;
     @Setter
     private boolean disabled = false;
-
+    private SetupManager sm;
+    private SetupMenu sem;
+    
     public static UltraSkyWars get() {
         return instance;
     }
-
+    
     public static Gson getGson() {
         return gson;
     }
-
+    
     @Override
     public void onEnable() {
         instance = this;
@@ -135,7 +138,7 @@ public class UltraSkyWars extends JavaPlugin {
         uim = new UltraInventoryMenu(this);
         uim.loadMenus();
         ijm = new ModuleManager();
-        ijm.loadWEInjection();
+        //ijm.loadWEInjection();
         adm.reload();
         wc = new WorldController();
         gm = new GameManager(this);
@@ -159,14 +162,12 @@ public class UltraSkyWars extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new SpectatorListener(this), this);
         getServer().getPluginManager().registerEvents(new WorldListener(), this);
         getServer().getPluginManager().registerEvents(new GeneralListener(), this);
+        getServer().getPluginManager().registerEvents(new YandereListener(), this);
         if (cm.isAutoLapiz()) {
             getServer().getPluginManager().registerEvents(new LapisListener(), this);
         }
         if (getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             new Placeholders().register();
-        }
-        if (getServer().getPluginManager().isPluginEnabled("MVdWPlaceholderAPI")) {
-            new MVdWPlaceholders().register();
         }
         tsm = new TaskManager(this);
         saveSchematics();
@@ -186,6 +187,11 @@ public class UltraSkyWars extends JavaPlugin {
         getDb().loadMultipliers(b -> {
         });
         new MetricsLite(this, 9620);
+        
+        this.sm = new SetupManager();
+        this.sem = new SetupMenu(this);
+        getServer().getPluginManager().registerEvents(new SetupListener(this), this);
+        getCommand("sws").setExecutor(new SetupCMD(this));
     }
 
     public void loadMainLobby() {
@@ -394,15 +400,23 @@ public class UltraSkyWars extends JavaPlugin {
                     windance.delete();
                 }
                 File wineffect = new File(getDataFolder(), "wineffect.yml");
-                if (wineffect.exists()) {
+                if(wineffect.exists()){
                     File to = new File(cosmetics, "wineffect.yml");
                     Files.copy(wineffect.toPath(), to.toPath());
                     wineffect.delete();
                 }
             }
-        } catch (IOException e) {
+        } catch(IOException e) {
             e.printStackTrace();
         }
     }
-
+    
+    public SetupManager getSm() {
+        return sm;
+    }
+    
+    public SetupMenu getSem() {
+        return sem;
+    }
+    
 }

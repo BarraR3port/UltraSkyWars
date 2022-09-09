@@ -7,7 +7,6 @@ import io.github.Leonardo0013YT.UltraSkyWars.modules.ranks.listeners.EloListener
 import io.github.Leonardo0013YT.UltraSkyWars.modules.ranks.managers.EloRankManager;
 import io.github.Leonardo0013YT.UltraSkyWars.modules.ranks.managers.SeasonManager;
 import io.github.Leonardo0013YT.UltraSkyWars.modules.ranks.menus.RankedMenu;
-import io.github.Leonardo0013YT.UltraSkyWars.modules.ranks.placeholders.MVdWPlaceholders;
 import io.github.Leonardo0013YT.UltraSkyWars.modules.ranks.placeholders.Placeholders;
 import org.bukkit.Bukkit;
 
@@ -70,8 +69,5 @@ public class InjectionEloRank implements Injection {
         new Placeholders(this).register();
     }
 
-    public void loadMVdWPlaceholders() {
-        new MVdWPlaceholders(UltraSkyWars.get(), this).register();
-    }
 
 }

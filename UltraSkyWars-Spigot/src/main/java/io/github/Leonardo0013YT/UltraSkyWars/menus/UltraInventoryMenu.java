@@ -46,16 +46,16 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 
 public class UltraInventoryMenu {
-
-    private HashMap<String, UltraInventory> menus = new HashMap<>();
-    private HashMap<UUID, Integer> pages = new HashMap<>();
-    private HashMap<String, Consumer<InventoryAction>> actions = new HashMap<>();
-    private UltraSkyWars plugin;
-
+    
+    private final HashMap<String, UltraInventory> menus = new HashMap<>();
+    private final HashMap<UUID, Integer> pages = new HashMap<>();
+    private final HashMap<String, Consumer<InventoryAction>> actions = new HashMap<>();
+    private final UltraSkyWars plugin;
+    
     public UltraInventoryMenu(UltraSkyWars plugin) {
         this.plugin = plugin;
     }
-
+    
     public void removeInventory(Player p) {
         pages.remove(p.getUniqueId());
         plugin.getGem().getViews().remove(p.getUniqueId());

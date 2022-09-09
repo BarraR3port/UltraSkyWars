@@ -1,44 +1,57 @@
 kits:
-  Prueba:
-    id: 0
-    name: Prueba
+  constructor:
+    id: 6
+    name: constructor
     slot: 10
     page: 1
-    permission: ultraskywars.kit.Prueba
+    permission: ultraskywars.kit.constructor
     levels:
       '1':
         level: 1
+        permission: ultraskywars.kit.constructor.1
         icon:
           ==: org.bukkit.inventory.ItemStack
-          type: DIAMOND_SWORD
+          type: BRICK
+          amount: 64
           meta:
             ==: ItemMeta
             meta-type: UNSPECIFIC
-            display-name: §aTest
+            display-name: §aConstructor
             lore:
-              - '§eDescription:'
-              - §7Kit test.
-              - §7
+              - ''
+              - '§4• §f§lContiene:'
+              - §c  • §fx64 Bloques de Ladrillo
+              - ''
               - <price>
-              - §7
-              - <level>
-              - §7
+              - ''
               - <status>
-        price: 100
-        permission: ultraskywars.kit.Prueba.1
+              - ''
+              - '§7Rareza: §aCOMÚN'
+              - ''
+        slot: 10
+        price: 0
         isBuy: true
         armor:
           - ==: org.bukkit.inventory.ItemStack
-            type: DIAMOND_BOOTS
+            type: AIR
+            damage: -1
+            amount: 0
           - ==: org.bukkit.inventory.ItemStack
-            type: DIAMOND_LEGGINGS
+            type: AIR
+            damage: -1
+            amount: 0
           - ==: org.bukkit.inventory.ItemStack
-            type: DIAMOND_CHESTPLATE
+            type: AIR
+            damage: -1
+            amount: 0
           - ==: org.bukkit.inventory.ItemStack
-            type: DIAMOND_HELMET
+            type: AIR
+            damage: -1
+            amount: 0
         inv:
           - ==: org.bukkit.inventory.ItemStack
-            type: DIAMOND_SWORD
+            type: BRICK
+            amount: 64
           - null
           - null
           - null
@@ -74,3 +87,1004 @@ kits:
           - null
           - null
           - null
+        autoGivePermission: ultraskywars.kits.autogive.constructor.1
+        needPermToBuy: false
+      '2':
+        level: 2
+        permission: ultraskywars.kit.constructor.2
+        icon:
+          ==: org.bukkit.inventory.ItemStack
+          type: OBSIDIAN
+          amount: 64
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: §aConstructor §3LVL 2
+            lore:
+              - ''
+              - '§4• §f§lContiene:'
+              - §c  • §fx64 Bloques de §5Obsidiana
+              - ''
+              - <price>
+              - ''
+              - <status>
+              - ''
+              - '§7Rareza: §aCOMÚN'
+              - ''
+        slot: 11
+        price: 5000
+        isBuy: true
+        armor:
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+        inv:
+          - ==: org.bukkit.inventory.ItemStack
+            type: OBSIDIAN
+            amount: 64
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+        autoGivePermission: ultraskywars.kits.autogive.constructor.2
+        needPermToBuy: false
+      '3':
+        level: 3
+        permission: ultraskywars.kit.constructor.3
+        icon:
+          ==: org.bukkit.inventory.ItemStack
+          type: BEDROCK
+          amount: 16
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: §aConstructor §3LVL 3
+            lore:
+              - ''
+              - '§4• §f§lContiene:'
+              - §c  • §fx16 Bloques de §9Piedra Madre
+              - ''
+              - <price>
+              - ''
+              - <status>
+              - ''
+              - '§7Rareza: §9RARO'
+              - ''
+        slot: 12
+        price: 10000
+        isBuy: true
+        armor:
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+        inv:
+          - ==: org.bukkit.inventory.ItemStack
+            type: BEDROCK
+            amount: 16
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+        autoGivePermission: ultraskywars.kits.autogive.constructor.3
+        needPermToBuy: false
+      '4':
+        level: 4
+        permission: ultraskywars.kit.constructor.4
+        icon:
+          ==: org.bukkit.inventory.ItemStack
+          type: BEDROCK
+          amount: 64
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: §aConstructor §3LVL 4
+            lore:
+              - ''
+              - '§4• §f§lContiene:'
+              - §c  • §fx64 Bloques de §9Piedra Madre
+              - ''
+              - <price>
+              - ''
+              - <status>
+              - ''
+              - '§7Rareza: §6LEGENDARIO'
+              - ''
+        slot: 13
+        price: 20000
+        isBuy: true
+        armor:
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+        inv:
+          - ==: org.bukkit.inventory.ItemStack
+            type: BEDROCK
+            amount: 64
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+        autoGivePermission: ultraskywars.kits.autogive.constructor.4
+        needPermToBuy: false
+    modes:
+      - SOLO
+      - TEAM
+      - RANKED
+  principiante:
+    id: 1
+    name: principiante
+    slot: 11
+    page: 1
+    permission: ultraskywars.kit.principiante
+    levels:
+      '1':
+        level: 1
+        permission: ultraskywars.kit.principiante.1
+        icon:
+          ==: org.bukkit.inventory.ItemStack
+          type: STONE_PICKAXE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: §7Principiante
+            ItemFlags: !!set
+              HIDE_PLACED_ON: null
+              HIDE_ENCHANTS: null
+              HIDE_UNBREAKABLE: null
+              HIDE_POTION_EFFECTS: null
+              HIDE_ATTRIBUTES: null
+              HIDE_DESTROYS: null
+            lore:
+              - ''
+              - '§4• §f§lContiene:'
+              - §c  • §fx1 Pico de piedra
+              - §c  • §fx1 Hacha de piedra
+              - §c  • §fx1 Pala de piedra
+              - ''
+              - <price>
+              - ''
+              - <status>
+              - ''
+              - '§7Rareza: §aCOMÚN'
+        slot: 10
+        price: 0
+        isBuy: true
+        armor:
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+        inv:
+          - ==: org.bukkit.inventory.ItemStack
+            type: STONE_PICKAXE
+          - ==: org.bukkit.inventory.ItemStack
+            type: STONE_AXE
+          - ==: org.bukkit.inventory.ItemStack
+            type: STONE_SPADE
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+        autoGivePermission: ultraskywars.kits.autogive.principiante.1
+        needPermToBuy: false
+    modes:
+      - SOLO
+      - TEAM
+      - RANKED
+  cañonero:
+    id: 8
+    name: cañonero
+    slot: 12
+    page: 1
+    permission: ultraskywars.kit.cañonero
+    levels:
+      '1':
+        level: 1
+        permission: ultraskywars.kit.cañonero.1
+        icon:
+          ==: org.bukkit.inventory.ItemStack
+          type: TNT
+          amount: 16
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: §cCañonero
+            lore:
+              - ''
+              - '§4• §f§lContiene:'
+              - §c  • §fx16 §cTNT
+              - §c  • §fx4 Bloques de Redstone
+              - §c  • §fx1 Cubo de Agua
+              - §c  • §fx1 Placa de Presión
+              - §c  • §fx1 Botas de Hierro
+              - §c    • §fCaída de Pluma III
+              - §c    • §fProec. contra Explociones III
+              - ''
+              - <price>
+              - ''
+              - <status>
+              - ''
+              - '§7Rareza: §6LEGENDARIO'
+              - ''
+        slot: 10
+        price: 30000
+        isBuy: true
+        armor:
+          - ==: org.bukkit.inventory.ItemStack
+            type: IRON_BOOTS
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              enchants:
+                PROTECTION_FALL: 3
+                PROTECTION_EXPLOSIONS: 3
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+        inv:
+          - ==: org.bukkit.inventory.ItemStack
+            type: TNT
+            amount: 16
+          - ==: org.bukkit.inventory.ItemStack
+            type: REDSTONE_BLOCK
+            amount: 4
+          - ==: org.bukkit.inventory.ItemStack
+            type: WATER_BUCKET
+          - ==: org.bukkit.inventory.ItemStack
+            type: STONE_PLATE
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+        autoGivePermission: ultraskywars.kits.autogive.cañonero.1
+        needPermToBuy: false
+    modes:
+      - SOLO
+      - TEAM
+      - RANKED
+  ecologista:
+    id: 10
+    name: ecologista
+    slot: 13
+    page: 1
+    permission: ultraskywars.kit.ecologista
+    levels:
+      '1':
+        level: 1
+        permission: ultraskywars.kit.ecologista.1
+        icon:
+          ==: org.bukkit.inventory.ItemStack
+          type: IRON_AXE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: §eEcologista
+            ItemFlags: !!set
+              HIDE_PLACED_ON: null
+              HIDE_ENCHANTS: null
+              HIDE_UNBREAKABLE: null
+              HIDE_POTION_EFFECTS: null
+              HIDE_ATTRIBUTES: null
+              HIDE_DESTROYS: null
+            lore:
+              - ''
+              - '§4• §f§lContiene:'
+              - §c  • §fx64 Bloques de §5Obsidiana
+              - ''
+              - <price>
+              - ''
+              - <status>
+              - ''
+              - '§7Rareza: §aCOMÚN'
+              - ''
+            enchants:
+              DIG_SPEED: 2
+              DAMAGE_ALL: 1
+        slot: 10
+        price: 15000
+        isBuy: true
+        armor:
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+        inv:
+          - ==: org.bukkit.inventory.ItemStack
+            type: IRON_AXE
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              enchants:
+                DIG_SPEED: 2
+                DAMAGE_ALL: 1
+          - ==: org.bukkit.inventory.ItemStack
+            type: LOG
+            amount: 16
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+        autoGivePermission: ultraskywars.kits.autogive.ecologista.1
+        needPermToBuy: false
+    modes:
+      - SOLO
+      - TEAM
+      - RANKED
+  snowman:
+    id: 12
+    name: snowman
+    slot: 14
+    page: 1
+    permission: ultraskywars.kit.snowman
+    levels:
+      '1':
+        level: 1
+        permission: ultraskywars.kit.snowman.1
+        icon:
+          ==: org.bukkit.inventory.ItemStack
+          type: SNOW_BALL
+          amount: 16
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: §fHombre de Nieve
+            lore:
+              - ''
+              - '§4• §f§lContiene:'
+              - §c  • §fx16 Bolas de §lNieve
+              - §c  • §fx1 Pala de §lHierro
+              - §c  • §fx2 Bloques de §lNieve
+              - §c  • §fx1 §6Calabaza Tallada
+              - ''
+              - <price>
+              - ''
+              - <status>
+              - ''
+              - '§7Rareza: §9RARO'
+              - ''
+        slot: 10
+        price: 7000
+        isBuy: true
+        armor:
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+        inv:
+          - ==: org.bukkit.inventory.ItemStack
+            type: SNOW_BALL
+            amount: 16
+          - ==: org.bukkit.inventory.ItemStack
+            type: IRON_SPADE
+          - ==: org.bukkit.inventory.ItemStack
+            type: SNOW_BLOCK
+            amount: 2
+          - ==: org.bukkit.inventory.ItemStack
+            type: PUMPKIN
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+        autoGivePermission: ultraskywars.kits.autogive.snowman.1
+        needPermToBuy: false
+    modes:
+      - SOLO
+      - TEAM
+      - RANKED
+  rusher:
+    id: 14
+    name: rusher
+    slot: 15
+    page: 1
+    permission: ultraskywars.kit.rusher
+    levels:
+      '1':
+        level: 1
+        permission: ultraskywars.kit.rusher.1
+        icon:
+          ==: org.bukkit.inventory.ItemStack
+          type: POTION
+          damage: 16418
+          meta:
+            ==: ItemMeta
+            meta-type: POTION
+            display-name: §bRusher
+            ItemFlags: !!set
+              HIDE_PLACED_ON: null
+              HIDE_ENCHANTS: null
+              HIDE_UNBREAKABLE: null
+              HIDE_POTION_EFFECTS: null
+              HIDE_ATTRIBUTES: null
+              HIDE_DESTROYS: null
+            lore:
+              - ''
+              - '§4• §f§lContiene:'
+              - §c  • §fx1 Espada de §fPiedra
+              - §c  • §fx1 §9Poción de Velocidad II (1:30)
+              - §c  • §fx1 Perneras de §lHierro
+              - ''
+              - <price>
+              - ''
+              - <status>
+              - ''
+              - '§7Rareza: §9RARO'
+              - ''
+        slot: 10
+        price: 20000
+        isBuy: true
+        armor:
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+          - ==: org.bukkit.inventory.ItemStack
+            type: IRON_LEGGINGS
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+        inv:
+          - ==: org.bukkit.inventory.ItemStack
+            type: STONE_SWORD
+          - ==: org.bukkit.inventory.ItemStack
+            type: POTION
+            damage: 16418
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+        autoGivePermission: ultraskywars.kits.autogive.rusher.1
+        needPermToBuy: false
+    modes:
+      - SOLO
+      - TEAM
+      - RANKED
+  troll:
+    id: 16
+    name: troll
+    slot: 16
+    page: 1
+    permission: ultraskywars.kit.troll
+    levels:
+      '1':
+        level: 1
+        permission: ultraskywars.kit.troll.1
+        icon:
+          ==: org.bukkit.inventory.ItemStack
+          type: STICK
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: §9Troll
+            ItemFlags: !!set
+              HIDE_PLACED_ON: null
+              HIDE_ENCHANTS: null
+              HIDE_UNBREAKABLE: null
+              HIDE_POTION_EFFECTS: null
+              HIDE_ATTRIBUTES: null
+              HIDE_DESTROYS: null
+            lore:
+              - ''
+              - '§4• §f§lContiene:'
+              - §c  • §fx1 Palo con §8Empuje IV
+              - §c  • §fx8Poción de Invisiibilidad (3:00)
+              - ''
+              - <price>
+              - ''
+              - <status>
+              - ''
+              - '§7Rareza: §9RARO'
+              - ''
+            enchants:
+              KNOCKBACK: 4
+        slot: 10
+        price: 37000
+        isBuy: true
+        armor:
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+        inv:
+          - ==: org.bukkit.inventory.ItemStack
+            type: STICK
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              enchants:
+                KNOCKBACK: 4
+          - ==: org.bukkit.inventory.ItemStack
+            type: POTION
+            damage: 8206
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+        autoGivePermission: ultraskywars.kits.autogive.troll.1
+        needPermToBuy: false
+    modes:
+      - SOLO
+      - TEAM
+      - RANKED
+  guerrero:
+    id: 18
+    name: guerrero
+    slot: 19
+    page: 1
+    permission: ultraskywars.kit.guerrero
+    levels:
+      '1':
+        level: 1
+        permission: ultraskywars.kit.guerrero.1
+        icon:
+          ==: org.bukkit.inventory.ItemStack
+          type: STONE_SWORD
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: §c§lGuerrero
+            ItemFlags: !!set
+              HIDE_PLACED_ON: null
+              HIDE_ENCHANTS: null
+              HIDE_UNBREAKABLE: null
+              HIDE_POTION_EFFECTS: null
+              HIDE_ATTRIBUTES: null
+              HIDE_DESTROYS: null
+            lore:
+              - ''
+              - '§4• §f§lContiene:'
+              - §c  • §fx1 Espada de §7Piedra §8Filo II
+              - §c  • §fx1 Peto de §lHierro §8Protección II
+              - §c  • §fx1 Perneras de §lHierro §8Protección II
+              - ''
+              - <price>
+              - ''
+              - <status>
+              - ''
+              - '§7Rareza: §9RARO'
+              - ''
+            enchants:
+              DAMAGE_ALL: 2
+        slot: 10
+        price: 45000
+        isBuy: true
+        armor:
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+          - ==: org.bukkit.inventory.ItemStack
+            type: IRON_LEGGINGS
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              enchants:
+                PROTECTION_ENVIRONMENTAL: 2
+          - ==: org.bukkit.inventory.ItemStack
+            type: IRON_CHESTPLATE
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              enchants:
+                PROTECTION_ENVIRONMENTAL: 2
+          - ==: org.bukkit.inventory.ItemStack
+            type: AIR
+            damage: -1
+            amount: 0
+        inv:
+          - ==: org.bukkit.inventory.ItemStack
+            type: STONE_SWORD
+            meta:
+              ==: ItemMeta
+              meta-type: UNSPECIFIC
+              enchants:
+                DAMAGE_ALL: 2
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+          - null
+        autoGivePermission: ultraskywars.kits.autogive.guerrero.1
+        needPermToBuy: false
+    modes:
+      - SOLO
+      - TEAM
+      - RANKED

@@ -9,7 +9,6 @@ import io.github.Leonardo0013YT.UltraSkyWars.xseries.XSound;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Particle;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -18,23 +17,23 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 public class KillEffectHead implements KillEffect, Cloneable {
-
+    
     private static boolean loaded = false;
     private static XSound punchSound;
     private BukkitTask task;
     private int pased = 0;
-
+    
     @Override
     public void loadCustoms(UltraSkyWars plugin, String path) {
-        if (!loaded) {
+        if(!loaded){
             punchSound = XSound.matchXSound(plugin.getKilleffect().getOrDefault(path + ".punchSound", XSound.ENTITY_FIREWORK_ROCKET_BLAST.parseSound().name())).orElse(XSound.ENTITY_FIREWORK_ROCKET_BLAST);
             loaded = true;
         }
     }
-
+    
     @Override
     public void start(Player p, Player death, Location loc) {
-        if (death == null || !death.isOnline()) {
+        if(death == null || !death.isOnline()){
             return;
         }
         ItemStack head = ItemBuilder.skull(XMaterial.PLAYER_HEAD, 1, "§e", "§e", death.getName());
@@ -50,7 +49,7 @@ public class KillEffectHead implements KillEffect, Cloneable {
             @Override
             public void run() {
                 pased++;
-                if (pased >= 20) {
+                if(pased >= 20){
                     armor.getWorld().playEffect(armor.getLocation(), Effect.STEP_SOUND, Material.COAL_BLOCK);
                     p.playSound(p.getLocation(), punchSound.parseSound(), 1.0f, 1.0f);
                     armor.remove();
@@ -59,28 +58,25 @@ public class KillEffectHead implements KillEffect, Cloneable {
                 }
                 Location loc = armor.getLocation().clone().add(0, 0.3 * pased, 0);
                 armor.teleport(loc);
-                if (plugin.getVc().is1_12() || plugin.getVc().is1_13to17()) {
-                    loc.getWorld().spawnParticle(Particle.SMOKE_NORMAL, loc, 1);
-                    loc.getWorld().spawnParticle(Particle.DRIP_LAVA, loc, 1);
-                } else {
-                    loc.getWorld().playEffect(loc, Effect.SMOKE, 1);
-                    loc.getWorld().playEffect(loc, Effect.LAVADRIP, 1);
-                }
+    
+                loc.getWorld().playEffect(loc, Effect.SMOKE, 1);
+                loc.getWorld().playEffect(loc, Effect.LAVADRIP, 1);
+    
                 CustomSound.KILLEFFECTS_HEAD.reproduce(p);
             }
         }.runTaskTimer(plugin, 0, 2);
     }
-
+    
     @Override
     public void stop() {
-        if (task != null) {
+        if(task != null){
             task.cancel();
         }
     }
-
+    
     @Override
     public KillEffect clone() {
         return new KillEffectHead();
     }
-
+    
 }

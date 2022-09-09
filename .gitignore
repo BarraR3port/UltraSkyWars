@@ -111,3 +111,9 @@ buildNumber.properties
 
 # Common working directory
 run/
+/UltraSkyWars-WEOld/
+/UltraSkyWars-WENew/
+/UltraSkyWars-Setup/
+/UltraSkyWars-Lobby/
+/UltraSkyWars-Game/
+/UltraSkyWars-API/

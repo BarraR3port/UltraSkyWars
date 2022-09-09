@@ -1,10 +1,9 @@
 package io.github.Leonardo0013YT.UltraSkyWars.controllers;
 
 import io.github.Leonardo0013YT.UltraSkyWars.UltraSkyWars;
-import io.github.Leonardo0013YT.UltraSkyWars.WorldEditUtils_New;
-import io.github.Leonardo0013YT.UltraSkyWars.WorldEditUtils_Old;
 import io.github.Leonardo0013YT.UltraSkyWars.calls.CallBackAPI;
 import io.github.Leonardo0013YT.UltraSkyWars.interfaces.WorldEdit;
+import io.github.Leonardo0013YT.UltraSkyWars.worldedit.WorldEditUtils_Old;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.generator.BlockPopulator;
@@ -21,11 +20,12 @@ public class WorldController {
     public WorldController() {
         UltraSkyWars plugin = UltraSkyWars.get();
         clear = plugin.getConfig().getString("schemaToClearLobby");
-        if (plugin.getVc().is1_13to17()) {
+        /*if (plugin.getVc().is1_13to17()) {
             edit = new WorldEditUtils_New(plugin);
         } else {
             edit = new WorldEditUtils_Old(plugin);
-        }
+        }*/
+        edit = new WorldEditUtils_Old(plugin);
     }
 
     public void clearLobby(Location lobby) {

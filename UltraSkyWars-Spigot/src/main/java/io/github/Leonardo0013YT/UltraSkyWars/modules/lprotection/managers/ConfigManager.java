@@ -7,19 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConfigManager {
-
-    private UltraSkyWars plugin;
-    private InjectionLProtection injection;
+    
+    private final InjectionLProtection injection;
     private String lobbyWorld;
     private boolean noBreakArmorStand, noInteractArmorStand, noBreakFarm, igniteProtect, hideJoinMessage, hideQuitMessage, opBypass, noBreak, noPlace, noDamage, noHunger, noWeather, noExplosion, noDayCycle, noMobSpawn, noDrop, joinTeleport, voidTeleport;
     private List<String> interactBlocked;
-
+    
     public ConfigManager(UltraSkyWars plugin, InjectionLProtection injection) {
-        this.plugin = plugin;
         this.injection = injection;
         reload();
     }
-
+    
     public void reload() {
         lobbyWorld = injection.getLobbyOptions().get("options.lobbyWorld");
         noBreakArmorStand = injection.getLobbyOptions().getBooleanOrDefault("options.noBreakArmorStand", true);

@@ -30,13 +30,12 @@ public class GamePlayer {
     private final int food;
     private final double maxHealth, health;
     private final GameMode mode;
-    private UUID player;
+    private final UUID player;
     private int kills, coins, xp, souls;
     private boolean reset, dead;
     private OrderType orderType;
 
     public GamePlayer(Player p, Game game, boolean mod) {
-        UltraSkyWars.get().getAdm().addPlayerNameTag(p);
         this.player = p.getUniqueId();
         this.inv = p.getInventory().getContents();
         this.armor = p.getInventory().getArmorContents();
@@ -186,11 +185,7 @@ public class GamePlayer {
             }
         }
         UltraSkyWars.get().getAdm().resetPlayerNameTag(p);
-        if (UltraSkyWars.get().getVc().getVersion().equals("v1_8_R3")) {
-            p.spigot().setCollidesWithEntities(true);
-        } else {
-            p.setCollidable(true);
-        }
+        p.spigot().setCollidesWithEntities(true);
         reset = true;
     }
 

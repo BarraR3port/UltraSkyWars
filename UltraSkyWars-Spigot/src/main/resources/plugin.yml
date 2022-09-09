@@ -8,18 +8,9 @@ softdepend:
   - WorldEdit
   - FastAsyncWorldEdit
   - PlaceholderAPI
-  - PlayerPoints
-  - Vault
-  - Coins
-  - Holograms
   - HolographicDisplays
   - Parties
-  - TAB
-  - NametagEdit
-  - PartyAndFriends
-  - MVdWPlaceholderAPI
-  - LeaderHeads
-  - TrHologram
+  - LeaderHeadsRevamped
 commands:
   sw:
     aliases: [ skywars, swars, skyw ]
@@ -31,3 +22,5 @@ commands:
     aliases: [ switems ]
   leave:
     aliases: [ quit ]
+  sws:
+    aliases: [ skywarssetup ]
