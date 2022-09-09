@@ -1,0 +1,6 @@
+main: io.github.Leonardo0013YT.UltraSkyWars.UltraSkyWarsDataParser
+author: Leonardo0013YT
+name: UltraSkyWarsDataParser
+version: 1.0.0
+depend:
+  - UltraSkyWars
