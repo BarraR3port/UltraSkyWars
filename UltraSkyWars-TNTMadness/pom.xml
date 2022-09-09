@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.podcrash.commissions.skywars</groupId>
         <artifactId>UltraSkyWars</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>9.0.0</version>
     </parent>
     <artifactId>UltraSkyWars-TNTMadness</artifactId>
     <name>UltraSkyWars-TNTMadness</name>
@@ -30,7 +30,7 @@
         <dependency>
             <groupId>com.podcrash.commissions.skywars</groupId>
             <artifactId>UltraSkyWars-Spigot</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>9.0.0</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.podcrash.commissions.skywars</groupId>
         <artifactId>UltraSkyWars</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>9.0.0</version>
     </parent>
     <artifactId>UltraSkyWars-WEOld</artifactId>
     <name>UltraSkyWars-WEOld</name>

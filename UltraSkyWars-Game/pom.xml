@@ -50,7 +50,7 @@
         <dependency>
             <groupId>de.simonsator</groupId>
             <artifactId>Spigot-Party-API-For-RedisBungee</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>9.0.0</version>
         </dependency>
     </dependencies>
 

@@ -21,16 +21,16 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class LobbyListener implements Listener {
-
+    
     private final UltraSkyWars plugin;
     private final InjectionLProtection injection;
     private final HashMap<UUID, Long> countdown = new HashMap<>();
-
+    
     public LobbyListener(UltraSkyWars plugin, InjectionLProtection injection) {
         this.plugin = plugin;
         this.injection = injection;
     }
-
+    
     @EventHandler(priority = EventPriority.MONITOR)
     public void onJoin(PlayerJoinEvent e) {
         if (injection.getCm().isHideJoinMessage()) {
@@ -42,7 +42,7 @@ public class LobbyListener implements Listener {
             p.teleport(plugin.getMainLobby());
         }
     }
-
+    
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         Player p = e.getPlayer();
@@ -51,20 +51,20 @@ public class LobbyListener implements Listener {
         }
         countdown.remove(p.getUniqueId());
     }
-
+    
     @EventHandler
     public void onKick(PlayerKickEvent e) {
         Player p = e.getPlayer();
         countdown.remove(p.getUniqueId());
     }
-
+    
     @EventHandler
     public void onIgnite(BlockIgniteEvent e) {
         if (check(e.getPlayer()) && injection.getCm().isIgniteProtect()) {
             e.setCancelled(true);
         }
     }
-
+    
     @EventHandler
     public void onBreak(BlockBreakEvent e) {
         if (!injection.getCm().isNoBreak()) return;
@@ -74,7 +74,7 @@ public class LobbyListener implements Listener {
             e.setCancelled(true);
         }
     }
-
+    
     @EventHandler
     public void onPlace(BlockPlaceEvent e) {
         if (!injection.getCm().isNoPlace()) return;
@@ -84,7 +84,7 @@ public class LobbyListener implements Listener {
             e.setCancelled(true);
         }
     }
-
+    
     @EventHandler
     public void onDamageByEntity(EntityDamageByEntityEvent e) {
         if (e.getDamager() instanceof Player && e.getEntity() instanceof ArmorStand) {
@@ -95,7 +95,7 @@ public class LobbyListener implements Listener {
             }
         }
     }
-
+    
     @EventHandler
     public void onInteractAtEntity(PlayerInteractAtEntityEvent e) {
         if (e.getRightClicked() instanceof ArmorStand) {
@@ -106,7 +106,7 @@ public class LobbyListener implements Listener {
             }
         }
     }
-
+    
     @EventHandler
     public void onDamage(EntityDamageEvent e) {
         if (e.getEntity() instanceof Player) {
@@ -128,7 +128,7 @@ public class LobbyListener implements Listener {
             }
         }
     }
-
+    
     @EventHandler
     public void onFood(FoodLevelChangeEvent e) {
         if (!injection.getCm().isNoHunger()) return;
@@ -139,7 +139,7 @@ public class LobbyListener implements Listener {
             }
         }
     }
-
+    
     @EventHandler
     public void onDrop(PlayerDropItemEvent e) {
         if (!injection.getCm().isNoDrop()) return;
@@ -148,7 +148,7 @@ public class LobbyListener implements Listener {
             e.setCancelled(true);
         }
     }
-
+    
     @EventHandler
     public void onWeather(WeatherChangeEvent e) {
         if (!injection.getCm().isNoWeather()) return;
@@ -157,7 +157,7 @@ public class LobbyListener implements Listener {
             e.setCancelled(e.toWeatherState());
         }
     }
-
+    
     @EventHandler
     public void onExplode(EntityExplodeEvent e) {
         if (!injection.getCm().isNoExplosion()) return;
@@ -166,7 +166,7 @@ public class LobbyListener implements Listener {
             e.setCancelled(true);
         }
     }
-
+    
     @EventHandler
     public void onExplode(BlockExplodeEvent e) {
         if (!injection.getCm().isNoExplosion()) return;
@@ -175,17 +175,17 @@ public class LobbyListener implements Listener {
             e.setCancelled(true);
         }
     }
-
+    
     @EventHandler
     public void onSpawn(EntitySpawnEvent e) {
         if (!injection.getCm().isNoMobSpawn()) return;
         World w = e.getLocation().getWorld();
         if (injection.getCm().getLobbyWorld().equals(w.getName())) {
-            if (e.getEntity() instanceof Player) return;
+            if(e.getEntity() instanceof Player || e.getEntity() instanceof ArmorStand) return;
             e.setCancelled(true);
         }
     }
-
+    
     @EventHandler
     public void onInteract(PlayerInteractEvent e) {
         Player p = e.getPlayer();
@@ -216,12 +216,12 @@ public class LobbyListener implements Listener {
             }
         }
     }
-
+    
     private boolean check(Player p) {
         if (p == null) return true;
         World w = p.getWorld();
         if (injection.getCm().getLobbyWorld() == null || w == null) return false;
         return injection.getCm().getLobbyWorld().equals(w.getName());
     }
-
+    
 }

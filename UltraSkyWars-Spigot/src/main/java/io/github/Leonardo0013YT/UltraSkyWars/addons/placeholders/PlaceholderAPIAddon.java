@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 public class PlaceholderAPIAddon implements PlaceholderAddon {
 
     public String parsePlaceholders(Player p, String value) {
-        return PlaceholderAPI.setPlaceholders(p, valmodulesue);
+        return PlaceholderAPI.setPlaceholders(p, value);
     }
 
 }
