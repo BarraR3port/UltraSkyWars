@@ -87,6 +87,7 @@ public class UltraGame extends Game {
                     create(p, team, on, g);
                 }
             }
+            p.teleport(team.getSpawn());
         }
         plugin.getGm().updateGame(name, color, state.name(), gameType, players.size(), max);
         plugin.getGem().updateInventories(gameType, "none");

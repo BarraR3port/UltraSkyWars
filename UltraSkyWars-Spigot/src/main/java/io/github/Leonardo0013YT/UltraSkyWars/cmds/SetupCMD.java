@@ -137,12 +137,14 @@ public class SetupCMD implements CommandExecutor {
                     }*/
                     World w = plugin.getWc().createEmptyWorld(name);
                     w.getBlockAt(0, 75, 0).setType(Material.STONE);
-                    p.getInventory().clear();
-                    p.teleport(w.getSpawnLocation());
-                    p.getInventory().remove(plugin.getIm().getSetup());
-                    p.getInventory().remove(plugin.getIm().getCenter());
-                    p.getInventory().addItem(plugin.getIm().getSetup());
-                    p.sendMessage(plugin.getLang().get("setup.arena.createMap").replace("<name>", name));
+                    if(p.teleport(w.getSpawnLocation())){
+                        p.getInventory().clear();
+                        p.getInventory().remove(plugin.getIm().getSetup());
+                        p.getInventory().remove(plugin.getIm().getCenter());
+                        p.getInventory().addItem(plugin.getIm().getSetup());
+                        p.sendMessage(plugin.getLang().get("setup.arena.createMap").replace("<name>", name));
+        
+                    }
                     break;
                 case "edit":
                     if(args.length < 2){
@@ -159,12 +161,13 @@ public class SetupCMD implements CommandExecutor {
                     }
                     plugin.getSm().setSetup(p, new ArenaSetup(plugin, p, name2, name2));
                     World w2 = Bukkit.getWorld(name2);
-                    p.getInventory().clear();
-                    p.teleport(w2.getSpawnLocation());
-                    p.getInventory().remove(plugin.getIm().getSetup());
-                    p.getInventory().remove(plugin.getIm().getCenter());
-                    p.getInventory().addItem(plugin.getIm().getSetup());
-                    p.sendMessage("§aNow you're editing the map §e" + name2 + "§a.");
+                    if(p.teleport(w2.getSpawnLocation())){
+                        p.getInventory().clear();
+                        p.getInventory().remove(plugin.getIm().getSetup());
+                        p.getInventory().remove(plugin.getIm().getCenter());
+                        p.getInventory().addItem(plugin.getIm().getSetup());
+                        p.sendMessage("§aNow you're editing the map §e" + name2 + "§a.");
+                    }
                     break;
                 case "delete": {
                     if(args.length < 2){

@@ -41,13 +41,15 @@ public class TabAPIAddon implements NametagAddon {
     @Override
     public String getPrefix(Player p) {
         TabPlayer tab = TabAPI.getInstance().getPlayer(p.getUniqueId());
-        return manager.getCustomPrefix(tab);
+        String prefix = manager.getCustomPrefix(tab);
+        return prefix == null ? "" : prefix;
     }
 
     @Override
     public String getSuffix(Player p) {
         TabPlayer tab = TabAPI.getInstance().getPlayer(p.getUniqueId());
-        return manager.getCustomSuffix(tab);
+        String suffix = manager.getCustomSuffix(tab);
+        return suffix == null ? "" : suffix;
     }
 
 }
