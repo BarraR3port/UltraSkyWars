@@ -14,6 +14,8 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class TeamGameChest extends GameChest {
     
@@ -36,6 +38,7 @@ public class TeamGameChest extends GameChest {
         SWChest sw = ct.getChest();
         LinkedList<ItemStack> required = new LinkedList<>();
         // Its required to add at least 1 item of each type for a normal game.
+        LinkedList<PerChestItem> tail = new LinkedList<>();
         for ( int t = 0; t < game.getTeamSize(); t++ ){
             required.addAll(Arrays.asList(
                     sw.getRandomHelmet(ct.isRefillChange() && refill, game.getGameType()),
@@ -51,18 +54,22 @@ public class TeamGameChest extends GameChest {
                     sw.getRandomBowItem(ct.isRefillChange() && refill, game.getGameType()),
                     sw.getRandomProjectileItem(ct.isRefillChange() && refill, game.getGameType()).getItem(),
                     sw.getRandomProjectileItem(ct.isRefillChange() && refill, game.getGameType()).getItem()));
+            if(!ct.isArmorAllTeams()){
+                break;
+            }
         }
         Collections.shuffle(required);
-        
-        
+    
+    
         LinkedList<PerChestItem> selected = new LinkedList<>();
-        Integer[] perChestRandomizer = plugin.getRandomizer().getRandomizer();
-        for ( int a = 0; a < required.size(); a++ ){
-            selected.add(new PerChestItem(ThreadLocalRandom.current().nextInt(0, invs.size()), perChestRandomizer[a], required.get(a)));
+        for ( ItemStack itemStack : required ){
+            int chest = ThreadLocalRandom.current().nextInt(0, invs.size());
+            int slot = plugin.getRandomizer().getRandomizer()[ThreadLocalRandom.current().nextInt(0, 6)];
+            selected.add(new PerChestItem(chest, slot, itemStack));
         }
-        
+    
         ArrayList<UltraGameChest> ugcList = new ArrayList<>(invs.values());
-        
+    
         ThreadLocalRandom random = ThreadLocalRandom.current();
         for ( int index = 0; index < ugcList.size(); index++ ){
             UltraGameChest ugc = ugcList.get(index);
@@ -87,7 +94,8 @@ public class TeamGameChest extends GameChest {
                     if(inv.getItem(r) == null){
                         inv.setItem(r, ci.getItem());
                     } else {
-                        inv.addItem(ci.getItem());
+                        tail.add(new PerChestItem(index, 0, ci.getItem()));
+                        // inv.addItem(ci.getItem());
                     }
                     added++;
                 } else {
@@ -96,7 +104,8 @@ public class TeamGameChest extends GameChest {
                         if(inv.getItem(r) == null){
                             inv.setItem(r, ci.getItem());
                         } else {
-                            inv.addItem(ci.getItem());
+                            tail.add(new PerChestItem(index, 0, ci.getItem()));
+                            //inv.addItem(ci.getItem());
                         }
                         added++;
                     } else {
@@ -108,7 +117,8 @@ public class TeamGameChest extends GameChest {
                                 if(inv.getItem(r) == null){
                                     inv.setItem(r, ci2.getItem());
                                 } else {
-                                    inv.addItem(ci2.getItem());
+                                    tail.add(new PerChestItem(index, 0, ci.getItem()));
+                                    //inv.addItem(ci2.getItem());
                                 }
                                 added++;
                             }
@@ -121,12 +131,22 @@ public class TeamGameChest extends GameChest {
                     if(inv.getItem(pci.getSlot()) == null){
                         inv.setItem(pci.getSlot(), pci.getItem());
                     } else {
-                        inv.addItem(pci.getItem());
+                        tail.add(new PerChestItem(index, 0, pci.getItem()));
+                        //inv.addItem(ci2.getItem());
                     }
                 }
             }
         }
-        
+        for ( PerChestItem pci : tail ){
+            UltraGameChest ugc = ugcList.get(pci.getChest());
+            Inventory inv = ugc.getInv();
+            if(inv == null) continue;
+            List<Integer> available = IntStream.range(0, inv.getSize()).filter(i -> inv.getItem(i) == null).boxed().collect(Collectors.toList());
+            if(available.isEmpty()) continue;
+            int slot = available.get(random.nextInt(0, available.size()));
+            inv.setItem(slot, pci.getItem());
+        }
+    
     }
     
     private ChestItem getRandomProjectileItem(ChestItem item) {

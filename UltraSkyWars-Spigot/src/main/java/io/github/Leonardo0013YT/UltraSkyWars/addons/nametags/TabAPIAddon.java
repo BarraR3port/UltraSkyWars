@@ -12,18 +12,17 @@ import java.util.UUID;
 public class TabAPIAddon implements NametagAddon {
     private final HashMap<UUID, String> prefix = new HashMap<>();
     private final HashMap<UUID, String> suffix = new HashMap<>();
-    private final TablistFormatManager manager = TabAPI.getInstance().getTablistFormatManager();
+    private final TabAPI tab = TabAPI.getInstance();
+    private final TablistFormatManager manager = tab.getTablistFormatManager();
     
     @Override
     public void addPlayerNameTag(Player p) {
-        TabPlayer tab = TabAPI.getInstance().getPlayer(p.getUniqueId());
-        TabAPI.getInstance().getTablistFormatManager().getCustomPrefix(tab);
-        if(tab != null){
-            prefix.put(p.getUniqueId(), manager.getCustomPrefix(tab));
-            suffix.put(p.getUniqueId(), manager.getCustomSuffix(tab));
-        }
+        TabPlayer tabPlayer = tab.getPlayer(p.getUniqueId());
+        tab.getTablistFormatManager().getCustomPrefix(tabPlayer);
+        prefix.put(p.getUniqueId(), manager.getCustomPrefix(tabPlayer));
+        suffix.put(p.getUniqueId(), manager.getCustomSuffix(tabPlayer));
     }
-
+    
     @Override
     public void removePlayerNameTag(Player p) {
         prefix.remove(p.getUniqueId());
@@ -32,23 +31,23 @@ public class TabAPIAddon implements NametagAddon {
 
     @Override
     public void resetPlayerNameTag(Player p) {
-        TabPlayer tab = TabAPI.getInstance().getPlayer(p.getUniqueId());
-        manager.setPrefix(tab, prefix.get(p.getUniqueId()));
-        manager.setSuffix(tab, suffix.get(p.getUniqueId()));
+        TabPlayer tabPlayer = tab.getPlayer(p.getUniqueId());
+        manager.setPrefix(tabPlayer, prefix.get(p.getUniqueId()));
+        manager.setSuffix(tabPlayer, suffix.get(p.getUniqueId()));
         removePlayerNameTag(p);
     }
 
     @Override
     public String getPrefix(Player p) {
-        TabPlayer tab = TabAPI.getInstance().getPlayer(p.getUniqueId());
-        String prefix = manager.getCustomPrefix(tab);
+        TabPlayer tabPlayer = tab.getPlayer(p.getUniqueId());
+        String prefix = manager.getCustomPrefix(tabPlayer);
         return prefix == null ? "" : prefix;
     }
 
     @Override
     public String getSuffix(Player p) {
-        TabPlayer tab = TabAPI.getInstance().getPlayer(p.getUniqueId());
-        String suffix = manager.getCustomSuffix(tab);
+        TabPlayer tabPlayer = tab.getPlayer(p.getUniqueId());
+        String suffix = manager.getCustomSuffix(tabPlayer);
         return suffix == null ? "" : suffix;
     }
 

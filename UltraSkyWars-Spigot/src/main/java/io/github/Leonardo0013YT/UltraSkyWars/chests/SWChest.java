@@ -69,21 +69,17 @@ public class SWChest {
             } else if(item.getType().name().contains("SNOW_BALL") || item.getType().name().contains("SNOWBALL") || item.getType().name().contains("EGG") || item.getType().name().contains("ARROW")){
                 getSpecialItems(c, item, chance, center, projectiles);
             } else if(item.getType().isBlock()){
-                int min = plugin.getChests().getIntOrDefault(path + "." + c + ".min", item.getAmount());
-                int max = plugin.getChests().getIntOrDefault(path + "." + c + ".max", item.getAmount());
-                readItem(c, item, chance, center, min, max, blockItems);
+                getSpecialItems(c, item, chance, center, blockItems);
             } else {
-                int min = plugin.getChests().getIntOrDefault(path + "." + c + ".min", item.getAmount());
-                int max = plugin.getChests().getIntOrDefault(path + "." + c + ".max", item.getAmount());
-                readItem(c, item, chance, center, min, max, chestItems);
+                getSpecialItems(c, item, chance, center, chestItems);
             }
         }
         amount = swordItems.size() + bowItems.size() + projectiles.size() + bootsItems.size() + leggingsItems.size() + chestPlateItems.size() + helmetItems.size() + bootsItems.size() + axeItems.size() + pickaxeItems.size() + blockItems.size();
     }
     
     private void getSpecialItems(String c, ItemStack item, int chance, boolean center, List<ChestItem> projectiles) {
-        int min = plugin.getChests().getIntOrDefault(path + "." + c + ".min", 1);
-        int max = plugin.getChests().getIntOrDefault(path + "." + c + ".max", 1);
+        int min = plugin.getChests().getIntOrDefault(path + "." + c + ".min", item.getAmount());
+        int max = plugin.getChests().getIntOrDefault(path + "." + c + ".max", item.getAmount());
         readItem(c, item, chance, center, min, max, projectiles);
     }
     
