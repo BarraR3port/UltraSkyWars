@@ -18,7 +18,7 @@ import java.util.List;
 
 @Getter
 public class ConfigManager {
-
+    
     private ItemStack head;
     private byte waitingState, startingState, emptyState;
     private byte redPanelData;
@@ -32,11 +32,11 @@ public class ConfigManager {
     private String gameType;
     private List<String> whitelistedCMD, winCommands, killCommands, deathCommands;
     private Location previewPlayerGlass, previewCosmeticGlass, previewPlayerBalloon, previewCosmeticBalloon;
-
+    
     public ConfigManager() {
         reload();
     }
-
+    
     public void reload() {
         UltraSkyWars plugin = UltraSkyWars.get();
         this.cosmeticsGlasses = plugin.getConfig().getBoolean("cosmetics.glasses");
@@ -70,7 +70,7 @@ public class ConfigManager {
         this.previewCosmeticGlass = Utils.getStringLocation(plugin.getConfig().getString("previews.glass.cosmetic"));
         this.previewPlayerBalloon = Utils.getStringLocation(plugin.getConfig().getString("previews.balloon.player"));
         this.previewCosmeticBalloon = Utils.getStringLocation(plugin.getConfig().getString("previews.balloon.cosmetic"));
-        for (CustomSound cs : CustomSound.values()) {
+        for ( CustomSound cs : CustomSound.values() ){
             String path = "sounds." + cs.name();
             cs.setSound(XSound.matchXSound(plugin.getSounds().get(path + ".sound")).orElse(XSound.BLOCK_NOTE_BLOCK_HAT).parseSound());
             cs.setVolume((float) plugin.getSounds().getDouble(path + ".volume"));
@@ -161,11 +161,11 @@ public class ConfigManager {
         this.next = XMaterial.matchXMaterial(plugin.getConfig().getString("materials.next")).orElse(XMaterial.ARROW);
         this.last = XMaterial.matchXMaterial(plugin.getConfig().getString("materials.last")).orElse(XMaterial.ARROW);
     }
-
+    
     public void reloadInjections() {
         UltraSkyWars plugin = UltraSkyWars.get();
-        if (plugin.getIjm() == null) return;
-        if (plugin.getIjm().isCubeletsInjection()) {
+        if(plugin.getIjm() == null) return;
+        if(plugin.getIjm().isCubeletsInjection()){
             this.ticksAni3 = plugin.getIjm().getCubelets().getCubelets().getInt("animations.flames.ticks");
             this.executesAni3 = plugin.getIjm().getCubelets().getCubelets().getInt("animations.flames.executes");
             this.url = plugin.getIjm().getCubelets().getCubelets().get(null, "animations.head.url");
@@ -176,12 +176,12 @@ public class ConfigManager {
             this.cubeletsEnabled = plugin.getIjm().getCubelets().getCubelets().getBoolean("cubelets");
         }
     }
-
+    
     public boolean isSetupLobby(Player p) {
-        if (Bukkit.getPluginManager().isPluginEnabled("UltraSkyWars-Setup")) {
+        if(Bukkit.getPluginManager().isPluginEnabled("UltraSkyWars-Setup")){
             return USWSetupAPI.isLobbySetup(p);
         }
         return false;
     }
-
+    
 }

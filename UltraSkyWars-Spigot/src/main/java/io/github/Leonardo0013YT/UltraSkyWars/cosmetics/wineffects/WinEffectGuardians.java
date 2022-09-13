@@ -14,11 +14,11 @@ import org.bukkit.scheduler.BukkitTask;
 import java.util.ArrayList;
 
 public class WinEffectGuardians implements WinEffect, Cloneable {
-
+    
     private final ArrayList<ArmorStand> armors = new ArrayList<>();
     private final ArrayList<Guardian> guardians = new ArrayList<>();
     private BukkitTask task;
-
+    
     @Override
     public void start(Player p, Game game) {
         World world = game.getSpectator().getWorld();
@@ -47,19 +47,19 @@ public class WinEffectGuardians implements WinEffect, Cloneable {
             final double add = Math.PI / 36;
             double lastStart = 0;
             double angle = 0;
-
+            
             @Override
             public void run() {
-                if (!p.getWorld().getName().equals(world.getName())) {
+                if(!p.getWorld().getName().equals(world.getName())){
                     cancel();
                     return;
                 }
-                if (!p.isOnline()) {
+                if(!p.isOnline()){
                     cancel();
                     return;
                 }
                 lastStart = angle - (add * 2);
-                for (ArmorStand as : armors) {
+                for ( ArmorStand as : armors ){
                     angle += add;
                     Location now = getCicle(p.getLocation(), angle, 2);
                     as.teleport(now);
@@ -67,45 +67,45 @@ public class WinEffectGuardians implements WinEffect, Cloneable {
             }
         }.runTaskTimer(UltraSkyWars.get(), 0, 2);
     }
-
+    
     @Override
     public void stop() {
-        for (Guardian s : guardians) {
-            if (s == null || s.isDead()) continue;
+        for ( Guardian s : guardians ){
+            if(s == null || s.isDead()) continue;
             s.remove();
         }
-        for (ArmorStand s : armors) {
-            if (s == null || s.isDead()) continue;
+        for ( ArmorStand s : armors ){
+            if(s == null || s.isDead()) continue;
             s.remove();
         }
         guardians.clear();
         armors.clear();
-        if (task != null) {
+        if(task != null){
             task.cancel();
         }
     }
-
+    
     @Override
     public WinEffect clone() {
         return new WinEffectGuardians();
     }
-
+    
     public Guardian apply(Guardian g) {
         g.setNoDamageTicks(Integer.MAX_VALUE);
         return g;
     }
-
+    
     public ArmorStand apply(ArmorStand a) {
         a.setGravity(false);
         a.setSmall(true);
         a.setVisible(false);
         return a;
     }
-
+    
     public Location getCicle(Location loc, double angle, double radius) {
         double x = radius * Math.cos(angle);
         double z = radius * Math.sin(angle);
         return loc.clone().add(x, 0, z);
     }
-
+    
 }

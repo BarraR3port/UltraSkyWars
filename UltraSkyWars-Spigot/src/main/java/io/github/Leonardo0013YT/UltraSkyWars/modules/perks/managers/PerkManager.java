@@ -10,16 +10,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PerkManager {
-
+    
     private final InjectionPerks plugin;
     private final HashMap<PerkType, Perk> perks = new HashMap<>();
     private final HashMap<Integer, PerkType> perksID = new HashMap<>();
-
+    
     public PerkManager(InjectionPerks plugin) {
         this.plugin = plugin;
         loadPerks();
     }
-
+    
     public void loadPerks() {
         perks.clear();
         perks.put(PerkType.FALL_REDUCTION, new NormalPerk(plugin, "perks.fallreduction"));
@@ -37,28 +37,28 @@ public class PerkManager {
         perks.put(PerkType.RESISTENCE_START, new PotionPerk(plugin, "perks.resistencestart", 20, 0));
         perks.put(PerkType.NOURISHMENT, new NormalPerk(plugin, "perks.nourishment"));
         perks.put(PerkType.SAVIOR, new PotionPerk(plugin, "perks.savior", 4, 0));
-        for (Map.Entry<PerkType, Perk> entry : perks.entrySet()) {
+        for ( Map.Entry<PerkType, Perk> entry : perks.entrySet() ){
             perksID.put(entry.getValue().getId(), entry.getKey());
         }
     }
-
+    
     public Perk getPerkByID(int id) {
         return perks.get(perksID.get(id));
     }
-
+    
     public Perk getPerk(PerkType type) {
         return perks.get(type);
     }
-
+    
     public Perk getPerkByName(String name) {
-        for (Perk perk : perks.values()) {
-            if (perk.getName().equals(name)) {
+        for ( Perk perk : perks.values() ){
+            if(perk.getName().equals(name)){
                 return perk;
             }
         }
         return null;
     }
-
+    
     public HashMap<PerkType, Perk> getPerks() {
         return perks;
     }

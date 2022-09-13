@@ -12,12 +12,12 @@ import lombok.Getter;
 
 @Getter
 public class InjectionSoulWell implements Injection {
-
+    
     private UltraSkyWars plugin;
     private Settings soulwell;
     private SoulWellManager swm;
     private SoulWellMenu wel;
-
+    
     @Override
     public void loadInjection(UltraSkyWars plugin) {
         this.plugin = plugin;
@@ -26,18 +26,18 @@ public class InjectionSoulWell implements Injection {
         this.wel = new SoulWellMenu(plugin, this);
         plugin.getServer().getPluginManager().registerEvents(new PlayerListener(plugin, this), plugin);
         plugin.getServer().getPluginManager().registerEvents(new MenuListener(plugin, this), plugin);
-        if (!plugin.getCm().isBungeeModeLobby()) {
+        if(!plugin.getCm().isBungeeModeLobby()){
             plugin.getServer().getPluginManager().registerEvents(new GameListener(plugin, this), plugin);
         }
     }
-
+    
     @Override
     public void reload() {
-
+    
     }
-
+    
     @Override
     public void disable() {
     }
-
+    
 }

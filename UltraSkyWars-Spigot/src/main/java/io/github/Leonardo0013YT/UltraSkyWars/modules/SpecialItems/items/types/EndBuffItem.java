@@ -4,9 +4,9 @@ import io.github.Leonardo0013YT.UltraSkyWars.modules.SpecialItems.InjectionSpeci
 import io.github.Leonardo0013YT.UltraSkyWars.modules.SpecialItems.items.SpecialItem;
 
 public class EndBuffItem extends SpecialItem {
-
+    
     public EndBuffItem(InjectionSpecialItems isi) {
-
+    
     }
-
+    
 }

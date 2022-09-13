@@ -9,9 +9,9 @@ import org.bukkit.entity.Vehicle;
 import org.bukkit.metadata.FixedMetadataValue;
 
 public class WinEffectDareDevil implements WinEffect {
-
+    
     private Vehicle horse;
-
+    
     @Override
     public void start(Player p, Game game) {
         horse = UltraSkyWars.get().getVc().getNMS().spawnHorse(p.getLocation(), p);
@@ -19,17 +19,17 @@ public class WinEffectDareDevil implements WinEffect {
         horse.setMetadata("NO_TARGET", new FixedMetadataValue(UltraSkyWars.get(), ""));
         p.getWorld().playSound(p.getLocation(), XSound.ENTITY_ENDER_DRAGON_GROWL.parseSound(), 1.0f, 1.0f);
     }
-
+    
     @Override
     public void stop() {
-        if (horse != null) {
+        if(horse != null){
             horse.remove();
         }
     }
-
+    
     @Override
     public WinEffect clone() {
         return new WinEffectDareDevil();
     }
-
+    
 }

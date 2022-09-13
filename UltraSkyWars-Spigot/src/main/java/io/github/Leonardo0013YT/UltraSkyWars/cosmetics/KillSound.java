@@ -17,15 +17,16 @@ import java.util.List;
 import java.util.Optional;
 
 public class KillSound extends Cosmetic {
-
-    private Sound sound;
-    private float vol1, vol2;
-    private ItemStack icon;
-
+    
+    private final Sound sound;
+    private final float vol1;
+    private final float vol2;
+    private final ItemStack icon;
+    
     public KillSound(UltraSkyWars plugin, String s) {
         super(plugin.getKillsound(), s, "killsound");
         Optional<XSound> xs = XSound.matchXSound(plugin.getKillsound().get(s + ".sound"));
-        if (xs.isPresent()) {
+        if(xs.isPresent()){
             this.sound = xs.get().parseSound();
         } else {
             this.sound = XSound.ENTITY_PLAYER_LEVELUP.parseSound();
@@ -35,30 +36,30 @@ public class KillSound extends Cosmetic {
         this.vol2 = (float) plugin.getKillsound().getConfig().getDouble(s + ".vol1");
         plugin.getCos().setLastPage("KillSound", page);
     }
-
+    
     public Sound getSound() {
         return sound;
     }
-
+    
     public float getVol1() {
         return vol1;
     }
-
+    
     public float getVol2() {
         return vol2;
     }
-
+    
     public ItemStack getIcon(Player p) {
-        if (!icon.hasItemMeta()) {
+        if(!icon.hasItemMeta()){
             return icon;
         }
         UltraSkyWars plugin = UltraSkyWars.get();
         SWPlayer sw = plugin.getDb().getSWPlayer(p);
         ItemStack icon = this.icon.clone();
-        if (!p.hasPermission(autoGivePermission)) {
-            if (price > 0) {
-                if (plugin.getCm().isRedPanelInLocked()) {
-                    if (!sw.getKillsounds().contains(id)) {
+        if(!p.hasPermission(autoGivePermission)){
+            if(price > 0){
+                if(plugin.getCm().isRedPanelInLocked()){
+                    if(!sw.getKillsounds().contains(id)){
                         icon = ItemBuilder.item(XMaterial.matchDefinedXMaterial(plugin.getCm().getRedPanelMaterial().name(), plugin.getCm().getRedPanelData()).orElse(XMaterial.RED_STAINED_GLASS_PANE), 1, icon.getItemMeta().getDisplayName(), icon.getItemMeta().getLore());
                     }
                 }
@@ -66,20 +67,20 @@ public class KillSound extends Cosmetic {
         }
         ItemMeta iconM = icon.getItemMeta();
         List<String> lore = icon.getItemMeta().getLore();
-        for (int i = 0; i < lore.size(); i++) {
+        for ( int i = 0; i < lore.size(); i++ ){
             String s = lore.get(i);
-            switch (s) {
+            switch(s) {
                 case "<price>":
-                    if (!p.hasPermission(autoGivePermission)) {
-                        if (isBuy && !sw.getKillsounds().contains(id)) {
+                    if(!p.hasPermission(autoGivePermission)){
+                        if(isBuy && !sw.getKillsounds().contains(id)){
                             lore.set(i, plugin.getLang().get(p, "menus.killsoundsselector.price").replaceAll("<price>", String.valueOf(price)));
-                        } else if (!isBuy && !sw.getKillsounds().contains(id)) {
-                            if (needPermToBuy && p.hasPermission(permission)) {
+                        } else if(!isBuy && !sw.getKillsounds().contains(id)){
+                            if(needPermToBuy && p.hasPermission(permission)){
                                 lore.set(i, plugin.getLang().get(p, "menus.killsoundsselector.price").replaceAll("<price>", String.valueOf(price)));
                             } else {
                                 lore.set(i, plugin.getLang().get(p, "menus.killsoundsselector.noBuyable"));
                             }
-                        } else if (sw.getKillsounds().contains(id) || !needPermToBuy) {
+                        } else if(sw.getKillsounds().contains(id) || !needPermToBuy){
                             lore.set(i, plugin.getLang().get(p, "menus.killsoundsselector.buyed"));
                         }
                     } else {
@@ -87,17 +88,17 @@ public class KillSound extends Cosmetic {
                     }
                     break;
                 case "<status>":
-                    if (!p.hasPermission(autoGivePermission)) {
-                        if (sw.getKillsounds().contains(id)) {
+                    if(!p.hasPermission(autoGivePermission)){
+                        if(sw.getKillsounds().contains(id)){
                             lore.set(i, plugin.getLang().get(p, "menus.killsoundsselector.hasBuy"));
-                        } else if (isBuy) {
-                            if (plugin.getAdm().getCoins(p) > price) {
+                        } else if(isBuy){
+                            if(plugin.getAdm().getCoins(p) > price){
                                 lore.set(i, plugin.getLang().get(p, "menus.killsoundsselector.buy"));
                             } else {
                                 lore.set(i, plugin.getLang().get(p, "menus.killsoundsselector.noMoney"));
                             }
-                        } else if (needPermToBuy) {
-                            if (plugin.getAdm().getCoins(p) > price) {
+                        } else if(needPermToBuy){
+                            if(plugin.getAdm().getCoins(p) > price){
                                 lore.set(i, plugin.getLang().get(p, "menus.killsoundsselector.buy"));
                             } else {
                                 lore.set(i, plugin.getLang().get(p, "menus.killsoundsselector.noMoney"));
@@ -115,10 +116,10 @@ public class KillSound extends Cosmetic {
         icon.setItemMeta(iconM);
         return NBTEditor.set(icon, id, "ULTRASKYWARS", "KILLSOUND");
     }
-
+    
     public void execute(Player k, Player d) {
         k.playSound(k.getLocation(), sound, getVol1(), getVol2());
         d.playSound(d.getLocation(), sound, getVol1(), getVol2());
     }
-
+    
 }

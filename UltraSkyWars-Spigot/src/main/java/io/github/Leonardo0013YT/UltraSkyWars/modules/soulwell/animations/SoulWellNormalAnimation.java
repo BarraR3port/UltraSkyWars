@@ -20,7 +20,7 @@ import org.bukkit.scheduler.BukkitTask;
 import java.util.ArrayList;
 
 public class SoulWellNormalAnimation implements SoulWellAnimation {
-
+    
     private final Inventory inv;
     private final ItemStack black;
     private final InjectionSoulWell is;
@@ -28,11 +28,11 @@ public class SoulWellNormalAnimation implements SoulWellAnimation {
     private final UltraSkyWars plugin;
     private final SoulWellRow row;
     private final Player p;
-    private ItemStack orange;
-    private int executes;
     private final Location loc;
     private final ArrayList<BukkitTask> tasks = new ArrayList<>();
-
+    private ItemStack orange;
+    private int executes;
+    
     public SoulWellNormalAnimation(UltraSkyWars plugin, InjectionSoulWell is, SoulWellSession sws, Player p, SoulWellRow row, Location loc) {
         this.plugin = plugin;
         this.inv = Bukkit.createInventory(null, 45, plugin.getLang().get(null, "menus.soulwellmenu.title"));
@@ -43,23 +43,23 @@ public class SoulWellNormalAnimation implements SoulWellAnimation {
         this.p = p;
         this.loc = loc;
     }
-
+    
     @Override
     public void execute() {
-        for (int i : row.getGlass()) {
+        for ( int i : row.getGlass() ){
             inv.setItem(i, black);
         }
         p.openInventory(inv);
         BukkitTask task = new BukkitRunnable() {
             @Override
             public void run() {
-                if (executes == 21) {
+                if(executes == 21){
                     executes = 0;
                     executePhase2();
                     cancel();
                     return;
                 }
-                for (SoulWellPath path : row.getPaths()) {
+                for ( SoulWellPath path : row.getPaths() ){
                     ItemStack fr = inv.getItem(path.getStart());
                     ItemStack sc = inv.getItem(path.getSecond());
                     ItemStack tr = inv.getItem(path.getThree());
@@ -72,8 +72,8 @@ public class SoulWellNormalAnimation implements SoulWellAnimation {
                 }
                 executes++;
                 CustomSound.SOULWELL.reproduce(p);
-                for (int i = 0; i < inv.getSize(); i++) {
-                    if (inv.getItem(i) == null || inv.getItem(i).getType().name().endsWith("STAINED_GLASS_PANE")) {
+                for ( int i = 0; i < inv.getSize(); i++ ){
+                    if(inv.getItem(i) == null || inv.getItem(i).getType().name().endsWith("STAINED_GLASS_PANE")){
                         inv.setItem(i, is.getSwm().getRandomGlass());
                     }
                 }
@@ -81,18 +81,18 @@ public class SoulWellNormalAnimation implements SoulWellAnimation {
         }.runTaskTimer(plugin, 3, 3);
         tasks.add(task);
     }
-
+    
     private void executePhase2() {
         BukkitTask task = new BukkitRunnable() {
             @Override
             public void run() {
-                if (executes == 7) {
+                if(executes == 7){
                     executes = 0;
                     executePhase3();
                     cancel();
                     return;
                 }
-                for (SoulWellPath path : row.getPaths()) {
+                for ( SoulWellPath path : row.getPaths() ){
                     ItemStack fr = inv.getItem(path.getStart());
                     ItemStack sc = inv.getItem(path.getSecond());
                     ItemStack tr = inv.getItem(path.getThree());
@@ -105,8 +105,8 @@ public class SoulWellNormalAnimation implements SoulWellAnimation {
                 }
                 executes++;
                 CustomSound.SOULWELL.reproduce(p);
-                for (int i = 0; i < inv.getSize(); i++) {
-                    if (inv.getItem(i) == null || inv.getItem(i).getType().name().endsWith("STAINED_GLASS_PANE")) {
+                for ( int i = 0; i < inv.getSize(); i++ ){
+                    if(inv.getItem(i) == null || inv.getItem(i).getType().name().endsWith("STAINED_GLASS_PANE")){
                         inv.setItem(i, is.getSwm().getRandomGlass());
                     }
                 }
@@ -114,14 +114,14 @@ public class SoulWellNormalAnimation implements SoulWellAnimation {
         }.runTaskTimer(plugin, 6, 6);
         tasks.add(task);
     }
-
+    
     private void executePhase3() {
         BukkitTask task = new BukkitRunnable() {
             @Override
             public void run() {
-                if (executes == 4) {
+                if(executes == 4){
                     executes = 0;
-                    for (SoulWellPath path : row.getPaths()) {
+                    for ( SoulWellPath path : row.getPaths() ){
                         sws.executeReward(p, inv.getItem(path.getThree()));
                     }
                     sws.firework(loc.clone().add(0.5, -1, 0.5));
@@ -136,7 +136,7 @@ public class SoulWellNormalAnimation implements SoulWellAnimation {
                     cancel();
                     return;
                 }
-                for (SoulWellPath path : row.getPaths()) {
+                for ( SoulWellPath path : row.getPaths() ){
                     ItemStack fr = inv.getItem(path.getStart());
                     ItemStack sc = inv.getItem(path.getSecond());
                     ItemStack tr = inv.getItem(path.getThree());
@@ -149,8 +149,8 @@ public class SoulWellNormalAnimation implements SoulWellAnimation {
                 }
                 executes++;
                 CustomSound.SOULWELL.reproduce(p);
-                for (int i = 0; i < inv.getSize(); i++) {
-                    if (inv.getItem(i) == null || inv.getItem(i).getType().name().endsWith("STAINED_GLASS_PANE")) {
+                for ( int i = 0; i < inv.getSize(); i++ ){
+                    if(inv.getItem(i) == null || inv.getItem(i).getType().name().endsWith("STAINED_GLASS_PANE")){
                         inv.setItem(i, is.getSwm().getRandomGlass());
                     }
                 }
@@ -158,15 +158,15 @@ public class SoulWellNormalAnimation implements SoulWellAnimation {
         }.runTaskTimer(plugin, 10, 10);
         tasks.add(task);
     }
-
+    
     @Override
     public void cancel(Player p) {
-        for (BukkitTask bt : tasks) {
-            if (bt == null) continue;
+        for ( BukkitTask bt : tasks ){
+            if(bt == null) continue;
             bt.cancel();
         }
     }
-
+    
     @Override
     public Inventory getInv() {
         return inv;

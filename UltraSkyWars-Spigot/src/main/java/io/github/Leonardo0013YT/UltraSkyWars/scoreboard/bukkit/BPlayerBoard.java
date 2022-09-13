@@ -15,84 +15,84 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class BPlayerBoard implements PlayerBoard<String, Integer, String> {
-
+    
     private final Player player;
     private Scoreboard scoreboard;
-
+    
     private String name;
-
+    
     private Objective objective;
     private Objective buffer;
-
+    
     private ConcurrentHashMap<Integer, String> lines = new ConcurrentHashMap<>();
-
+    
     private boolean deleted = false;
-
+    
     public BPlayerBoard(Player player, String name) {
         this(player, null, name);
     }
-
+    
     public BPlayerBoard(Player player, Scoreboard scoreboard, String name) {
         this.player = player;
         this.scoreboard = scoreboard;
-
-        if (this.scoreboard == null) {
+        
+        if(this.scoreboard == null){
             Scoreboard sb = player.getScoreboard();
-
-            if (sb == null || sb == Bukkit.getScoreboardManager().getMainScoreboard())
+            
+            if(sb == null || sb == Bukkit.getScoreboardManager().getMainScoreboard())
                 sb = Bukkit.getScoreboardManager().getNewScoreboard();
-
+            
             this.scoreboard = sb;
         }
-
+        
         this.name = name;
-
+        
         String subName = player.getName().length() <= 14
                 ? player.getName()
                 : player.getName().substring(0, 14);
-
+        
         this.objective = this.scoreboard.getObjective("sb" + subName);
         this.buffer = this.scoreboard.getObjective("bf" + subName);
-
-        if (this.objective == null)
+        
+        if(this.objective == null)
             this.objective = this.scoreboard.registerNewObjective("sb" + subName, "dummy");
-        if (this.buffer == null)
+        if(this.buffer == null)
             this.buffer = this.scoreboard.registerNewObjective("bf" + subName, "dummy");
-
+        
         this.objective.setDisplayName(name);
         sendObjective(this.objective, ObjectiveMode.CREATE);
         sendObjectiveDisplay(this.objective);
-
+        
         this.buffer.setDisplayName(name);
         sendObjective(this.buffer, ObjectiveMode.CREATE);
-
+        
         this.player.setScoreboard(this.scoreboard);
     }
-
+    
     @Override
     public String get(Integer score) {
-        if (this.deleted)
+        if(this.deleted)
             throw new IllegalStateException("The PlayerBoard is deleted!");
-
+        
         return this.lines.get(score);
     }
-
+    
     @Override
     public void set(String show, Integer score) {
-        if (this.deleted)
+        if(this.deleted)
             throw new IllegalStateException("The PlayerBoard is deleted!");
-
+        
         String line = getNoDup(score) + show;
         String name = (line.length() > 34) ? line.substring(0, 34) : line;
         String oldName = this.lines.get(score);
-
-        if (name.equals(oldName))
+        
+        if(name.equals(oldName))
             return;
-
+        
         this.lines.entrySet().removeIf(entry -> entry.getValue().equals(name));
-
-        if (oldName != null) {
-            if (NMS.getVersion().getMajor().equals("1.7")) {
+        
+        if(oldName != null){
+            if(NMS.getVersion().getMajor().equals("1.7")){
                 sendScore(this.objective, oldName, score, true);
                 sendScore(this.objective, name, score, false);
             } else {
@@ -108,80 +108,80 @@ public class BPlayerBoard implements PlayerBoard<String, Integer, String> {
         }
         this.lines.put(score, name);
     }
-
+    
     @Override
     public void setAll(String... lines) {
-        if (this.deleted)
+        if(this.deleted)
             throw new IllegalStateException("The PlayerBoard is deleted!");
-
-        for (int i = 0; i < lines.length; i++) {
+        
+        for ( int i = 0; i < lines.length; i++ ){
             String line = lines[i];
             set(line, lines.length - i);
         }
-
+        
         Set<Integer> scores = this.lines.keySet();
-        for (int score : scores) {
-            if (score <= 0 || score > lines.length) {
+        for ( int score : scores ){
+            if(score <= 0 || score > lines.length){
                 remove(score);
             }
         }
     }
-
+    
     @Override
     public void clear() {
         this.lines.keySet().forEach(this::remove);
         this.lines.clear();
     }
-
+    
     private void swapBuffers() {
         sendObjectiveDisplay(this.buffer);
         Objective temp = this.buffer;
         this.buffer = this.objective;
         this.objective = temp;
     }
-
+    
     private void sendObjective(Objective obj, ObjectiveMode mode) {
         try {
             Object objHandle = NMS.getHandle(obj);
             Object packetObj = NMS.PACKET_OBJ.newInstance(objHandle, mode.ordinal());
             NMS.sendPacket(packetObj, player);
-        } catch (InstantiationException | IllegalAccessException
+        } catch(InstantiationException | IllegalAccessException
                 | InvocationTargetException | NoSuchMethodException ignored) {
         }
     }
-
+    
     private void sendObjectiveDisplay(Objective obj) {
         try {
             Object objHandle = NMS.getHandle(obj);
             Object packet = NMS.PACKET_DISPLAY.newInstance(1, objHandle);
             NMS.sendPacket(packet, player);
-        } catch (InstantiationException | IllegalAccessException
+        } catch(InstantiationException | IllegalAccessException
                 | InvocationTargetException | NoSuchMethodException ignored) {
-
+            
         }
     }
-
+    
     @SuppressWarnings({"unchecked", "rawtypes"})
     private void sendScore(Objective obj, String name, int score, boolean remove) {
         try {
             Object sbHandle = NMS.getHandle(scoreboard);
             Object objHandle = NMS.getHandle(obj);
-
+            
             Object sbScore = NMS.SB_SCORE.newInstance(sbHandle, objHandle, name);
-
+            
             NMS.SB_SCORE_SET.invoke(sbScore, score);
             Map scores = (Map) NMS.PLAYER_SCORES.get(sbHandle);
-
-            if (remove) {
-                if (scores.containsKey(name))
+            
+            if(remove){
+                if(scores.containsKey(name))
                     ((Map) scores.get(name)).remove(objHandle);
             } else {
-                if (!scores.containsKey(name))
+                if(!scores.containsKey(name))
                     scores.put(name, new HashMap());
                 ((Map) scores.get(name)).put(objHandle, sbScore);
             }
-
-            switch (NMS.getVersion().getMajor()) {
+            
+            switch(NMS.getVersion().getMajor()) {
                 case "1.7": {
                     Object packet = NMS.PACKET_SCORE.newInstance(sbScore, remove ? 1 : 0);
                     NMS.sendPacket(packet, player);
@@ -193,7 +193,7 @@ public class BPlayerBoard implements PlayerBoard<String, Integer, String> {
                 case "1.11":
                 case "1.12": {
                     Object packet;
-                    if (remove) {
+                    if(remove){
                         packet = NMS.PACKET_SCORE_REMOVE.newInstance(name, objHandle);
                     } else {
                         packet = NMS.PACKET_SCORE.newInstance(sbScore);
@@ -207,25 +207,25 @@ public class BPlayerBoard implements PlayerBoard<String, Integer, String> {
                     break;
                 }
             }
-        } catch (InstantiationException | IllegalAccessException
+        } catch(InstantiationException | IllegalAccessException
                 | InvocationTargetException | NoSuchMethodException ignored) {
         }
     }
-
+    
     @Override
     public void remove(Integer score) {
-        if (this.deleted)
+        if(this.deleted)
             throw new IllegalStateException("The PlayerBoard is deleted!");
         String name = this.lines.get(score);
-        if (name == null)
+        if(name == null)
             return;
         this.scoreboard.resetScores(name);
         this.lines.remove(score);
     }
-
+    
     @Override
     public void delete() {
-        if (this.deleted)
+        if(this.deleted)
             return;
         Netherboard.instance().removeBoard(player);
         sendObjective(this.objective, ObjectiveMode.REMOVE);
@@ -237,89 +237,89 @@ public class BPlayerBoard implements PlayerBoard<String, Integer, String> {
         this.lines = null;
         this.deleted = true;
     }
-
+    
     @Override
     public Map<Integer, String> getLines() {
-        if (this.deleted)
+        if(this.deleted)
             throw new IllegalStateException("The PlayerBoard is deleted!");
-
+        
         return new HashMap<>(lines);
     }
-
+    
     @Override
     public String getName() {
         return name;
     }
-
+    
     @Override
     public void setName(String name) {
-        if (this.deleted)
+        if(this.deleted)
             throw new IllegalStateException("The PlayerBoard is deleted!");
-
+        
         this.name = name;
         this.objective.setDisplayName(name);
         this.buffer.setDisplayName(name);
         sendObjective(this.objective, ObjectiveMode.UPDATE);
         sendObjective(this.buffer, ObjectiveMode.UPDATE);
     }
-
+    
     public Player getPlayer() {
         return player;
     }
-
+    
     public Scoreboard getScoreboard() {
         return scoreboard;
     }
-
+    
     public String getNoDup(int line) {
-        if (line == 0) {
+        if(line == 0){
             return "§a";
         }
-        if (line == 1) {
+        if(line == 1){
             return "§d";
         }
-        if (line == 2) {
+        if(line == 2){
             return "§b";
         }
-        if (line == 3) {
+        if(line == 3){
             return "§c";
         }
-        if (line == 4) {
+        if(line == 4){
             return "§0";
         }
-        if (line == 5) {
+        if(line == 5){
             return "§1";
         }
-        if (line == 6) {
+        if(line == 6){
             return "§2";
         }
-        if (line == 7) {
+        if(line == 7){
             return "§3";
         }
-        if (line == 8) {
+        if(line == 8){
             return "§4";
         }
-        if (line == 9) {
+        if(line == 9){
             return "§5";
         }
-        if (line == 10) {
+        if(line == 10){
             return "§6";
         }
-        if (line == 11) {
+        if(line == 11){
             return "§7";
         }
-        if (line == 12) {
+        if(line == 12){
             return "§8";
         }
-        if (line == 13) {
+        if(line == 13){
             return "§9";
         }
-        if (line == 14) {
+        if(line == 14){
             return "§e";
         }
         return "§f";
     }
-
+    
     private enum ObjectiveMode {CREATE, REMOVE, UPDATE}
-
+    
 }

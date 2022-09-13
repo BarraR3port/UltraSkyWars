@@ -58,10 +58,10 @@ public class KillEffectHead implements KillEffect, Cloneable {
                 }
                 Location loc = armor.getLocation().clone().add(0, 0.3 * pased, 0);
                 armor.teleport(loc);
-    
+                
                 loc.getWorld().playEffect(loc, Effect.SMOKE, 1);
                 loc.getWorld().playEffect(loc, Effect.LAVADRIP, 1);
-    
+                
                 CustomSound.KILLEFFECTS_HEAD.reproduce(p);
             }
         }.runTaskTimer(plugin, 0, 2);

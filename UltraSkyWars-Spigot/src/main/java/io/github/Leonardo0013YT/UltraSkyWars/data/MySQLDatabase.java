@@ -23,22 +23,22 @@ import java.util.List;
 import java.util.UUID;
 
 public class MySQLDatabase implements Database {
-
+    
     private final static String SAVE = "UPDATE UltraSkyWars SET Data=?, Kills=?, Wins=?, Deaths=?, Coins=?, Elo=? WHERE UUID=?";
     private final static HashMap<UUID, SWPlayer> players = new HashMap<>();
     private static boolean enabled;
     private final UltraSkyWars plugin;
     private HikariDataSource hikari;
     private Connection connection;
-
+    
     public MySQLDatabase(UltraSkyWars plugin) {
         this.plugin = plugin;
         enabled = plugin.getConfig().getBoolean("mysql.enabled");
         connect();
     }
-
+    
     public void connect() {
-        if (enabled) {
+        if(enabled){
             int port = plugin.getConfig().getInt("mysql.port");
             String ip = plugin.getConfig().getString("mysql.host");
             String database = plugin.getConfig().getString("mysql.database");
@@ -65,7 +65,7 @@ public class MySQLDatabase implements Database {
             config.addDataSourceProperty("useUnicode", "true");
             config.addDataSourceProperty("useSSL", false);
             config.addDataSourceProperty("tcpKeepAlive", true);
-            config.setPoolName("UltraSkyWars " + UUID.randomUUID().toString());
+            config.setPoolName("UltraSkyWars " + UUID.randomUUID());
             config.setMaxLifetime(Long.MAX_VALUE);
             config.setMinimumIdle(0);
             config.setIdleTimeout(30000L);
@@ -76,10 +76,10 @@ public class MySQLDatabase implements Database {
             plugin.sendLogMessage("§eMySQL connected correctly.");
         } else {
             File DataFile = new File(plugin.getDataFolder(), "/UltraSkyWars.db");
-            if (!DataFile.exists()) {
+            if(!DataFile.exists()){
                 try {
                     DataFile.createNewFile();
-                } catch (IOException ex) {
+                } catch(IOException ex) {
                     ex.printStackTrace();
                     Bukkit.getPluginManager().disablePlugin(plugin);
                 }
@@ -90,47 +90,47 @@ public class MySQLDatabase implements Database {
                     connection = DriverManager.getConnection("jdbc:sqlite:" + DataFile);
                     plugin.sendLogMessage("§eSQLLite connected correctly.");
                     createTable();
-                } catch (SQLException ex2) {
+                } catch(SQLException ex2) {
                     ex2.printStackTrace();
                     Bukkit.getPluginManager().disablePlugin(plugin);
                 }
-            } catch (ClassNotFoundException ex3) {
+            } catch(ClassNotFoundException ex3) {
                 ex3.printStackTrace();
                 Bukkit.getPluginManager().disablePlugin(plugin);
             }
         }
     }
-
+    
     @Override
     public HashMap<UUID, SWPlayer> getPlayers() {
         return players;
     }
-
+    
     public void close() {
-        if (enabled) {
-            if (hikari != null) {
+        if(enabled){
+            if(hikari != null){
                 hikari.close();
             }
         } else {
-            if (connection != null) {
+            if(connection != null){
                 try {
                     connection.close();
-                } catch (SQLException e) {
+                } catch(SQLException e) {
                     e.printStackTrace();
                 }
             }
         }
     }
-
+    
     private void createTable() {
-        if (enabled) {
+        if(enabled){
             try {
                 Connection connection = hikari.getConnection();
                 Statement statement = connection.createStatement();
                 statement.executeUpdate("CREATE TABLE IF NOT EXISTS UltraSkyWars(UUID varchar(36) primary key, Name varchar(20), Data LONGTEXT, Kills INT, Wins INT, Deaths INT, Coins INT, Elo INT, UNIQUE(UUID));");
                 statement.executeUpdate("CREATE TABLE IF NOT EXISTS Multipliers(ID INT AUTO_INCREMENT, Type varchar(10), Name varchar(20), Amount DOUBLE, Ending DATETIME, PRIMARY KEY(ID));");
                 close(connection, statement, null);
-            } catch (SQLException e) {
+            } catch(SQLException e) {
                 e.printStackTrace();
             }
         } else {
@@ -139,12 +139,12 @@ public class MySQLDatabase implements Database {
                 statement.executeUpdate("CREATE TABLE IF NOT EXISTS UltraSkyWars(UUID varchar(36) primary key, Name varchar(20), Data LONGTEXT, Kills INT, Wins INT, Deaths INT, Coins INT, Elo INT, UNIQUE(UUID));"
                         + "CREATE TABLE IF NOT EXISTS Multipliers(ID INT AUTO_INCREMENT, Type varchar(10), Name varchar(20), Amount DOUBLE, Ending DATETIME, PRIMARY KEY(ID));");
                 close(connection, statement, null);
-            } catch (SQLException e) {
+            } catch(SQLException e) {
                 e.printStackTrace();
             }
         }
     }
-
+    
     @Override
     public int getRanking(UUID uuid) {
         // SELECT UUID, Elo, (SELECT COUNT(*)+1 FROM UltraSkyWars WHERE Elo>x.Elo) AS Ranking FROM UltraSkyWars x WHERE x.UUID = '3f1f95d8-fd39-11ea-ba2b-d05099d6ad05';
@@ -154,15 +154,15 @@ public class MySQLDatabase implements Database {
             Connection con = getConnection();
             PreparedStatement select = con.prepareStatement("SELECT UUID, Elo, (SELECT COUNT(*)+1 FROM UltraSkyWars WHERE Elo>x.Elo) AS Ranking FROM UltraSkyWars x WHERE x.UUID = '" + uuid.toString() + "';");
             ResultSet result = select.executeQuery();
-            if (result.next()) {
+            if(result.next()){
                 return result.getInt("Ranking");
             }
             close(con, select, result);
-        } catch (SQLException ignored) {
+        } catch(SQLException ignored) {
         }
         return 0;
     }
-
+    
     @Override
     public void loadMultipliers(CallBackAPI<Boolean> request) {
         plugin.getMm().clear();
@@ -183,20 +183,20 @@ public class MySQLDatabase implements Database {
                     }
                     close(connection, select, result);
                     request.done(true);
-                } catch (SQLException e) {
+                } catch(SQLException e) {
                     request.done(false);
                 }
             }
         }.runTaskAsynchronously(plugin);
     }
-
+    
     @Override
     public void createMultiplier(String type, String name, double amount, long ending, CallBackAPI<Boolean> request) {
         Date date = new Date(ending);
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (enabled) {
+                if(enabled){
                     try {
                         Connection connection = hikari.getConnection();
                         String MULTI = "INSERT INTO Multipliers VALUES(?,?,?,?) ON DUPLICATE KEY UPDATE Name=?;";
@@ -210,7 +210,7 @@ public class MySQLDatabase implements Database {
                         close(connection, insert, null);
                         plugin.sendDebugMessage("Se ha creado un Multiplicador:", "§aCantidad: §b" + amount, "§aNombre: §b" + name, "§aFin: §b" + new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(date));
                         request.done(true);
-                    } catch (SQLException e) {
+                    } catch(SQLException e) {
                         request.done(false);
                     }
                 } else {
@@ -226,14 +226,14 @@ public class MySQLDatabase implements Database {
                         close(connection, insert, null);
                         plugin.sendDebugMessage("Se ha creado un Multiplicador:", "§aCantidad: §b" + amount, "§aNombre: §b" + name, "§aFin: §b" + new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(date));
                         request.done(true);
-                    } catch (SQLException e) {
+                    } catch(SQLException e) {
                         request.done(false);
                     }
                 }
             }
         }.runTaskAsynchronously(plugin);
     }
-
+    
     @Override
     public boolean removeMultiplier(int id) {
         try {
@@ -244,12 +244,12 @@ public class MySQLDatabase implements Database {
             boolean b = delete.execute();
             close(connection, delete, null);
             return b;
-        } catch (SQLException e) {
+        } catch(SQLException e) {
             e.printStackTrace();
         }
         return false;
     }
-
+    
     @Override
     public void loadTopElo() {
         Connection connection;
@@ -268,11 +268,11 @@ public class MySQLDatabase implements Database {
             }
             plugin.getTop().addTop(TopType.ELO, tops);
             close(connection, select, result);
-        } catch (SQLException e) {
+        } catch(SQLException e) {
             e.printStackTrace();
         }
     }
-
+    
     @Override
     public void loadTopCoins() {
         Connection connection;
@@ -291,11 +291,11 @@ public class MySQLDatabase implements Database {
             }
             plugin.getTop().addTop(TopType.COINS, tops);
             close(connection, select, result);
-        } catch (SQLException e) {
+        } catch(SQLException e) {
             e.printStackTrace();
         }
     }
-
+    
     @Override
     public void loadTopKills() {
         Connection connection;
@@ -314,11 +314,11 @@ public class MySQLDatabase implements Database {
             }
             plugin.getTop().addTop(TopType.KILLS, tops);
             close(connection, select, result);
-        } catch (SQLException e) {
+        } catch(SQLException e) {
             e.printStackTrace();
         }
     }
-
+    
     @Override
     public void loadTopWins() {
         Connection connection;
@@ -337,11 +337,11 @@ public class MySQLDatabase implements Database {
             }
             plugin.getTop().addTop(TopType.WINS, tops);
             close(connection, select, result);
-        } catch (SQLException e) {
+        } catch(SQLException e) {
             e.printStackTrace();
         }
     }
-
+    
     @Override
     public void loadTopDeaths() {
         Connection connection;
@@ -360,18 +360,18 @@ public class MySQLDatabase implements Database {
             }
             plugin.getTop().addTop(TopType.DEATHS, tops);
             close(connection, select, result);
-        } catch (SQLException e) {
+        } catch(SQLException e) {
             e.printStackTrace();
         }
     }
-
+    
     @Override
     public void loadPlayer(final Player p) {
         new BukkitRunnable() {
             @Override
             public void run() {
                 String SELECT = "SELECT * FROM UltraSkyWars WHERE UUID=?";
-                if (enabled) {
+                if(enabled){
                     Connection connection = null;
                     PreparedStatement insert = null;
                     PreparedStatement select = null;
@@ -386,15 +386,15 @@ public class MySQLDatabase implements Database {
                         insert.execute();
                         select.setString(1, p.getUniqueId().toString());
                         result = select.executeQuery();
-                        if (result.next()) {
+                        if(result.next()){
                             String data = result.getString("Data");
-                            if (data != null) {
+                            if(data != null){
                                 addPlayer(p, Utils.fromGson(data));
                             } else {
                                 addPlayer(p, new SWPlayer());
                             }
                         }
-                    } catch (SQLException ignored) {
+                    } catch(SQLException ignored) {
                     } finally {
                         close(connection, insert, result);
                         close(null, select, null);
@@ -406,7 +406,7 @@ public class MySQLDatabase implements Database {
                         PreparedStatement select = connection.prepareStatement(SELECT);
                         select.setString(1, p.getUniqueId().toString());
                         ResultSet result = select.executeQuery();
-                        if (result.next()) {
+                        if(result.next()){
                             addPlayer(p, Utils.fromGson(result.getString("Data")));
                         } else {
                             setValues(insert, p);
@@ -414,19 +414,19 @@ public class MySQLDatabase implements Database {
                             PreparedStatement select2 = connection.prepareStatement(SELECT);
                             select2.setString(1, p.getUniqueId().toString());
                             ResultSet result2 = select2.executeQuery();
-                            if (result2.next())
+                            if(result2.next())
                                 addPlayer(p, Utils.fromGson(result2.getString("Data")));
                             close(connection, select2, result2);
                         }
                         close(connection, insert, result);
                         close(connection, select, null);
-                    } catch (SQLException ignored) {
+                    } catch(SQLException ignored) {
                     }
                 }
             }
         }.runTaskLaterAsynchronously(plugin, 10);
     }
-
+    
     private void setValues(PreparedStatement insert, Player p) throws SQLException {
         insert.setString(1, p.getUniqueId().toString());
         insert.setString(2, p.getName());
@@ -437,24 +437,24 @@ public class MySQLDatabase implements Database {
         insert.setInt(7, 0);
         insert.setInt(8, 0);
     }
-
+    
     @Override
     public void savePlayer(final Player p) {
         SWPlayer ps = players.get(p.getUniqueId());
-        if (ps == null) return;
+        if(ps == null) return;
         new BukkitRunnable() {
             @Override
             public void run() {
                 try {
                     saveValues(ps, p.getUniqueId());
                     removePlayer(p);
-                } catch (SQLException e) {
+                } catch(SQLException e) {
                     e.printStackTrace();
                 }
             }
         }.runTaskAsynchronously(plugin);
     }
-
+    
     private void saveValues(SWPlayer ps, UUID p) throws SQLException {
         Connection connection = getConnection();
         PreparedStatement statement = connection.prepareStatement(SAVE);
@@ -468,7 +468,7 @@ public class MySQLDatabase implements Database {
         statement.execute();
         close(connection, statement, null);
     }
-
+    
     @Override
     public void saveAll(CallBackAPI<Boolean> done) {
         new BukkitRunnable() {
@@ -476,10 +476,10 @@ public class MySQLDatabase implements Database {
             public void run() {
                 Bukkit.getOnlinePlayers().forEach(p -> {
                     SWPlayer ps = players.get(p.getUniqueId());
-                    if (ps == null) return;
+                    if(ps == null) return;
                     try {
                         saveValues(ps, p.getUniqueId());
-                    } catch (SQLException e) {
+                    } catch(SQLException e) {
                         e.printStackTrace();
                     }
                 });
@@ -487,22 +487,22 @@ public class MySQLDatabase implements Database {
             }
         }.runTaskAsynchronously(plugin);
     }
-
+    
     @Override
     public void savePlayerSync(UUID p) {
         SWPlayer ps = players.get(p);
-        if (ps == null) return;
+        if(ps == null) return;
         try {
             saveValues(ps, p);
             removePlayer(p);
-        } catch (SQLException e) {
+        } catch(SQLException e) {
             e.printStackTrace();
         }
     }
-
+    
     @Override
     public void createPlayer(UUID uuid, String name, SWPlayer ps) {
-        if (enabled) {
+        if(enabled){
             try {
                 Connection connection = hikari.getConnection();
                 String INSERT = "INSERT INTO UltraSkyWars VALUES(?,?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE Name=?";
@@ -519,7 +519,7 @@ public class MySQLDatabase implements Database {
                 insert.execute();
                 close(connection, insert, null);
                 plugin.sendLogMessage("§aCompleted migration of §b" + name + "§a! §dSkyWars Cookloco §7to §6UltraSkyWars");
-            } catch (SQLException ignored) {
+            } catch(SQLException ignored) {
             }
         } else {
             try {
@@ -536,51 +536,51 @@ public class MySQLDatabase implements Database {
                 insert.executeUpdate();
                 close(connection, insert, null);
                 plugin.sendLogMessage("§aCompleted migration of §b" + name + "§a! §dSkyWars Cookloco §7to §6UltraSkyWars");
-            } catch (SQLException ignored) {
+            } catch(SQLException ignored) {
             }
         }
     }
-
+    
     @Override
     public Connection getConnection() {
-        if (enabled) {
+        if(enabled){
             try {
                 return connection = hikari.getConnection();
-            } catch (SQLException ignored) {
+            } catch(SQLException ignored) {
             }
         }
         return connection;
     }
-
+    
     private void close(Connection connection, Statement statement, ResultSet result) {
-        if (enabled && connection != null) {
+        if(enabled && connection != null){
             try {
                 connection.close();
-            } catch (SQLException e) {
+            } catch(SQLException e) {
                 e.printStackTrace();
             }
         }
-        if (statement != null) {
+        if(statement != null){
             try {
                 statement.close();
-            } catch (SQLException e) {
+            } catch(SQLException e) {
                 e.printStackTrace();
             }
         }
-        if (result != null) {
+        if(result != null){
             try {
                 result.close();
-            } catch (SQLException e) {
+            } catch(SQLException e) {
                 e.printStackTrace();
             }
         }
     }
-
+    
     @Override
     public void clearStats(Player p) {
         new BukkitRunnable() {
             int correct = 0, failed = 0;
-
+            
             @Override
             public void run() {
                 long start = System.currentTimeMillis();
@@ -600,7 +600,7 @@ public class MySQLDatabase implements Database {
                         saveStatement.execute();
                         correct++;
                     }
-                } catch (Exception e) {
+                } catch(Exception e) {
                     failed++;
                 }
                 long end = System.currentTimeMillis();
@@ -608,24 +608,24 @@ public class MySQLDatabase implements Database {
             }
         }.runTaskAsynchronously(plugin);
     }
-
+    
     private void addPlayer(Player p, SWPlayer sw) {
-        if (p == null || !p.isOnline()) return;
+        if(p == null || !p.isOnline()) return;
         players.put(p.getUniqueId(), sw);
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> Bukkit.getPluginManager().callEvent(new USWPlayerLoadEvent(p)));
     }
-
+    
     private void removePlayer(UUID p) {
         players.remove(p);
     }
-
+    
     private void removePlayer(Player p) {
         players.remove(p.getUniqueId());
     }
-
+    
     @Override
     public SWPlayer getSWPlayer(Player p) {
-        if (p == null || !p.isOnline() || !players.containsKey(p.getUniqueId())) {
+        if(p == null || !p.isOnline() || !players.containsKey(p.getUniqueId())){
             return new SWPlayer();
         }
         return players.get(p.getUniqueId());

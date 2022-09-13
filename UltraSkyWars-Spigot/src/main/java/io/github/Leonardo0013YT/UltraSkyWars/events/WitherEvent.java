@@ -9,9 +9,9 @@ import org.bukkit.entity.Wither;
 import org.bukkit.metadata.FixedMetadataValue;
 
 public class WitherEvent extends GameEvent {
-
+    
     private Wither wither;
-
+    
     public WitherEvent(UltraSkyWars plugin, int time) {
         this.time = time;
         this.reset = time;
@@ -22,7 +22,7 @@ public class WitherEvent extends GameEvent {
         this.title = plugin.getLang().get("titles." + name + ".title");
         this.subtitle = plugin.getLang().get("titles." + name + ".subtitle");
     }
-
+    
     public WitherEvent(WitherEvent e) {
         this.time = e.getReset();
         this.reset = e.getReset();
@@ -33,24 +33,24 @@ public class WitherEvent extends GameEvent {
         this.title = e.getTitle();
         this.subtitle = e.getSubTitle();
     }
-
+    
     @Override
     public void start(Game game) {
         wither = game.getSpectator().getWorld().spawn(game.getSpectator(), Wither.class);
         wither.setNoDamageTicks(999999999);
         wither.setMetadata("CUSTOM", new FixedMetadataValue(UltraSkyWars.get(), "CUSTOM"));
-        for (Player on : game.getCached()) {
+        for ( Player on : game.getCached() ){
             CustomSound.EVENTS_WITHER.reproduce(on);
         }
     }
-
+    
     @Override
     public void stop(Game game) {
-        if (wither != null) {
+        if(wither != null){
             wither.remove();
         }
     }
-
+    
     @Override
     public void reset() {
         this.time = this.reset;
@@ -58,10 +58,10 @@ public class WitherEvent extends GameEvent {
         this.type = "final";
         this.name = "wither";
     }
-
+    
     @Override
     public WitherEvent clone() {
         return new WitherEvent(this);
     }
-
+    
 }

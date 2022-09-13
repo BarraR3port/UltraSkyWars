@@ -18,14 +18,14 @@ import java.util.Map;
 import java.util.UUID;
 
 public class PreviewCosmetic {
-
-    private Location playerLocation;
-    private String type;
+    
+    private final Location playerLocation;
+    private final String type;
     private ArmorStand player;
-    private ArmorStand cosmetic;
-    private Location cosmeticLocation;
-    private HashMap<UUID, PreviewSession> preview = new HashMap<>();
-
+    private final ArmorStand cosmetic;
+    private final Location cosmeticLocation;
+    private final HashMap<UUID, PreviewSession> preview = new HashMap<>();
+    
     public PreviewCosmetic(String type, Location playerLocation, Location cosmeticLocation) {
         this.type = type;
         this.playerLocation = playerLocation;
@@ -33,9 +33,9 @@ public class PreviewCosmetic {
         this.cosmetic = Utils.getArmorStand(cosmeticLocation);
         this.cosmeticLocation = cosmeticLocation;
     }
-
+    
     public void addPreview(Player p) {
-        if (player == null || player.isDead()) {
+        if(player == null || player.isDead()){
             this.player = Utils.getArmorStand(playerLocation);
         }
         preview.put(p.getUniqueId(), new PreviewSession(0, p));
@@ -56,16 +56,16 @@ public class PreviewCosmetic {
             }
         }.runTaskLater(UltraSkyWars.get(), 5 * 20);
     }
-
+    
     public void removePreview(Player p) {
         PreviewSession ps = preview.get(p.getUniqueId());
         UltraSkyWars plugin = UltraSkyWars.get();
-        if (type.equals("balloon")) {
+        if(type.equals("balloon")){
             plugin.getVc().getNMS().destroy(p, ps.getEntityId());
         }
-        if (type.equals("glass")) {
+        if(type.equals("glass")){
             Glass glass = plugin.getCos().getGlass(ps.getId());
-            for (Map.Entry<Vector, GlassBlock> entry : glass.getPreview().entrySet()) {
+            for ( Map.Entry<Vector, GlassBlock> entry : glass.getPreview().entrySet() ){
                 Vector v = entry.getKey();
                 p.sendBlockChange(cosmeticLocation.clone().add(v), Material.AIR, (byte) 0);
             }
@@ -73,26 +73,26 @@ public class PreviewCosmetic {
         ps.reset();
         preview.remove(p.getUniqueId());
     }
-
+    
     public void execute(Player p, int id) {
         PreviewSession ps = preview.get(p.getUniqueId());
         ps.setId(id);
         UltraSkyWars plugin = UltraSkyWars.get();
-        if (type.equals("glass")) {
+        if(type.equals("glass")){
             Glass glass = plugin.getCos().getGlass(id);
-            if (glass.getPreview().isEmpty()) {
+            if(glass.getPreview().isEmpty()){
                 glass.setPreview(plugin.getWc().getEdit().getBlocks(glass.getSchematic()));
             }
-            for (Map.Entry<Vector, GlassBlock> entry : glass.getPreview().entrySet()) {
+            for ( Map.Entry<Vector, GlassBlock> entry : glass.getPreview().entrySet() ){
                 Vector v = entry.getKey();
                 GlassBlock g = entry.getValue();
                 p.sendBlockChange(cosmeticLocation.clone().add(v), g.getMaterial(), (byte) g.getData());
             }
         }
-        if (type.equals("balloon")) {
+        if(type.equals("balloon")){
             Balloon balloon = plugin.getCos().getBalloon(id);
             plugin.getVc().getNMS().spawn(p, cosmeticLocation, balloon.getActualHead()).forEach(ps::addEntityId);
         }
     }
-
+    
 }

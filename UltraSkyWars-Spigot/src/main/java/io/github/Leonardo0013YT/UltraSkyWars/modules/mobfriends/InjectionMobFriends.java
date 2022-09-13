@@ -7,21 +7,21 @@ import io.github.Leonardo0013YT.UltraSkyWars.modules.mobfriends.listeners.Target
 import org.bukkit.Bukkit;
 
 public class InjectionMobFriends implements Injection {
-
+    
     @Override
     public void loadInjection(UltraSkyWars main) {
         Bukkit.getServer().getPluginManager().registerEvents(new MobFriendsListener(main), main);
         Bukkit.getServer().getPluginManager().registerEvents(new TargetListener(main), main);
     }
-
+    
     @Override
     public void reload() {
-
+    
     }
-
+    
     @Override
     public void disable() {
-
+    
     }
-
+    
 }

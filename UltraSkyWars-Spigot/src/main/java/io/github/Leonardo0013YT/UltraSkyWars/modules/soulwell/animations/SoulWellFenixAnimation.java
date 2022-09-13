@@ -23,20 +23,20 @@ import java.util.Collection;
 import java.util.HashMap;
 
 public class SoulWellFenixAnimation implements SoulWellAnimation {
-
+    
     private final Inventory inv;
     private final InjectionSoulWell is;
     private final UltraSkyWars plugin;
     private final ItemStack orange;
     private final SoulWellSession sws;
-    private Blaze blaze;
     private final Player p;
     private final SoulWellRow row;
     private final Location loc;
-    private float lastVel;
     private final HashMap<Location, Material> backup = new HashMap<>();
     private final Collection<BukkitTask> tasks = new ArrayList<>();
-
+    private Blaze blaze;
+    private float lastVel;
+    
     public SoulWellFenixAnimation(UltraSkyWars plugin, InjectionSoulWell is, SoulWellSession sws, Player p, SoulWellRow row, Location loc) {
         this.plugin = plugin;
         this.inv = Bukkit.createInventory(null, 45, plugin.getLang().get(null, "menus.soulwellmenu.title"));
@@ -47,19 +47,19 @@ public class SoulWellFenixAnimation implements SoulWellAnimation {
         this.row = row;
         this.loc = loc;
     }
-
+    
     @Override
     public void execute() {
         p.openInventory(inv);
         BukkitTask task = new BukkitRunnable() {
             int i = 0;
-
+            
             @Override
             public void run() {
-                for (int r : row.getResult()) {
+                for ( int r : row.getResult() ){
                     inv.setItem(r, plugin.getLvl().getRandomReward().getIcon());
                 }
-                if (i < row.getFenix().length) {
+                if(i < row.getFenix().length){
                     int slot = row.getFenix()[i];
                     inv.setItem(slot, orange);
                     i++;
@@ -73,26 +73,26 @@ public class SoulWellFenixAnimation implements SoulWellAnimation {
         }.runTaskTimer(plugin, 2, 2);
         tasks.add(task);
     }
-
+    
     private void executeFenixAnimation2() {
         BukkitTask task = new BukkitRunnable() {
             int i = 0;
-
+            
             @Override
             public void run() {
-                if (i == 1 || i == 3 || i == 5 || i == 7) {
-                    for (int slot : row.getFenix()) {
+                if(i == 1 || i == 3 || i == 5 || i == 7){
+                    for ( int slot : row.getFenix() ){
                         inv.setItem(slot, null);
                     }
                     CustomSound.SOUL_ANIMATION_BLAZE_3.reproduce(p);
                 } else {
-                    for (int slot : row.getFenix()) {
+                    for ( int slot : row.getFenix() ){
                         inv.setItem(slot, orange);
                     }
                     CustomSound.SOUL_ANIMATION_BLAZE_4.reproduce(p);
                 }
                 i++;
-                if (i > 7) {
+                if(i > 7){
                     sws.setRolling(false);
                     lastVel = p.getWalkSpeed();
                     p.setWalkSpeed(0f);
@@ -103,12 +103,12 @@ public class SoulWellFenixAnimation implements SoulWellAnimation {
         }.runTaskTimer(plugin, 5, 5);
         tasks.add(task);
     }
-
+    
     private void executeFenixAnimation3() {
         sws.deleteHologram();
         BukkitTask task = new BukkitRunnable() {
             int i = 0;
-
+            
             @Override
             public void run() {
                 p.closeInventory();
@@ -121,7 +121,7 @@ public class SoulWellFenixAnimation implements SoulWellAnimation {
                 Location l7 = loc.clone().add(-1, -1, 1);
                 Location l8 = loc.clone().add(1, -1, -1);
                 ArrayList<Location> locs = new ArrayList<>(Arrays.asList(l1, l2, l3, l4, l5, l6, l7, l8));
-                if (i < locs.size()) {
+                if(i < locs.size()){
                     Location l = locs.get(i);
                     backup.put(l, l.getBlock().getType());
                     l.getBlock().setType(Material.NETHERRACK);
@@ -135,20 +135,20 @@ public class SoulWellFenixAnimation implements SoulWellAnimation {
         }.runTaskTimer(plugin, 5, 5);
         tasks.add(task);
     }
-
+    
     private void executeFenixAnimation4() {
         plugin.getEntities().add(blaze = loc.getWorld().spawn(loc.clone().add(0.5, 1, 0.5), Blaze.class));
         blaze.setNoDamageTicks(Integer.MAX_VALUE);
         BukkitTask task = new BukkitRunnable() {
             int i = 0;
-
+            
             @Override
             public void run() {
-                if (i < 3) {
+                if(i < 3){
                     new InstantFirework(FireworkEffect.builder().withColor(Color.RED).withFade(Color.ORANGE).with(FireworkEffect.Type.BURST).build(), loc.clone().add(0.5, 3.5, 0.5));
                 }
                 i++;
-                if (i >= 5) {
+                if(i >= 5){
                     cancel();
                     executeFenixAnimation5();
                 }
@@ -156,14 +156,14 @@ public class SoulWellFenixAnimation implements SoulWellAnimation {
         }.runTaskTimer(plugin, 10, 10);
         tasks.add(task);
     }
-
+    
     private void executeFenixAnimation5() {
         sws.setRolling(true);
         p.openInventory(inv);
-        for (int r : row.getResult()) {
+        for ( int r : row.getResult() ){
             inv.setItem(r, plugin.getLvl().getRandomReward().getIcon());
         }
-        for (int r : row.getResult()) {
+        for ( int r : row.getResult() ){
             CustomSound.SOUL_ANIMATION_BLAZE_6.reproduce(p);
             sws.executeReward(p, inv.getItem(r));
         }
@@ -172,7 +172,7 @@ public class SoulWellFenixAnimation implements SoulWellAnimation {
             public void run() {
                 p.setWalkSpeed(lastVel);
                 blaze.remove();
-                for (Location b : backup.keySet()) {
+                for ( Location b : backup.keySet() ){
                     b.getBlock().setType(backup.get(b));
                 }
                 sws.setRolling(false);
@@ -182,28 +182,28 @@ public class SoulWellFenixAnimation implements SoulWellAnimation {
             }
         }.runTaskLater(plugin, 20);
     }
-
+    
     @Override
     public void cancel(Player p) {
-        if (sws.isDeleted()) {
+        if(sws.isDeleted()){
             sws.recreateHologram();
         }
-        for (BukkitTask bt : tasks) {
-            if (bt == null) continue;
+        for ( BukkitTask bt : tasks ){
+            if(bt == null) continue;
             bt.cancel();
         }
         p.setWalkSpeed(lastVel);
-        if (blaze != null && !blaze.isDead()) {
+        if(blaze != null && !blaze.isDead()){
             blaze.remove();
         }
-        for (Location b : backup.keySet()) {
+        for ( Location b : backup.keySet() ){
             b.getBlock().setType(backup.get(b));
         }
     }
-
+    
     @Override
     public Inventory getInv() {
         return inv;
     }
-
+    
 }

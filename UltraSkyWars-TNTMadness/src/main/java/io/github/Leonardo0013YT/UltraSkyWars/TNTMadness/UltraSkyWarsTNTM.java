@@ -9,11 +9,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 @Getter
 public class UltraSkyWarsTNTM extends JavaPlugin {
-
+    
     private static UltraSkyWarsTNTM instance;
     private Settings tntLang;
     private ItemManager im;
-
+    
     @Override
     public void onEnable() {
         instance = this;
@@ -22,7 +22,7 @@ public class UltraSkyWarsTNTM extends JavaPlugin {
         getCommand("uswt").setExecutor(new TNTMadnessCMD(this));
         getServer().getPluginManager().registerEvents(new TNTListener(this), this);
     }
-
+    
     @Override
     public void onDisable() {
         

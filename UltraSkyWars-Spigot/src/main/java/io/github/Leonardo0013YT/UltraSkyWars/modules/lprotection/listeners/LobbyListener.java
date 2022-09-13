@@ -33,12 +33,12 @@ public class LobbyListener implements Listener {
     
     @EventHandler(priority = EventPriority.MONITOR)
     public void onJoin(PlayerJoinEvent e) {
-        if (injection.getCm().isHideJoinMessage()) {
+        if(injection.getCm().isHideJoinMessage()){
             e.setJoinMessage(null);
         }
-        if (!injection.getCm().isJoinTeleport()) return;
+        if(!injection.getCm().isJoinTeleport()) return;
         Player p = e.getPlayer();
-        if (plugin.getMainLobby() != null) {
+        if(plugin.getMainLobby() != null){
             p.teleport(plugin.getMainLobby());
         }
     }
@@ -46,7 +46,7 @@ public class LobbyListener implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         Player p = e.getPlayer();
-        if (injection.getCm().isHideQuitMessage()) {
+        if(injection.getCm().isHideQuitMessage()){
             e.setQuitMessage(null);
         }
         countdown.remove(p.getUniqueId());
@@ -60,37 +60,37 @@ public class LobbyListener implements Listener {
     
     @EventHandler
     public void onIgnite(BlockIgniteEvent e) {
-        if (check(e.getPlayer()) && injection.getCm().isIgniteProtect()) {
+        if(check(e.getPlayer()) && injection.getCm().isIgniteProtect()){
             e.setCancelled(true);
         }
     }
     
     @EventHandler
     public void onBreak(BlockBreakEvent e) {
-        if (!injection.getCm().isNoBreak()) return;
+        if(!injection.getCm().isNoBreak()) return;
         Player p = e.getPlayer();
-        if (injection.getCm().isOpBypass() && p.isOp()) return;
-        if (check(p)) {
+        if(injection.getCm().isOpBypass() && p.isOp()) return;
+        if(check(p)){
             e.setCancelled(true);
         }
     }
     
     @EventHandler
     public void onPlace(BlockPlaceEvent e) {
-        if (!injection.getCm().isNoPlace()) return;
+        if(!injection.getCm().isNoPlace()) return;
         Player p = e.getPlayer();
-        if (injection.getCm().isOpBypass() && p.isOp()) return;
-        if (check(p)) {
+        if(injection.getCm().isOpBypass() && p.isOp()) return;
+        if(check(p)){
             e.setCancelled(true);
         }
     }
     
     @EventHandler
     public void onDamageByEntity(EntityDamageByEntityEvent e) {
-        if (e.getDamager() instanceof Player && e.getEntity() instanceof ArmorStand) {
+        if(e.getDamager() instanceof Player && e.getEntity() instanceof ArmorStand){
             Player p = (Player) e.getDamager();
-            if (!injection.getCm().isNoBreakArmorStand()) return;
-            if (check(p)) {
+            if(!injection.getCm().isNoBreakArmorStand()) return;
+            if(check(p)){
                 e.setCancelled(true);
             }
         }
@@ -98,10 +98,10 @@ public class LobbyListener implements Listener {
     
     @EventHandler
     public void onInteractAtEntity(PlayerInteractAtEntityEvent e) {
-        if (e.getRightClicked() instanceof ArmorStand) {
+        if(e.getRightClicked() instanceof ArmorStand){
             Player p = e.getPlayer();
-            if (!injection.getCm().isNoInteractArmorStand()) return;
-            if (check(p)) {
+            if(!injection.getCm().isNoInteractArmorStand()) return;
+            if(check(p)){
                 e.setCancelled(true);
             }
         }
@@ -109,20 +109,20 @@ public class LobbyListener implements Listener {
     
     @EventHandler
     public void onDamage(EntityDamageEvent e) {
-        if (e.getEntity() instanceof Player) {
+        if(e.getEntity() instanceof Player){
             Player p = (Player) e.getEntity();
-            if (check(p) && injection.getCm().isVoidTeleport() && countdown.getOrDefault(p.getUniqueId(), 0L) < System.currentTimeMillis()) {
-                if (e.getCause().equals(EntityDamageEvent.DamageCause.VOID)) {
+            if(check(p) && injection.getCm().isVoidTeleport() && countdown.getOrDefault(p.getUniqueId(), 0L) < System.currentTimeMillis()){
+                if(e.getCause().equals(EntityDamageEvent.DamageCause.VOID)){
                     countdown.put(p.getUniqueId(), System.currentTimeMillis() + 1000);
-                    if (plugin.getMainLobby() != null) {
+                    if(plugin.getMainLobby() != null){
                         e.setCancelled(true);
                         p.setFallDistance(0);
                         p.teleport(plugin.getMainLobby());
                     }
                 }
             }
-            if (injection.getCm().isNoDamage()) {
-                if (check(p)) {
+            if(injection.getCm().isNoDamage()){
+                if(check(p)){
                     e.setCancelled(true);
                 }
             }
@@ -131,10 +131,10 @@ public class LobbyListener implements Listener {
     
     @EventHandler
     public void onFood(FoodLevelChangeEvent e) {
-        if (!injection.getCm().isNoHunger()) return;
-        if (e.getEntity() instanceof Player) {
+        if(!injection.getCm().isNoHunger()) return;
+        if(e.getEntity() instanceof Player){
             Player p = (Player) e.getEntity();
-            if (check(p)) {
+            if(check(p)){
                 e.setCancelled(true);
             }
         }
@@ -142,45 +142,45 @@ public class LobbyListener implements Listener {
     
     @EventHandler
     public void onDrop(PlayerDropItemEvent e) {
-        if (!injection.getCm().isNoDrop()) return;
+        if(!injection.getCm().isNoDrop()) return;
         World w = e.getPlayer().getWorld();
-        if (injection.getCm().getLobbyWorld().equals(w.getName())) {
+        if(injection.getCm().getLobbyWorld().equals(w.getName())){
             e.setCancelled(true);
         }
     }
     
     @EventHandler
     public void onWeather(WeatherChangeEvent e) {
-        if (!injection.getCm().isNoWeather()) return;
+        if(!injection.getCm().isNoWeather()) return;
         World w = e.getWorld();
-        if (injection.getCm().getLobbyWorld().equals(w.getName())) {
+        if(injection.getCm().getLobbyWorld().equals(w.getName())){
             e.setCancelled(e.toWeatherState());
         }
     }
     
     @EventHandler
     public void onExplode(EntityExplodeEvent e) {
-        if (!injection.getCm().isNoExplosion()) return;
+        if(!injection.getCm().isNoExplosion()) return;
         World w = e.getLocation().getWorld();
-        if (injection.getCm().getLobbyWorld().equals(w.getName())) {
+        if(injection.getCm().getLobbyWorld().equals(w.getName())){
             e.setCancelled(true);
         }
     }
     
     @EventHandler
     public void onExplode(BlockExplodeEvent e) {
-        if (!injection.getCm().isNoExplosion()) return;
+        if(!injection.getCm().isNoExplosion()) return;
         World w = e.getBlock().getWorld();
-        if (injection.getCm().getLobbyWorld().equals(w.getName())) {
+        if(injection.getCm().getLobbyWorld().equals(w.getName())){
             e.setCancelled(true);
         }
     }
     
     @EventHandler
     public void onSpawn(EntitySpawnEvent e) {
-        if (!injection.getCm().isNoMobSpawn()) return;
+        if(!injection.getCm().isNoMobSpawn()) return;
         World w = e.getLocation().getWorld();
-        if (injection.getCm().getLobbyWorld().equals(w.getName())) {
+        if(injection.getCm().getLobbyWorld().equals(w.getName())){
             if(e.getEntity() instanceof Player || e.getEntity() instanceof ArmorStand) return;
             e.setCancelled(true);
         }
@@ -190,27 +190,27 @@ public class LobbyListener implements Listener {
     public void onInteract(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         World w = p.getWorld();
-        if (injection.getCm().getLobbyWorld().equals(w.getName())) {
-            if (e.getAction().equals(Action.PHYSICAL) && injection.getCm().isNoBreakFarm()) {
+        if(injection.getCm().getLobbyWorld().equals(w.getName())){
+            if(e.getAction().equals(Action.PHYSICAL) && injection.getCm().isNoBreakFarm()){
                 Material material = Material.getMaterial("FARMLAND");
-                if (material == null) {
+                if(material == null){
                     material = Material.getMaterial("SOIL");
                 }
-                if (e.getClickedBlock().getType().equals(material)) {
+                if(e.getClickedBlock().getType().equals(material)){
                     e.setCancelled(true);
                 }
             }
-            if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) || e.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
+            if(e.getAction().equals(Action.RIGHT_CLICK_BLOCK) || e.getAction().equals(Action.LEFT_CLICK_BLOCK)){
                 Block b = e.getClickedBlock();
-                if (p.getItemInHand() != null && !p.getItemInHand().getType().equals(Material.AIR)) {
+                if(p.getItemInHand() != null && !p.getItemInHand().getType().equals(Material.AIR)){
                     ItemStack item = p.getItemInHand();
-                    if (injection.getCm().getInteractBlocked().contains(item.getType().name())) {
+                    if(injection.getCm().getInteractBlocked().contains(item.getType().name())){
                         e.setCancelled(true);
                         e.setUseItemInHand(Event.Result.DENY);
                         e.setUseInteractedBlock(Event.Result.DENY);
                     }
                 }
-                if (injection.getCm().getInteractBlocked().contains(b.getType().name())) {
+                if(injection.getCm().getInteractBlocked().contains(b.getType().name())){
                     e.setCancelled(true);
                 }
             }
@@ -218,9 +218,9 @@ public class LobbyListener implements Listener {
     }
     
     private boolean check(Player p) {
-        if (p == null) return true;
+        if(p == null) return true;
         World w = p.getWorld();
-        if (injection.getCm().getLobbyWorld() == null || w == null) return false;
+        if(injection.getCm().getLobbyWorld() == null || w == null) return false;
         return injection.getCm().getLobbyWorld().equals(w.getName());
     }
     

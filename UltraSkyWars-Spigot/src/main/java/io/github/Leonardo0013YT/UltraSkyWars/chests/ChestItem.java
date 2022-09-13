@@ -25,23 +25,23 @@ public class ChestItem {
         this.refill = refill;
         this.modes = modes;
     }
-
+    
     public ArrayList<String> getModes() {
         return modes;
     }
-
+    
     public int getPercent() {
         return percent * 100;
     }
-
+    
     public ItemStack getItem() {
         ItemStack item = this.item.clone();
-        if (min != max) {
+        if(min != max){
             int now = new Random().nextInt(this.max - this.min + 1) + this.min;
             item.setAmount(now);
             return item;
         }
         return item;
     }
-
+    
 }

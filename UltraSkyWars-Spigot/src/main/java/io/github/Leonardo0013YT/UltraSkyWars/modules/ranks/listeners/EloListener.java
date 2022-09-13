@@ -9,22 +9,22 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 public class EloListener implements Listener {
-
+    
     private final InjectionEloRank eloInjection;
     private final UltraSkyWars plugin;
-
+    
     public EloListener(UltraSkyWars plugin, InjectionEloRank eloInjection) {
         this.plugin = plugin;
         this.eloInjection = eloInjection;
     }
-
+    
     @EventHandler
     public void onMenu(InventoryClickEvent e) {
-        if (e.getView().getTitle().equals(eloInjection.getRankeds().get("menus.title"))) {
+        if(e.getView().getTitle().equals(eloInjection.getRankeds().get("menus.title"))){
             e.setCancelled(true);
         }
     }
-
+    
     @EventHandler
     public void loadPlayer(USWPlayerLoadEvent e) {
         Player p = e.getPlayer();
@@ -32,5 +32,5 @@ public class EloListener implements Listener {
             eloInjection.getErm().checkUpgrateOrDegrate(p);
         });
     }
-
+    
 }

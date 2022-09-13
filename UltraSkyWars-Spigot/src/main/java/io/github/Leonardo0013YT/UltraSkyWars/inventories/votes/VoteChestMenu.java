@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VoteChestMenu extends UltraInventory {
-
+    
     public VoteChestMenu(UltraSkyWars plugin, String name) {
         super(name);
         this.title = plugin.getChestType().get("lang." + name + ".title");
@@ -26,34 +26,34 @@ public class VoteChestMenu extends UltraInventory {
         plugin.getUim().getActions().put(title, (b) -> {
             InventoryClickEvent e = b.getInventoryClickEvent();
             Player p = b.getPlayer();
-            if (plugin.getCm().isSetupLobby(p)) return;
+            if(plugin.getCm().isSetupLobby(p)) return;
             Game g = plugin.getGm().getGameByPlayer(p);
             e.setCancelled(true);
-            if (e.getCurrentItem() == null || e.getCurrentItem().getType().equals(Material.AIR)) {
+            if(e.getCurrentItem() == null || e.getCurrentItem().getType().equals(Material.AIR)){
                 return;
             }
             ItemStack item = e.getCurrentItem();
-            if (!item.hasItemMeta()) {
+            if(!item.hasItemMeta()){
                 return;
             }
-            if (!item.getItemMeta().hasDisplayName()) {
+            if(!item.getItemMeta().hasDisplayName()){
                 return;
             }
-            if (g == null) return;
+            if(g == null) return;
             Vote vote = g.getVote();
             ItemMeta im = item.getItemMeta();
             String display = im.getDisplayName();
             String type = NBTEditor.getString(item, "CHEST", "VOTE", "TYPE");
-            if (type == null) return;
+            if(type == null) return;
             String lower = type.toLowerCase();
-            if (display.equals(plugin.getChestType().get(p, "lang.chest." + lower + ".nameItem"))) {
-                if (!p.hasPermission("ultraskywars.votes.chest.*") && !p.hasPermission("ultraskywars.votes.chest." + lower)) {
+            if(display.equals(plugin.getChestType().get(p, "lang.chest." + lower + ".nameItem"))){
+                if(!p.hasPermission("ultraskywars.votes.chest.*") && !p.hasPermission("ultraskywars.votes.chest." + lower)){
                     p.sendMessage(plugin.getLang().get(p, "messages.noPermission"));
                     return;
                 }
                 Vote.VotePlayer vp = vote.getVotePlayer(p);
-                if (vp.getChestType() != null) {
-                    if (vp.getChestType().equals(type)) {
+                if(vp.getChestType() != null){
+                    if(vp.getChestType().equals(type)){
                         p.sendMessage(plugin.getLang().get(p, "messages.alreadyVoted").replaceAll("<type>", plugin.getChestType().get(p, "votes.chest." + lower)));
                         return;
                     }
@@ -62,7 +62,7 @@ public class VoteChestMenu extends UltraInventory {
                 g.sendGameMessage(plugin.getLang().get(p, "messages.voted").replaceAll("<player>", p.getName()).replaceAll("<category>", plugin.getChestType().get(p, "votes.chest.name")).replaceAll("<type>", plugin.getChestType().get(p, "votes.chest." + lower)).replaceAll("<votes>", String.valueOf(vote.getVotes(type))));
                 String[][] replacements = new String[plugin.getCtm().getChests().size()][3];
                 int i = 0;
-                for (ChestType ct : plugin.getCtm().getChests().values()) {
+                for ( ChestType ct : plugin.getCtm().getChests().values() ){
                     replacements[i][0] = "<" + ct.getKey() + "Chest>";
                     replacements[i][1] = String.valueOf(vote.getVotes(ct.getKey().toUpperCase()));
                     replacements[i][2] = ct.getKey().toUpperCase();
@@ -72,24 +72,24 @@ public class VoteChestMenu extends UltraInventory {
             }
         });
     }
-
+    
     @Override
     public void reload() {
         UltraSkyWars plugin = UltraSkyWars.get();
-        if (plugin.getMenus().isSet("menus." + name)) {
+        if(plugin.getMenus().isSet("menus." + name)){
             this.rows = plugin.getMenus().getInt("menus." + name + ".rows");
             Map<Integer, ItemStack> config = new HashMap<>();
             Map<Integer, ItemStack> contents = new HashMap<>();
-            if (plugin.getMenus().getConfig().isSet("menus." + name + ".items")) {
+            if(plugin.getMenus().getConfig().isSet("menus." + name + ".items")){
                 ConfigurationSection conf = plugin.getMenus().getConfig().getConfigurationSection("menus." + name + ".items");
-                for (String c : conf.getKeys(false)) {
+                for ( String c : conf.getKeys(false) ){
                     int slot = Integer.parseInt(c);
                     ItemStack litem = plugin.getMenus().getConfig().getItemStack("menus." + name + ".items." + c);
                     ItemStack item = ItemBuilder.parse(plugin.getMenus().getConfig().getItemStack("menus." + name + ".items." + c).clone());
                     contents.put(slot, item);
                     config.put(slot, litem);
                 }
-                for (ChestType chest : plugin.getCtm().getChests().values()) {
+                for ( ChestType chest : plugin.getCtm().getChests().values() ){
                     int slot = chest.getVoteSlot();
                     ItemStack litem = chest.getVoteItem();
                     ItemStack item = ItemBuilder.parse(chest.getVoteItem(),
@@ -102,5 +102,5 @@ public class VoteChestMenu extends UltraInventory {
             }
         }
     }
-
+    
 }

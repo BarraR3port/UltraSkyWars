@@ -10,19 +10,23 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class PreviewSession {
-
-    private Location lastLocation;
-    private ItemStack[] inv, armor;
-    private Collection<PotionEffect> effects;
-    private boolean allowFly, flying;
-    private float walkSpeed, flySpeed;
-    private int food;
-    private double maxHealth, health;
+    
+    private final Location lastLocation;
+    private final ItemStack[] inv;
+    private final ItemStack[] armor;
+    private final Collection<PotionEffect> effects;
+    private final boolean allowFly;
+    private final boolean flying;
+    private final float walkSpeed;
+    private final float flySpeed;
+    private final int food;
+    private final double maxHealth;
+    private final double health;
     private int id;
-    private Collection<Integer> entityId = new ArrayList<>();
-    private GameMode mode;
-    private Player p;
-
+    private final Collection<Integer> entityId = new ArrayList<>();
+    private final GameMode mode;
+    private final Player p;
+    
     public PreviewSession(int id, Player p) {
         this.id = id;
         this.p = p;
@@ -39,7 +43,7 @@ public class PreviewSession {
         this.mode = p.getGameMode();
         this.lastLocation = p.getLocation();
     }
-
+    
     public void reset() {
         p.getActivePotionEffects().forEach(e -> p.removePotionEffect(e.getType()));
         p.getInventory().clear();
@@ -58,19 +62,19 @@ public class PreviewSession {
         p.teleport(lastLocation);
         p.updateInventory();
     }
-
+    
     public Collection<Integer> getEntityId() {
         return entityId;
     }
-
+    
     public void addEntityId(int id) {
         entityId.add(id);
     }
-
+    
     public int getId() {
         return id;
     }
-
+    
     public void setId(int id) {
         this.id = id;
     }

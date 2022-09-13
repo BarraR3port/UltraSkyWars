@@ -11,9 +11,9 @@ import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
 public class TNTEvent extends GameEvent {
-
+    
     private BukkitTask task;
-
+    
     public TNTEvent(UltraSkyWars plugin, int time) {
         this.time = time;
         this.reset = time;
@@ -24,7 +24,7 @@ public class TNTEvent extends GameEvent {
         this.title = plugin.getLang().get("titles." + name + ".title");
         this.subtitle = plugin.getLang().get("titles." + name + ".subtitle");
     }
-
+    
     public TNTEvent(TNTEvent e) {
         this.time = e.getReset();
         this.reset = e.getReset();
@@ -35,30 +35,30 @@ public class TNTEvent extends GameEvent {
         this.title = e.getTitle();
         this.subtitle = e.getSubTitle();
     }
-
+    
     @Override
     public void start(Game game) {
         this.task = new BukkitRunnable() {
             @Override
             public void run() {
-                for (Player on : game.getPlayers()) {
+                for ( Player on : game.getPlayers() ){
                     TNTPrimed tntPrimed = on.getWorld().spawn(on.getLocation().clone().add(0, 10, 0), TNTPrimed.class);
                     tntPrimed.setVelocity(new Vector(0, -2, 0));
                 }
             }
         }.runTaskTimer(UltraSkyWars.get(), 40, 40);
-        for (Player on : game.getCached()) {
+        for ( Player on : game.getCached() ){
             CustomSound.EVENTS_TNT.reproduce(on);
         }
     }
-
+    
     @Override
     public void stop(Game game) {
-        if (task != null) {
+        if(task != null){
             task.cancel();
         }
     }
-
+    
     @Override
     public void reset() {
         this.time = this.reset;
@@ -66,10 +66,10 @@ public class TNTEvent extends GameEvent {
         this.type = "final";
         this.name = "tnt";
     }
-
+    
     @Override
     public TNTEvent clone() {
         return new TNTEvent(this);
     }
-
+    
 }

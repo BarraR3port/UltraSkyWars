@@ -19,14 +19,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cubelets {
-
-    private UltraSkyWars plugin;
-    private Location hologram;
-    private InjectionCubelets injectionCubelets;
-    private Location loc;
+    
+    private final UltraSkyWars plugin;
+    private final Location hologram;
+    private final InjectionCubelets injectionCubelets;
+    private final Location loc;
     private boolean inUse;
     private Player now;
-
+    
     public Cubelets(UltraSkyWars plugin, InjectionCubelets injectionCubelets, Location loc) {
         this.plugin = plugin;
         this.injectionCubelets = injectionCubelets;
@@ -35,26 +35,26 @@ public class Cubelets {
         this.inUse = false;
         this.now = null;
     }
-
+    
     public void reload() {
         plugin.getAdm().createHologram(hologram, plugin.getLang().getList("holograms.cubelets"));
     }
-
+    
     public void execute() {
-        if (plugin.getAdm().hasHologram(hologram)) {
+        if(plugin.getAdm().hasHologram(hologram)){
             plugin.getAdm().deleteHologram(hologram);
         }
         SWPlayer sw = plugin.getDb().getSWPlayer(now);
-        if (sw.getCubeAnimation() == injectionCubelets.getCubelets().getInt("animations.fireworks.id")) {
+        if(sw.getCubeAnimation() == injectionCubelets.getCubelets().getInt("animations.fireworks.id")){
             final Location l = loc.clone().add(0.5, plugin.getCm().getUpYAni1(), 0.5);
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    if (!now.isOnline()) {
+                    if(!now.isOnline()){
                         cancel();
                         return;
                     }
-                    if (l.getY() <= loc.getY()) {
+                    if(l.getY() <= loc.getY()){
                         reward();
                         cancel();
                         return;
@@ -65,7 +65,7 @@ public class Cubelets {
                 }
             }.runTaskTimer(plugin, 0, plugin.getCm().getTicksAni1());
         }
-        if (sw.getCubeAnimation() == injectionCubelets.getCubelets().getInt("animations.head.id")) {
+        if(sw.getCubeAnimation() == injectionCubelets.getCubelets().getInt("animations.head.id")){
             final Location l = loc.clone().add(0.5, 0, 0.5);
             final ArmorStand head = l.getWorld().spawn(l, ArmorStand.class);
             head.setVisible(false);
@@ -78,11 +78,11 @@ public class Cubelets {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    if (!now.isOnline()) {
+                    if(!now.isOnline()){
                         cancel();
                         return;
                     }
-                    if (loc.getY() + 0.8 <= l.getY()) {
+                    if(loc.getY() + 0.8 <= l.getY()){
                         injectionCubelets.getEntities().remove(head);
                         head.remove();
                         reward();
@@ -97,22 +97,22 @@ public class Cubelets {
                 }
             }.runTaskTimer(plugin, 0, 1);
         }
-        if (sw.getCubeAnimation() == injectionCubelets.getCubelets().getInt("animations.flames.id")) {
+        if(sw.getCubeAnimation() == injectionCubelets.getCubelets().getInt("animations.flames.id")){
             final Location l = loc.clone().add(0.5, 0, 0.5);
             new BukkitRunnable() {
                 int ticks = 0;
-                int tick = 0;
+                final int tick = 0;
                 double x = 1;
                 double y = 1;
                 double z = 1;
-
+                
                 @Override
                 public void run() {
-                    if (!now.isOnline()) {
+                    if(!now.isOnline()){
                         cancel();
                         return;
                     }
-                    if (ticks > plugin.getCm().getExecutesAni3()) {
+                    if(ticks > plugin.getCm().getExecutesAni3()){
                         l.getWorld().createExplosion(l.clone().add(0, 1, 0), 1, false);
                         new BukkitRunnable() {
                             @Override
@@ -126,12 +126,12 @@ public class Cubelets {
                     x -= 0.02;
                     y += 0.02;
                     z -= 0.02;
-                    for (int i = tick; i < 360; ++i) {
-                        if (i % (2 + 1) == 0) {
+                    for ( int i = tick; i < 360; ++i ){
+                        if(i % (2 + 1) == 0){
                             double var8 = Math.sin(Math.toRadians(i)) * x;
                             double var10 = Math.cos(Math.toRadians(i)) * x;
                             double var12 = z / 10.0D;
-                            for (double var14 = 0.0D; var14 < var12; var14 += 0.1D) {
+                            for ( double var14 = 0.0D; var14 < var12; var14 += 0.1D ){
                                 Vector var16 = new Vector(var8, var14 + y, var10);
                                 plugin.getVc().getNMS().broadcastParticle(l.clone().add(var16.getX(), var16.getY() - 0.5, var16.getZ()), 0F, 0F, 0F, 0, "FLAME", 1, 5);
                             }
@@ -143,22 +143,22 @@ public class Cubelets {
             }.runTaskTimer(plugin, 0, plugin.getCm().getTicksAni3());
         }
     }
-
+    
     public void reward() {
         Reward swr = plugin.getLvl().getRandomReward();
-        if (plugin.getAdm().hasHologramPlugin()) {
-            if (plugin.getAdm().hasHologram(hologram)) {
+        if(plugin.getAdm().hasHologramPlugin()){
+            if(plugin.getAdm().hasHologram(hologram)){
                 plugin.getAdm().deleteHologram(hologram);
             }
             List<String> list = new ArrayList<>();
-            for (String l : plugin.getLang().getList("holograms.rewards")) {
+            for ( String l : plugin.getLang().getList("holograms.rewards") ){
                 list.add(l.replaceAll("<name>", swr.getName()).replaceAll("<rarity>", plugin.getLang().get(null, "soulwell.rarity." + swr.getRarity().name().toLowerCase())));
             }
             ItemStack icon = swr.getIcon().clone();
             icon.setAmount(1);
             plugin.getAdm().createHologram(hologram, list, icon);
         }
-        if (now != null && now.isOnline()) {
+        if(now != null && now.isOnline()){
             swr.execute(now);
             CustomSound.CUBELETS_REWARD.reproduce(now);
             now.sendMessage(plugin.getLang().get(now, "cubeletReward").replaceAll("<reward>", swr.getName()).replaceAll("<rarity>", plugin.getLang().get(null, "soulwell.rarity." + swr.getRarity().name().toLowerCase())));
@@ -171,31 +171,31 @@ public class Cubelets {
             }
         }.runTaskLater(plugin, 20 * 2);
     }
-
+    
     public Location getLoc() {
         return loc;
     }
-
+    
     public boolean isInUse() {
         return inUse;
     }
-
+    
     public void setInUse(boolean inUse) {
         this.inUse = inUse;
-        if (plugin.getAdm().hasHologramPlugin()) {
-            if (plugin.getAdm().hasHologram(hologram)) {
+        if(plugin.getAdm().hasHologramPlugin()){
+            if(plugin.getAdm().hasHologram(hologram)){
                 plugin.getAdm().deleteHologram(hologram);
             }
             plugin.getAdm().createHologram(hologram, plugin.getLang().getList("holograms.cubelets"));
         }
     }
-
+    
     public Player getNow() {
         return now;
     }
-
+    
     public void setNow(Player now) {
         this.now = now;
     }
-
+    
 }

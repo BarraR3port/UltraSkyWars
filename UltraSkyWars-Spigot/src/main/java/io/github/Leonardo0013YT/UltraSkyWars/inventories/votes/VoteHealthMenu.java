@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VoteHealthMenu extends UltraInventory {
-
+    
     public VoteHealthMenu(UltraSkyWars plugin, String name) {
         super(name);
         this.title = plugin.getLang().get(null, "menus." + name + ".title");
@@ -25,31 +25,31 @@ public class VoteHealthMenu extends UltraInventory {
         plugin.getUim().getActions().put(title, (b) -> {
             InventoryClickEvent e = b.getInventoryClickEvent();
             Player p = b.getPlayer();
-            if (plugin.getCm().isSetupLobby(p)) return;
+            if(plugin.getCm().isSetupLobby(p)) return;
             Game g = plugin.getGm().getGameByPlayer(p);
             e.setCancelled(true);
-            if (e.getCurrentItem() == null || e.getCurrentItem().getType().equals(Material.AIR)) {
+            if(e.getCurrentItem() == null || e.getCurrentItem().getType().equals(Material.AIR)){
                 return;
             }
             ItemStack item = e.getCurrentItem();
-            if (!item.hasItemMeta()) {
+            if(!item.hasItemMeta()){
                 return;
             }
-            if (!item.getItemMeta().hasDisplayName()) {
+            if(!item.getItemMeta().hasDisplayName()){
                 return;
             }
-            if (g == null) return;
+            if(g == null) return;
             Vote vote = g.getVote();
             ItemMeta im = item.getItemMeta();
             String display = im.getDisplayName();
-            if (display.equals(plugin.getLang().get(p, "menus.health.health5.nameItem"))) {
-                if (!p.hasPermission("ultraskywars.votes.health.*") && !p.hasPermission("ultraskywars.votes.health.health5")) {
+            if(display.equals(plugin.getLang().get(p, "menus.health.health5.nameItem"))){
+                if(!p.hasPermission("ultraskywars.votes.health.*") && !p.hasPermission("ultraskywars.votes.health.health5")){
                     p.sendMessage(plugin.getLang().get(p, "messages.noPermission"));
                     return;
                 }
                 Vote.VotePlayer vp = vote.getVotePlayer(p);
-                if (vp.getHealthType() != null) {
-                    if (vp.getHealthType().equals(HealthType.HEALTH5)) {
+                if(vp.getHealthType() != null){
+                    if(vp.getHealthType().equals(HealthType.HEALTH5)){
                         p.sendMessage(plugin.getLang().get(p, "messages.alreadyVoted").replaceAll("<type>", plugin.getLang().get(p, "votes.health.health5")));
                         return;
                     }
@@ -62,14 +62,14 @@ public class VoteHealthMenu extends UltraInventory {
                         new String[]{"<health20>", String.valueOf(vote.getVotes("HEALTH20"))},
                         new String[]{"<healthuhc>", String.valueOf(vote.getVotes("UHC"))});
             }
-            if (display.equals(plugin.getLang().get(p, "menus.health.health10.nameItem"))) {
-                if (!p.hasPermission("ultraskywars.votes.health.*") && !p.hasPermission("ultraskywars.votes.health.health10")) {
+            if(display.equals(plugin.getLang().get(p, "menus.health.health10.nameItem"))){
+                if(!p.hasPermission("ultraskywars.votes.health.*") && !p.hasPermission("ultraskywars.votes.health.health10")){
                     p.sendMessage(plugin.getLang().get(p, "messages.noPermission"));
                     return;
                 }
                 Vote.VotePlayer vp = vote.getVotePlayer(p);
-                if (vp.getHealthType() != null) {
-                    if (vp.getHealthType().equals(HealthType.HEALTH10)) {
+                if(vp.getHealthType() != null){
+                    if(vp.getHealthType().equals(HealthType.HEALTH10)){
                         p.sendMessage(plugin.getLang().get(p, "messages.alreadyVoted").replaceAll("<type>", plugin.getLang().get(p, "votes.health.health10")));
                         return;
                     }
@@ -82,14 +82,14 @@ public class VoteHealthMenu extends UltraInventory {
                         new String[]{"<health20>", String.valueOf(vote.getVotes("HEALTH20"))},
                         new String[]{"<healthuhc>", String.valueOf(vote.getVotes("UHC"))});
             }
-            if (display.equals(plugin.getLang().get(p, "menus.health.health20.nameItem"))) {
-                if (!p.hasPermission("ultraskywars.votes.health.*") && !p.hasPermission("ultraskywars.votes.health.health20")) {
+            if(display.equals(plugin.getLang().get(p, "menus.health.health20.nameItem"))){
+                if(!p.hasPermission("ultraskywars.votes.health.*") && !p.hasPermission("ultraskywars.votes.health.health20")){
                     p.sendMessage(plugin.getLang().get(p, "messages.noPermission"));
                     return;
                 }
                 Vote.VotePlayer vp = vote.getVotePlayer(p);
-                if (vp.getHealthType() != null) {
-                    if (vp.getHealthType().equals(HealthType.HEALTH20)) {
+                if(vp.getHealthType() != null){
+                    if(vp.getHealthType().equals(HealthType.HEALTH20)){
                         p.sendMessage(plugin.getLang().get(p, "messages.alreadyVoted").replaceAll("<type>", plugin.getLang().get(p, "votes.health.health20")));
                         return;
                     }
@@ -102,14 +102,14 @@ public class VoteHealthMenu extends UltraInventory {
                         new String[]{"<health20>", String.valueOf(vote.getVotes("HEALTH20"))},
                         new String[]{"<healthuhc>", String.valueOf(vote.getVotes("UHC"))});
             }
-            if (display.equals(plugin.getLang().get(p, "menus.health.uhc.nameItem"))) {
-                if (!p.hasPermission("ultraskywars.votes.health.*") && !p.hasPermission("ultraskywars.votes.health.uhc")) {
+            if(display.equals(plugin.getLang().get(p, "menus.health.uhc.nameItem"))){
+                if(!p.hasPermission("ultraskywars.votes.health.*") && !p.hasPermission("ultraskywars.votes.health.uhc")){
                     p.sendMessage(plugin.getLang().get(p, "messages.noPermission"));
                     return;
                 }
                 Vote.VotePlayer vp = vote.getVotePlayer(p);
-                if (vp.getHealthType() != null) {
-                    if (vp.getHealthType().equals(HealthType.UHC)) {
+                if(vp.getHealthType() != null){
+                    if(vp.getHealthType().equals(HealthType.UHC)){
                         p.sendMessage(plugin.getLang().get(p, "messages.alreadyVoted").replaceAll("<type>", plugin.getLang().get(p, "votes.health.uhc")));
                         return;
                     }
@@ -124,17 +124,17 @@ public class VoteHealthMenu extends UltraInventory {
             }
         });
     }
-
+    
     @Override
     public void reload() {
         UltraSkyWars plugin = UltraSkyWars.get();
-        if (plugin.getMenus().isSet("menus." + name)) {
+        if(plugin.getMenus().isSet("menus." + name)){
             this.rows = plugin.getMenus().getInt("menus." + name + ".rows");
             Map<Integer, ItemStack> config = new HashMap<>();
             Map<Integer, ItemStack> contents = new HashMap<>();
-            if (plugin.getMenus().getConfig().isSet("menus." + name + ".items")) {
+            if(plugin.getMenus().getConfig().isSet("menus." + name + ".items")){
                 ConfigurationSection conf = plugin.getMenus().getConfig().getConfigurationSection("menus." + name + ".items");
-                for (String c : conf.getKeys(false)) {
+                for ( String c : conf.getKeys(false) ){
                     int slot = Integer.parseInt(c);
                     ItemStack litem = plugin.getMenus().getConfig().getItemStack("menus." + name + ".items." + c);
                     ItemStack item = ItemBuilder.parse(plugin.getMenus().getConfig().getItemStack("menus." + name + ".items." + c).clone(),
@@ -150,5 +150,5 @@ public class VoteHealthMenu extends UltraInventory {
             }
         }
     }
-
+    
 }

@@ -28,7 +28,7 @@ public class TabAPIAddon implements NametagAddon {
         prefix.remove(p.getUniqueId());
         suffix.remove(p.getUniqueId());
     }
-
+    
     @Override
     public void resetPlayerNameTag(Player p) {
         TabPlayer tabPlayer = tab.getPlayer(p.getUniqueId());
@@ -36,19 +36,19 @@ public class TabAPIAddon implements NametagAddon {
         manager.setSuffix(tabPlayer, suffix.get(p.getUniqueId()));
         removePlayerNameTag(p);
     }
-
+    
     @Override
     public String getPrefix(Player p) {
         TabPlayer tabPlayer = tab.getPlayer(p.getUniqueId());
         String prefix = manager.getCustomPrefix(tabPlayer);
         return prefix == null ? "" : prefix;
     }
-
+    
     @Override
     public String getSuffix(Player p) {
         TabPlayer tabPlayer = tab.getPlayer(p.getUniqueId());
         String suffix = manager.getCustomSuffix(tabPlayer);
         return suffix == null ? "" : suffix;
     }
-
+    
 }

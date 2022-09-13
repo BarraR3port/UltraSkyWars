@@ -12,23 +12,23 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 public class AnimationHead {
-
-    private UltraSkyWars plugin;
-    private Cubelets box;
-    private Location loc;
+    
+    private final UltraSkyWars plugin;
+    private final Cubelets box;
+    private final Location loc;
     private Location armorStandLocation;
     private int noteValue;
     private float notePitch;
     private int time = 0;
     private BukkitTask music, animation;
     private Location c1, c2, c3, c4;
-
+    
     public AnimationHead(UltraSkyWars plugin, Cubelets box, Location loc) {
         this.plugin = plugin;
         this.box = box;
         this.loc = loc;
     }
-
+    
     public void execute() {
         final Location l = loc.clone().add(0.5, 0, 0.5);
         final ArmorStand head = l.getWorld().spawn(l, ArmorStand.class);
@@ -46,16 +46,16 @@ public class AnimationHead {
         animation = new BukkitRunnable() {
             @Override
             public void run() {
-                if (time <= 50) {
+                if(time <= 50){
                     armorStandLocation.add(0.0D, 0.02D, 0.0D);
                 }
                 head.teleport(armorStandLocation);
                 head.setHeadPose(head.getHeadPose().add(0.0D, 0.159D, 0.0D));
                 time++;
-                if (time == 98) {
+                if(time == 98){
                     FireworkEffect effect = FireworkEffect.builder().with(FireworkEffect.Type.STAR).withColor(Utils.getRandomColor()).build();
                     new InstantFirework(effect, l);
-                } else if (time == 100) {
+                } else if(time == 100){
                     head.remove();
                     music.cancel();
                     box.reward();
@@ -69,15 +69,15 @@ public class AnimationHead {
             }
         }.runTaskTimer(plugin, 0, 4L);
     }
-
+    
     public void sound() {
         ++this.noteValue;
-        if (this.noteValue >= 1 && this.noteValue <= 3) {
+        if(this.noteValue >= 1 && this.noteValue <= 3){
             loc.getWorld().playSound(this.loc, XSound.BLOCK_NOTE_BLOCK_HARP.parseSound(), 1.0F, 0.05F);
         } else {
             loc.getWorld().playSound(this.loc, XSound.BLOCK_NOTE_BLOCK_HARP.parseSound(), 1.0F, 0.05F + this.notePitch);
             this.notePitch = (float) ((double) this.notePitch + 0.044D);
         }
     }
-
+    
 }

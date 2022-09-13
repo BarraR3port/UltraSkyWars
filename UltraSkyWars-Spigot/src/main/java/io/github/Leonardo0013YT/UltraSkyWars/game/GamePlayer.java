@@ -20,7 +20,7 @@ import java.util.Set;
 import java.util.UUID;
 
 public class GamePlayer {
-
+    
     private final ItemStack[] inv, armor;
     private final Collection<PotionEffect> effects;
     private final Set<String> challenges = new HashSet<>();
@@ -34,7 +34,7 @@ public class GamePlayer {
     private int kills, coins, xp, souls;
     private boolean reset, dead;
     private OrderType orderType;
-
+    
     public GamePlayer(Player p, Game game, boolean mod) {
         this.player = p.getUniqueId();
         this.inv = p.getInventory().getContents();
@@ -60,28 +60,28 @@ public class GamePlayer {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (mod) return;
+                if(mod) return;
                 UltraSkyWars plugin = UltraSkyWars.get();
-                if (!game.getGameType().equals("TNT_MADNESS")) {
+                if(!game.getGameType().equals("TNT_MADNESS")){
                     p.getInventory().setItem(plugin.getCm().getKitsSlot(), plugin.getIm().getKits());
                 }
-                if (game.getGameType().equals("SOLO")) {
-                    if (game.isVotes()) {
+                if(game.getGameType().equals("SOLO")){
+                    if(game.isVotes()){
                         p.getInventory().setItem(plugin.getCm().getVotesSlot(), plugin.getIm().getVotes());
                     }
                 }
-                if (game.getGameType().equals("TEAM")) {
-                    if (game.isVotes()) {
+                if(game.getGameType().equals("TEAM")){
+                    if(game.isVotes()){
                         p.getInventory().setItem(plugin.getCm().getVotesSlot(), plugin.getIm().getVotes());
                     }
                     p.getInventory().setItem(plugin.getCm().getTeamSlot(), plugin.getIm().getTeam());
                 }
-                if (game.getGameType().equals("RANKED")) {
-                    if (game.isVotes() && !plugin.getCm().isDisableVotesRanked()) {
+                if(game.getGameType().equals("RANKED")){
+                    if(game.isVotes() && !plugin.getCm().isDisableVotesRanked()){
                         p.getInventory().setItem(plugin.getCm().getVotesSlot(), plugin.getIm().getVotes());
                     }
                 }
-                if (UltraSkyWars.get().getIjm().isChallenges() && !game.getGameType().equals("TNT_MADNESS")) {
+                if(UltraSkyWars.get().getIjm().isChallenges() && !game.getGameType().equals("TNT_MADNESS")){
                     p.getInventory().setItem(plugin.getCm().getChallengesSlot(), plugin.getIm().getChallenges());
                 }
                 p.getInventory().setItem(plugin.getCm().getLeaveSlot(), plugin.getIm().getLeave());
@@ -89,73 +89,73 @@ public class GamePlayer {
             }
         }.runTaskLater(UltraSkyWars.get(), 5);
     }
-
+    
     public Set<String> getChallenges() {
         return challenges;
     }
-
+    
     public boolean hasChallenge(String challenge) {
         return challenges.contains(challenge);
     }
-
+    
     public void addChallenge(String challenge) {
         challenges.add(challenge);
     }
-
+    
     public void removeChallenge(String challenge) {
         challenges.remove(challenge);
     }
-
+    
     public boolean isDead() {
         return dead;
     }
-
+    
     public void setDead(boolean dead) {
         this.dead = dead;
     }
-
+    
     public int getKills() {
         return kills;
     }
-
+    
     public void addKills(int kills) {
         this.kills += kills;
     }
-
+    
     public int getCoins() {
         return coins;
     }
-
+    
     public void addCoins(int coins) {
         this.coins += coins;
     }
-
+    
     public int getXP() {
         return xp;
     }
-
+    
     public void addXP(int xp) {
         this.xp += xp;
     }
-
+    
     public int getSouls() {
         return souls;
     }
-
+    
     public void addSouls(int souls) {
         this.souls += souls;
     }
-
+    
     public OrderType getOrderType() {
         return orderType;
     }
-
+    
     public void setOrderType(OrderType orderType) {
         this.orderType = orderType;
     }
-
+    
     public void reset() {
-        if (reset) return;
+        if(reset) return;
         Player p = Bukkit.getPlayer(player);
         p.getActivePotionEffects().forEach(e -> p.removePotionEffect(e.getType()));
         p.getInventory().clear();
@@ -178,8 +178,8 @@ public class GamePlayer {
         p.updateInventory();
         p.removePotionEffect(PotionEffectType.ABSORPTION);
         p.removePotionEffect(PotionEffectType.REGENERATION);
-        for (Player on : Bukkit.getOnlinePlayers()) {
-            if (!UltraSkyWars.get().getGm().isPlayerInGame(on)) {
+        for ( Player on : Bukkit.getOnlinePlayers() ){
+            if(!UltraSkyWars.get().getGm().isPlayerInGame(on)){
                 on.showPlayer(p);
                 p.showPlayer(on);
             }
@@ -188,11 +188,11 @@ public class GamePlayer {
         p.spigot().setCollidesWithEntities(true);
         reset = true;
     }
-
+    
     public void clear() {
         Player p = Bukkit.getPlayer(player);
-        if (p == null) return;
-        if (p.getScoreboard() != null) {
+        if(p == null) return;
+        if(p.getScoreboard() != null){
             p.getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
         }
         p.getInventory().clear();
@@ -209,7 +209,7 @@ public class GamePlayer {
         p.setGameMode(GameMode.SURVIVAL);
         p.updateInventory();
     }
-
+    
     public Player getP() {
         return Bukkit.getPlayer(player);
     }

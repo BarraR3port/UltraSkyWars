@@ -9,9 +9,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.metadata.FixedMetadataValue;
 
 public class WinEffectDragonRider implements WinEffect {
-
+    
     private EnderDragon dragon;
-
+    
     @Override
     public void start(Player p, Game game) {
         dragon = p.getWorld().spawn(p.getLocation(), EnderDragon.class);
@@ -19,17 +19,17 @@ public class WinEffectDragonRider implements WinEffect {
         dragon.setMetadata("NO_TARGET", new FixedMetadataValue(UltraSkyWars.get(), ""));
         p.getWorld().playSound(p.getLocation(), XSound.ENTITY_ENDER_DRAGON_GROWL.parseSound(), 1.0f, 1.0f);
     }
-
+    
     @Override
     public void stop() {
-        if (dragon != null) {
+        if(dragon != null){
             dragon.remove();
         }
     }
-
+    
     @Override
     public WinEffect clone() {
         return new WinEffectDragonRider();
     }
-
+    
 }

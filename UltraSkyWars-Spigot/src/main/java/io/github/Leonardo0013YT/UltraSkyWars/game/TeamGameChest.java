@@ -59,17 +59,17 @@ public class TeamGameChest extends GameChest {
             }
         }
         Collections.shuffle(required);
-    
-    
+        
+        
         LinkedList<PerChestItem> selected = new LinkedList<>();
         for ( ItemStack itemStack : required ){
             int chest = ThreadLocalRandom.current().nextInt(0, invs.size());
             int slot = plugin.getRandomizer().getRandomizer()[ThreadLocalRandom.current().nextInt(0, 6)];
             selected.add(new PerChestItem(chest, slot, itemStack));
         }
-    
+        
         ArrayList<UltraGameChest> ugcList = new ArrayList<>(invs.values());
-    
+        
         ThreadLocalRandom random = ThreadLocalRandom.current();
         for ( int index = 0; index < ugcList.size(); index++ ){
             UltraGameChest ugc = ugcList.get(index);
@@ -146,7 +146,7 @@ public class TeamGameChest extends GameChest {
             int slot = available.get(random.nextInt(0, available.size()));
             inv.setItem(slot, pci.getItem());
         }
-    
+        
     }
     
     private ChestItem getRandomProjectileItem(ChestItem item) {

@@ -19,7 +19,8 @@ import java.util.*;
 @Getter
 @Setter
 public class Team {
-
+    
+    private final TeamStats stats;
     private Collection<Player> members = new ArrayList<>();
     private Map<Player, Location> center = new HashMap<>();
     private UltraSkyWars plugin;
@@ -30,8 +31,7 @@ public class Team {
     private GameChest chest;
     private Nametags friendly, fire;
     private boolean created = false;
-    private final TeamStats stats;
-
+    
     public Team(UltraSkyWars plugin, Game game, String path, int id) {
         this.plugin = plugin;
         this.game = game;
@@ -49,33 +49,33 @@ public class Team {
         stats = new TeamStats(members.size(), chests.size());
         chest = new TeamGameChest(chests, this);
     }
-
+    
     public void setCenter(Player p, Location l) {
         center.put(p, l);
     }
-
+    
     public Location getCenter(Player p) {
         return center.get(p);
     }
-
+    
     public void addKill() {
         kills++;
     }
-
+    
     public void updateWorld(World w) {
         spawn.setWorld(w);
         balloon.setWorld(w);
-        if (fence != null) {
+        if(fence != null){
             fence.setWorld(w);
         }
-        for (Location l : chest.getChests()) {
+        for ( Location l : chest.getChests() ){
             l.setWorld(w);
         }
-        for (Location l : chest.getInvs().keySet()) {
+        for ( Location l : chest.getInvs().keySet() ){
             l.setWorld(w);
         }
     }
-
+    
     public void reset() {
         created = false;
         center.clear();
@@ -88,47 +88,47 @@ public class Team {
         stats.reset();
         chest = new TeamGameChest(chests, this);
     }
-
+    
     public void execute() {
-        for (Player on : game.getPlayers()) {
-            if (members.contains(on)) {
+        for ( Player on : game.getPlayers() ){
+            if(members.contains(on)){
                 friendly.addPlayer(on);
             } else {
                 fire.addPlayer(on);
             }
         }
-        for (Player on : members) {
+        for ( Player on : members ){
             PlayerNametagReceivedEvent e = new PlayerNametagReceivedEvent(on, friendly, fire);
             Bukkit.getPluginManager().callEvent(e);
-            if (e.isCancelled()) continue;
+            if(e.isCancelled()) continue;
             friendly.sendToPlayer(on);
             fire.sendToPlayer(on);
         }
     }
-
+    
     public void addMember(Player p) {
-        if (!members.contains(p)) {
+        if(!members.contains(p)){
             members.add(p);
         }
     }
-
+    
     public void removeMember(Player p) {
         members.remove(p);
         center.remove(p);
         friendly.deleteTeam(p, "A" + getName() + "FR");
         fire.deleteTeam(p, "B" + getName() + "FI");
     }
-
+    
     public int getTeamSize() {
         return members.size();
     }
-
+    
     private String getName() {
         String name = game.getName();
-        if (name.length() > 12) {
+        if(name.length() > 12){
             return name.substring(0, 12);
         }
         return name;
     }
-
+    
 }

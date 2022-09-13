@@ -7,8 +7,8 @@ import org.bukkit.Material;
 @AllArgsConstructor
 @Getter
 public class GlassBlock {
-
+    
     Material material;
     int data;
-
+    
 }

@@ -3,25 +3,25 @@ package io.github.Leonardo0013YT.UltraSkyWars.utils;
 import java.util.HashMap;
 
 public class CenterMessage {
-
+    
     public static HashMap<String, String> cached = new HashMap<>();
-
+    
     public static String getCenteredMessage(String string) {
-        if (cached.containsKey(string)) {
+        if(cached.containsKey(string)){
             return cached.get(string);
         }
         Object object;
         int n = 0;
         boolean bl = false;
         boolean bl2 = false;
-        for (int n2 : string.toCharArray()) {
-            if (n2 == 167) {
+        for ( int n2 : string.toCharArray() ){
+            if(n2 == 167){
                 bl = true;
                 continue;
             }
-            if (bl) {
+            if(bl){
                 bl = false;
-                if (n2 == 108 || n2 == 76) {
+                if(n2 == 108 || n2 == 76){
                     bl2 = true;
                     continue;
                 }
@@ -36,14 +36,14 @@ public class CenterMessage {
         int n4 = 154 - n3;
         int n5 = DefaultFontInfo.SPACE.getLength() + 1;
         object = new StringBuilder();
-        for (int n2 = 0; n2 < n4; n2 += n5) {
+        for ( int n2 = 0; n2 < n4; n2 += n5 ){
             ((StringBuilder) object).append(" ");
         }
         String centered = object + string;
         cached.put(string, centered);
         return centered;
     }
-
+    
     public enum DefaultFontInfo {
         A('A', 5),
         a('a', 5),
@@ -141,33 +141,33 @@ public class CenterMessage {
         COMMA(',', 1),
         SPACE(' ', 3),
         DEFAULT('a', 4);
-
+        
         private final char character;
         private final int length;
-
+        
         DefaultFontInfo(char c, int n2) {
             this.character = c;
             this.length = n2;
         }
-
+        
         public static DefaultFontInfo getDefaultFontInfo(char c) {
-            for (DefaultFontInfo defaultFontInfo : DefaultFontInfo.values()) {
-                if (defaultFontInfo.getCharacter() != c) continue;
+            for ( DefaultFontInfo defaultFontInfo : DefaultFontInfo.values() ){
+                if(defaultFontInfo.getCharacter() != c) continue;
                 return defaultFontInfo;
             }
             return DEFAULT;
         }
-
+        
         public char getCharacter() {
             return this.character;
         }
-
+        
         public int getLength() {
             return this.length;
         }
-
+        
         public int getBoldLength() {
-            if (this == SPACE) {
+            if(this == SPACE){
                 return this.getLength();
             }
             return this.length + 1;

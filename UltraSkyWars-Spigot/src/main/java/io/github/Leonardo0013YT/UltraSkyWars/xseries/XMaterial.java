@@ -15,7 +15,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public enum XMaterial {
-
+    
     RED_BED(0, "BED_BLOCK", "BED"),
     MAP("EMPTY_MAP"),
     ACACIA_BOAT("BOAT_ACACIA"),
@@ -1093,31 +1093,31 @@ public enum XMaterial {
     ZOMBIE_VILLAGER_SPAWN_EGG(27, "MONSTER_EGG"),
     ZOMBIE_WALL_HEAD(2, "SKULL", "SKULL_ITEM"),
     ZOMBIFIED_PIGLIN_SPAWN_EGG(57, "MONSTER_EGG", "ZOMBIE_PIGMAN_SPAWN_EGG");
-
+    
     public static final XMaterial[] VALUES = values();
-
+    
     private static final Map<String, XMaterial> NAMES = new HashMap<>();
-
+    
     private static final Map<XMaterial, XMaterial> DUPLICATED = new EnumMap<>(XMaterial.class);
-
+    
     private static final Cache<String, XMaterial> NAME_CACHE = CacheBuilder.newBuilder()
             .expireAfterAccess(1, TimeUnit.HOURS)
             .build();
-
+    
     private static final Cache<XMaterial, Optional<Material>> PARSED_CACHE = CacheBuilder.newBuilder()
             .expireAfterAccess(30, TimeUnit.MINUTES)
             .build();
-
+    
     private static final int VERSION = Integer.parseInt(getMajorVersion(Bukkit.getVersion()).substring(2));
-
+    
     private static final boolean ISFLAT = supports(13);
-
+    
     private static final byte MAX_DATA_VALUE = 120;
-
+    
     private static final byte UNKNOWN_DATA_VALUE = -1;
-
+    
     private static final short MAX_ID = 2267;
-
+    
     static {
         DUPLICATED.put(MELON, MELON_SLICE);
         DUPLICATED.put(CARROT, CARROTS);
@@ -1126,143 +1126,143 @@ public enum XMaterial {
         DUPLICATED.put(BROWN_MUSHROOM, BROWN_MUSHROOM_BLOCK);
         DUPLICATED.put(BRICK, BRICKS);
         DUPLICATED.put(NETHER_BRICK, NETHER_BRICKS);
-
+        
         DUPLICATED.put(DARK_OAK_DOOR, DARK_OAK_DOOR);
         DUPLICATED.put(ACACIA_DOOR, ACACIA_DOOR);
         DUPLICATED.put(BIRCH_DOOR, BIRCH_DOOR);
         DUPLICATED.put(JUNGLE_DOOR, JUNGLE_DOOR);
         DUPLICATED.put(SPRUCE_DOOR, SPRUCE_DOOR);
-
+        
         DUPLICATED.put(CAULDRON, CAULDRON);
         DUPLICATED.put(BREWING_STAND, BREWING_STAND);
         DUPLICATED.put(FLOWER_POT, FLOWER_POT);
     }
-
+    
     static {
-        for (XMaterial material : VALUES) NAMES.put(material.name(), material);
+        for ( XMaterial material : VALUES ) NAMES.put(material.name(), material);
     }
-
+    
     private final byte data;
-
+    
     private final byte version;
-
+    
     @Nonnull
     private final String[] legacy;
-
+    
     XMaterial(int data, int version, @Nonnull String... legacy) {
         this.data = (byte) data;
         this.version = (byte) version;
         this.legacy = legacy;
     }
-
+    
     XMaterial(int data, @Nonnull String... legacy) {
         this(data, 0, legacy);
     }
-
+    
     XMaterial(int version) {
         this(0, version);
     }
-
+    
     XMaterial() {
         this(0, 0);
     }
-
+    
     XMaterial(String... legacy) {
         this(0, 0, legacy);
     }
-
+    
     @Nonnull
     private static Optional<XMaterial> getIfPresent(@Nonnull String name) {
         return Optional.ofNullable(NAMES.get(name));
     }
-
+    
     public static int getVersion() {
         return VERSION;
     }
-
+    
     @Nullable
     private static XMaterial requestOldXMaterial(@Nonnull String name, byte data) {
-        if (name.equals("EMPTY_MAP")) {
+        if(name.equals("EMPTY_MAP")){
             return XMaterial.MAP;
         }
-        if (name.equals("MAP")) {
+        if(name.equals("MAP")){
             return XMaterial.FILLED_MAP;
         }
         String holder = name + data;
         XMaterial cache = NAME_CACHE.getIfPresent(holder);
-        if (cache != null) return cache;
-        for (XMaterial material : VALUES) {
-            if ((data == UNKNOWN_DATA_VALUE || data == material.data) && material.anyMatchLegacy(name)) {
+        if(cache != null) return cache;
+        for ( XMaterial material : VALUES ){
+            if((data == UNKNOWN_DATA_VALUE || data == material.data) && material.anyMatchLegacy(name)){
                 NAME_CACHE.put(holder, material);
                 return material;
             }
         }
         return null;
     }
-
+    
     @Nonnull
     public static Optional<XMaterial> matchXMaterial(@Nonnull String name) {
         Validate.notEmpty(name, "Cannot match a material with null or empty material name");
         Optional<XMaterial> oldMatch = matchXMaterialWithData(name);
         return oldMatch.isPresent() ? oldMatch : matchDefinedXMaterial(format(name), UNKNOWN_DATA_VALUE);
     }
-
+    
     @Nonnull
     private static Optional<XMaterial> matchXMaterialWithData(@Nonnull String name) {
         int index = name.indexOf(':');
-        if (index != -1) {
+        if(index != -1){
             String mat = format(name.substring(0, index));
             try {
                 byte data = (byte) Integer.parseInt(StringUtils.deleteWhitespace(name.substring(index + 1)));
                 return data >= 0 && data < MAX_DATA_VALUE ? matchDefinedXMaterial(mat, data) : matchDefinedXMaterial(mat, UNKNOWN_DATA_VALUE);
-            } catch (NumberFormatException ignored) {
+            } catch(NumberFormatException ignored) {
                 return matchDefinedXMaterial(mat, UNKNOWN_DATA_VALUE);
             }
         }
         return Optional.empty();
     }
-
+    
     @Nonnull
     public static Optional<XMaterial> matchDefinedXMaterial(@Nonnull String name, byte data) {
         Boolean duplicated = null;
-
-        if (data <= 0 && (ISFLAT || !(duplicated = isDuplicated(name)))) {
+        
+        if(data <= 0 && (ISFLAT || !(duplicated = isDuplicated(name)))){
             Optional<XMaterial> xMaterial = getIfPresent(name);
-            if (xMaterial.isPresent()) return xMaterial;
+            if(xMaterial.isPresent()) return xMaterial;
         }
-
+        
         XMaterial oldXMaterial = requestOldXMaterial(name, data);
-        if (oldXMaterial == null) {
-            if (name.equals("EMPTY_MAP")) {
+        if(oldXMaterial == null){
+            if(name.equals("EMPTY_MAP")){
                 return Optional.of(MAP);
             }
-            if (name.equals("MAP")) {
+            if(name.equals("MAP")){
                 return Optional.of(FILLED_MAP);
             }
             return data > 0 && name.endsWith("MAP") ? Optional.of(MAP) : Optional.empty();
         }
-
-        if (!ISFLAT && oldXMaterial.isPlural() && (duplicated == null ? isDuplicated(name) : duplicated)) {
-
+        
+        if(!ISFLAT && oldXMaterial.isPlural() && (duplicated == null ? isDuplicated(name) : duplicated)){
+            
             return getIfPresent(name);
         }
         return Optional.of(oldXMaterial);
     }
-
+    
     @Nonnull
     @SuppressWarnings("deprecation")
     public static XMaterial matchXMaterial(@Nonnull ItemStack item) {
         Objects.requireNonNull(item, "Cannot match null ItemStack");
         String material = item.getType().name();
         byte data = (byte) (ISFLAT || item.getType().getMaxDurability() > 0 ? 0 : item.getDurability());
-
+        
         return matchDefinedXMaterial(material, data)
                 .orElseThrow(() -> new IllegalArgumentException("Unsupported material: " + material + " (" + data + ')'));
     }
-
+    
     private static boolean isDuplicated(@Nonnull String name) {
-        for (XMaterial duplicated : DUPLICATED.keySet()) {
-            if (duplicated.name().equals(name) || duplicated.anyMatchLegacy(name)) return true;
+        for ( XMaterial duplicated : DUPLICATED.keySet() ){
+            if(duplicated.name().equals(name) || duplicated.anyMatchLegacy(name)) return true;
         }
         return false;
     }
@@ -1298,154 +1298,154 @@ public enum XMaterial {
                 appendUnderline = true;
             else {
                 boolean number = false;
-                if ((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z') || (number = (ch >= '0' && ch <= '9'))) {
-                    if (appendUnderline) {
+                if((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z') || (number = (ch >= '0' && ch <= '9'))){
+                    if(appendUnderline){
                         chs[count++] = '_';
                         appendUnderline = false;
                     }
-
-                    if (number) chs[count++] = ch;
+                    
+                    if(number) chs[count++] = ch;
                     else chs[count++] = (char) (ch & 0x5f);
                 }
             }
         }
-
+        
         return new String(chs, 0, count);
     }
-
+    
     public static boolean supports(int version) {
         return VERSION >= version;
     }
-
+    
     @Nonnull
     public static String getMajorVersion(@Nonnull String version) {
         Validate.notEmpty(version, "Cannot get major Minecraft version from null or empty string");
-
+        
         int index = version.lastIndexOf("MC:");
-        if (index != -1) {
+        if(index != -1){
             version = version.substring(index + 4, version.length() - 1);
-        } else if (version.endsWith("SNAPSHOT")) {
+        } else if(version.endsWith("SNAPSHOT")){
             index = version.indexOf('-');
             version = version.substring(0, index);
         }
-
+        
         int lastDot = version.lastIndexOf('.');
-        if (version.indexOf('.') != lastDot) version = version.substring(0, lastDot);
-
+        if(version.indexOf('.') != lastDot) version = version.substring(0, lastDot);
+        
         return version;
     }
-
+    
     public static boolean isNewVersion() {
         return ISFLAT;
     }
-
+    
     private boolean isPlural() {
         return this.name().charAt(this.name().length() - 1) == 'S';
     }
-
+    
     @Nonnull
     public ItemStack setType(@Nonnull ItemStack item) {
         Objects.requireNonNull(item, "Cannot set material for null ItemStack");
         Material material = this.parseMaterial();
         Objects.requireNonNull(material, () -> "Unsupported material: " + this.name());
-
+        
         item.setType(material);
-        if (!ISFLAT && material.getMaxDurability() <= 0) item.setDurability(this.data);
+        if(!ISFLAT && material.getMaxDurability() <= 0) item.setDurability(this.data);
         return item;
     }
-
+    
     private boolean anyMatchLegacy(@Nonnull String name) {
-        for (String legacy : this.legacy) {
-            if (legacy == null) return false; // Left-side suggestion list
-            if (name.equals(legacy)) return true;
+        for ( String legacy : this.legacy ){
+            if(legacy == null) return false; // Left-side suggestion list
+            if(name.equals(legacy)) return true;
         }
         return false;
     }
-
+    
     @Override
     @Nonnull
     public String toString() {
         return WordUtils.capitalize(this.name().replace('_', ' ').toLowerCase(Locale.ENGLISH));
     }
-
+    
     @SuppressWarnings("deprecation")
     public int getId() {
-        if (this.data != 0 || this.version >= 13) return -1;
+        if(this.data != 0 || this.version >= 13) return -1;
         Material material = this.parseMaterial();
-        if (material == null) return -1;
-        if (ISFLAT/* && !material.isLegacy()*/) return -1;
+        if(material == null) return -1;
+        if(ISFLAT/* && !material.isLegacy()*/) return -1;
         return material.getId();
     }
-
+    
     private boolean isDuplicated() {
         return DUPLICATED.containsKey(this);
     }
-
+    
     @SuppressWarnings("deprecation")
     public byte getData() {
         return data;
     }
-
+    
     @Nullable
     public Material parseMaterial() {
         return parseMaterial(false);
     }
-
+    
     @SuppressWarnings("OptionalAssignedToNull")
     @Nullable
     public Material parseMaterial(boolean suggest) {
         Optional<Material> cache = PARSED_CACHE.getIfPresent(this);
-        if (cache != null) return cache.orElse(null);
+        if(cache != null) return cache.orElse(null);
         Material mat;
-
-        if (!ISFLAT && this.isDuplicated()) mat = requestOldMaterial(suggest);
+        
+        if(!ISFLAT && this.isDuplicated()) mat = requestOldMaterial(suggest);
         else {
             mat = Material.getMaterial(this.name());
-            if (mat == null) mat = requestOldMaterial(suggest);
+            if(mat == null) mat = requestOldMaterial(suggest);
         }
-
+        
         PARSED_CACHE.put(this, Optional.ofNullable(mat));
         return mat;
     }
-
+    
     @Nullable
     private Material requestOldMaterial(boolean suggest) {
-        for (int i = this.legacy.length - 1; i >= 0; i--) {
+        for ( int i = this.legacy.length - 1; i >= 0; i-- ){
             String legacy = this.legacy[i];
-
-            if (legacy == null) {
-                if (suggest) continue;
+            
+            if(legacy == null){
+                if(suggest) continue;
                 break;
             }
-
+            
             Material material = Material.getMaterial(legacy);
-            if (material != null) return material;
+            if(material != null) return material;
         }
         return null;
     }
-
+    
     public boolean isSimilar(@Nonnull ItemStack item) {
         Objects.requireNonNull(item, "Cannot compare with null ItemStack");
-        if (item.getType() != this.parseMaterial()) return false;
+        if(item.getType() != this.parseMaterial()) return false;
         return ISFLAT || item.getDurability() == this.data || item.getType().getMaxDurability() <= 0;
     }
-
+    
     @Nonnull
     public List<String> getSuggestions() {
-        if (this.legacy.length == 0 || this.version == 0) return new ArrayList<>();
+        if(this.legacy.length == 0 || this.version == 0) return new ArrayList<>();
         List<String> suggestions = new ArrayList<>(this.legacy.length);
-        for (String legacy : this.legacy) {
-            if (legacy == null) break;
+        for ( String legacy : this.legacy ){
+            if(legacy == null) break;
             suggestions.add(legacy);
         }
         return suggestions;
     }
-
+    
     public boolean isSupported() {
-        if (this.version != 0) return supports(this.version);
+        if(this.version != 0) return supports(this.version);
         return Material.getMaterial(this.name()) != null || requestOldMaterial(false) != null;
     }
-
+    
     public byte getMaterialVersion() {
         return version;
     }

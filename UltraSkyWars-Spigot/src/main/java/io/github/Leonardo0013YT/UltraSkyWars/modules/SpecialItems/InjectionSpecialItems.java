@@ -10,10 +10,10 @@ import lombok.Getter;
 
 @Getter
 public class InjectionSpecialItems implements Injection {
-
+    
     private Settings special_items;
     private ItemManager im;
-
+    
     @Override
     public void loadInjection(UltraSkyWars plugin) {
         this.special_items = new Settings("modules/special_items", true, false);
@@ -21,15 +21,15 @@ public class InjectionSpecialItems implements Injection {
         plugin.getCommand("swi").setExecutor(new SpecialItemsCMD(plugin, this));
         plugin.getServer().getPluginManager().registerEvents(new SpecialItemsListener(plugin, this), plugin);
     }
-
+    
     @Override
     public void reload() {
-
+    
     }
-
+    
     @Override
     public void disable() {
-
+    
     }
-
+    
 }

@@ -17,10 +17,10 @@ import java.util.Collection;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class WinEffectVulcanWool implements WinEffect, Cloneable {
-
-    private Collection<FallingBlock> fires = new ArrayList<>();
+    
+    private final Collection<FallingBlock> fires = new ArrayList<>();
     private BukkitTask task;
-
+    
     @Override
     public void start(Player p, Game game) {
         UltraSkyWars plugin = UltraSkyWars.get();
@@ -28,7 +28,7 @@ public class WinEffectVulcanWool implements WinEffect, Cloneable {
         task = new BukkitRunnable() {
             @Override
             public void run() {
-                if (p == null || !p.isOnline() || !name.equals(p.getWorld().getName())) {
+                if(p == null || !p.isOnline() || !name.equals(p.getWorld().getName())){
                     stop();
                     return;
                 }
@@ -39,36 +39,36 @@ public class WinEffectVulcanWool implements WinEffect, Cloneable {
             }
         }.runTaskTimer(plugin, 0, 2);
     }
-
+    
     @Override
     public void stop() {
-        if (task != null) {
+        if(task != null){
             task.cancel();
         }
-        for (FallingBlock fb : fires) {
-            if (fb == null) continue;
-            if (!fb.isDead()) {
+        for ( FallingBlock fb : fires ){
+            if(fb == null) continue;
+            if(!fb.isDead()){
                 fb.remove();
-            } else if (fb.isOnGround()) {
+            } else if(fb.isOnGround()){
                 fb.getLocation().getBlock().setType(Material.AIR);
             }
         }
     }
-
+    
     @Override
     public WinEffect clone() {
         return new WinEffectVulcanWool();
     }
-
+    
     protected double random(double d, double d2) {
         return d + ThreadLocalRandom.current().nextDouble() * (d2 - d);
     }
-
+    
     private FallingBlock spawnWool(Location location, double d, double d3) {
         @SuppressWarnings("deprecation")
         FallingBlock fallingBlock = location.getWorld().spawnFallingBlock(location, Material.valueOf("WOOL"), (byte) ThreadLocalRandom.current().nextInt(15));
         fallingBlock.setVelocity(new Vector(d, 0.75, d3));
         return fallingBlock;
     }
-
+    
 }

@@ -12,34 +12,34 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class KillSoundsSelectorMenu extends UltraInventory {
-
-    private HashMap<String, Integer> slots = new HashMap<>();
-    private ArrayList<Integer> extra = new ArrayList<>();
-
+    
+    private final HashMap<String, Integer> slots = new HashMap<>();
+    private final ArrayList<Integer> extra = new ArrayList<>();
+    
     public KillSoundsSelectorMenu(UltraSkyWars plugin, String name) {
         super(name);
         this.title = plugin.getLang().get("menus.killsoundsselector.title");
         reload();
     }
-
+    
     public ArrayList<Integer> getExtra() {
         return extra;
     }
-
+    
     public HashMap<String, Integer> getSlots() {
         return slots;
     }
-
+    
     @Override
     public void reload() {
         UltraSkyWars plugin = UltraSkyWars.get();
-        if (plugin.getMenus().isSet("menus." + name)) {
+        if(plugin.getMenus().isSet("menus." + name)){
             this.rows = plugin.getMenus().getInt("menus." + name + ".rows");
             Map<Integer, ItemStack> config = new HashMap<>();
             Map<Integer, ItemStack> contents = new HashMap<>();
-            if (plugin.getMenus().getConfig().isSet("menus." + name + ".items")) {
+            if(plugin.getMenus().getConfig().isSet("menus." + name + ".items")){
                 ConfigurationSection conf = plugin.getMenus().getConfig().getConfigurationSection("menus." + name + ".items");
-                for (String c : conf.getKeys(false)) {
+                for ( String c : conf.getKeys(false) ){
                     int slot = Integer.parseInt(c);
                     ItemStack litem = plugin.getMenus().getConfig().getItemStack("menus." + name + ".items." + c);
                     AtomicReference<String> selected = new AtomicReference<>("NONE");
@@ -50,7 +50,7 @@ public class KillSoundsSelectorMenu extends UltraInventory {
                             new String[]{"{CLOSE}", plugin.getLang().get("menus.killsoundsselector.close.nameItem"), plugin.getLang().get("menus.killsoundsselector.close.loreItem")},
                             new String[]{"{DESELECT}", plugin.getLang().get("menus.killsoundsselector.deselect.nameItem"), plugin.getLang().get("menus.killsoundsselector.deselect.loreItem")});
                     contents.put(slot, item);
-                    if (selected.get().equals("NONE")) {
+                    if(selected.get().equals("NONE")){
                         extra.add(slot);
                     } else {
                         slots.put(selected.get(), slot);
@@ -62,9 +62,9 @@ public class KillSoundsSelectorMenu extends UltraInventory {
             }
         }
     }
-
+    
     public int getSlot(String name) {
         return slots.getOrDefault(name, -1);
     }
-
+    
 }

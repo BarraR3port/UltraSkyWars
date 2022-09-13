@@ -13,29 +13,29 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class PartyMemberMenu extends UltraInventory {
-
+    
     private final InjectionParty ip;
     private final HashMap<String, Integer> slots = new HashMap<>();
     private final ArrayList<Integer> extra = new ArrayList<>();
     private final ArrayList<Integer> gameSlots = new ArrayList<>();
-
+    
     public PartyMemberMenu(InjectionParty ip, String name) {
         super(name);
         this.ip = ip;
         this.title = ip.getParties().get("menus.members.title");
         reload();
     }
-
+    
     @Override
     public void reload() {
         UltraSkyWars plugin = UltraSkyWars.get();
-        if (plugin.getMenus().isSet("menus." + name)) {
+        if(plugin.getMenus().isSet("menus." + name)){
             this.rows = plugin.getMenus().getInt("menus." + name + ".rows");
             Map<Integer, ItemStack> config = new HashMap<>();
             Map<Integer, ItemStack> contents = new HashMap<>();
-            if (plugin.getMenus().getConfig().isSet("menus." + name + ".items")) {
+            if(plugin.getMenus().getConfig().isSet("menus." + name + ".items")){
                 ConfigurationSection conf = plugin.getMenus().getConfig().getConfigurationSection("menus." + name + ".items");
-                for (String c : conf.getKeys(false)) {
+                for ( String c : conf.getKeys(false) ){
                     int slot = Integer.parseInt(c);
                     ItemStack litem = plugin.getMenus().getConfig().getItemStack("menus." + name + ".items." + c);
                     AtomicReference<String> selected = new AtomicReference<>("NONE");
@@ -43,9 +43,9 @@ public class PartyMemberMenu extends UltraInventory {
                             new String[]{"{PMEMBERCLOSE}", ip.getParties().get("menus.members.close.nameItem"), ip.getParties().get("menus.members.close.loreItem")},
                             new String[]{"{PMEMBERDELETE}", ip.getParties().get("menus.members.delete.nameItem"), ip.getParties().get("menus.members.delete.loreItem")},
                             new String[]{"{MEMBERSLOT}", "", ""});
-                    if (selected.get().equals("NONE")) {
+                    if(selected.get().equals("NONE")){
                         extra.add(slot);
-                    } else if (selected.get().equals("{MEMBERSLOT}")) {
+                    } else if(selected.get().equals("{MEMBERSLOT}")){
                         gameSlots.add(slot);
                     } else {
                         slots.put(selected.get(), slot);
@@ -58,17 +58,17 @@ public class PartyMemberMenu extends UltraInventory {
             }
         }
     }
-
+    
     public ArrayList<Integer> getExtra() {
         return extra;
     }
-
+    
     public ArrayList<Integer> getGameSlots() {
         return gameSlots;
     }
-
+    
     public int getSlot(String name) {
         return slots.getOrDefault(name, -1);
     }
-
+    
 }

@@ -18,10 +18,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class ZombieEvent extends GameEvent {
-
+    
     private BukkitTask task;
     private Collection<Zombie> zombies;
-
+    
     public ZombieEvent(UltraSkyWars plugin, int time) {
         this.time = time;
         this.reset = time;
@@ -33,7 +33,7 @@ public class ZombieEvent extends GameEvent {
         this.title = plugin.getLang().get("titles." + name + ".title");
         this.subtitle = plugin.getLang().get("titles." + name + ".subtitle");
     }
-
+    
     public ZombieEvent(ZombieEvent e) {
         this.time = e.getReset();
         this.reset = e.getReset();
@@ -45,16 +45,16 @@ public class ZombieEvent extends GameEvent {
         this.title = e.getTitle();
         this.subtitle = e.getSubTitle();
     }
-
+    
     @Override
     public void start(Game game) {
         this.task = new BukkitRunnable() {
             @Override
             public void run() {
-                if (zombies.size() >= 30) {
+                if(zombies.size() >= 30){
                     return;
                 }
-                for (Player on : game.getPlayers()) {
+                for ( Player on : game.getPlayers() ){
                     Zombie z = on.getWorld().spawn(on.getLocation(), Zombie.class);
                     z.setMetadata("GAMEEVENT", new FixedMetadataValue(UltraSkyWars.get(), game.getId()));
                     zombies.add(z);
@@ -63,23 +63,23 @@ public class ZombieEvent extends GameEvent {
         }.runTaskTimer(UltraSkyWars.get(), 30, 30);
         World w = game.getLobby().getWorld();
         w.setTime(18000);
-        for (Player on : game.getCached()) {
+        for ( Player on : game.getCached() ){
             w.strikeLightningEffect(on.getLocation());
             on.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 1));
             CustomSound.EVENTS_ZOMBIE.reproduce(on);
         }
     }
-
+    
     @Override
     public void stop(Game game) {
-        if (task != null) {
+        if(task != null){
             task.cancel();
         }
-        if (!zombies.isEmpty()) {
+        if(!zombies.isEmpty()){
             zombies.forEach(Entity::remove);
         }
     }
-
+    
     @Override
     public void reset() {
         this.time = this.reset;
@@ -88,12 +88,12 @@ public class ZombieEvent extends GameEvent {
         this.type = "final";
         this.name = "zombie";
     }
-
+    
     @Override
     public ZombieEvent clone() {
         return new ZombieEvent(this);
     }
-
+    
     public Collection<Zombie> getZombies() {
         return zombies;
     }

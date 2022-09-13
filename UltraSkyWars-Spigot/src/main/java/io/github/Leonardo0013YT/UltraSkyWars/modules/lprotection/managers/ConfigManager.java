@@ -40,83 +40,83 @@ public class ConfigManager {
         noDrop = injection.getLobbyOptions().getBoolean("options.noDrop");
         interactBlocked = injection.getLobbyOptions().getListOrDefault("options.interactBlocked", new ArrayList<>());
     }
-
+    
     public boolean isNoBreakArmorStand() {
         return noBreakArmorStand;
     }
-
+    
     public boolean isNoInteractArmorStand() {
         return noInteractArmorStand;
     }
-
+    
     public boolean isNoBreakFarm() {
         return noBreakFarm;
     }
-
+    
     public boolean isIgniteProtect() {
         return igniteProtect;
     }
-
+    
     public boolean isHideJoinMessage() {
         return hideJoinMessage;
     }
-
+    
     public boolean isHideQuitMessage() {
         return hideQuitMessage;
     }
-
+    
     public String getLobbyWorld() {
         return lobbyWorld;
     }
-
+    
     public List<String> getInteractBlocked() {
         return interactBlocked;
     }
-
+    
     public boolean isOpBypass() {
         return opBypass;
     }
-
+    
     public boolean isJoinTeleport() {
         return joinTeleport;
     }
-
+    
     public boolean isVoidTeleport() {
         return voidTeleport;
     }
-
+    
     public boolean isNoDrop() {
         return noDrop;
     }
-
+    
     public boolean isNoBreak() {
         return noBreak;
     }
-
+    
     public boolean isNoPlace() {
         return noPlace;
     }
-
+    
     public boolean isNoDamage() {
         return noDamage;
     }
-
+    
     public boolean isNoHunger() {
         return noHunger;
     }
-
+    
     public boolean isNoWeather() {
         return noWeather;
     }
-
+    
     public boolean isNoExplosion() {
         return noExplosion;
     }
-
+    
     public boolean isNoDayCycle() {
         return noDayCycle;
     }
-
+    
     public boolean isNoMobSpawn() {
         return noMobSpawn;
     }

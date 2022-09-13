@@ -5,8 +5,8 @@ import org.bukkit.inventory.Inventory;
 
 public interface SoulWellAnimation {
     void execute();
-
+    
     void cancel(Player p);
-
+    
     Inventory getInv();
 }

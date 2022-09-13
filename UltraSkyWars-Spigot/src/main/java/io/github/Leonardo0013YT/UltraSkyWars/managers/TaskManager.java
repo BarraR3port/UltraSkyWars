@@ -7,18 +7,18 @@ import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class TaskManager {
-
+    
     private final UltraSkyWars plugin;
     private int amount = 0;
-
+    
     public TaskManager(UltraSkyWars plugin) {
         this.plugin = plugin;
         loadTasks();
     }
-
+    
     public void loadTasks() {
         Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> {
-            if (amount >= 5) {
+            if(amount >= 5){
                 Utils.updateSB();
                 amount = 0;
             }
@@ -43,6 +43,6 @@ public class TaskManager {
             }
         }.runTaskLater(plugin, 20 * 10);
     }
-
-
+    
+    
 }

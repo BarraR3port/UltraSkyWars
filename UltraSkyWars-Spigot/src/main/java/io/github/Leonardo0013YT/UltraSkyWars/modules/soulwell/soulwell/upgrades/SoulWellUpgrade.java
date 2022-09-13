@@ -9,15 +9,17 @@ import org.bukkit.inventory.ItemStack;
 
 @Getter
 public class SoulWellUpgrade {
-
-    private Material material;
-    private short data;
-    private int amount, level;
-    private double price;
-    private String name, lore;
-    private String type;
-    private String key;
-
+    
+    private final Material material;
+    private final short data;
+    private final int amount;
+    private final int level;
+    private final double price;
+    private final String name;
+    private final String lore;
+    private final String type;
+    private final String key;
+    
     public SoulWellUpgrade(InjectionSoulWell is, String path, String type, String key) {
         this.type = type;
         this.key = key;
@@ -29,11 +31,11 @@ public class SoulWellUpgrade {
         this.name = is.getSoulwell().get(path + ".name");
         this.lore = is.getSoulwell().get(path + ".lore");
     }
-
+    
     public ItemStack getIcon(String status) {
         ItemStack icon = ItemBuilder.item(material, 1, data, name, lore.replaceAll("<status>", status).replaceAll("<price>", String.valueOf(price)).replaceAll("<amount>", String.valueOf(amount)));
         icon = NBTEditor.set(icon, level, "SOULWELL", "UPGRADE", "LEVEL");
         return NBTEditor.set(icon, key, "SOULWELL", "UPGRADE", "KEY");
     }
-
+    
 }

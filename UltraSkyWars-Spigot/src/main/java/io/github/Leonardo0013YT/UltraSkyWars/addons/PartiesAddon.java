@@ -11,29 +11,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PartiesAddon {
-
-    private PartiesAPI api;
-
+    
+    private final PartiesAPI api;
+    
     public PartiesAddon() {
         api = Parties.getApi();
     }
-
+    
     public boolean isInParty(Player p) {
         return !api.getPartyPlayer(p.getUniqueId()).getPartyName().isEmpty();
     }
-
+    
     public boolean isPartyLeader(Player p) {
         PartyPlayer pp = api.getPartyPlayer(p.getUniqueId());
-        if (pp == null) {
+        if(pp == null){
             return false;
         }
         Party party = api.getParty(pp.getPartyName());
-        if (party == null || party.getLeader() == null) {
+        if(party == null || party.getLeader() == null){
             return false;
         }
         return party.getLeader().equals(p.getUniqueId());
     }
-
+    
     public List<Player> getPlayersParty(Player leader) {
         PartyPlayer pp = api.getPartyPlayer(leader.getUniqueId());
         Party party = api.getParty(pp.getPartyName());
@@ -41,5 +41,5 @@ public class PartiesAddon {
         party.getOnlineMembers(true).forEach(o -> online.add(Bukkit.getPlayer(o.getPlayerUUID())));
         return online;
     }
-
+    
 }

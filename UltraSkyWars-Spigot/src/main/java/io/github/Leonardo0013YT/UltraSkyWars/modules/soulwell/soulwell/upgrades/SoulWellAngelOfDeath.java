@@ -8,13 +8,15 @@ import org.bukkit.inventory.ItemStack;
 
 @Getter
 public class SoulWellAngelOfDeath {
-
-    private int level, probability;
-    private double price;
-    private String name, lore;
-    private InjectionSoulWell is;
-    private String key;
-
+    
+    private final int level;
+    private final int probability;
+    private final double price;
+    private final String name;
+    private final String lore;
+    private final InjectionSoulWell is;
+    private final String key;
+    
     public SoulWellAngelOfDeath(InjectionSoulWell is, String path, String key) {
         this.is = is;
         this.key = key;
@@ -24,10 +26,10 @@ public class SoulWellAngelOfDeath {
         this.name = is.getSoulwell().get(path + ".name");
         this.lore = is.getSoulwell().get(path + ".lore");
     }
-
+    
     public ItemStack getIcon() {
         ItemStack icon = ItemBuilder.item(XMaterial.WITHER_SKELETON_SKULL, name, lore.replaceAll("<desc>", is.getSoulwell().get("angelLore")));
         return icon;
     }
-
+    
 }

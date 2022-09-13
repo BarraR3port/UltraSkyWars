@@ -3,7 +3,7 @@ package io.github.Leonardo0013YT.UltraSkyWars.modules.ranks.ranks;
 import io.github.Leonardo0013YT.UltraSkyWars.modules.ranks.InjectionEloRank;
 
 public class EloRank {
-
+    
     private final int min;
     private final int max;
     private final int order;
@@ -11,7 +11,7 @@ public class EloRank {
     private final String prefix;
     private final String corto;
     private final String name;
-
+    
     public EloRank(String color, String corto, String prefix) {
         this.color = color;
         this.corto = corto;
@@ -21,7 +21,7 @@ public class EloRank {
         this.min = 0;
         this.order = 0;
     }
-
+    
     public EloRank(InjectionEloRank plugin, String path, String name) {
         this.name = name;
         this.min = plugin.getEloRank().getInt(path + ".min");
@@ -31,31 +31,31 @@ public class EloRank {
         this.prefix = plugin.getEloRank().get(null, path + ".prefix");
         this.corto = plugin.getEloRank().get(null, path + ".short");
     }
-
+    
     public String getPrefix() {
         return prefix;
     }
-
+    
     public String getCorto() {
         return corto;
     }
-
+    
     public String getColor() {
         return color;
     }
-
+    
     public int getOrder() {
         return order;
     }
-
+    
     public int getMax() {
         return max;
     }
-
+    
     public int getMin() {
         return min;
     }
-
+    
     public String getName() {
         return name;
     }

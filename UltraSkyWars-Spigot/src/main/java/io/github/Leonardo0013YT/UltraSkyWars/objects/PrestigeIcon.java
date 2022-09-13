@@ -11,12 +11,12 @@ import org.bukkit.inventory.ItemStack;
 
 @Getter
 public class PrestigeIcon {
-
+    
     private final Material material;
     private final String id, prefix, name, permRequired, lore;
     private final int levelRequired, angelDeathRequired, slot, page;
-    private UltraSkyWars plugin;
-
+    private final UltraSkyWars plugin;
+    
     public PrestigeIcon(UltraSkyWars plugin, String path) {
         this.plugin = plugin;
         this.id = plugin.getLevels().get(path + ".id");
@@ -30,7 +30,7 @@ public class PrestigeIcon {
         this.angelDeathRequired = plugin.getLevels().getInt(path + ".requirements.angelDeath");
         this.permRequired = plugin.getLevels().get(path + ".requirements.perm");
     }
-
+    
     public ItemStack getItemStack(Player p, SWPlayer sw) {
         boolean required = check(p, sw);
         ItemStack i = ItemBuilder.item(material, 1, ((required) ? "§a" : "§c") + name, lore
@@ -38,9 +38,9 @@ public class PrestigeIcon {
                 .replace("<name>", p.getName()).replace("<level>", String.valueOf(sw.getLevel())).replace("<icon>", prefix));
         return NBTEditor.set(NBTEditor.set(i, id, "PRESTIGE_ICON_ID"), required, "PRESTIGE_ICON_HAS");
     }
-
+    
     public boolean check(Player p, SWPlayer sw) {
         return sw.getLevel() >= levelRequired && sw.getSoulWellHead() >= angelDeathRequired && p.hasPermission(permRequired);
     }
-
+    
 }

@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class SoulWell3DAnimation implements SoulWellAnimation {
-
+    
     private final Inventory inv;
     private final UltraSkyWars plugin;
     private final InjectionSoulWell is;
@@ -29,11 +29,11 @@ public class SoulWell3DAnimation implements SoulWellAnimation {
     private final Player p;
     private final SoulWellRow row;
     private final Location loc;
-    private float lastVel;
     private final Collection<BukkitTask> tasks = new ArrayList<>();
     private final Collection<ArmorStand> armors = new ArrayList<>();
     private final Collection<Entity> items = new ArrayList<>();
-
+    private float lastVel;
+    
     public SoulWell3DAnimation(UltraSkyWars plugin, InjectionSoulWell is, SoulWellSession sws, Player p, SoulWellRow row, Location loc) {
         this.plugin = plugin;
         this.inv = Bukkit.createInventory(null, 45, plugin.getLang().get(null, "menus.soulwellmenu.title"));
@@ -43,13 +43,13 @@ public class SoulWell3DAnimation implements SoulWellAnimation {
         this.row = row;
         this.loc = loc;
     }
-
+    
     @Override
     public void execute() {
         sws.deleteHologram();
         lastVel = p.getWalkSpeed();
         p.setWalkSpeed(0f);
-        for (Vector v : row.getArmors()) {
+        for ( Vector v : row.getArmors() ){
             ArmorStand as = loc.getWorld().spawn(loc.clone().add(v).add(0.5, 0, 0.5), ArmorStand.class);
             as.setGravity(false);
             as.setSmall(false);
@@ -65,29 +65,29 @@ public class SoulWell3DAnimation implements SoulWellAnimation {
             final Location m1 = loc.clone().add(0.5, 1.5, -3).clone();
             final Location m2 = loc.clone().add(0.5, 3.0, 3).clone();
             int i = 0;
-
+            
             @Override
             public void run() {
-                for (Entity e : items) {
+                for ( Entity e : items ){
                     e.remove();
                 }
                 items.clear();
                 CustomSound.SOUL_ANIMATION_3D_1.reproduce(p);
                 plugin.getVc().getNMS().broadcastParticle(m1.add(0, 0, re), 0, 0, 0, 0, "FLAME", 5, 5);
                 plugin.getVc().getNMS().broadcastParticle(m2.add(0, 0, -re), 0, 0, 0, 0, "FLAME", 5, 5);
-                for (ArmorStand as : armors) {
+                for ( ArmorStand as : armors ){
                     Item item = loc.getWorld().dropItem(as.getLocation().clone().add(0, 1.5, 0), plugin.getLvl().getRandomReward().getIcon());
                     item.setPickupDelay(Integer.MAX_VALUE);
                     as.setPassenger(item);
                     items.add(item);
                 }
                 i++;
-                if (i >= 30) {
-                    for (Entity e : items) {
+                if(i >= 30){
+                    for ( Entity e : items ){
                         e.remove();
                     }
                     items.clear();
-                    for (ArmorStand as : armors) {
+                    for ( ArmorStand as : armors ){
                         as.remove();
                     }
                     execute3DAnimation2();
@@ -97,15 +97,15 @@ public class SoulWell3DAnimation implements SoulWellAnimation {
         }.runTaskTimer(plugin, 3, 3);
         tasks.add(task);
     }
-
+    
     private void execute3DAnimation2() {
         sws.setRolling(true);
         p.openInventory(inv);
         p.setWalkSpeed(lastVel);
-        for (int r : row.getResult()) {
+        for ( int r : row.getResult() ){
             inv.setItem(r, plugin.getLvl().getRandomReward().getIcon());
         }
-        for (int r : row.getResult()) {
+        for ( int r : row.getResult() ){
             CustomSound.SOUL_ANIMATION_3D_2.reproduce(p);
             sws.executeReward(p, inv.getItem(r));
         }
@@ -119,30 +119,30 @@ public class SoulWell3DAnimation implements SoulWellAnimation {
             }
         }.runTaskLater(plugin, 20);
     }
-
+    
     @Override
     public void cancel(Player p) {
-        if (sws.isDeleted()) {
+        if(sws.isDeleted()){
             sws.recreateHologram();
         }
-        for (BukkitTask bt : tasks) {
-            if (bt == null) continue;
+        for ( BukkitTask bt : tasks ){
+            if(bt == null) continue;
             bt.cancel();
         }
-        for (ArmorStand a : armors) {
-            if (a == null || a.isDead()) continue;
+        for ( ArmorStand a : armors ){
+            if(a == null || a.isDead()) continue;
             a.remove();
         }
-        for (Entity i : items) {
-            if (i == null || i.isDead()) continue;
+        for ( Entity i : items ){
+            if(i == null || i.isDead()) continue;
             i.remove();
         }
         p.setWalkSpeed(lastVel);
     }
-
+    
     @Override
     public Inventory getInv() {
         return inv;
     }
-
+    
 }

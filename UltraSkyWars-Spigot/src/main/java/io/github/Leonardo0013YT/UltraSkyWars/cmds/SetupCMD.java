@@ -143,7 +143,7 @@ public class SetupCMD implements CommandExecutor {
                         p.getInventory().remove(plugin.getIm().getCenter());
                         p.getInventory().addItem(plugin.getIm().getSetup());
                         p.sendMessage(plugin.getLang().get("setup.arena.createMap").replace("<name>", name));
-    
+                        
                     }
                     break;
                 case "edit":

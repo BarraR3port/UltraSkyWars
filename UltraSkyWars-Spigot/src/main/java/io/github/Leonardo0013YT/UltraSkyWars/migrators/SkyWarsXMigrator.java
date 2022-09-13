@@ -17,23 +17,23 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 public class SkyWarsXMigrator {
-
+    
     private HikariDataSource hikari;
     private String tableData;
     private boolean enabled, useUUID;
     private File connection;
     private UltraSkyWars plugin;
-
+    
     public SkyWarsXMigrator(UltraSkyWars plugin) {
-        if (!plugin.getMigrators().getBoolean("skywarsX.enabled")) return;
+        if(!plugin.getMigrators().getBoolean("skywarsX.enabled")) return;
         tableData = plugin.getMigrators().get(null, "skywarsX.table");
         enabled = plugin.getMigrators().getBoolean("skywarsX.mysql.enabled");
         useUUID = plugin.getMigrators().getBoolean("skywarsX.useUUID");
-        if (!useUUID) {
+        if(!useUUID){
             plugin.sendLogMessage("§cThe migration by name is only for MySQL! §bSkyWars X");
         }
         this.plugin = plugin;
-        if (enabled) {
+        if(enabled){
             hikari = new HikariDataSource();
             hikari.setDataSourceClassName("com.mysql.jdbc.jdbc2.optional.MysqlDataSource");
             hikari.addDataSourceProperty("serverName", plugin.getMigrators().get(null, "skywarsX.mysql.server"));
@@ -46,7 +46,7 @@ public class SkyWarsXMigrator {
             plugin.sendLogMessage("§aMigration §bMySQL SkyWars X§e connected!");
         } else {
             connection = new File("plugins/Skywars/players");
-            if (!connection.exists()) {
+            if(!connection.exists()){
                 connection.mkdirs();
             }
             plugin.sendLogMessage("§aMigration §bYML Data SkyWars X§e connected!");
@@ -55,33 +55,33 @@ public class SkyWarsXMigrator {
         plugin.getMigrators().set("skywarsX.enabled", false);
         plugin.getMigrators().save();
     }
-
+    
     public void loadPlayer(Player p) {
         File file = new File(plugin.getDataFolder(), "players");
-        if (!file.exists()) {
+        if(!file.exists()){
             file.mkdirs();
         }
         File player = new File(file, p.getUniqueId().toString());
-        if (player.exists()) {
+        if(player.exists()){
             // CODIGO DE CARGA
             YamlConfiguration cargado = YamlConfiguration.loadConfiguration(player);
-
+            
         } else {
             YamlConfiguration cargado = YamlConfiguration.loadConfiguration(player);
             try {
                 cargado.save(player);
-            } catch (IOException ignored) {
+            } catch(IOException ignored) {
             }
         }
     }
-
+    
     public void migrate() {
         new BukkitRunnable() {
             int parsed = 0, failed = 0;
-
+            
             @Override
             public void run() {
-                if (enabled) {
+                if(enabled){
                     try {
                         Connection connection = hikari.getConnection();
                         String MULTI = "SELECT * FROM " + tableData + ";";
@@ -89,7 +89,7 @@ public class SkyWarsXMigrator {
                         ResultSet result = select.executeQuery();
                         while (result.next()) {
                             String name = result.getString("player_name");
-                            if (result.getString("player_uuid") == null) {
+                            if(result.getString("player_uuid") == null){
                                 plugin.sendLogMessage("§cError migrating data of §b" + name + "§e! §6SkyWars X");
                                 failed++;
                                 continue;
@@ -113,15 +113,15 @@ public class SkyWarsXMigrator {
                             parsed++;
                         }
                         plugin.sendLogMessage("§eMigration completed: §aCorrect -> §b" + parsed + " §cError -> §b" + failed);
-                    } catch (SQLException ignored) {
+                    } catch(SQLException ignored) {
                     }
                 } else {
-                    if (!useUUID) {
+                    if(!useUUID){
                         plugin.sendLogMessage("§cThe migration by name is only for MySQL! §bSkyWars X");
                         return;
                     }
                     File[] files = connection.listFiles();
-                    for (File f : files) {
+                    for ( File f : files ){
                         YamlConfiguration result = YamlConfiguration.loadConfiguration(f);
                         UUID uuid = UUID.fromString(f.getName());
                         String name = result.getString("player_name");
@@ -147,7 +147,7 @@ public class SkyWarsXMigrator {
             }
         }.runTaskAsynchronously(plugin);
     }
-
+    
     public SWPlayer getSw(int coins, int xp, int wins, int kills, int deaths, int played, int arrow_shot, int arrow_hit, int blocks_broken, int blocks_placed, int distance_walked) {
         SWPlayer pw = new SWPlayer();
         pw.addStat(StatType.BREAK, "SOLO", blocks_broken);
@@ -163,5 +163,5 @@ public class SkyWarsXMigrator {
         pw.setXp(xp);
         return pw;
     }
-
+    
 }

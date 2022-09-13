@@ -20,31 +20,31 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import java.util.ArrayList;
 
 public class SignsListener implements Listener {
-
-    private UltraSkyWars plugin;
-    private InjectionSigns signsInjection;
-
+    
+    private final UltraSkyWars plugin;
+    private final InjectionSigns signsInjection;
+    
     public SignsListener(UltraSkyWars plugin, InjectionSigns signsInjection) {
         this.plugin = plugin;
         this.signsInjection = signsInjection;
     }
-
+    
     @EventHandler
     public void onSign(SignChangeEvent e) {
         Player p = e.getPlayer();
-        if (!p.hasPermission("usw.admin")) {
+        if(!p.hasPermission("usw.admin")){
             return;
         }
-        if (e.getLine(0).equalsIgnoreCase("[SW]")) {
-            if (e.getLine(1) == null) {
+        if(e.getLine(0).equalsIgnoreCase("[SW]")){
+            if(e.getLine(1) == null){
                 return;
             }
             String type = e.getLine(1).toUpperCase();
-            if (plugin.getGm().getModes().contains(type)) {
+            if(plugin.getGm().getModes().contains(type)){
                 Location loc = e.getBlock().getLocation();
                 String l = Utils.getLocationString(loc);
                 ArrayList<String> locs = new ArrayList<>(signsInjection.getSigns().getListOrDefault("signs." + type, new ArrayList<>()));
-                if (locs.contains(l)) {
+                if(locs.contains(l)){
                     p.sendMessage("§cThis sign is already added.");
                     return;
                 }
@@ -56,20 +56,20 @@ public class SignsListener implements Listener {
             }
         }
     }
-
+    
     @EventHandler
     public void onBreak(BlockBreakEvent e) {
         Player p = e.getPlayer();
-        if (!p.hasPermission("usw.admin")) {
+        if(!p.hasPermission("usw.admin")){
             return;
         }
         Location loc = e.getBlock().getLocation();
-        if (signsInjection.getSim().getGameSignByLoc(loc) != null) {
+        if(signsInjection.getSim().getGameSignByLoc(loc) != null){
             GameSign us = signsInjection.getSim().getGameSignByLoc(loc);
             String l = Utils.getLocationString(loc);
             String type = us.getType().toUpperCase();
             ArrayList<String> locs = new ArrayList<>(signsInjection.getSigns().getListOrDefault("signs." + type, new ArrayList<>()));
-            if (!locs.contains(l)) {
+            if(!locs.contains(l)){
                 return;
             }
             locs.remove(l);
@@ -77,55 +77,55 @@ public class SignsListener implements Listener {
             p.sendMessage(plugin.getLang().get(p, "messages.removedSing"));
         }
     }
-
+    
     private void setSign(String type, ArrayList<String> locs) {
         signsInjection.getSigns().set("signs." + type, locs);
         signsInjection.getSigns().save();
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
             signsInjection.getSim().reload();
             plugin.getGm().getGames().values().forEach(Game::updateSign);
-            if (plugin.getCm().isBungeeModeLobby()) {
+            if(plugin.getCm().isBungeeModeLobby()){
                 plugin.getGm().getModes().forEach(mode -> {
                     //plugin.getBm().sendMessage("usw:callback", mode);
                 });
             }
         }, 2L);
     }
-
+    
     @EventHandler
     public void onInteract(PlayerInteractEvent e) {
         Player p = e.getPlayer();
-        if (e.getAction().equals(Action.PHYSICAL)) {
+        if(e.getAction().equals(Action.PHYSICAL)){
             return;
         }
-        if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) || e.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
+        if(e.getAction().equals(Action.RIGHT_CLICK_BLOCK) || e.getAction().equals(Action.LEFT_CLICK_BLOCK)){
             Block b = e.getClickedBlock();
-            if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-                if (b.getState() instanceof Sign) {
-                    if (plugin.getCm().isSignsRight() && !plugin.getGm().isPlayerInGame(p)) {
-                        if (sendToServer(e, p, b)) return;
+            if(e.getAction().equals(Action.RIGHT_CLICK_BLOCK)){
+                if(b.getState() instanceof Sign){
+                    if(plugin.getCm().isSignsRight() && !plugin.getGm().isPlayerInGame(p)){
+                        if(sendToServer(e, p, b)) return;
                     }
                 }
             }
-            if (e.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
-                if (b.getState() instanceof Sign) {
-                    if (p.hasPermission("usw.admin") && p.isSneaking()) return;
-                    if (plugin.getCm().isSignsLeft() && !plugin.getGm().isPlayerInGame(p)) {
+            if(e.getAction().equals(Action.LEFT_CLICK_BLOCK)){
+                if(b.getState() instanceof Sign){
+                    if(p.hasPermission("usw.admin") && p.isSneaking()) return;
+                    if(plugin.getCm().isSignsLeft() && !plugin.getGm().isPlayerInGame(p)){
                         sendToServer(e, p, b);
                     }
                 }
             }
         }
     }
-
+    
     private boolean sendToServer(PlayerInteractEvent e, Player p, Block b) {
         GameSign us = signsInjection.getSim().getGameSignByLoc(b.getLocation());
-        if (us == null) {
+        if(us == null){
             return true;
         }
-        if (us.isOccupied()) {
+        if(us.isOccupied()){
             e.setCancelled(true);
-            if (!us.getData().getServer().equals("")) {
+            if(!us.getData().getServer().equals("")){
                 plugin.sendToServer(p, us.getData().getServer());
             } else {
                 plugin.getGm().addPlayerGame(p, plugin.getGm().getGameID(us.getData().getMap()));
@@ -133,5 +133,5 @@ public class SignsListener implements Listener {
         }
         return false;
     }
-
+    
 }

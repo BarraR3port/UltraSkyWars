@@ -1,7 +1,7 @@
 package io.github.Leonardo0013YT.UltraSkyWars.enums;
 
 public enum StatType {
-
+    
     ASSISTS,
     PLAYED,
     PLACED,
@@ -14,6 +14,6 @@ public enum StatType {
     WINS,
     KILL50,
     KILL25,
-    KILL5;
-
+    KILL5
+    
 }

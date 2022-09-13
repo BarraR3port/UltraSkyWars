@@ -32,8 +32,8 @@ public class SlimeWorldManagerAddon {
         slimeProperties.setString(SlimeProperties.ENVIRONMENT, "normal");
         try {
             slime.createEmptyWorld(loader, name, false, slimeProperties);
-        } catch (WorldAlreadyExistsException | IOException ignored) {
+        } catch(WorldAlreadyExistsException | IOException ignored) {
         }
     }
-
+    
 }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SeasonDivision {
-
+    
     private final ItemStack icon;
     private final int topMin;
     private final int topMax;
@@ -17,7 +17,7 @@ public class SeasonDivision {
     private final List<String> lore;
     private final List<String> ranks;
     private final List<String> rewards;
-
+    
     public SeasonDivision(InjectionEloRank ier, String path, int season, boolean passed) {
         this.topMin = ier.getRankeds().getInt(path + ".top.min");
         this.topMax = ier.getRankeds().getInt(path + ".top.max");
@@ -25,17 +25,17 @@ public class SeasonDivision {
         this.ranks = ier.getRankeds().getList(path + ".ranks");
         this.rewards = ier.getRankeds().getList(path + ".rewards.commands");
         List<String> lore = new ArrayList<>();
-        for (String l : ier.getRankeds().getList(path + ".lore")) {
+        for ( String l : ier.getRankeds().getList(path + ".lore") ){
             lore.add(l.replaceAll("&", "§").replaceAll("<season>", String.valueOf(season)).replaceAll("<status>", passed ? ier.getRankeds().get("passed") : ier.getRankeds().get("now")));
         }
         this.lore = lore;
         this.icon = ItemBuilder.item(new ItemStack(XMaterial.matchDefinedXMaterial(ier.getRankeds().get(path + ".icon.material"), (byte) ier.getRankeds().getInt(path + ".icon.data")).orElse(XMaterial.OAK_WOOD).parseMaterial(), ier.getRankeds().getInt(path + ".icon.amount"), (short) ier.getRankeds().getInt(path + ".icon.data")), name + ier.getRankeds().get("format").replaceAll("<max>", String.valueOf(topMax)).replaceAll("<min>", String.valueOf(topMin)), lore);
     }
-
+    
     public String getName() {
         return name;
     }
-
+    
     public ItemStack getIcon() {
         return icon;
     }

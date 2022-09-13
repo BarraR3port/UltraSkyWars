@@ -11,13 +11,13 @@ import io.github.Leonardo0013YT.UltraSkyWars.modules.ranks.placeholders.Placehol
 import org.bukkit.Bukkit;
 
 public class InjectionEloRank implements Injection {
-
+    
     private Injection instance;
     private EloRankManager erm;
     private SeasonManager sm;
     private Settings eloRank, rankeds;
     private RankedMenu rem;
-
+    
     @Override
     public void loadInjection(UltraSkyWars main) {
         instance = this;
@@ -29,45 +29,45 @@ public class InjectionEloRank implements Injection {
         Bukkit.getServer().getPluginManager().registerEvents(new EloListener(main, this), main);
         Bukkit.getScheduler().runTaskTimerAsynchronously(main, () -> sm.reduce(), 20 * 5, 20 * 5);
     }
-
+    
     @Override
     public void reload() {
         eloRank.reload();
         erm.reload();
     }
-
+    
     @Override
     public void disable() {
-
+    
     }
-
+    
     public Settings getRankeds() {
         return rankeds;
     }
-
+    
     public Settings getEloRank() {
         return eloRank;
     }
-
+    
     public RankedMenu getRem() {
         return rem;
     }
-
+    
     public SeasonManager getSm() {
         return sm;
     }
-
+    
     public EloRankManager getErm() {
         return erm;
     }
-
+    
     public Injection getInstance() {
         return instance;
     }
-
+    
     public void loadPlaceholders() {
         new Placeholders(this).register();
     }
-
-
+    
+    
 }

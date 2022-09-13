@@ -12,11 +12,11 @@ public class VersionController {
     
     private final UltraSkyWars plugin;
     private final NMSReflection reflection;
-    private String version;
-    private NMS nms;
     private final boolean is1_13to17 = false;
     private final boolean is1_9to17 = false;
     private final boolean is1_12 = false;
+    private String version;
+    private NMS nms;
     
     public VersionController(UltraSkyWars plugin) {
         this.plugin = plugin;
@@ -34,40 +34,40 @@ public class VersionController {
                 plugin.sendLogMessage("§cYou have an outdated version §e1.8§c, please use version §a1.8.8§c.");
                 disable();
             }
-        } catch (ArrayIndexOutOfBoundsException ex) {
+        } catch(ArrayIndexOutOfBoundsException ex) {
             ex.printStackTrace();
         }
     }
-
+    
     public void disable() {
         Bukkit.getScheduler().cancelTasks(plugin);
         Bukkit.getPluginManager().disablePlugin(plugin);
     }
-
+    
     public NMS getNMS() {
         return nms;
     }
-
+    
     public Nametags getNameTag(String name, String display, String prefix) {
         return new Nametags(name, display, prefix);
     }
-
+    
     public NMSReflection getReflection() {
         return reflection;
     }
-
+    
     public String getVersion() {
         return version;
     }
-
+    
     public boolean is1_12() {
         return is1_12;
     }
-
+    
     public boolean is1_9to17() {
         return is1_9to17;
     }
-
+    
     public boolean is1_13to17() {
         return is1_13to17;
     }

@@ -9,13 +9,13 @@ import java.util.Map;
 
 @Getter
 public class Top {
-
+    
     private final Map<Integer, TopPlayer> tops = new HashMap<>();
     private final TopType type;
-
+    
     public Top(TopType type, List<String> tops) {
         this.type = type;
-        for (String top : tops) {
+        for ( String top : tops ){
             String[] t = top.split(":");
             String uuid = t[0];
             String name = t[1];
@@ -24,5 +24,5 @@ public class Top {
             this.tops.put(position, new TopPlayer(type.name(), uuid, name, position, amount));
         }
     }
-
+    
 }

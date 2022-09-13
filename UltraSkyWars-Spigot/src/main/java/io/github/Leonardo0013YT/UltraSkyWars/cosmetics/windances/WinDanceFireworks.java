@@ -11,14 +11,14 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 public class WinDanceFireworks implements WinDance, Cloneable {
-
+    
     private static boolean loaded = false;
     private static int minOfCenter, maxOfCenter, firstUp, taskTick;
     private BukkitTask task;
-
+    
     @Override
     public void loadCustoms(UltraSkyWars plugin, String path) {
-        if (!loaded) {
+        if(!loaded){
             minOfCenter = plugin.getWindance().getIntOrDefault(path + ".minOfCenter", 10);
             maxOfCenter = plugin.getWindance().getIntOrDefault(path + ".maxOfCenter", 10);
             firstUp = plugin.getWindance().getIntOrDefault(path + ".firstUp", 90);
@@ -26,7 +26,7 @@ public class WinDanceFireworks implements WinDance, Cloneable {
             loaded = true;
         }
     }
-
+    
     @Override
     public void start(Player p, Game game) {
         World world = game.getSpectator().getWorld();
@@ -40,7 +40,7 @@ public class WinDanceFireworks implements WinDance, Cloneable {
         Location loc8 = new Location(world, -maxOfCenter, firstUp, -maxOfCenter);
         task = new BukkitRunnable() {
             public void run() {
-                if (p == null || !p.isOnline() || !world.getName().equals(p.getWorld().getName())) {
+                if(p == null || !p.isOnline() || !world.getName().equals(p.getWorld().getName())){
                     stop();
                     return;
                 }
@@ -55,17 +55,17 @@ public class WinDanceFireworks implements WinDance, Cloneable {
             }
         }.runTaskTimer(UltraSkyWars.get(), 0, taskTick);
     }
-
+    
     @Override
     public void stop() {
-        if (task != null) {
+        if(task != null){
             task.cancel();
         }
     }
-
+    
     @Override
     public WinDance clone() {
         return new WinDanceFireworks();
     }
-
+    
 }

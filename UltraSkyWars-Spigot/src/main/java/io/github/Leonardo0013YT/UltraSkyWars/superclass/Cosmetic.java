@@ -4,11 +4,11 @@ import io.github.Leonardo0013YT.UltraSkyWars.config.Settings;
 import io.github.Leonardo0013YT.UltraSkyWars.interfaces.Purchasable;
 
 public abstract class Cosmetic implements Purchasable {
-
+    
     public String name, permission, autoGivePermission;
     public boolean isBuy, needPermToBuy;
     public int id, slot, page, price;
-
+    
     public Cosmetic(Settings config, String path, String type) {
         this.name = config.get(path + ".name");
         this.id = config.getInt(path + ".id");
@@ -20,44 +20,44 @@ public abstract class Cosmetic implements Purchasable {
         this.isBuy = config.getBoolean(path + ".isBuy");
         this.needPermToBuy = config.getBooleanOrDefault(path + ".needPermToBuy", false);
     }
-
+    
     @Override
     public String getPermission() {
         return permission;
     }
-
+    
     @Override
     public String getAutoGivePermission() {
         return autoGivePermission;
     }
-
+    
     @Override
     public boolean isBuy() {
         return isBuy;
     }
-
+    
     @Override
     public boolean needPermToBuy() {
         return needPermToBuy;
     }
-
+    
     @Override
     public int getPrice() {
         return price;
     }
-
+    
     public String getName() {
         return name;
     }
-
+    
     public int getSlot() {
         return slot;
     }
-
+    
     public int getPage() {
         return page;
     }
-
+    
     public int getId() {
         return id;
     }

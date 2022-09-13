@@ -13,10 +13,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 @Getter
 public class ItemManager {
-
+    
     private final UltraSkyWarsTNTM plugin;
     private final ItemStack tntLaunchPad, instantBoom, normalTNT, tntMadnessBook;
-
+    
     public ItemManager(UltraSkyWarsTNTM plugin) {
         this.plugin = plugin;
         this.tntMadnessBook = new ItemStack(Material.WRITTEN_BOOK);
@@ -36,5 +36,5 @@ public class ItemManager {
         this.normalTNT = ItemBuilder.item(Material.TNT, 1, plugin.getTntLang().get("items.normalTNT.nameItem"), plugin.getTntLang().get("items.normalTNT.loreItem"));
         UltraSkyWars.get().getIm().getItems().add(tntMadnessBook);
     }
-
+    
 }

@@ -60,7 +60,7 @@ public class UltraInventoryMenu {
         pages.remove(p.getUniqueId());
         plugin.getGem().getViews().remove(p.getUniqueId());
     }
-
+    
     public void loadMenus() {
         menus.clear();
         menus.put("kitsperks", new KitsPerksMenu(plugin, "kitsperks"));
@@ -91,24 +91,24 @@ public class UltraInventoryMenu {
         menus.put("kitselector", new KitSelectorMenu(plugin, "kitselector"));
         loadMenusActions();
     }
-
+    
     public UltraInventory getMenus(String t) {
         return menus.get(t);
     }
-
+    
     public void openInventory(Player p, UltraInventory i) {
         Inventory inv = Bukkit.createInventory(null, i.getRows() * 9, i.getTitle());
-        for (Map.Entry<Integer, ItemStack> entry : i.getConfig().entrySet()) {
+        for ( Map.Entry<Integer, ItemStack> entry : i.getConfig().entrySet() ){
             Integer s = entry.getKey();
             ItemStack it = entry.getValue();
             inv.setItem(s, it);
         }
         p.openInventory(inv);
     }
-
+    
     public Inventory openContentInventory(Player p, UltraInventory i) {
         Inventory inv = Bukkit.createInventory(null, i.getRows() * 9, i.getTitle());
-        for (Map.Entry<Integer, ItemStack> entry : i.getContents().entrySet()) {
+        for ( Map.Entry<Integer, ItemStack> entry : i.getContents().entrySet() ){
             Integer s = entry.getKey();
             ItemStack it = entry.getValue();
             inv.setItem(s, ItemBuilder.parseVariables(p, it));
@@ -116,64 +116,64 @@ public class UltraInventoryMenu {
         p.openInventory(inv);
         return inv;
     }
-
+    
     public void openPlayersInventory(Player p, UltraInventory i, Game game, OrderType type, String[]... t) {
         Inventory inv = Bukkit.createInventory(null, i.getRows() * 9, i.getTitle());
-        if (type.equals(OrderType.ALPHABETICALLY)) {
+        if(type.equals(OrderType.ALPHABETICALLY)){
             List<String> pls = new ArrayList<>();
             game.getPlayers().forEach(player -> pls.add(player.getName()));
-            for (String l : Utils.orderABC(pls)) {
+            for ( String l : Utils.orderABC(pls) ){
                 GamePlayer gp = game.getGamePlayerByName(l);
-                if (gp.getP().equals(p) || gp.isDead()) continue;
+                if(gp.getP().equals(p) || gp.isDead()) continue;
                 ItemStack skull = ItemBuilder.skull(XMaterial.PLAYER_HEAD, 1, "§e" + l, plugin.getLang().get(p, "menus.players.players.loreItem").replaceAll("<health>", Utils.formatDouble(gp.getP().getHealth())).replaceAll("<food>", Utils.formatDouble(gp.getP().getFoodLevel())).replaceAll("<kills>", String.valueOf(gp.getKills())), l);
                 inv.addItem(skull);
             }
-        } else if (type.equals(OrderType.KILLS)) {
+        } else if(type.equals(OrderType.KILLS)){
             List<Integer> pls = new ArrayList<>();
-            for (GamePlayer gp : game.getGamePlayer().values()) {
-                if (gp.isDead()) continue;
+            for ( GamePlayer gp : game.getGamePlayer().values() ){
+                if(gp.isDead()) continue;
                 pls.add(gp.getKills());
             }
             List<GamePlayer> ready = new ArrayList<>();
-            for (int l : Utils.orderDESC(pls)) {
+            for ( int l : Utils.orderDESC(pls) ){
                 GamePlayer gp = game.getGamePlayerByKills(l, ready);
                 ready.add(gp);
                 checkEquals(p, inv, gp);
             }
         } else {
-            for (GamePlayer gp : game.getGamePlayer().values()) {
-                if (gp.isDead()) continue;
+            for ( GamePlayer gp : game.getGamePlayer().values() ){
+                if(gp.isDead()) continue;
                 checkEquals(p, inv, gp);
             }
         }
-        for (Map.Entry<Integer, ItemStack> entry : i.getContents().entrySet()) {
+        for ( Map.Entry<Integer, ItemStack> entry : i.getContents().entrySet() ){
             Integer s = entry.getKey();
             ItemStack it = entry.getValue();
             inv.setItem(s, ItemBuilder.parseVariables(p, it, plugin, t));
         }
         p.openInventory(inv);
     }
-
+    
     private void checkEquals(Player p, Inventory inv, GamePlayer gp) {
-        if (gp == null || gp.getP() == null || !gp.getP().isOnline()) return;
-        if (gp.getP().getUniqueId().equals(p.getUniqueId())) return;
+        if(gp == null || gp.getP() == null || !gp.getP().isOnline()) return;
+        if(gp.getP().getUniqueId().equals(p.getUniqueId())) return;
         ItemStack skull = ItemBuilder.skull(XMaterial.PLAYER_HEAD, 1, "§e" + gp.getP().getName(), plugin.getLang().get(p, "menus.players.players.loreItem").replaceAll("<health>", Utils.formatDouble(gp.getP().getHealth())).replaceAll("<food>", Utils.formatDouble(gp.getP().getFoodLevel())).replaceAll("<kills>", String.valueOf(gp.getKills())), gp.getP().getName());
         inv.addItem(skull);
     }
-
+    
     public void openInventory(Player p, UltraInventory i, String[]... t) {
         Inventory inv = Bukkit.createInventory(null, i.getRows() * 9, i.getTitle());
-        for (Map.Entry<Integer, ItemStack> entry : i.getContents().entrySet()) {
+        for ( Map.Entry<Integer, ItemStack> entry : i.getContents().entrySet() ){
             Integer s = entry.getKey();
             ItemStack it = entry.getValue().clone();
             inv.setItem(s, ItemBuilder.parseVariables(p, it, plugin, t));
         }
         p.openInventory(inv);
     }
-
+    
     public void openChestInventory(Player p, UltraInventory i, String[]... t) {
         Inventory inv = Bukkit.createInventory(null, i.getRows() * 9, i.getTitle());
-        for (Map.Entry<Integer, ItemStack> entry : i.getContents().entrySet()) {
+        for ( Map.Entry<Integer, ItemStack> entry : i.getContents().entrySet() ){
             Integer s = entry.getKey();
             ItemStack it = entry.getValue().clone();
             AtomicReference<String> selected = new AtomicReference<>("");
@@ -182,13 +182,13 @@ public class UltraInventoryMenu {
         }
         p.openInventory(inv);
     }
-
+    
     public void setInventory(String inv, Inventory close) {
-        if (menus.containsKey(inv)) {
+        if(menus.containsKey(inv)){
             Map<Integer, ItemStack> items = new HashMap<>();
-            for (int i = 0; i < close.getSize(); i++) {
+            for ( int i = 0; i < close.getSize(); i++ ){
                 ItemStack it = close.getItem(i);
-                if (it == null || it.getType().equals(Material.AIR)) {
+                if(it == null || it.getType().equals(Material.AIR)){
                     continue;
                 }
                 items.put(i, it);
@@ -197,55 +197,55 @@ public class UltraInventoryMenu {
             menus.get(inv).save();
         }
     }
-
+    
     public void createPartingSelectorMenu(Player p) {
         int page = pages.get(p.getUniqueId());
         PartingSelectorMenu selector = (PartingSelectorMenu) getMenus("partingselector");
         Inventory inv = Bukkit.createInventory(null, selector.getRows() * 9, plugin.getLang().get(p, "menus.partingselector.title"));
-        for (int s : selector.getExtra()) {
+        for ( int s : selector.getExtra() ){
             inv.setItem(s, selector.getContents().get(s));
         }
         SWPlayer sw = plugin.getDb().getSWPlayer(p);
-        for (Parting k : plugin.getCos().getPartings().values()) {
-            if (k.getId() == sw.getParting()) {
+        for ( Parting k : plugin.getCos().getPartings().values() ){
+            if(k.getId() == sw.getParting()){
                 ItemStack i = k.getIcon(p);
                 ItemStack kit = ItemBuilder.nameLore(i.clone(), plugin.getLang().get(p, "menus.partingselector.parting.nameItem"), plugin.getLang().get(p, "menus.partingselector.parting.loreItem"));
                 int s = selector.getSlot("{SELECTED}");
-                if (s > -1 && s < 54) {
+                if(s > -1 && s < 54){
                     inv.setItem(s, kit);
                 }
-                if (k.getPage() != page) continue;
+                if(k.getPage() != page) continue;
                 inv.setItem(k.getSlot(), i);
             } else {
-                if (k.getPage() != page) continue;
+                if(k.getPage() != page) continue;
                 inv.setItem(k.getSlot(), k.getIcon(p));
             }
         }
-        if (sw.getParting() != 999999) {
+        if(sw.getParting() != 999999){
             int s = selector.getSlot("{DESELECT}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, selector.getContents().get(s));
             }
         }
-        if (page > 1) {
+        if(page > 1){
             int s = selector.getSlot("{LAST}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, selector.getContents().get(s));
             }
         }
-        if (page < plugin.getCos().getLastPage("Parting")) {
+        if(page < plugin.getCos().getLastPage("Parting")){
             int s = selector.getSlot("{NEXT}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, selector.getContents().get(s));
             }
         }
         int s = selector.getSlot("{CLOSE}");
-        if (s > -1 && s < 54) {
+        if(s > -1 && s < 54){
             inv.setItem(s, selector.getContents().get(s));
         }
         p.openInventory(inv);
     }
-
+    
     public void createKitSelectorMenu(Player p, String type, boolean game) {
         int page = pages.get(p.getUniqueId());
         KitSelectorMenu selector = (KitSelectorMenu) getMenus("kitselector");
@@ -253,476 +253,476 @@ public class UltraInventoryMenu {
         SWPlayer sw = plugin.getDb().getSWPlayer(p);
         int kitSelected = sw.getSoloKit();
         int kitSelectedLevel = sw.getSoloKitLevel();
-        if (type.equals("TEAM")) {
+        if(type.equals("TEAM")){
             kitSelected = sw.getTeamKit();
             kitSelectedLevel = sw.getTeamKitLevel();
-        } else if (type.equals("RANKED")) {
+        } else if(type.equals("RANKED")){
             kitSelected = sw.getRankedKit();
             kitSelectedLevel = sw.getRankedKitLevel();
         }
-        for (Kit k : plugin.getKm().getKits().values()) {
-            if (!k.getModes().contains(type)) {
+        for ( Kit k : plugin.getKm().getKits().values() ){
+            if(!k.getModes().contains(type)){
                 continue;
             }
-            if (k.getId() == kitSelected) {
+            if(k.getId() == kitSelected){
                 KitLevel kl = k.getLevels().get(kitSelectedLevel);
-                if (kl == null) {
+                if(kl == null){
                     inv.setItem(k.getSlot(), NBTEditor.set(k.getLevels().get(1).getIcon(p), type, "KIT", "SELECTOR", "TYPE"));
                     continue;
                 }
                 ItemStack i = kl.getIcon(p);
                 ItemStack kit = ItemBuilder.nameLore(i.clone(), plugin.getLang().get(p, "menus.kitselector.kit.nameItem"), plugin.getLang().get(p, "menus.kitselector.kit.loreItem"));
                 int s = selector.getSlot("{SELECTED}");
-                if (s > -1 && s < 54) {
+                if(s > -1 && s < 54){
                     inv.setItem(s, NBTEditor.set(kit, type, "KIT", "SELECTOR", "TYPE"));
                 }
-                if (k.getPage() != page) continue;
+                if(k.getPage() != page) continue;
                 inv.setItem(k.getSlot(), NBTEditor.set(i, type, "KIT", "SELECTOR", "TYPE"));
             } else {
-                if (k.getPage() != page) continue;
+                if(k.getPage() != page) continue;
                 inv.setItem(k.getSlot(), NBTEditor.set(k.getLevels().get(1).getIcon(p), type, "KIT", "SELECTOR", "TYPE"));
             }
         }
-        if (kitSelected != 999999) {
+        if(kitSelected != 999999){
             int s = selector.getSlot("{DESELECT}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, NBTEditor.set(selector.getContents().get(s), type, "KIT", "SELECTOR", "TYPE"));
             }
         }
-        if (page > 1) {
+        if(page > 1){
             int s = selector.getSlot("{LAST}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, NBTEditor.set(selector.getContents().get(s), type, "KIT", "SELECTOR", "TYPE"));
             }
         }
-        if (page < plugin.getKm().getLastPage()) {
+        if(page < plugin.getKm().getLastPage()){
             int s = selector.getSlot("{NEXT}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, NBTEditor.set(selector.getContents().get(s), type, "KIT", "SELECTOR", "TYPE"));
             }
         }
-        if (game) {
+        if(game){
             int s = selector.getSlot("{CLOSE}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, selector.getContents().get(s));
             }
         } else {
             int s = selector.getSlot("{BACK}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, NBTEditor.set(selector.getContents().get(s), type, "KIT", "SELECTOR", "TYPE"));
             }
         }
         p.openInventory(inv);
     }
-
+    
     public void createTrailsSelectorMenu(Player p) {
         int page = pages.get(p.getUniqueId());
         TrailsSelectorMenu selector = (TrailsSelectorMenu) getMenus("trailsselector");
         Inventory inv = Bukkit.createInventory(null, selector.getRows() * 9, plugin.getLang().get(p, "menus.trailsselector.title"));
-        for (int s : selector.getExtra()) {
+        for ( int s : selector.getExtra() ){
             inv.setItem(s, selector.getContents().get(s));
         }
         SWPlayer sw = plugin.getDb().getSWPlayer(p);
-        for (Trail k : plugin.getCos().getTrails().values()) {
-            if (k.getId() == sw.getTrail()) {
+        for ( Trail k : plugin.getCos().getTrails().values() ){
+            if(k.getId() == sw.getTrail()){
                 ItemStack i = k.getIcon(p);
                 ItemStack kit = ItemBuilder.nameLore(i.clone(), plugin.getLang().get(p, "menus.trailsselector.trail.nameItem"), plugin.getLang().get(p, "menus.trailsselector.trail.loreItem"));
                 int s = selector.getSlot("{SELECTED}");
-                if (s > -1 && s < 54) {
+                if(s > -1 && s < 54){
                     inv.setItem(s, kit);
                 }
-                if (k.getPage() != page) continue;
+                if(k.getPage() != page) continue;
                 inv.setItem(k.getSlot(), i);
             } else {
-                if (k.getPage() != page) continue;
+                if(k.getPage() != page) continue;
                 inv.setItem(k.getSlot(), k.getIcon(p));
             }
         }
-        if (sw.getTrail() != 999999) {
+        if(sw.getTrail() != 999999){
             int s = selector.getSlot("{DESELECT}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, selector.getContents().get(s));
             }
         }
-        if (page > 1) {
+        if(page > 1){
             int s = selector.getSlot("{LAST}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, selector.getContents().get(s));
             }
         }
-        if (page < plugin.getCos().getLastPage("Trail")) {
+        if(page < plugin.getCos().getLastPage("Trail")){
             int s = selector.getSlot("{NEXT}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, selector.getContents().get(s));
             }
         }
         int s = selector.getSlot("{CLOSE}");
-        if (s > -1 && s < 54) {
+        if(s > -1 && s < 54){
             inv.setItem(s, selector.getContents().get(s));
         }
         p.openInventory(inv);
     }
-
+    
     public void createTauntsSelectorMenu(Player p) {
         int page = pages.get(p.getUniqueId());
         TauntsSelectorMenu selector = (TauntsSelectorMenu) getMenus("tauntsselector");
         Inventory inv = Bukkit.createInventory(null, selector.getRows() * 9, plugin.getLang().get(p, "menus.tauntsselector.title"));
-        for (int s : selector.getExtra()) {
+        for ( int s : selector.getExtra() ){
             inv.setItem(s, selector.getContents().get(s));
         }
         SWPlayer sw = plugin.getDb().getSWPlayer(p);
-        for (Taunt k : plugin.getCos().getTaunts().values()) {
-            if (k.getId() == sw.getTaunt()) {
+        for ( Taunt k : plugin.getCos().getTaunts().values() ){
+            if(k.getId() == sw.getTaunt()){
                 ItemStack i = k.getIcon(p);
                 ItemStack kit = ItemBuilder.nameLore(i.clone(), plugin.getLang().get(p, "menus.tauntsselector.taunt.nameItem"), plugin.getLang().get(p, "menus.tauntsselector.taunt.loreItem"));
                 int s = selector.getSlot("{SELECTED}");
-                if (s > -1 && s < 54) {
+                if(s > -1 && s < 54){
                     inv.setItem(s, kit);
                 }
-                if (k.getPage() != page) continue;
+                if(k.getPage() != page) continue;
                 inv.setItem(k.getSlot(), i);
             } else {
-                if (k.getPage() != page) continue;
+                if(k.getPage() != page) continue;
                 inv.setItem(k.getSlot(), k.getIcon(p));
             }
         }
-        if (sw.getTaunt() != 999999) {
+        if(sw.getTaunt() != 999999){
             int s = selector.getSlot("{DESELECT}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, selector.getContents().get(s));
             }
         }
-        if (page > 1) {
+        if(page > 1){
             int s = selector.getSlot("{LAST}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, selector.getContents().get(s));
             }
         }
-        if (page < plugin.getCos().getLastPage("Taunt")) {
+        if(page < plugin.getCos().getLastPage("Taunt")){
             int s = selector.getSlot("{NEXT}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, selector.getContents().get(s));
             }
         }
         int s = selector.getSlot("{CLOSE}");
-        if (s > -1 && s < 54) {
+        if(s > -1 && s < 54){
             inv.setItem(s, selector.getContents().get(s));
         }
         p.openInventory(inv);
     }
-
+    
     public void createGlassSelectorMenu(Player p) {
         int page = pages.get(p.getUniqueId());
         GlassSelectorMenu selector = (GlassSelectorMenu) getMenus("glassselector");
         Inventory inv = Bukkit.createInventory(null, selector.getRows() * 9, plugin.getLang().get(p, "menus.glassselector.title"));
-        for (int s : selector.getExtra()) {
+        for ( int s : selector.getExtra() ){
             inv.setItem(s, selector.getContents().get(s));
         }
         SWPlayer sw = plugin.getDb().getSWPlayer(p);
-        for (Glass k : plugin.getCos().getGlasses().values()) {
-            if (k.getId() == sw.getGlass()) {
+        for ( Glass k : plugin.getCos().getGlasses().values() ){
+            if(k.getId() == sw.getGlass()){
                 ItemStack i = k.getIcon(p);
                 ItemStack kit = ItemBuilder.nameLore(i.clone(), plugin.getLang().get(p, "menus.glassselector.glass.nameItem"), plugin.getLang().get(p, "menus.glassselector.glass.loreItem"));
                 int s = selector.getSlot("{SELECTED}");
-                if (s > -1 && s < 54) {
+                if(s > -1 && s < 54){
                     inv.setItem(s, kit);
                 }
-                if (k.getPage() != page) continue;
+                if(k.getPage() != page) continue;
                 inv.setItem(k.getSlot(), i);
             } else {
-                if (k.getPage() != page) continue;
+                if(k.getPage() != page) continue;
                 inv.setItem(k.getSlot(), k.getIcon(p));
             }
         }
-        if (sw.getGlass() != 999999) {
+        if(sw.getGlass() != 999999){
             int s = selector.getSlot("{DESELECT}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, selector.getContents().get(s));
             }
         }
-        if (page > 1) {
+        if(page > 1){
             int s = selector.getSlot("{LAST}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, selector.getContents().get(s));
             }
         }
-        if (page < plugin.getCos().getLastPage("Glass")) {
+        if(page < plugin.getCos().getLastPage("Glass")){
             int s = selector.getSlot("{NEXT}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, selector.getContents().get(s));
             }
         }
         int s = selector.getSlot("{CLOSE}");
-        if (s > -1 && s < 54) {
+        if(s > -1 && s < 54){
             inv.setItem(s, selector.getContents().get(s));
         }
         p.openInventory(inv);
     }
-
+    
     public void createBalloonSelectorMenu(Player p) {
         int page = pages.get(p.getUniqueId());
         BalloonSelectorMenu selector = (BalloonSelectorMenu) getMenus("balloonsselector");
         Inventory inv = Bukkit.createInventory(null, selector.getRows() * 9, plugin.getLang().get(p, "menus.balloonsselector.title"));
-        for (int s : selector.getExtra()) {
+        for ( int s : selector.getExtra() ){
             inv.setItem(s, selector.getContents().get(s));
         }
         SWPlayer sw = plugin.getDb().getSWPlayer(p);
-        for (Balloon k : plugin.getCos().getBalloons().values()) {
-            if (k.getId() == sw.getBalloon()) {
+        for ( Balloon k : plugin.getCos().getBalloons().values() ){
+            if(k.getId() == sw.getBalloon()){
                 ItemStack i = k.getIcon(p);
                 ItemStack kit = ItemBuilder.createSkull(plugin.getLang().get(p, "menus.balloonsselector.balloon.nameItem"), plugin.getLang().get(p, "menus.balloonsselector.balloon.loreItem"), k.getUrl());
                 int s = selector.getSlot("{SELECTED}");
-                if (s > -1 && s < 54) {
+                if(s > -1 && s < 54){
                     inv.setItem(s, kit);
                 }
-                if (k.getPage() != page) continue;
+                if(k.getPage() != page) continue;
                 inv.setItem(k.getSlot(), i);
             } else {
-                if (k.getPage() != page) continue;
+                if(k.getPage() != page) continue;
                 inv.setItem(k.getSlot(), k.getIcon(p));
             }
         }
-        if (sw.getBalloon() != 999999) {
+        if(sw.getBalloon() != 999999){
             int s = selector.getSlot("{DESELECT}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, selector.getContents().get(s));
             }
         }
-        if (page > 1) {
+        if(page > 1){
             int s = selector.getSlot("{LAST}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, selector.getContents().get(s));
             }
         }
-        if (page < plugin.getCos().getLastPage("Balloon")) {
+        if(page < plugin.getCos().getLastPage("Balloon")){
             int s = selector.getSlot("{NEXT}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, selector.getContents().get(s));
             }
         }
         int s = selector.getSlot("{CLOSE}");
-        if (s > -1 && s < 54) {
+        if(s > -1 && s < 54){
             inv.setItem(s, selector.getContents().get(s));
         }
         p.openInventory(inv);
     }
-
+    
     public void createKillSoundSelectorMenu(Player p) {
         int page = pages.get(p.getUniqueId());
         KillSoundsSelectorMenu selector = (KillSoundsSelectorMenu) getMenus("killsoundsselector");
         Inventory inv = Bukkit.createInventory(null, selector.getRows() * 9, plugin.getLang().get(p, "menus.killsoundsselector.title"));
-        for (int s : selector.getExtra()) {
+        for ( int s : selector.getExtra() ){
             inv.setItem(s, selector.getContents().get(s));
         }
         SWPlayer sw = plugin.getDb().getSWPlayer(p);
-        for (KillSound k : plugin.getCos().getKillSounds().values()) {
-            if (k.getId() == sw.getKillSound()) {
+        for ( KillSound k : plugin.getCos().getKillSounds().values() ){
+            if(k.getId() == sw.getKillSound()){
                 ItemStack i = k.getIcon(p);
                 ItemStack kit = ItemBuilder.nameLore(i.clone(), plugin.getLang().get(p, "menus.killsoundsselector.killsound.nameItem"), plugin.getLang().get(p, "menus.killsoundsselector.killsound.loreItem"));
                 int s = selector.getSlot("{SELECTED}");
-                if (s > -1 && s < 54) {
+                if(s > -1 && s < 54){
                     inv.setItem(s, kit);
                 }
-                if (k.getPage() != page) continue;
+                if(k.getPage() != page) continue;
                 inv.setItem(k.getSlot(), i);
             } else {
-                if (k.getPage() != page) continue;
+                if(k.getPage() != page) continue;
                 inv.setItem(k.getSlot(), k.getIcon(p));
             }
         }
-        if (sw.getKillSound() != 999999) {
+        if(sw.getKillSound() != 999999){
             int s = selector.getSlot("{DESELECT}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, selector.getContents().get(s));
             }
         }
-        if (page > 1) {
+        if(page > 1){
             int s = selector.getSlot("{LAST}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, selector.getContents().get(s));
             }
         }
-        if (page < plugin.getCos().getLastPage("KillSound")) {
+        if(page < plugin.getCos().getLastPage("KillSound")){
             int s = selector.getSlot("{NEXT}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, selector.getContents().get(s));
             }
         }
         int s = selector.getSlot("{CLOSE}");
-        if (s > -1 && s < 54) {
+        if(s > -1 && s < 54){
             inv.setItem(s, selector.getContents().get(s));
         }
         p.openInventory(inv);
     }
-
+    
     public void createKillEffectSelectorMenu(Player p) {
         int page = pages.get(p.getUniqueId());
         KillEffectsSelectorMenu selector = (KillEffectsSelectorMenu) getMenus("killeffectsselector");
         Inventory inv = Bukkit.createInventory(null, selector.getRows() * 9, plugin.getLang().get(p, "menus.killeffectsselector.title"));
-        for (int s : selector.getExtra()) {
+        for ( int s : selector.getExtra() ){
             inv.setItem(s, selector.getContents().get(s));
         }
         SWPlayer sw = plugin.getDb().getSWPlayer(p);
-        for (UltraKillEffect k : plugin.getCos().getKillEffect().values()) {
-            if (k.getId() == sw.getKillEffect()) {
+        for ( UltraKillEffect k : plugin.getCos().getKillEffect().values() ){
+            if(k.getId() == sw.getKillEffect()){
                 ItemStack i = k.getIcon(p);
                 ItemStack kit = ItemBuilder.nameLore(i.clone(), plugin.getLang().get(p, "menus.killeffectsselector.killeffect.nameItem"), plugin.getLang().get(p, "menus.killeffectsselector.killeffect.loreItem"));
                 int s = selector.getSlot("{SELECTED}");
-                if (s > -1 && s < 54) {
+                if(s > -1 && s < 54){
                     inv.setItem(s, kit);
                 }
-                if (k.getPage() != page) continue;
+                if(k.getPage() != page) continue;
                 inv.setItem(k.getSlot(), i);
             } else {
-                if (k.getPage() != page) continue;
+                if(k.getPage() != page) continue;
                 inv.setItem(k.getSlot(), k.getIcon(p));
             }
         }
-        if (sw.getKillEffect() != 999999) {
+        if(sw.getKillEffect() != 999999){
             int s = selector.getSlot("{DESELECT}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, selector.getContents().get(s));
             }
         }
-        if (page > 1) {
+        if(page > 1){
             int s = selector.getSlot("{LAST}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, selector.getContents().get(s));
             }
         }
-        if (page < plugin.getCos().getLastPage("KillEffect")) {
+        if(page < plugin.getCos().getLastPage("KillEffect")){
             int s = selector.getSlot("{NEXT}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, selector.getContents().get(s));
             }
         }
         int s = selector.getSlot("{CLOSE}");
-        if (s > -1 && s < 54) {
+        if(s > -1 && s < 54){
             inv.setItem(s, selector.getContents().get(s));
         }
         p.openInventory(inv);
     }
-
+    
     public void createWinEffectSelectorMenu(Player p) {
         int page = pages.get(p.getUniqueId());
         WinEffectsSelectorMenu selector = (WinEffectsSelectorMenu) getMenus("wineffectsselector");
         Inventory inv = Bukkit.createInventory(null, selector.getRows() * 9, plugin.getLang().get(p, "menus.wineffectsselector.title"));
-        for (int s : selector.getExtra()) {
+        for ( int s : selector.getExtra() ){
             inv.setItem(s, selector.getContents().get(s));
         }
         SWPlayer sw = plugin.getDb().getSWPlayer(p);
-        for (UltraWinEffect k : plugin.getCos().getWinEffects().values()) {
-            if (k.getId() == sw.getWinEffect()) {
+        for ( UltraWinEffect k : plugin.getCos().getWinEffects().values() ){
+            if(k.getId() == sw.getWinEffect()){
                 ItemStack i = k.getIcon(p);
                 ItemStack kit = ItemBuilder.nameLore(i.clone(), plugin.getLang().get(p, "menus.wineffectsselector.wineffect.nameItem"), plugin.getLang().get(p, "menus.wineffectsselector.wineffect.loreItem"));
                 int s = selector.getSlot("{SELECTED}");
-                if (s > -1 && s < 54) {
+                if(s > -1 && s < 54){
                     inv.setItem(s, kit);
                 }
-                if (k.getPage() != page) continue;
+                if(k.getPage() != page) continue;
                 inv.setItem(k.getSlot(), i);
             } else {
-                if (k.getPage() != page) continue;
+                if(k.getPage() != page) continue;
                 inv.setItem(k.getSlot(), k.getIcon(p));
             }
         }
-        if (sw.getWinEffect() != 999999) {
+        if(sw.getWinEffect() != 999999){
             int s = selector.getSlot("{DESELECT}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, selector.getContents().get(s));
             }
         }
-        if (page > 1) {
+        if(page > 1){
             int s = selector.getSlot("{LAST}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, selector.getContents().get(s));
             }
         }
-        if (page < plugin.getCos().getLastPage("WinEffect")) {
+        if(page < plugin.getCos().getLastPage("WinEffect")){
             int s = selector.getSlot("{NEXT}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, selector.getContents().get(s));
             }
         }
         int s = selector.getSlot("{CLOSE}");
-        if (s > -1 && s < 54) {
+        if(s > -1 && s < 54){
             inv.setItem(s, selector.getContents().get(s));
         }
         p.openInventory(inv);
     }
-
+    
     public void createWinDanceSelectorMenu(Player p) {
         int page = pages.get(p.getUniqueId());
         WinDancesSelectorMenu selector = (WinDancesSelectorMenu) getMenus("windancesselector");
         Inventory inv = Bukkit.createInventory(null, selector.getRows() * 9, plugin.getLang().get(p, "menus.windancesselector.title"));
-        for (int s : selector.getExtra()) {
+        for ( int s : selector.getExtra() ){
             inv.setItem(s, selector.getContents().get(s));
         }
         SWPlayer sw = plugin.getDb().getSWPlayer(p);
-        for (UltraWinDance k : plugin.getCos().getWinDance().values()) {
-            if (k.getId() == sw.getWinDance()) {
+        for ( UltraWinDance k : plugin.getCos().getWinDance().values() ){
+            if(k.getId() == sw.getWinDance()){
                 ItemStack i = k.getIcon(p);
                 ItemStack kit = ItemBuilder.nameLore(i.clone(), plugin.getLang().get(p, "menus.windancesselector.windance.nameItem"), plugin.getLang().get(p, "menus.windancesselector.windance.loreItem"));
                 int s = selector.getSlot("{SELECTED}");
-                if (s > -1 && s < 54) {
+                if(s > -1 && s < 54){
                     inv.setItem(s, kit);
                 }
-                if (k.getPage() != page) continue;
+                if(k.getPage() != page) continue;
                 inv.setItem(k.getSlot(), i);
             } else {
-                if (k.getPage() != page) continue;
+                if(k.getPage() != page) continue;
                 inv.setItem(k.getSlot(), k.getIcon(p));
             }
         }
-        if (sw.getWinDance() != 999999) {
+        if(sw.getWinDance() != 999999){
             int s = selector.getSlot("{DESELECT}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, selector.getContents().get(s));
             }
         }
-        if (page > 1) {
+        if(page > 1){
             int s = selector.getSlot("{LAST}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, selector.getContents().get(s));
             }
         }
-        if (page < plugin.getCos().getLastPage("WinDance")) {
+        if(page < plugin.getCos().getLastPage("WinDance")){
             int s = selector.getSlot("{NEXT}");
-            if (s > -1 && s < 54) {
+            if(s > -1 && s < 54){
                 inv.setItem(s, selector.getContents().get(s));
             }
         }
         int s = selector.getSlot("{CLOSE}");
-        if (s > -1 && s < 54) {
+        if(s > -1 && s < 54){
             inv.setItem(s, selector.getContents().get(s));
         }
         p.openInventory(inv);
     }
-
+    
     public void createKitLevelSelectorMenu(Player p, Kit k, String type) {
         Inventory inv = Bukkit.createInventory(null, 54, plugin.getLang().get(p, "menus.kitlevels.title"));
         ItemStack close = ItemBuilder.item(plugin.getCm().getCloseitem(), plugin.getLang().get(p, "menus.back.nameItem"), plugin.getLang().get(p, "menus.back.loreItem"));
-        for (KitLevel kl : k.getLevels().values()) {
+        for ( KitLevel kl : k.getLevels().values() ){
             ItemStack i = kl.getIcon(p);
             inv.setItem(kl.getSlot(), NBTEditor.set(i, type, "KIT", "SELECTOR", "TYPE"));
         }
         inv.setItem(49, NBTEditor.set(close, type, "KIT", "SELECTOR", "TYPE"));
         p.openInventory(inv);
     }
-
+    
     public HashMap<UUID, Integer> getPages() {
         return pages;
     }
-
+    
     public void addPage(Player p) {
         pages.putIfAbsent(p.getUniqueId(), 1);
         pages.put(p.getUniqueId(), pages.get(p.getUniqueId()) + 1);
     }
-
+    
     public void removePage(Player p) {
         pages.put(p.getUniqueId(), pages.get(p.getUniqueId()) - 1);
     }
-
+    
     public void loadMenusActions() {
         /*actions.put(plugin.getLang().get("menus.balloonsselector.title"), (b) -> {
             InventoryClickEvent e = b.getInventoryClickEvent();
@@ -739,11 +739,11 @@ public class UltraInventoryMenu {
         actions.put(plugin.getLang().get("menus.kitselector.title"), (b) -> {
             InventoryClickEvent e = b.getInventoryClickEvent();
             Player p = b.getPlayer();
-            if (plugin.getCm().isSetupLobby(p)) return;
+            if(plugin.getCm().isSetupLobby(p)) return;
             String display = checkDisplayName(b);
-            if (display.equals("none")) return;
-            if (display.equals(plugin.getLang().get(p, "menus.close.nameItem"))) {
-                if (e.getClick().equals(ClickType.RIGHT)) {
+            if(display.equals("none")) return;
+            if(display.equals(plugin.getLang().get(p, "menus.close.nameItem"))){
+                if(e.getClick().equals(ClickType.RIGHT)){
                     p.sendMessage(plugin.getLang().get(p, "messages.closeWithClick"));
                     return;
                 }
@@ -753,28 +753,28 @@ public class UltraInventoryMenu {
             SWPlayer sw = plugin.getDb().getSWPlayer(p);
             boolean isGame = plugin.getGm().isPlayerInGame(p);
             String type = NBTEditor.getString(e.getCurrentItem(), "KIT", "SELECTOR", "TYPE");
-            if (type == null) return;
-            if (display.equals(plugin.getLang().get(p, "menus.back.nameItem"))) {
+            if(type == null) return;
+            if(display.equals(plugin.getLang().get(p, "menus.back.nameItem"))){
                 plugin.getUim().openContentInventory(p, plugin.getUim().getMenus("kitsperks"));
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.next.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.next.nameItem"))){
                 plugin.getUim().addPage(p);
                 plugin.getUim().createKitSelectorMenu(p, type, isGame);
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.last.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.last.nameItem"))){
                 plugin.getUim().removePage(p);
                 plugin.getUim().createKitSelectorMenu(p, type, isGame);
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.kitselector.kit.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.kitselector.kit.nameItem"))){
                 int kitSelected = sw.getSoloKit();
                 int kitSelectedLevel = sw.getSoloKitLevel();
-                if (type.equals("TEAM")) {
+                if(type.equals("TEAM")){
                     kitSelected = sw.getTeamKit();
                     kitSelectedLevel = sw.getTeamKitLevel();
-                } else if (type.equals("RANKED")) {
+                } else if(type.equals("RANKED")){
                     kitSelected = sw.getRankedKit();
                     kitSelectedLevel = sw.getRankedKitLevel();
                 }
@@ -783,23 +783,23 @@ public class UltraInventoryMenu {
                 plugin.getGem().createKitsMenu(p, kl.getInv(), kl.getArmors());
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.kitselector.deselect.nameItem"))) {
-                if (type.equals("SOLO")) {
-                    if (sw.getSoloKit() == 999999) {
+            if(display.equals(plugin.getLang().get(p, "menus.kitselector.deselect.nameItem"))){
+                if(type.equals("SOLO")){
+                    if(sw.getSoloKit() == 999999){
                         p.sendMessage(plugin.getLang().get(p, "messages.noSelect"));
                         return;
                     }
                     sw.setSoloKit(999999);
                     sw.setSoloKitLevel(1);
-                } else if (type.equals("TEAM")) {
-                    if (sw.getTeamKit() == 999999) {
+                } else if(type.equals("TEAM")){
+                    if(sw.getTeamKit() == 999999){
                         p.sendMessage(plugin.getLang().get(p, "messages.noSelect"));
                         return;
                     }
                     sw.setTeamKit(999999);
                     sw.setTeamKitLevel(1);
                 } else {
-                    if (sw.getRankedKit() == 999999) {
+                    if(sw.getRankedKit() == 999999){
                         p.sendMessage(plugin.getLang().get(p, "messages.noSelect"));
                         return;
                     }
@@ -811,10 +811,10 @@ public class UltraInventoryMenu {
                 return;
             }
             Kit k = plugin.getKm().getKitByItem(p, e.getCurrentItem());
-            if (k == null) {
+            if(k == null){
                 return;
             }
-            if (plugin.getCm().isDisableKitLevels()) {
+            if(plugin.getCm().isDisableKitLevels()){
                 KitLevel kl = k.getFirstLevel().getValue();
                 disableKit(p, sw, isGame, type, k, kl);
             } else {
@@ -828,19 +828,19 @@ public class UltraInventoryMenu {
         actions.put(plugin.getLang().get("menus.kitlevels.title"), (b) -> {
             InventoryClickEvent e = b.getInventoryClickEvent();
             String display = checkDisplayName(b);
-            if (display.equals("none")) return;
+            if(display.equals("none")) return;
             Player p = b.getPlayer();
             boolean isGame = plugin.getGm().isPlayerInGame(p);
             ItemStack item = e.getCurrentItem();
             String type = NBTEditor.getString(item, "KIT", "SELECTOR", "TYPE");
-            if (type == null) return;
-            if (display.equals(plugin.getLang().get(p, "menus.back.nameItem"))) {
+            if(type == null) return;
+            if(display.equals(plugin.getLang().get(p, "menus.back.nameItem"))){
                 plugin.getUim().createKitSelectorMenu(p, type, isGame);
                 return;
             }
             SWPlayer sw = plugin.getDb().getSWPlayer(p);
             Kit k = plugin.getKm().getKitByItem(p, item);
-            if (k == null) {
+            if(k == null){
                 return;
             }
             KitLevel kl = plugin.getKm().getKitLevelByItem(k, p, item);
@@ -849,44 +849,44 @@ public class UltraInventoryMenu {
         actions.put(plugin.getLang().get("menus.kitsperks.title"), (b) -> {
             InventoryClickEvent e = b.getInventoryClickEvent();
             Player p = b.getPlayer();
-            if (plugin.getCm().isSetupLobby(p)) return;
+            if(plugin.getCm().isSetupLobby(p)) return;
             String display = checkDisplayName(b);
-            if (display.equals("none")) return;
-            if (display.equals(plugin.getLang().get(p, "menus.kitsperks.kitsolo.nameItem"))) {
+            if(display.equals("none")) return;
+            if(display.equals(plugin.getLang().get(p, "menus.kitsperks.kitsolo.nameItem"))){
                 plugin.getUim().getPages().put(p.getUniqueId(), 1);
                 plugin.getUim().createKitSelectorMenu(p, "SOLO", false);
             }
-            if (display.equals(plugin.getLang().get(p, "menus.kitsperks.kitteam.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.kitsperks.kitteam.nameItem"))){
                 plugin.getUim().getPages().put(p.getUniqueId(), 1);
                 plugin.getUim().createKitSelectorMenu(p, "TEAM", false);
             }
-            if (display.equals(plugin.getLang().get(p, "menus.kitsperks.kitranked.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.kitsperks.kitranked.nameItem"))){
                 plugin.getUim().getPages().put(p.getUniqueId(), 1);
                 plugin.getUim().createKitSelectorMenu(p, "RANKED", false);
             }
-            if (display.equals(plugin.getLang().get(p, "menus.kitsperks.perksolo.nameItem"))) {
-                if (!plugin.getIjm().isPerksInjection()) {
+            if(display.equals(plugin.getLang().get(p, "menus.kitsperks.perksolo.nameItem"))){
+                if(!plugin.getIjm().isPerksInjection()){
                     p.sendMessage(plugin.getLang().get(p, "injections.perks"));
                     return;
                 }
                 plugin.getGem().createPerksMenu(p, "SOLO");
             }
-            if (display.equals(plugin.getLang().get(p, "menus.kitsperks.perkteam.nameItem"))) {
-                if (!plugin.getIjm().isPerksInjection()) {
+            if(display.equals(plugin.getLang().get(p, "menus.kitsperks.perkteam.nameItem"))){
+                if(!plugin.getIjm().isPerksInjection()){
                     p.sendMessage(plugin.getLang().get(p, "injections.perks"));
                     return;
                 }
                 plugin.getGem().createPerksMenu(p, "TEAM");
             }
-            if (display.equals(plugin.getLang().get(p, "menus.kitsperks.perkranked.nameItem"))) {
-                if (!plugin.getIjm().isPerksInjection()) {
+            if(display.equals(plugin.getLang().get(p, "menus.kitsperks.perkranked.nameItem"))){
+                if(!plugin.getIjm().isPerksInjection()){
                     p.sendMessage(plugin.getLang().get(p, "injections.perks"));
                     return;
                 }
                 plugin.getGem().createPerksMenu(p, "RANKED");
             }
-            if (display.equals(plugin.getLang().get("menus.kitsperks.close.nameItem"))) {
-                if (e.getClick().equals(ClickType.RIGHT)) {
+            if(display.equals(plugin.getLang().get("menus.kitsperks.close.nameItem"))){
+                if(e.getClick().equals(ClickType.RIGHT)){
                     p.sendMessage(plugin.getLang().get(p, "messages.closeWithClick"));
                     return;
                 }
@@ -896,25 +896,25 @@ public class UltraInventoryMenu {
         actions.put(plugin.getLang().get("menus.windancesselector.title"), (b) -> {
             InventoryClickEvent e = b.getInventoryClickEvent();
             Player p = b.getPlayer();
-            if (plugin.getCm().isSetupLobby(p)) return;
+            if(plugin.getCm().isSetupLobby(p)) return;
             String display = checkDisplayName(b);
-            if (display.equals("none")) return;
+            if(display.equals("none")) return;
             SWPlayer sw = plugin.getDb().getSWPlayer(p);
-            if (display.equals(plugin.getLang().get(p, "menus.next.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.next.nameItem"))){
                 plugin.getUim().addPage(p);
                 plugin.getUim().createWinDanceSelectorMenu(p);
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.last.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.last.nameItem"))){
                 plugin.getUim().removePage(p);
                 plugin.getUim().createWinDanceSelectorMenu(p);
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.windancesselector.kit.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.windancesselector.kit.nameItem"))){
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.windancesselector.deselect.nameItem"))) {
-                if (sw.getWinDance() == 999999) {
+            if(display.equals(plugin.getLang().get(p, "menus.windancesselector.deselect.nameItem"))){
+                if(sw.getWinDance() == 999999){
                     p.sendMessage(plugin.getLang().get(p, "messages.noSelect"));
                     return;
                 }
@@ -923,8 +923,8 @@ public class UltraInventoryMenu {
                 plugin.getUim().createWinDanceSelectorMenu(p);
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.windancesselector.close.nameItem"))) {
-                if (e.getClick().equals(ClickType.RIGHT)) {
+            if(display.equals(plugin.getLang().get(p, "menus.windancesselector.close.nameItem"))){
+                if(e.getClick().equals(ClickType.RIGHT)){
                     p.sendMessage(plugin.getLang().get(p, "messages.closeWithClick"));
                     return;
                 }
@@ -932,17 +932,17 @@ public class UltraInventoryMenu {
                 return;
             }
             UltraWinDance k = plugin.getCos().getWinDanceByItem(e.getCurrentItem());
-            if (k == null) {
+            if(k == null){
                 return;
             }
-            if (p.hasPermission(k.getAutoGivePermission())) {
+            if(p.hasPermission(k.getAutoGivePermission())){
                 sw.setWinDance(k.getId());
                 p.sendMessage(plugin.getLang().get(p, "messages.selectWinDance").replaceAll("<windance>", k.getName()));
                 plugin.getUim().createWinDanceSelectorMenu(p);
                 return;
             }
-            if (!sw.getWindances().contains(k.getId())) {
-                if (k.needPermToBuy() && !p.hasPermission(k.getPermission())) {
+            if(!sw.getWindances().contains(k.getId())){
+                if(k.needPermToBuy() && !p.hasPermission(k.getPermission())){
                     p.sendMessage(plugin.getLang().get(p, "messages.noPermit"));
                 } else {
                     plugin.getShm().buy(p, k, k.getName());
@@ -956,25 +956,25 @@ public class UltraInventoryMenu {
         actions.put(plugin.getLang().get("menus.killeffectsselector.title"), (b) -> {
             InventoryClickEvent e = b.getInventoryClickEvent();
             Player p = b.getPlayer();
-            if (plugin.getCm().isSetupLobby(p)) return;
+            if(plugin.getCm().isSetupLobby(p)) return;
             String display = checkDisplayName(b);
-            if (display.equals("none")) return;
+            if(display.equals("none")) return;
             SWPlayer sw = plugin.getDb().getSWPlayer(p);
-            if (display.equals(plugin.getLang().get(p, "menus.next.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.next.nameItem"))){
                 plugin.getUim().addPage(p);
                 plugin.getUim().createKillEffectSelectorMenu(p);
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.last.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.last.nameItem"))){
                 plugin.getUim().removePage(p);
                 plugin.getUim().createKillEffectSelectorMenu(p);
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.killeffectsselector.kit.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.killeffectsselector.kit.nameItem"))){
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.killeffectsselector.deselect.nameItem"))) {
-                if (sw.getKillEffect() == 999999) {
+            if(display.equals(plugin.getLang().get(p, "menus.killeffectsselector.deselect.nameItem"))){
+                if(sw.getKillEffect() == 999999){
                     p.sendMessage(plugin.getLang().get(p, "messages.noSelect"));
                     return;
                 }
@@ -983,8 +983,8 @@ public class UltraInventoryMenu {
                 plugin.getUim().createKillEffectSelectorMenu(p);
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.killeffectsselector.close.nameItem"))) {
-                if (e.getClick().equals(ClickType.RIGHT)) {
+            if(display.equals(plugin.getLang().get(p, "menus.killeffectsselector.close.nameItem"))){
+                if(e.getClick().equals(ClickType.RIGHT)){
                     p.sendMessage(plugin.getLang().get(p, "messages.closeWithClick"));
                     return;
                 }
@@ -992,17 +992,17 @@ public class UltraInventoryMenu {
                 return;
             }
             UltraKillEffect k = plugin.getCos().getKillEffectByItem(e.getCurrentItem());
-            if (k == null) {
+            if(k == null){
                 return;
             }
-            if (p.hasPermission(k.getAutoGivePermission())) {
+            if(p.hasPermission(k.getAutoGivePermission())){
                 sw.setKillEffect(k.getId());
                 p.sendMessage(plugin.getLang().get(p, "messages.selectKillEffect").replaceAll("<killeffect>", k.getName()));
                 plugin.getUim().createKillEffectSelectorMenu(p);
                 return;
             }
-            if (!sw.getKilleffects().contains(k.getId())) {
-                if (k.needPermToBuy() && !p.hasPermission(k.getPermission())) {
+            if(!sw.getKilleffects().contains(k.getId())){
+                if(k.needPermToBuy() && !p.hasPermission(k.getPermission())){
                     p.sendMessage(plugin.getLang().get(p, "messages.noPermit"));
                 } else {
                     plugin.getShm().buy(p, k, k.getName());
@@ -1016,25 +1016,25 @@ public class UltraInventoryMenu {
         actions.put(plugin.getLang().get("menus.wineffectsselector.title"), (b) -> {
             InventoryClickEvent e = b.getInventoryClickEvent();
             Player p = b.getPlayer();
-            if (plugin.getCm().isSetupLobby(p)) return;
+            if(plugin.getCm().isSetupLobby(p)) return;
             String display = checkDisplayName(b);
-            if (display.equals("none")) return;
+            if(display.equals("none")) return;
             SWPlayer sw = plugin.getDb().getSWPlayer(p);
-            if (display.equals(plugin.getLang().get(p, "menus.next.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.next.nameItem"))){
                 plugin.getUim().addPage(p);
                 plugin.getUim().createWinEffectSelectorMenu(p);
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.last.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.last.nameItem"))){
                 plugin.getUim().removePage(p);
                 plugin.getUim().createWinEffectSelectorMenu(p);
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.wineffectsselector.kit.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.wineffectsselector.kit.nameItem"))){
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.wineffectsselector.deselect.nameItem"))) {
-                if (sw.getWinEffect() == 999999) {
+            if(display.equals(plugin.getLang().get(p, "menus.wineffectsselector.deselect.nameItem"))){
+                if(sw.getWinEffect() == 999999){
                     p.sendMessage(plugin.getLang().get(p, "messages.noSelect"));
                     return;
                 }
@@ -1043,8 +1043,8 @@ public class UltraInventoryMenu {
                 plugin.getUim().createWinEffectSelectorMenu(p);
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.wineffectsselector.close.nameItem"))) {
-                if (e.getClick().equals(ClickType.RIGHT)) {
+            if(display.equals(plugin.getLang().get(p, "menus.wineffectsselector.close.nameItem"))){
+                if(e.getClick().equals(ClickType.RIGHT)){
                     p.sendMessage(plugin.getLang().get(p, "messages.closeWithClick"));
                     return;
                 }
@@ -1052,17 +1052,17 @@ public class UltraInventoryMenu {
                 return;
             }
             UltraWinEffect k = plugin.getCos().getWinEffectByItem(e.getCurrentItem());
-            if (k == null) {
+            if(k == null){
                 return;
             }
-            if (p.hasPermission(k.getAutoGivePermission())) {
+            if(p.hasPermission(k.getAutoGivePermission())){
                 sw.setWinEffect(k.getId());
                 p.sendMessage(plugin.getLang().get(p, "messages.selectWinEffect").replaceAll("<wineffect>", k.getName()));
                 plugin.getUim().createWinEffectSelectorMenu(p);
                 return;
             }
-            if (!sw.getWineffects().contains(k.getId())) {
-                if (k.needPermToBuy() && !p.hasPermission(k.getPermission())) {
+            if(!sw.getWineffects().contains(k.getId())){
+                if(k.needPermToBuy() && !p.hasPermission(k.getPermission())){
                     p.sendMessage(plugin.getLang().get(p, "messages.noPermit"));
                 } else {
                     plugin.getShm().buy(p, k, k.getName());
@@ -1076,25 +1076,25 @@ public class UltraInventoryMenu {
         actions.put(plugin.getLang().get("menus.killsoundsselector.title"), (b) -> {
             InventoryClickEvent e = b.getInventoryClickEvent();
             Player p = b.getPlayer();
-            if (plugin.getCm().isSetupLobby(p)) return;
+            if(plugin.getCm().isSetupLobby(p)) return;
             String display = checkDisplayName(b);
-            if (display.equals("none")) return;
+            if(display.equals("none")) return;
             SWPlayer sw = plugin.getDb().getSWPlayer(p);
-            if (display.equals(plugin.getLang().get(p, "menus.next.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.next.nameItem"))){
                 plugin.getUim().addPage(p);
                 plugin.getUim().createKillSoundSelectorMenu(p);
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.last.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.last.nameItem"))){
                 plugin.getUim().removePage(p);
                 plugin.getUim().createKillSoundSelectorMenu(p);
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.killsoundsselector.kit.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.killsoundsselector.kit.nameItem"))){
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.killsoundsselector.deselect.nameItem"))) {
-                if (sw.getKillSound() == 999999) {
+            if(display.equals(plugin.getLang().get(p, "menus.killsoundsselector.deselect.nameItem"))){
+                if(sw.getKillSound() == 999999){
                     p.sendMessage(plugin.getLang().get(p, "messages.noSelect"));
                     return;
                 }
@@ -1103,8 +1103,8 @@ public class UltraInventoryMenu {
                 plugin.getUim().createKillSoundSelectorMenu(p);
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.killsoundsselector.close.nameItem"))) {
-                if (e.getClick().equals(ClickType.RIGHT)) {
+            if(display.equals(plugin.getLang().get(p, "menus.killsoundsselector.close.nameItem"))){
+                if(e.getClick().equals(ClickType.RIGHT)){
                     p.sendMessage(plugin.getLang().get(p, "messages.closeWithClick"));
                     return;
                 }
@@ -1112,21 +1112,21 @@ public class UltraInventoryMenu {
                 return;
             }
             KillSound k = plugin.getCos().getKillSoundByItem(e.getCurrentItem());
-            if (k == null) {
+            if(k == null){
                 return;
             }
-            if (e.getClick().equals(ClickType.RIGHT)) {
+            if(e.getClick().equals(ClickType.RIGHT)){
                 p.playSound(p.getLocation(), k.getSound(), k.getVol1(), k.getVol2());
                 return;
             }
-            if (p.hasPermission(k.getAutoGivePermission())) {
+            if(p.hasPermission(k.getAutoGivePermission())){
                 sw.setKillSound(k.getId());
                 p.sendMessage(plugin.getLang().get(p, "messages.selectKillSound").replaceAll("<killsound>", k.getName()));
                 plugin.getUim().createKillSoundSelectorMenu(p);
                 return;
             }
-            if (!sw.getKillsounds().contains(k.getId())) {
-                if (k.needPermToBuy() && !p.hasPermission(k.getPermission())) {
+            if(!sw.getKillsounds().contains(k.getId())){
+                if(k.needPermToBuy() && !p.hasPermission(k.getPermission())){
                     p.sendMessage(plugin.getLang().get(p, "messages.noPermit"));
                 } else {
                     plugin.getShm().buy(p, k, k.getName());
@@ -1140,25 +1140,25 @@ public class UltraInventoryMenu {
         actions.put(plugin.getLang().get("menus.balloonsselector.title"), (b) -> {
             InventoryClickEvent e = b.getInventoryClickEvent();
             Player p = b.getPlayer();
-            if (plugin.getCm().isSetupLobby(p)) return;
+            if(plugin.getCm().isSetupLobby(p)) return;
             String display = checkDisplayName(b);
-            if (display.equals("none")) return;
+            if(display.equals("none")) return;
             SWPlayer sw = plugin.getDb().getSWPlayer(p);
-            if (display.equals(plugin.getLang().get(p, "menus.next.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.next.nameItem"))){
                 plugin.getUim().addPage(p);
                 plugin.getUim().createBalloonSelectorMenu(p);
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.last.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.last.nameItem"))){
                 plugin.getUim().removePage(p);
                 plugin.getUim().createBalloonSelectorMenu(p);
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.balloonsselector.kit.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.balloonsselector.kit.nameItem"))){
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.balloonsselector.deselect.nameItem"))) {
-                if (sw.getBalloon() == 999999) {
+            if(display.equals(plugin.getLang().get(p, "menus.balloonsselector.deselect.nameItem"))){
+                if(sw.getBalloon() == 999999){
                     p.sendMessage(plugin.getLang().get(p, "messages.noSelect"));
                     return;
                 }
@@ -1167,8 +1167,8 @@ public class UltraInventoryMenu {
                 plugin.getUim().createBalloonSelectorMenu(p);
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.balloonsselector.close.nameItem"))) {
-                if (e.getClick().equals(ClickType.RIGHT)) {
+            if(display.equals(plugin.getLang().get(p, "menus.balloonsselector.close.nameItem"))){
+                if(e.getClick().equals(ClickType.RIGHT)){
                     p.sendMessage(plugin.getLang().get(p, "messages.closeWithClick"));
                     return;
                 }
@@ -1176,15 +1176,15 @@ public class UltraInventoryMenu {
                 return;
             }
             Balloon k = plugin.getCos().getBalloonByItem(e.getCurrentItem());
-            if (k == null) {
+            if(k == null){
                 return;
             }
-            if (e.getClick().equals(ClickType.RIGHT)) {
-                if (plugin.getCos().getPreviewCosmetic("balloon") == null) {
+            if(e.getClick().equals(ClickType.RIGHT)){
+                if(plugin.getCos().getPreviewCosmetic("balloon") == null){
                     p.sendMessage(plugin.getLang().get("setup.noBalloonPreview"));
                     return;
                 }
-                if (plugin.getCos().getPlayerPreview().containsKey(p.getUniqueId())) {
+                if(plugin.getCos().getPlayerPreview().containsKey(p.getUniqueId())){
                     p.sendMessage(plugin.getLang().get("setup.alreadyPreview"));
                     return;
                 }
@@ -1195,14 +1195,14 @@ public class UltraInventoryMenu {
                 pc.execute(p, k.getId());
                 return;
             }
-            if (p.hasPermission(k.getAutoGivePermission())) {
+            if(p.hasPermission(k.getAutoGivePermission())){
                 sw.setBalloon(k.getId());
                 p.sendMessage(plugin.getLang().get(p, "messages.selectBalloon").replaceAll("<balloon>", k.getName()));
                 plugin.getUim().createBalloonSelectorMenu(p);
                 return;
             }
-            if (!sw.getBalloons().contains(k.getId())) {
-                if (k.needPermToBuy() && !p.hasPermission(k.getPermission())) {
+            if(!sw.getBalloons().contains(k.getId())){
+                if(k.needPermToBuy() && !p.hasPermission(k.getPermission())){
                     p.sendMessage(plugin.getLang().get(p, "messages.noPermit"));
                 } else {
                     plugin.getShm().buy(p, k, k.getName());
@@ -1216,25 +1216,25 @@ public class UltraInventoryMenu {
         actions.put(plugin.getLang().get("menus.glassselector.title"), (b) -> {
             InventoryClickEvent e = b.getInventoryClickEvent();
             Player p = b.getPlayer();
-            if (plugin.getCm().isSetupLobby(p)) return;
+            if(plugin.getCm().isSetupLobby(p)) return;
             String display = checkDisplayName(b);
-            if (display.equals("none")) return;
+            if(display.equals("none")) return;
             SWPlayer sw = plugin.getDb().getSWPlayer(p);
-            if (display.equals(plugin.getLang().get(p, "menus.next.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.next.nameItem"))){
                 plugin.getUim().addPage(p);
                 plugin.getUim().createGlassSelectorMenu(p);
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.last.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.last.nameItem"))){
                 plugin.getUim().removePage(p);
                 plugin.getUim().createGlassSelectorMenu(p);
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.glassselector.kit.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.glassselector.kit.nameItem"))){
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.glassselector.deselect.nameItem"))) {
-                if (sw.getGlass() == 999999) {
+            if(display.equals(plugin.getLang().get(p, "menus.glassselector.deselect.nameItem"))){
+                if(sw.getGlass() == 999999){
                     p.sendMessage(plugin.getLang().get(p, "messages.noSelect"));
                     return;
                 }
@@ -1243,8 +1243,8 @@ public class UltraInventoryMenu {
                 plugin.getUim().createGlassSelectorMenu(p);
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.glassselector.close.nameItem"))) {
-                if (e.getClick().equals(ClickType.RIGHT)) {
+            if(display.equals(plugin.getLang().get(p, "menus.glassselector.close.nameItem"))){
+                if(e.getClick().equals(ClickType.RIGHT)){
                     p.sendMessage(plugin.getLang().get(p, "messages.closeWithClick"));
                     return;
                 }
@@ -1252,15 +1252,15 @@ public class UltraInventoryMenu {
                 return;
             }
             Glass k = plugin.getCos().getGlassByItem(e.getCurrentItem());
-            if (k == null) {
+            if(k == null){
                 return;
             }
-            if (e.getClick().equals(ClickType.RIGHT)) {
-                if (plugin.getCos().getPreviewCosmetic("glass") == null) {
+            if(e.getClick().equals(ClickType.RIGHT)){
+                if(plugin.getCos().getPreviewCosmetic("glass") == null){
                     p.sendMessage(plugin.getLang().get("setup.noGlassPreview"));
                     return;
                 }
-                if (plugin.getCos().getPlayerPreview().containsKey(p.getUniqueId())) {
+                if(plugin.getCos().getPlayerPreview().containsKey(p.getUniqueId())){
                     p.sendMessage(plugin.getLang().get("setup.alreadyPreview"));
                     return;
                 }
@@ -1273,14 +1273,14 @@ public class UltraInventoryMenu {
                 }, 1L);
                 return;
             }
-            if (p.hasPermission(k.getAutoGivePermission())) {
+            if(p.hasPermission(k.getAutoGivePermission())){
                 sw.setGlass(k.getId());
                 p.sendMessage(plugin.getLang().get(p, "messages.selectGlass").replaceAll("<glass>", k.getName()));
                 plugin.getUim().createGlassSelectorMenu(p);
                 return;
             }
-            if (!sw.getGlasses().contains(k.getId())) {
-                if (k.needPermToBuy() && !p.hasPermission(k.getPermission())) {
+            if(!sw.getGlasses().contains(k.getId())){
+                if(k.needPermToBuy() && !p.hasPermission(k.getPermission())){
                     p.sendMessage(plugin.getLang().get(p, "messages.noPermit"));
                 } else {
                     plugin.getShm().buy(p, k, k.getName());
@@ -1294,25 +1294,25 @@ public class UltraInventoryMenu {
         actions.put(plugin.getLang().get("menus.partingselector.title"), (b) -> {
             InventoryClickEvent e = b.getInventoryClickEvent();
             Player p = b.getPlayer();
-            if (plugin.getCm().isSetupLobby(p)) return;
+            if(plugin.getCm().isSetupLobby(p)) return;
             String display = checkDisplayName(b);
-            if (display.equals("none")) return;
+            if(display.equals("none")) return;
             SWPlayer sw = plugin.getDb().getSWPlayer(p);
-            if (display.equals(plugin.getLang().get(p, "menus.next.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.next.nameItem"))){
                 plugin.getUim().addPage(p);
                 plugin.getUim().createTauntsSelectorMenu(p);
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.last.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.last.nameItem"))){
                 plugin.getUim().removePage(p);
                 plugin.getUim().createTauntsSelectorMenu(p);
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.partingselector.kit.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.partingselector.kit.nameItem"))){
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.partingselector.deselect.nameItem"))) {
-                if (sw.getParting() == 999999) {
+            if(display.equals(plugin.getLang().get(p, "menus.partingselector.deselect.nameItem"))){
+                if(sw.getParting() == 999999){
                     p.sendMessage(plugin.getLang().get(p, "messages.noSelect"));
                     return;
                 }
@@ -1321,8 +1321,8 @@ public class UltraInventoryMenu {
                 plugin.getUim().createPartingSelectorMenu(p);
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.partingselector.close.nameItem"))) {
-                if (e.getClick().equals(ClickType.RIGHT)) {
+            if(display.equals(plugin.getLang().get(p, "menus.partingselector.close.nameItem"))){
+                if(e.getClick().equals(ClickType.RIGHT)){
                     p.sendMessage(plugin.getLang().get(p, "messages.closeWithClick"));
                     return;
                 }
@@ -1330,17 +1330,17 @@ public class UltraInventoryMenu {
                 return;
             }
             Parting k = plugin.getCos().getPartingByItem(e.getCurrentItem());
-            if (k == null) {
+            if(k == null){
                 return;
             }
-            if (p.hasPermission(k.getAutoGivePermission())) {
+            if(p.hasPermission(k.getAutoGivePermission())){
                 sw.setParting(k.getId());
                 p.sendMessage(plugin.getLang().get(p, "messages.selectParting").replaceAll("<parting>", k.getName()));
                 plugin.getUim().createPartingSelectorMenu(p);
                 return;
             }
-            if (!sw.getPartings().contains(k.getId())) {
-                if (k.needPermToBuy() && !p.hasPermission(k.getPermission())) {
+            if(!sw.getPartings().contains(k.getId())){
+                if(k.needPermToBuy() && !p.hasPermission(k.getPermission())){
                     p.sendMessage(plugin.getLang().get(p, "messages.noPermit"));
                 } else {
                     plugin.getShm().buy(p, k, k.getName());
@@ -1354,25 +1354,25 @@ public class UltraInventoryMenu {
         actions.put(plugin.getLang().get("menus.tauntsselector.title"), (b) -> {
             InventoryClickEvent e = b.getInventoryClickEvent();
             Player p = b.getPlayer();
-            if (plugin.getCm().isSetupLobby(p)) return;
+            if(plugin.getCm().isSetupLobby(p)) return;
             String display = checkDisplayName(b);
-            if (display.equals("none")) return;
+            if(display.equals("none")) return;
             SWPlayer sw = plugin.getDb().getSWPlayer(p);
-            if (display.equals(plugin.getLang().get(p, "menus.next.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.next.nameItem"))){
                 plugin.getUim().addPage(p);
                 plugin.getUim().createTauntsSelectorMenu(p);
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.last.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.last.nameItem"))){
                 plugin.getUim().removePage(p);
                 plugin.getUim().createTauntsSelectorMenu(p);
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.tauntsselector.kit.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.tauntsselector.kit.nameItem"))){
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.tauntsselector.deselect.nameItem"))) {
-                if (sw.getTaunt() == 999999) {
+            if(display.equals(plugin.getLang().get(p, "menus.tauntsselector.deselect.nameItem"))){
+                if(sw.getTaunt() == 999999){
                     p.sendMessage(plugin.getLang().get(p, "messages.noSelect"));
                     return;
                 }
@@ -1381,8 +1381,8 @@ public class UltraInventoryMenu {
                 plugin.getUim().createTauntsSelectorMenu(p);
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.tauntsselector.close.nameItem"))) {
-                if (e.getClick().equals(ClickType.RIGHT)) {
+            if(display.equals(plugin.getLang().get(p, "menus.tauntsselector.close.nameItem"))){
+                if(e.getClick().equals(ClickType.RIGHT)){
                     p.sendMessage(plugin.getLang().get(p, "messages.closeWithClick"));
                     return;
                 }
@@ -1390,21 +1390,21 @@ public class UltraInventoryMenu {
                 return;
             }
             Taunt k = plugin.getCos().getTauntByItem(e.getCurrentItem());
-            if (k == null) {
+            if(k == null){
                 return;
             }
-            if (e.getClick().equals(ClickType.RIGHT)) {
+            if(e.getClick().equals(ClickType.RIGHT)){
                 k.executePreview(p);
                 return;
             }
-            if (p.hasPermission(k.getAutoGivePermission())) {
+            if(p.hasPermission(k.getAutoGivePermission())){
                 sw.setTaunt(k.getId());
                 p.sendMessage(plugin.getLang().get(p, "messages.selectTaunt").replaceAll("<taunt>", k.getName()));
                 plugin.getUim().createTauntsSelectorMenu(p);
                 return;
             }
-            if (!sw.getTaunts().contains(k.getId())) {
-                if (k.needPermToBuy() && !p.hasPermission(k.getPermission())) {
+            if(!sw.getTaunts().contains(k.getId())){
+                if(k.needPermToBuy() && !p.hasPermission(k.getPermission())){
                     p.sendMessage(plugin.getLang().get(p, "messages.noPermit"));
                 } else {
                     plugin.getShm().buy(p, k, k.getName());
@@ -1418,25 +1418,25 @@ public class UltraInventoryMenu {
         actions.put(plugin.getLang().get("menus.trailsselector.title"), (b) -> {
             InventoryClickEvent e = b.getInventoryClickEvent();
             Player p = b.getPlayer();
-            if (plugin.getCm().isSetupLobby(p)) return;
+            if(plugin.getCm().isSetupLobby(p)) return;
             String display = checkDisplayName(b);
-            if (display.equals("none")) return;
-            if (display.equals(plugin.getLang().get(p, "menus.next.nameItem"))) {
+            if(display.equals("none")) return;
+            if(display.equals(plugin.getLang().get(p, "menus.next.nameItem"))){
                 plugin.getUim().addPage(p);
                 plugin.getUim().createTrailsSelectorMenu(p);
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.last.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.last.nameItem"))){
                 plugin.getUim().removePage(p);
                 plugin.getUim().createTrailsSelectorMenu(p);
                 return;
             }
             SWPlayer sw = plugin.getDb().getSWPlayer(p);
-            if (display.equals(plugin.getLang().get(p, "menus.trailsselector.kit.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.trailsselector.kit.nameItem"))){
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.trailsselector.deselect.nameItem"))) {
-                if (sw.getTrail() == 999999) {
+            if(display.equals(plugin.getLang().get(p, "menus.trailsselector.deselect.nameItem"))){
+                if(sw.getTrail() == 999999){
                     p.sendMessage(plugin.getLang().get(p, "messages.noSelect"));
                     return;
                 }
@@ -1445,8 +1445,8 @@ public class UltraInventoryMenu {
                 plugin.getUim().createTrailsSelectorMenu(p);
                 return;
             }
-            if (display.equals(plugin.getLang().get(p, "menus.trailsselector.close.nameItem"))) {
-                if (e.getClick().equals(ClickType.RIGHT)) {
+            if(display.equals(plugin.getLang().get(p, "menus.trailsselector.close.nameItem"))){
+                if(e.getClick().equals(ClickType.RIGHT)){
                     p.sendMessage(plugin.getLang().get(p, "messages.closeWithClick"));
                     return;
                 }
@@ -1454,17 +1454,17 @@ public class UltraInventoryMenu {
                 return;
             }
             Trail k = plugin.getCos().getTrailByItem(e.getCurrentItem());
-            if (k == null) {
+            if(k == null){
                 return;
             }
-            if (p.hasPermission(k.getAutoGivePermission())) {
+            if(p.hasPermission(k.getAutoGivePermission())){
                 sw.setTrail(k.getId());
                 p.sendMessage(plugin.getLang().get(p, "messages.selectTrail").replaceAll("<trail>", k.getName()));
                 plugin.getUim().createTrailsSelectorMenu(p);
                 return;
             }
-            if (!sw.getTrails().contains(k.getId())) {
-                if (k.needPermToBuy() && !p.hasPermission(k.getPermission())) {
+            if(!sw.getTrails().contains(k.getId())){
+                if(k.needPermToBuy() && !p.hasPermission(k.getPermission())){
                     p.sendMessage(plugin.getLang().get(p, "messages.noPermit"));
                 } else {
                     plugin.getShm().buy(p, k, k.getName());
@@ -1477,55 +1477,55 @@ public class UltraInventoryMenu {
         });
         actions.put(plugin.getLang().get("menus.lobby.title"), (b) -> {
             Player p = b.getPlayer();
-            if (plugin.getCm().isSetupLobby(p)) return;
+            if(plugin.getCm().isSetupLobby(p)) return;
             String display = checkDisplayName(b);
-            if (display.equals("none")) return;
-            if (display.equals(plugin.getLang().get(p, "menus.lobby.soulwell.nameItem"))) {
-                if (!plugin.getIjm().isSoulWellInjection()) {
+            if(display.equals("none")) return;
+            if(display.equals(plugin.getLang().get(p, "menus.lobby.soulwell.nameItem"))){
+                if(!plugin.getIjm().isSoulWellInjection()){
                     p.sendMessage(plugin.getLang().get(p, "injections.soulwell"));
                     return;
                 }
                 plugin.getIjm().getSoulwell().getWel().createSoulWellMenu(p);
             }
-            if (display.equals(plugin.getLang().get(p, "menus.lobby.levels.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.lobby.levels.nameItem"))){
                 plugin.getGem().createLevelMenu(p);
             }
-            if (display.equals(plugin.getLang().get(p, "menus.lobby.perksKits.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.lobby.perksKits.nameItem"))){
                 plugin.getUim().openContentInventory(p, plugin.getUim().getMenus("kitsperks"));
             }
-            if (display.equals(plugin.getLang().get(p, "menus.lobby.trails.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.lobby.trails.nameItem"))){
                 plugin.getUim().getPages().put(p.getUniqueId(), 1);
                 plugin.getUim().createTrailsSelectorMenu(p);
             }
-            if (display.equals(plugin.getLang().get(p, "menus.lobby.parting.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.lobby.parting.nameItem"))){
                 plugin.getUim().getPages().put(p.getUniqueId(), 1);
                 plugin.getUim().createPartingSelectorMenu(p);
             }
-            if (display.equals(plugin.getLang().get(p, "menus.lobby.taunts.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.lobby.taunts.nameItem"))){
                 plugin.getUim().getPages().put(p.getUniqueId(), 1);
                 plugin.getUim().createTauntsSelectorMenu(p);
             }
-            if (display.equals(plugin.getLang().get(p, "menus.lobby.balloons.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.lobby.balloons.nameItem"))){
                 plugin.getUim().getPages().put(p.getUniqueId(), 1);
                 plugin.getUim().createBalloonSelectorMenu(p);
             }
-            if (display.equals(plugin.getLang().get(p, "menus.lobby.glass.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.lobby.glass.nameItem"))){
                 plugin.getUim().getPages().put(p.getUniqueId(), 1);
                 plugin.getUim().createGlassSelectorMenu(p);
             }
-            if (display.equals(plugin.getLang().get(p, "menus.lobby.wineffects.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.lobby.wineffects.nameItem"))){
                 plugin.getUim().getPages().put(p.getUniqueId(), 1);
                 plugin.getUim().createWinEffectSelectorMenu(p);
             }
-            if (display.equals(plugin.getLang().get(p, "menus.lobby.killeffects.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.lobby.killeffects.nameItem"))){
                 plugin.getUim().getPages().put(p.getUniqueId(), 1);
                 plugin.getUim().createKillEffectSelectorMenu(p);
             }
-            if (display.equals(plugin.getLang().get(p, "menus.lobby.windances.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.lobby.windances.nameItem"))){
                 plugin.getUim().getPages().put(p.getUniqueId(), 1);
                 plugin.getUim().createWinDanceSelectorMenu(p);
             }
-            if (display.equals(plugin.getLang().get(p, "menus.lobby.killsound.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.lobby.killsound.nameItem"))){
                 plugin.getUim().getPages().put(p.getUniqueId(), 1);
                 plugin.getUim().createKillSoundSelectorMenu(p);
             }
@@ -1533,19 +1533,19 @@ public class UltraInventoryMenu {
         actions.put(plugin.getLang().get("menus.teamselector.title"), (b) -> {
             InventoryClickEvent e = b.getInventoryClickEvent();
             String display = checkDisplayName(b);
-            if (display.equals("none")) return;
+            if(display.equals("none")) return;
             Player p = b.getPlayer();
             Game game = plugin.getGm().getGameByPlayer(p);
-            if (game == null) {
+            if(game == null){
                 return;
             }
             UltraTeamGame utg = (UltraTeamGame) game;
             int id = NBTEditor.getInt(e.getCurrentItem(), "TEAM", "ID");
             Team team = utg.getTeamByID(id);
-            if (team == null) {
+            if(team == null){
                 return;
             }
-            if (team.getTeamSize() >= game.getTeamSize()) {
+            if(team.getTeamSize() >= game.getTeamSize()){
                 p.sendMessage(plugin.getLang().get(p, "messages.teamFull"));
                 return;
             }
@@ -1561,9 +1561,9 @@ public class UltraInventoryMenu {
         actions.put(plugin.getLang().get("menus.perks.title"), (b) -> {
             InventoryClickEvent e = b.getInventoryClickEvent();
             String display = checkDisplayName(b);
-            if (display.equals("none")) return;
+            if(display.equals("none")) return;
             Player p = b.getPlayer();
-            if (display.equals(plugin.getLang().get(p, "menus.back.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.back.nameItem"))){
                 plugin.getUim().openContentInventory(p, plugin.getUim().getMenus("kitsperks"));
                 return;
             }
@@ -1573,13 +1573,13 @@ public class UltraInventoryMenu {
             int level = Integer.parseInt(data[2]);
             boolean maxed = Boolean.parseBoolean(data[3]);
             SWPlayer sw = plugin.getDb().getSWPlayer(p);
-            if (e.isRightClick()) {
-                if (locked) {
+            if(e.isRightClick()){
+                if(locked){
                     p.sendMessage(plugin.getLang().get("messages.perks.perkLocked"));
                     CustomSound.PERK_LOCKED.reproduce(p);
                     return;
                 }
-                if (sw.getPerksEnabled().contains(id)) {
+                if(sw.getPerksEnabled().contains(id)){
                     sw.getPerksEnabled().remove(id);
                     CustomSound.PERK_OFF.reproduce(p);
                 } else {
@@ -1588,14 +1588,14 @@ public class UltraInventoryMenu {
                 }
                 p.sendMessage(plugin.getLang().get("messages.perks.toggle").replace("<state>", (!sw.getPerksEnabled().contains(id) ? plugin.getLang().get("messages.perks.onState") : plugin.getLang().get("messages.perks.offState"))));
             } else {
-                if (maxed) {
+                if(maxed){
                     p.sendMessage(plugin.getLang().get("messages.perks.maxedPerk"));
                     CustomSound.PERK_MAXED.reproduce(p);
                     return;
                 }
                 Perk perk = plugin.getIjm().getPerks().getPem().getPerkByID(id);
                 PerkLevel next = perk.getLevels().get(level + 1);
-                if (plugin.getAdm().getCoins(p) < next.getPrice()) {
+                if(plugin.getAdm().getCoins(p) < next.getPrice()){
                     p.sendMessage(plugin.getLang().get("messages.perks.noCoins"));
                     CustomSound.PERK_NO_COINS.reproduce(p);
                     return;
@@ -1610,24 +1610,24 @@ public class UltraInventoryMenu {
         actions.put(plugin.getLang().get("menus.levels.title"), (b) -> {
             InventoryClickEvent e = b.getInventoryClickEvent();
             String display = checkDisplayName(b);
-            if (display.equals("none")) return;
+            if(display.equals("none")) return;
             Player p = b.getPlayer();
             SWPlayer sw = plugin.getDb().getSWPlayer(p);
-            if (display.equals(plugin.getLang().get(p, "menus.levels.prestige.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.levels.prestige.nameItem"))){
                 plugin.getGem().createPrestigeIcons(p);
             }
-            if (display.equals(plugin.getLang().get(p, "menus.levels.hide.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.levels.hide.nameItem"))){
                 sw.setShowLevel(false);
                 p.sendMessage(plugin.getLang().get("messages.showPrefix").replaceAll("<status>", Utils.parseBoolean(sw.isShowLevel())));
                 plugin.getGem().createLevelMenu(p);
             }
-            if (display.equals(plugin.getLang().get(p, "menus.levels.show.nameItem"))) {
+            if(display.equals(plugin.getLang().get(p, "menus.levels.show.nameItem"))){
                 sw.setShowLevel(true);
                 p.sendMessage(plugin.getLang().get("messages.showPrefix").replaceAll("<status>", Utils.parseBoolean(sw.isShowLevel())));
                 plugin.getGem().createLevelMenu(p);
             }
-            if (display.equals(plugin.getLang().get(p, "menus.close.nameItem"))) {
-                if (e.getClick().equals(ClickType.RIGHT)) {
+            if(display.equals(plugin.getLang().get(p, "menus.close.nameItem"))){
+                if(e.getClick().equals(ClickType.RIGHT)){
                     p.sendMessage(plugin.getLang().get(p, "messages.closeWithClick"));
                     return;
                 }
@@ -1637,26 +1637,26 @@ public class UltraInventoryMenu {
         actions.put(plugin.getLang().get("menus.prestige.title"), (b) -> {
             InventoryClickEvent e = b.getInventoryClickEvent();
             String display = checkDisplayName(b);
-            if (display.equals("none")) return;
+            if(display.equals("none")) return;
             Player p = b.getPlayer();
             SWPlayer sw = plugin.getDb().getSWPlayer(p);
             ItemStack item = e.getCurrentItem();
-            if (item.getItemMeta().getDisplayName().equals(plugin.getLang().get(p, "menus.back.nameItem"))) {
+            if(item.getItemMeta().getDisplayName().equals(plugin.getLang().get(p, "menus.back.nameItem"))){
                 plugin.getGem().createLevelMenu(p);
                 return;
             }
-            if (item.getItemMeta().getDisplayName().equals(plugin.getLang().get(p, "menus.close.nameItem"))) {
+            if(item.getItemMeta().getDisplayName().equals(plugin.getLang().get(p, "menus.close.nameItem"))){
                 p.closeInventory();
                 return;
             }
             String id = NBTEditor.getString(item, "PRESTIGE_ICON_ID");
             boolean has = NBTEditor.getBoolean(item, "PRESTIGE_ICON_HAS");
-            if (!has) {
+            if(!has){
                 p.sendMessage(plugin.getLang().get("messages.levels.prestigeNoHas"));
                 CustomSound.PRESTIGE_NO_HAS.reproduce(p);
                 return;
             }
-            if (sw.getPrestigeIcon().equals(id)) {
+            if(sw.getPrestigeIcon().equals(id)){
                 p.sendMessage(plugin.getLang().get("messages.levels.alreadySelected"));
                 CustomSound.PRESTIGE_ALREADY_SELECTED.reproduce(p);
             } else {
@@ -1668,18 +1668,18 @@ public class UltraInventoryMenu {
             }
         });
     }
-
+    
     private void disableKit(Player p, SWPlayer sw, boolean isGame, String type, Kit k, KitLevel kl) {
-        if (kl == null) {
+        if(kl == null){
             return;
         }
-        if (p.hasPermission(kl.getAutoGivePermission())) {
+        if(p.hasPermission(kl.getAutoGivePermission())){
             selectKit(p, sw, type, k, kl);
             plugin.getUim().createKitSelectorMenu(p, type, isGame);
             return;
         }
-        if (!sw.hasKitLevel(k.getId(), kl.getLevel())) {
-            if (kl.needPermToBuy() && !p.hasPermission(k.getPermission())) {
+        if(!sw.hasKitLevel(k.getId(), kl.getLevel())){
+            if(kl.needPermToBuy() && !p.hasPermission(k.getPermission())){
                 p.sendMessage(plugin.getLang().get(p, "messages.noPermit"));
             } else {
                 plugin.getShm().buy(p, kl, k.getName());
@@ -1689,12 +1689,12 @@ public class UltraInventoryMenu {
         }
         plugin.getUim().createKitSelectorMenu(p, type, isGame);
     }
-
+    
     private void selectKit(Player p, SWPlayer sw, String type, Kit k, KitLevel kl) {
-        if (type.equals("SOLO")) {
+        if(type.equals("SOLO")){
             sw.setSoloKit(k.getId());
             sw.setSoloKitLevel(kl.getLevel());
-        } else if (type.equals("TEAM")) {
+        } else if(type.equals("TEAM")){
             sw.setTeamKit(k.getId());
             sw.setTeamKitLevel(kl.getLevel());
         } else {
@@ -1703,28 +1703,28 @@ public class UltraInventoryMenu {
         }
         p.sendMessage(plugin.getLang().get(p, "messages.select").replaceAll("<kit>", k.getName()));
     }
-
+    
     public String checkDisplayName(InventoryAction b) {
         InventoryClickEvent e = b.getInventoryClickEvent();
         e.setCancelled(true);
-        if (e.getCurrentItem() == null || e.getCurrentItem().getType().equals(Material.AIR)) {
+        if(e.getCurrentItem() == null || e.getCurrentItem().getType().equals(Material.AIR)){
             return "none";
         }
         ItemStack item = e.getCurrentItem();
-        if (!item.hasItemMeta()) {
+        if(!item.hasItemMeta()){
             return "none";
         }
-        if (!item.getItemMeta().hasDisplayName()) {
+        if(!item.getItemMeta().hasDisplayName()){
             return "none";
         }
         ItemMeta im = item.getItemMeta();
         return im.getDisplayName();
     }
-
+    
     public HashMap<String, UltraInventory> getMenus() {
         return menus;
     }
-
+    
     public HashMap<String, Consumer<InventoryAction>> getActions() {
         return actions;
     }

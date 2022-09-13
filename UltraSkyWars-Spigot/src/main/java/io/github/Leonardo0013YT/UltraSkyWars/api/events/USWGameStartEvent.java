@@ -10,44 +10,44 @@ import org.bukkit.event.HandlerList;
 import java.util.Collection;
 
 public class USWGameStartEvent extends Event {
-
+    
     private static final HandlerList HANDLERS_LIST = new HandlerList();
-    private Game game;
-    private Collection<Player> players;
-    private Collection<Team> teams;
-    private Vote vote;
-    private boolean isCancelled = false;
-
+    private final Game game;
+    private final Collection<Player> players;
+    private final Collection<Team> teams;
+    private final Vote vote;
+    private final boolean isCancelled = false;
+    
     public USWGameStartEvent(Game game, Collection<Player> players, Collection<Team> teams, Vote vote) {
         this.game = game;
         this.players = players;
         this.teams = teams;
         this.vote = vote;
     }
-
+    
     public static HandlerList getHandlerList() {
         return HANDLERS_LIST;
     }
-
+    
     public Collection<Player> getPlayers() {
         return players;
     }
-
+    
     public Collection<Team> getTeams() {
         return teams;
     }
-
+    
     public Game getGame() {
         return game;
     }
-
+    
     public Vote getVote() {
         return vote;
     }
-
+    
     @Override
     public HandlerList getHandlers() {
         return HANDLERS_LIST;
     }
-
+    
 }

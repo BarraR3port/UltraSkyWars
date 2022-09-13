@@ -15,14 +15,17 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.List;
 
 public class Trail extends Cosmetic {
-
-    private TrailType type;
-    private ItemStack icon;
-    private String particle;
-    private float offsetX, offsetY, offsetZ;
-    private int amount;
-    private double range, speed;
-
+    
+    private final TrailType type;
+    private final ItemStack icon;
+    private final String particle;
+    private final float offsetX;
+    private final float offsetY;
+    private final float offsetZ;
+    private final int amount;
+    private final double range;
+    private final double speed;
+    
     public Trail(UltraSkyWars plugin, String path) {
         super(plugin.getTrail(), path, "trails");
         this.type = TrailType.valueOf(plugin.getTrail().getOrDefault(path + ".type", "NORMAL"));
@@ -36,18 +39,18 @@ public class Trail extends Cosmetic {
         this.offsetZ = (float) plugin.getTrail().getConfig().getDouble(path + ".offsetZ");
         plugin.getCos().setLastPage("Trail", page);
     }
-
+    
     public ItemStack getIcon(Player p) {
-        if (!icon.hasItemMeta()) {
+        if(!icon.hasItemMeta()){
             return icon;
         }
         UltraSkyWars plugin = UltraSkyWars.get();
         SWPlayer sw = plugin.getDb().getSWPlayer(p);
         ItemStack icon = this.icon.clone();
-        if (!p.hasPermission(autoGivePermission)) {
-            if (price > 0) {
-                if (plugin.getCm().isRedPanelInLocked()) {
-                    if (!sw.getTrails().contains(id)) {
+        if(!p.hasPermission(autoGivePermission)){
+            if(price > 0){
+                if(plugin.getCm().isRedPanelInLocked()){
+                    if(!sw.getTrails().contains(id)){
                         icon = ItemBuilder.item(XMaterial.matchDefinedXMaterial(plugin.getCm().getRedPanelMaterial().name(), plugin.getCm().getRedPanelData()).orElse(XMaterial.RED_STAINED_GLASS_PANE), 1, icon.getItemMeta().getDisplayName(), icon.getItemMeta().getLore());
                     }
                 }
@@ -55,20 +58,20 @@ public class Trail extends Cosmetic {
         }
         ItemMeta iconM = icon.getItemMeta();
         List<String> lore = icon.getItemMeta().getLore();
-        for (int i = 0; i < lore.size(); i++) {
+        for ( int i = 0; i < lore.size(); i++ ){
             String s = lore.get(i);
-            switch (s) {
+            switch(s) {
                 case "<price>":
-                    if (!p.hasPermission(autoGivePermission)) {
-                        if (isBuy && !sw.getTrails().contains(id)) {
+                    if(!p.hasPermission(autoGivePermission)){
+                        if(isBuy && !sw.getTrails().contains(id)){
                             lore.set(i, plugin.getLang().get(p, "menus.trailsselector.price").replaceAll("<price>", String.valueOf(price)));
-                        } else if (!isBuy && !sw.getTrails().contains(id)) {
-                            if (needPermToBuy && p.hasPermission(permission)) {
+                        } else if(!isBuy && !sw.getTrails().contains(id)){
+                            if(needPermToBuy && p.hasPermission(permission)){
                                 lore.set(i, plugin.getLang().get(p, "menus.trailsselector.price").replaceAll("<price>", String.valueOf(price)));
                             } else {
                                 lore.set(i, plugin.getLang().get(p, "menus.trailsselector.noBuyable"));
                             }
-                        } else if (sw.getTrails().contains(id) || !needPermToBuy) {
+                        } else if(sw.getTrails().contains(id) || !needPermToBuy){
                             lore.set(i, plugin.getLang().get(p, "menus.trailsselector.buyed"));
                         }
                     } else {
@@ -76,17 +79,17 @@ public class Trail extends Cosmetic {
                     }
                     break;
                 case "<status>":
-                    if (!p.hasPermission(autoGivePermission)) {
-                        if (sw.getTrails().contains(id)) {
+                    if(!p.hasPermission(autoGivePermission)){
+                        if(sw.getTrails().contains(id)){
                             lore.set(i, plugin.getLang().get(p, "menus.trailsselector.hasBuy"));
-                        } else if (isBuy) {
-                            if (plugin.getAdm().getCoins(p) > price) {
+                        } else if(isBuy){
+                            if(plugin.getAdm().getCoins(p) > price){
                                 lore.set(i, plugin.getLang().get(p, "menus.trailsselector.buy"));
                             } else {
                                 lore.set(i, plugin.getLang().get(p, "menus.trailsselector.noMoney"));
                             }
-                        } else if (needPermToBuy) {
-                            if (plugin.getAdm().getCoins(p) > price) {
+                        } else if(needPermToBuy){
+                            if(plugin.getAdm().getCoins(p) > price){
                                 lore.set(i, plugin.getLang().get(p, "menus.trailsselector.buy"));
                             } else {
                                 lore.set(i, plugin.getLang().get(p, "menus.trailsselector.noMoney"));
@@ -104,37 +107,37 @@ public class Trail extends Cosmetic {
         icon.setItemMeta(iconM);
         return NBTEditor.set(icon, id, "ULTRASKYWARS", "TRAIL");
     }
-
+    
     public TrailType getType() {
         return type;
     }
-
+    
     public String getParticle() {
         return particle;
     }
-
+    
     public float getOffsetX() {
         return offsetX;
     }
-
+    
     public float getOffsetY() {
         return offsetY;
     }
-
+    
     public float getOffsetZ() {
         return offsetZ;
     }
-
+    
     public int getAmount() {
         return amount;
     }
-
+    
     public double getSpeed() {
         return speed;
     }
-
+    
     public double getRange() {
         return range;
     }
-
+    
 }

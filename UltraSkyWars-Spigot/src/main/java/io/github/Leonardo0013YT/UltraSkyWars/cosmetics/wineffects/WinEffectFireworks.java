@@ -9,21 +9,21 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 public class WinEffectFireworks implements WinEffect, Cloneable {
-
+    
     private BukkitTask task;
-
+    
     public WinEffectFireworks() {
         this.task = null;
     }
-
+    
     @Override
     public void start(Player p, Game game) {
         task = new BukkitRunnable() {
             final String name = game.getSpectator().getWorld().getName();
-
+            
             @Override
             public void run() {
-                if (p == null || !p.isOnline() || !name.equals(p.getWorld().getName())) {
+                if(p == null || !p.isOnline() || !name.equals(p.getWorld().getName())){
                     stop();
                     return;
                 }
@@ -31,14 +31,14 @@ public class WinEffectFireworks implements WinEffect, Cloneable {
             }
         }.runTaskTimer(UltraSkyWars.get(), 0, 6);
     }
-
+    
     @Override
     public void stop() {
-        if (task != null) {
+        if(task != null){
             task.cancel();
         }
     }
-
+    
     @Override
     public WinEffect clone() {
         return new WinEffectFireworks();

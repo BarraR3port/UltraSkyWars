@@ -6,13 +6,13 @@ import lombok.Getter;
 
 @Getter
 public class SoupItem extends SpecialItem {
-
+    
     private final String maxHealth;
     private final double health;
-
+    
     public SoupItem(InjectionSpecialItems isi) {
         this.maxHealth = isi.getSpecial_items().get("items.soup.maxHealth");
         this.health = isi.getSpecial_items().getDouble("items.soup.hearts");
     }
-
+    
 }

@@ -4,20 +4,20 @@ import lombok.Getter;
 
 @Getter
 public enum TrailType {
-
+    
     NORMAL(0, 0, 1),
     SPIRAL(1.5, 20, 1),
     PYRAMID(1.5, 3, 3),
     HELIX(1.5, 15, 3);
-
+    
     private final double radius;
     private final int count;
     private final int speed;
-
+    
     TrailType(double radius, int speed, int count) {
         this.radius = radius;
         this.speed = speed;
         this.count = count;
     }
-
+    
 }

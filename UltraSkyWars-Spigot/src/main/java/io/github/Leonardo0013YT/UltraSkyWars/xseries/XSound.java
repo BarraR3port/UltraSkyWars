@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
 import java.util.*;
 
 public enum XSound {
-
+    
     AMBIENT_BASALT_DELTAS_ADDITIONS,
     AMBIENT_BASALT_DELTAS_LOOP,
     AMBIENT_BASALT_DELTAS_MOOD,
@@ -1001,84 +1001,84 @@ public enum XSound {
     UI_TOAST_OUT,
     WEATHER_RAIN("AMBIENCE_RAIN"),
     WEATHER_RAIN_ABOVE;
-
+    
     @Nullable
     private final Sound sound;
-
+    
     XSound(@Nonnull String... legacies) {
         Sound bukkitSound = Data.BUKKIT_NAMES.get(this.name());
-        if (bukkitSound == null) {
-            for (String legacy : legacies) {
+        if(bukkitSound == null){
+            for ( String legacy : legacies ){
                 bukkitSound = Data.BUKKIT_NAMES.get(legacy);
-                if (bukkitSound != null) break;
+                if(bukkitSound != null) break;
             }
         }
         this.sound = bukkitSound;
-
+        
         Data.NAMES.put(this.name(), this);
-        for (String legacy : legacies) {
+        for ( String legacy : legacies ){
             Data.NAMES.putIfAbsent(legacy, this);
         }
     }
-
+    
     @Nonnull
     private static String format(@Nonnull String name) {
         int len = name.length();
         char[] chs = new char[len];
         int count = 0;
         boolean appendUnderline = false;
-
-        for (int i = 0; i < len; i++) {
+        
+        for ( int i = 0; i < len; i++ ){
             char ch = name.charAt(i);
-
-            if (!appendUnderline && count != 0 && (ch == '-' || ch == ' ' || ch == '_') && chs[count] != '_')
+            
+            if(!appendUnderline && count != 0 && (ch == '-' || ch == ' ' || ch == '_') && chs[count] != '_')
                 appendUnderline = true;
             else {
                 boolean number = false;
-                if ((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z') || (number = (ch >= '0' && ch <= '9'))) {
-                    if (appendUnderline) {
+                if((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z') || (number = (ch >= '0' && ch <= '9'))){
+                    if(appendUnderline){
                         chs[count++] = '_';
                         appendUnderline = false;
                     }
-
-                    if (number) chs[count++] = ch;
+                    
+                    if(number) chs[count++] = ch;
                     else chs[count++] = (char) (ch & 0x5f);
                 }
             }
         }
-
+        
         return new String(chs, 0, count);
     }
-
+    
     @Nonnull
     public static Optional<XSound> matchXSound(@Nonnull String sound) {
         Validate.notEmpty(sound, "Cannot match XSound of a null or empty sound name");
         return Optional.ofNullable(Data.NAMES.get(format(sound)));
     }
-
+    
     @Override
     public String toString() {
         return WordUtils.capitalize(this.name().replace('_', ' ').toLowerCase(Locale.ENGLISH));
     }
-
+    
     @Nullable
     public Sound parseSound() {
         return this.sound;
     }
-
+    
     public boolean isSupported() {
         return this.parseSound() != null;
     }
-
+    
     private static final class Data {
-
+        
         private static final WeakHashMap<String, Sound> BUKKIT_NAMES = new WeakHashMap<>();
-
+        
         private static final Map<String, XSound> NAMES = new HashMap<>();
-
+        
         static {
-            for (Sound sound : Sound.values()) BUKKIT_NAMES.put(sound.name(), sound);
+            for ( Sound sound : Sound.values() ) BUKKIT_NAMES.put(sound.name(), sound);
         }
     }
-
+    
 }

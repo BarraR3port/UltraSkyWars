@@ -8,7 +8,7 @@ import io.github.Leonardo0013YT.UltraSkyWars.superclass.GameEvent;
 import org.bukkit.entity.Player;
 
 public class RefillEvent extends GameEvent {
-
+    
     public RefillEvent(UltraSkyWars plugin, int time) {
         this.time = time;
         this.reset = time;
@@ -18,7 +18,7 @@ public class RefillEvent extends GameEvent {
         this.title = plugin.getLang().get("titles." + name + ".title");
         this.subtitle = plugin.getLang().get("titles." + name + ".subtitle");
     }
-
+    
     public RefillEvent(RefillEvent e) {
         this.time = e.getReset();
         this.reset = e.getReset();
@@ -28,7 +28,7 @@ public class RefillEvent extends GameEvent {
         this.title = e.getTitle();
         this.subtitle = e.getSubTitle();
     }
-
+    
     @Override
     public void start(Game game) {
         GameChest gc = game.getCenter();
@@ -36,25 +36,25 @@ public class RefillEvent extends GameEvent {
         gc.fill(game, true);
         //FILL CHESTS
         game.getTeams().values().forEach(t -> t.getChest().fill(game, true));
-        for (Player on : game.getCached()) {
+        for ( Player on : game.getCached() ){
             CustomSound.EVENTS_REFILL.reproduce(on);
         }
     }
-
+    
     @Override
     public void stop(Game game) {
     }
-
+    
     @Override
     public void reset() {
         this.time = this.reset;
         this.type = "game";
         this.name = "refill";
     }
-
+    
     @Override
     public RefillEvent clone() {
         return new RefillEvent(this);
     }
-
+    
 }

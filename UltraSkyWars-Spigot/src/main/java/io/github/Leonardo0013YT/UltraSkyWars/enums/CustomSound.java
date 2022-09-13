@@ -4,7 +4,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 public enum CustomSound {
-
+    
     PERK_NO_COINS(null, 0.0f, 0.0f),
     PERK_LOCKED(null, 0.0f, 0.0f),
     PERK_MAXED(null, 0.0f, 0.0f),
@@ -57,40 +57,40 @@ public enum CustomSound {
     EVENTS_ZOMBIE(null, 0.0f, 0.0f),
     QUIT_PLAYER(null, 0.0f, 0.0f),
     JOIN_PLAYER(null, 0.0f, 0.0f);
-
+    
     private Sound sound;
     private float volume, pitch;
-
+    
     CustomSound(Sound sound, float volume, float pitch) {
         this.sound = sound;
         this.volume = volume;
         this.pitch = pitch;
     }
-
+    
     public Sound getSound() {
         return sound;
     }
-
+    
     public void setSound(Sound sound) {
         this.sound = sound;
     }
-
+    
     public float getVolume() {
         return volume;
     }
-
+    
     public void setVolume(float volume) {
         this.volume = volume;
     }
-
+    
     public float getPitch() {
         return pitch;
     }
-
+    
     public void setPitch(float pitch) {
         this.pitch = pitch;
     }
-
+    
     public void reproduce(Player p) {
         p.playSound(p.getLocation(), sound, volume, pitch);
     }

@@ -16,34 +16,35 @@ import java.util.HashMap;
 import java.util.List;
 
 public class SignsManager {
-
-    private HashMap<Integer, GameSign> signs = new HashMap<>();
-    private HashMap<Location, Integer> signsLoc = new HashMap<>();
-    private ArrayList<String> showing = new ArrayList<>(), waiting = new ArrayList<>();
-    private UltraSkyWars plugin;
-    private InjectionSigns signsInjection;
-
+    
+    private final HashMap<Integer, GameSign> signs = new HashMap<>();
+    private final HashMap<Location, Integer> signsLoc = new HashMap<>();
+    private final ArrayList<String> showing = new ArrayList<>();
+    private final ArrayList<String> waiting = new ArrayList<>();
+    private final UltraSkyWars plugin;
+    private final InjectionSigns signsInjection;
+    
     public SignsManager(UltraSkyWars plugin, InjectionSigns signsInjection) {
         this.plugin = plugin;
         this.signsInjection = signsInjection;
         reload();
     }
-
+    
     public void reload() {
         showing.clear();
         waiting.clear();
         signs.clear();
         signsLoc.clear();
-        if (signsInjection.getSigns().isSet("signs")) {
+        if(signsInjection.getSigns().isSet("signs")){
             ConfigurationSection cs = signsInjection.getSigns().getConfig().getConfigurationSection("signs");
-            if (cs == null) return;
-            for (String s : cs.getKeys(false)) {
-                if (!signsInjection.getSigns().isSet("signs." + s.toUpperCase())) return;
+            if(cs == null) return;
+            for ( String s : cs.getKeys(false) ){
+                if(!signsInjection.getSigns().isSet("signs." + s.toUpperCase())) return;
                 List<String> locs = signsInjection.getSigns().getList("signs." + s.toUpperCase());
-                for (String l : locs) {
+                for ( String l : locs ){
                     Location loc = Utils.getStringLocation(l);
-                    if (loc == null) continue;
-                    if (loc.getBlock().getState() instanceof Sign) {
+                    if(loc == null) continue;
+                    if(loc.getBlock().getState() instanceof Sign){
                         int id = signs.size();
                         signs.put(id, new GameSign(s, loc));
                         signsLoc.put(loc, id);
@@ -53,18 +54,18 @@ public class SignsManager {
         }
         loadSigns();
     }
-
+    
     public void loadSigns() {
-        for (GameData data : UltraSkyWarsAPI.getGameData().values()) {
+        for ( GameData data : UltraSkyWarsAPI.getGameData().values() ){
             update(data.getServer(), data.getMap(), data.getState(), data.getPlayers(), data.getMax());
         }
-        for (GameSign gs : signs.values()) {
-            if (!gs.isOccupied()) {
+        for ( GameSign gs : signs.values() ){
+            if(!gs.isOccupied()){
                 lines(gs);
             }
         }
     }
-
+    
     private void lines(GameSign gs) {
         String l1 = signsInjection.getSigns().get("texts.lines.empty.1");
         String l2 = signsInjection.getSigns().get("texts.lines.empty.2");
@@ -73,14 +74,14 @@ public class SignsManager {
         gs.setState("EMPTY");
         gs.setLines(l1, l2, l3, l4);
     }
-
+    
     public void update(String type2, String server2, String map2, String state2, int players2, int max2) {
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-            if (plugin.getCm().isSignsRotation()) {
-                if (isStarted(state2)) {
-                    if (showing.contains(server2)) {
+            if(plugin.getCm().isSignsRotation()){
+                if(isStarted(state2)){
+                    if(showing.contains(server2)){
                         GameSign gs = getServerSign(server2);
-                        if (gs != null) {
+                        if(gs != null){
                             gs.setData(null);
                             gs.setState("EMPTY");
                             gs.setOccupied(false);
@@ -97,9 +98,9 @@ public class SignsManager {
                     return;
                 }
             }
-            if (showing.contains(server2)) {
+            if(showing.contains(server2)){
                 GameSign gs = getServerSign(server2);
-                if (gs == null) {
+                if(gs == null){
                     showing.remove(server2);
                     waiting.remove(server2);
                     update(type2, server2, map2, state2, players2, max2);
@@ -108,17 +109,17 @@ public class SignsManager {
                 removeWaiting(server2, map2, state2, players2, max2, gs);
                 return;
             } else {
-                if (added(type2, server2, map2, state2, players2, max2)) return;
+                if(added(type2, server2, map2, state2, players2, max2)) return;
             }
             fillEmpty(type2);
         });
     }
-
+    
     private boolean added(String type2, String server2, String map2, String state2, int players2, int max2) {
         GameSign gs = getEmptySign(type2);
-        if (gs != null) {
+        if(gs != null){
             GameData gameData = UltraSkyWarsAPI.getGameData().get(server2);
-            if (gameData == null) {
+            if(gameData == null){
                 return true;
             }
             gs.setData(gameData);
@@ -127,19 +128,19 @@ public class SignsManager {
             waiting.remove(server2);
             return true;
         } else {
-            if (!waiting.contains(server2)) {
+            if(!waiting.contains(server2)){
                 waiting.add(server2);
             }
         }
         return false;
     }
-
+    
     private void removeWaiting(String server2, String map2, String state2, int players2, int max2, GameSign gs) {
         GameData gameData = gs.getData();
         setLines(map2, state2, players2, max2, gs, gameData);
         waiting.remove(server2);
     }
-
+    
     private void setLines(String map2, String state2, int players2, int max2, GameSign gs, GameData gameData) {
         gs.setState(state2);
         gs.setOccupied(true);
@@ -149,13 +150,13 @@ public class SignsManager {
         String l4 = signsInjection.getSigns().get("texts.lines." + state2.toLowerCase() + ".4").replaceAll("<max>", String.valueOf(max2)).replaceAll("<players>", String.valueOf(players2)).replaceAll("<map>", map2).replaceAll("<state>", signsInjection.getSigns().get("texts.states." + gameData.getState().toLowerCase())).replaceAll("<color>", gameData.getColor());
         gs.setLines(l1, l2, l3, l4);
     }
-
+    
     public void update(String type, String map, String state, int players, int max) {
-        if (plugin.getCm().isSignsRotation()) {
-            if (isStarted(state)) {
-                if (showing.contains(map)) {
+        if(plugin.getCm().isSignsRotation()){
+            if(isStarted(state)){
+                if(showing.contains(map)){
                     GameSign gs = getMapSign(map);
-                    if (gs != null) {
+                    if(gs != null){
                         gs.setData(null);
                         gs.setOccupied(false);
                         lines(gs);
@@ -167,9 +168,9 @@ public class SignsManager {
                 return;
             }
         }
-        if (showing.contains(map)) {
+        if(showing.contains(map)){
             GameSign gs = getMapSign(map);
-            if (gs == null) {
+            if(gs == null){
                 waiting.remove(map);
                 showing.remove(map);
                 update(type, map, state, players, max);
@@ -177,18 +178,18 @@ public class SignsManager {
             }
             removeWaiting(map, map, state, players, max, gs);
         } else {
-            if (added(type, map, map, state, players, max)) return;
+            if(added(type, map, map, state, players, max)) return;
         }
         fillEmpty(type);
     }
-
+    
     private void fillEmpty(String type) {
-        if (waiting.size() > 0) {
+        if(waiting.size() > 0){
             String sv = waiting.get(0);
             GameSign gs = getEmptySign(type);
-            if (gs != null) {
+            if(gs != null){
                 GameData gameData = UltraSkyWarsAPI.getGameData().get(sv);
-                if (gameData == null) {
+                if(gameData == null){
                     return;
                 }
                 String newState = gameData.getState();
@@ -208,45 +209,45 @@ public class SignsManager {
             }
         }
     }
-
+    
     private boolean isStarted(String state) {
         return state.equalsIgnoreCase("EMPTY") || state.equalsIgnoreCase("PREGAME") || state.equalsIgnoreCase("GAME") || state.equalsIgnoreCase("FINISH") || state.equalsIgnoreCase("RESTARTING");
     }
-
+    
     public GameSign getGameSignByLoc(Location loc) {
-        if (signsLoc.containsKey(loc)) {
+        if(signsLoc.containsKey(loc)){
             return signs.get(signsLoc.get(loc));
         }
         return null;
     }
-
+    
     private GameSign getEmptySign(String type) {
-        for (GameSign g : signs.values()) {
-            if (!g.isOccupied() && g.getType().equalsIgnoreCase(type)) {
+        for ( GameSign g : signs.values() ){
+            if(!g.isOccupied() && g.getType().equalsIgnoreCase(type)){
                 return g;
             }
         }
         return null;
     }
-
+    
     private GameSign getServerSign(String server) {
-        for (GameSign g : signs.values()) {
-            if (g.isOccupied() && g.getData().getServer().equals(server)) {
+        for ( GameSign g : signs.values() ){
+            if(g.isOccupied() && g.getData().getServer().equals(server)){
                 return g;
             }
         }
         return null;
     }
-
+    
     private GameSign getMapSign(String map) {
-        for (GameSign g : signs.values()) {
-            if (g.isOccupied() && g.getData().getMap().equals(map)) {
+        for ( GameSign g : signs.values() ){
+            if(g.isOccupied() && g.getData().getMap().equals(map)){
                 return g;
             }
         }
         return null;
     }
-
+    
     public HashMap<Integer, GameSign> getSigns() {
         return signs;
     }

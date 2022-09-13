@@ -5,17 +5,15 @@ import org.bukkit.Location;
 import org.bukkit.util.Vector;
 
 public class HelixTrail {
-
+    
     private final String particle;
     private final double radius;
     private final int degressPerIncrement;
-    private int theta = 0;
-
     private final int helixCount;
     private final int helixDegreeSeperation;
-
+    private int theta = 0;
     private double cosX, sinX, cosZ, sinZ;
-
+    
     public HelixTrail(String particle, int helixCount, Vector direction, double radius, int rotationalSpeed) {
         this.particle = particle;
         this.radius = radius;
@@ -24,7 +22,7 @@ public class HelixTrail {
         this.helixDegreeSeperation = 360 / Math.max(helixCount, 1);
         calculateDeviations(direction);
     }
-
+    
     protected void calculateDeviations(Vector direction) {
         Vector zDeviationComponent = new Vector(direction.getX(), direction.getY(), 0);
         Vector xDeviationComponent = new Vector(0, direction.getY(), direction.getZ());
@@ -36,15 +34,15 @@ public class HelixTrail {
         cosZ = Math.cos(zDeviation);
         sinZ = Math.sin(zDeviation);
     }
-
+    
     public void spawn(Location location) {
-        for (int i = 0; i < helixCount; i++) {
+        for ( int i = 0; i < helixCount; i++ ){
             Location spawnLoc = location.clone().add(offsetFromCenter(theta + (i * helixDegreeSeperation)));
             UltraSkyWars.get().getVc().getNMS().broadcastParticle(spawnLoc, 0, 0, 0, 0, particle, 1, 20);
         }
         theta += degressPerIncrement;
     }
-
+    
     protected Vector offsetFromCenter(int degrees) {
         double radians = Math.toRadians(degrees);
         double x = Math.cos(radians);
@@ -55,17 +53,17 @@ public class HelixTrail {
         rotateAroundAxisZ(v, cosZ, sinZ);
         return v;
     }
-
+    
     private void rotateAroundAxisX(Vector v, double cos, double sin) {
         double y = v.getY() * cos - v.getZ() * sin;
         double z = v.getY() * sin + v.getZ() * cos;
         v.setY(y).setZ(z);
     }
-
+    
     private void rotateAroundAxisZ(Vector v, double cos, double sin) {
         double x = v.getX() * cos - v.getY() * sin;
         double y = v.getX() * sin + v.getY() * cos;
         v.setX(x).setY(y);
     }
-
+    
 }

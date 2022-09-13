@@ -10,26 +10,26 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 public class WinDanceDayNight implements WinDance, Cloneable {
-
+    
     private static boolean loaded = false;
     private static int perTickTime, taskTick;
     private BukkitTask task;
-
+    
     @Override
     public void loadCustoms(UltraSkyWars plugin, String path) {
-        if (!loaded) {
+        if(!loaded){
             perTickTime = plugin.getWindance().getIntOrDefault(path + ".perTickTime", 700);
             taskTick = plugin.getWindance().getIntOrDefault(path + ".taskTick", 1);
             loaded = true;
         }
     }
-
+    
     @Override
     public void start(Player p, Game game) {
         World world = game.getSpectator().getWorld();
         task = new BukkitRunnable() {
             public void run() {
-                if (p == null || !p.isOnline() || !world.getName().equals(p.getWorld().getName())) {
+                if(p == null || !p.isOnline() || !world.getName().equals(p.getWorld().getName())){
                     stop();
                     return;
                 }
@@ -38,14 +38,14 @@ public class WinDanceDayNight implements WinDance, Cloneable {
             }
         }.runTaskTimer(UltraSkyWars.get(), 0, taskTick);
     }
-
+    
     @Override
     public void stop() {
-        if (task != null) {
+        if(task != null){
             task.cancel();
         }
     }
-
+    
     @Override
     public WinDance clone() {
         return new WinDanceDayNight();

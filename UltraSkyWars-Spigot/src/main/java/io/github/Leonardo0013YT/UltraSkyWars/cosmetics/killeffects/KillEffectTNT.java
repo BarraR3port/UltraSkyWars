@@ -10,24 +10,24 @@ import org.bukkit.entity.TNTPrimed;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class KillEffectTNT implements KillEffect, Cloneable {
-
+    
     private static boolean loaded = false;
     private static int fuseTicks;
-
+    
     @Override
     public void loadCustoms(UltraSkyWars plugin, String path) {
-        if (!loaded) {
+        if(!loaded){
             fuseTicks = plugin.getKilleffect().getIntOrDefault(path + ".fuseTicks", 4);
             loaded = true;
         }
     }
-
+    
     @Override
     public void start(Player p, Player death, Location loc) {
-        if (p == null || !p.isOnline()) {
+        if(p == null || !p.isOnline()){
             return;
         }
-        if (death == null || !death.isOnline()) {
+        if(death == null || !death.isOnline()){
             return;
         }
         TNTPrimed primed = loc.getWorld().spawn(loc, TNTPrimed.class);
@@ -42,14 +42,14 @@ public class KillEffectTNT implements KillEffect, Cloneable {
             }
         }.runTaskLater(plugin, fuseTicks);
     }
-
+    
     @Override
     public void stop() {
     }
-
+    
     @Override
     public KillEffect clone() {
         return new KillEffectSquid();
     }
-
+    
 }

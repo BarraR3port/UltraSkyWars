@@ -12,21 +12,21 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 public class KillEffectSquid implements KillEffect, Cloneable {
-
+    
     private static int lavaAmount, explosionAmount;
     private static boolean loaded = false;
     private BukkitTask task;
     private int pased = 0;
-
+    
     @Override
     public void loadCustoms(UltraSkyWars plugin, String path) {
-        if (!loaded) {
+        if(!loaded){
             lavaAmount = plugin.getKilleffect().getIntOrDefault(path + ".lavaAmount", 1);
             explosionAmount = plugin.getKilleffect().getIntOrDefault(path + ".explosionAmount", 1);
             loaded = true;
         }
     }
-
+    
     @Override
     public void start(Player p, Player death, Location loc) {
         Squid squid = loc.getWorld().spawn(loc, Squid.class);
@@ -36,7 +36,7 @@ public class KillEffectSquid implements KillEffect, Cloneable {
         task = new BukkitRunnable() {
             @Override
             public void run() {
-                if (death == null || !death.isOnline()) {
+                if(death == null || !death.isOnline()){
                     squid.remove();
                     cancel();
                     return;
@@ -55,17 +55,17 @@ public class KillEffectSquid implements KillEffect, Cloneable {
             }
         }.runTaskTimer(plugin, 0, 2);
     }
-
+    
     @Override
     public void stop() {
-        if (task != null) {
+        if(task != null){
             task.cancel();
         }
     }
-
+    
     @Override
     public KillEffect clone() {
         return new KillEffectSquid();
     }
-
+    
 }

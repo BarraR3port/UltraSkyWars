@@ -17,20 +17,20 @@ import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class WinEffectNotes implements WinEffect {
-
+    
     private final ArrayList<Item> items = new ArrayList<>();
-    private BukkitTask task;
     private final Material[] discs = new Material[]{Material.GOLD_RECORD, Material.GREEN_RECORD, Material.RECORD_3, Material.RECORD_4, Material.RECORD_5, Material.RECORD_6, Material.RECORD_7, Material.RECORD_8, Material.RECORD_9, Material.RECORD_10, Material.RECORD_11, Material.RECORD_12};
-
+    private BukkitTask task;
+    
     @Override
     public void start(Player p, Game game) {
         UltraSkyWars plugin = UltraSkyWars.get();
         task = new BukkitRunnable() {
             final String name = game.getSpectator().getWorld().getName();
-
+            
             @Override
             public void run() {
-                if (p == null || !p.isOnline() || !name.equals(p.getWorld().getName())) {
+                if(p == null || !p.isOnline() || !name.equals(p.getWorld().getName())){
                     stop();
                     return;
                 }
@@ -38,8 +38,8 @@ public class WinEffectNotes implements WinEffect {
                 CustomSound.WINEFFECTS_NOTES.reproduce(p);
                 plugin.getVc().getNMS().broadcastParticle(p.getLocation(), ThreadLocalRandom.current().nextInt(0, 24), 0, 0, 1, "NOTE", 5, 10);
                 items.add(item);
-                for (Item c : new ArrayList<>(items)) {
-                    if (c.getTicksLived() > 30) {
+                for ( Item c : new ArrayList<>(items) ){
+                    if(c.getTicksLived() > 30){
                         c.remove();
                         plugin.getVc().getNMS().broadcastParticle(item.getLocation(), ThreadLocalRandom.current().nextInt(0, 24), 0, 0, 1, "NOTE", 5, 10);
                         items.remove(c);
@@ -48,24 +48,24 @@ public class WinEffectNotes implements WinEffect {
             }
         }.runTaskTimer(plugin, 0, 6);
     }
-
+    
     @Override
     public void stop() {
         items.clear();
-        if (task != null) {
+        if(task != null){
             task.cancel();
         }
     }
-
+    
     @Override
     public WinEffect clone() {
         return new WinEffectNotes();
     }
-
+    
     protected double random(double d, double d2) {
         return d + ThreadLocalRandom.current().nextDouble() * (d2 - d);
     }
-
+    
     private Item spawnDisc(Location location, double d, double d3) {
         ItemStack itemStack = new ItemStack(this.discs[ThreadLocalRandom.current().nextInt(this.discs.length)]);
         Item item = location.getWorld().dropItem(location, itemStack);
@@ -73,5 +73,5 @@ public class WinEffectNotes implements WinEffect {
         item.setVelocity(new Vector(d, 0.8, d3));
         return item;
     }
-
+    
 }

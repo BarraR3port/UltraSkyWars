@@ -31,11 +31,11 @@ public class AddonManager {
     private PartiesAddon parties;
     private PlaceholderAddon placeholder;
     private SlimeWorldManagerAddon slime;
-
+    
     public boolean check(String pluginName) {
         UltraSkyWars plugin = UltraSkyWars.get();
-        if (plugin.getConfig().isSet("addons." + pluginName) && plugin.getConfig().getBoolean("addons." + pluginName)) {
-            if (Bukkit.getPluginManager().isPluginEnabled(pluginName)){
+        if(plugin.getConfig().isSet("addons." + pluginName) && plugin.getConfig().getBoolean("addons." + pluginName)){
+            if(Bukkit.getPluginManager().isPluginEnabled(pluginName)){
                 plugin.sendLogMessage("Hooked into §a" + pluginName + "§e!");
                 plugin.getConfig().set("addons." + pluginName, true);
                 plugin.saveConfig();
@@ -48,23 +48,23 @@ public class AddonManager {
         }
         return false;
     }
-
+    
     public void reload() {
         UltraSkyWars plugin = UltraSkyWars.get();
-        if (check("SlimeWorldManager")) {
+        if(check("SlimeWorldManager")){
             slime = new SlimeWorldManagerAddon(plugin);
         }
-        if (check("PlaceholderAPI")) {
+        if(check("PlaceholderAPI")){
             placeholder = new PlaceholderAPIAddon();
         }
-        if (check("TAB")) {
+        if(check("TAB")){
             tag = new TabAPIAddon();
         }
-        if (check("Parties")) {
+        if(check("Parties")){
             parties = new PartiesAddon();
         }
-    
-        if (!plugin.isDisabled()) {
+        
+        if(!plugin.isDisabled()){
             new BukkitRunnable() {
                 @Override
                 public void run() {
@@ -96,140 +96,140 @@ public class AddonManager {
             }.runTaskLater(plugin, 80);
         }
     }
-
+    
     public void reloadHologram() {
         UltraSkyWars plugin = UltraSkyWars.get();
-        if (plugin.getIjm().isSoulWellInjection()) {
+        if(plugin.getIjm().isSoulWellInjection()){
             plugin.getIjm().getSoulwell().getSwm().reload();
         }
-        if (plugin.getIjm().isCubeletsInjection()) {
+        if(plugin.getIjm().isCubeletsInjection()){
             plugin.getIjm().getCubelets().getCbm().reload();
         }
     }
-
+    
     public PartiesAddon getParties() {
         return parties;
     }
-
+    
     public void addCoins(Player p, double amount) {
         UltraSkyWars plugin = UltraSkyWars.get();
-        if (economy != null) {
+        if(economy != null){
             economy.addCoins(p, amount);
         } else {
             SWPlayer sw = plugin.getDb().getSWPlayer(p);
-            if (sw == null) return;
+            if(sw == null) return;
             sw.addCoins((int) amount);
         }
         Utils.updateSB(p);
     }
-
+    
     public void setCoins(Player p, double amount) {
         UltraSkyWars plugin = UltraSkyWars.get();
-        if (economy != null) {
+        if(economy != null){
             economy.setCoins(p, amount);
         } else {
             SWPlayer sw = plugin.getDb().getSWPlayer(p);
-            if (sw == null) return;
+            if(sw == null) return;
             sw.setCoins((int) amount);
         }
         Utils.updateSB(p);
     }
-
+    
     public void removeCoins(Player p, double amount) {
         UltraSkyWars plugin = UltraSkyWars.get();
-        if (economy != null) {
+        if(economy != null){
             economy.removeCoins(p, amount);
         } else {
             SWPlayer sw = plugin.getDb().getSWPlayer(p);
-            if (sw == null) return;
+            if(sw == null) return;
             sw.removeCoins((int) amount);
         }
         Utils.updateSB(p);
     }
-
+    
     public double getCoins(Player p) {
         UltraSkyWars plugin = UltraSkyWars.get();
-        if (economy != null) {
+        if(economy != null){
             return economy.getCoins(p);
         } else {
             SWPlayer sw = plugin.getDb().getSWPlayer(p);
-            if (sw == null) {
+            if(sw == null){
                 return 0;
             }
             return sw.getCoins();
         }
     }
-
+    
     public void createHologram(Location spawn, List<String> lines) {
-        if (ha != null) {
+        if(ha != null){
             ha.createHologram(spawn, lines);
         }
     }
-
+    
     public void createHologram(Location spawn, List<String> lines, ItemStack item) {
-        if (ha != null) {
+        if(ha != null){
             ha.createHologram(spawn, lines, item);
         }
     }
-
+    
     public void remove() {
-        if (ha != null) {
+        if(ha != null){
             ha.remove();
         }
     }
-
+    
     public void deleteHologram(Location spawn) {
-        if (ha != null) {
+        if(ha != null){
             ha.deleteHologram(spawn);
         }
     }
-
+    
     public boolean hasHologram(Location spawn) {
-        if (ha != null) {
+        if(ha != null){
             return ha.hasHologram(spawn);
         }
         return false;
     }
-
+    
     public void addPlayerNameTag(Player p) {
-        if (tag != null) {
+        if(tag != null){
             tag.addPlayerNameTag(p);
         }
     }
-
+    
     public void resetPlayerNameTag(Player p) {
-        if (tag != null) {
+        if(tag != null){
             tag.resetPlayerNameTag(p);
         }
     }
-
+    
     public String getPlayerPrefix(Player p) {
-        if (tag != null) {
+        if(tag != null){
             return tag.getPrefix(p);
         }
         return "";
     }
-
+    
     public String getPlayerSuffix(Player p) {
-        if (tag != null) {
+        if(tag != null){
             return tag.getSuffix(p);
         }
         return "";
     }
-
+    
     public String parsePlaceholders(Player p, String value) {
-        if (placeholder != null) {
+        if(placeholder != null){
             return placeholder.parsePlaceholders(p, value);
         }
         return value;
     }
-
+    
     public SlimeWorldManagerAddon getSlime() {
         return slime;
     }
-
+    
     public boolean hasHologramPlugin() {
         return !(ha == null);
     }
-
+    
 }

@@ -4,28 +4,29 @@ import io.github.Leonardo0013YT.UltraSkyWars.UltraSkyWars;
 import org.bukkit.Location;
 
 public class SoulWell {
-
-    private UltraSkyWars plugin;
-    private Location loc, hologram;
-
+    
+    private final UltraSkyWars plugin;
+    private final Location loc;
+    private final Location hologram;
+    
     public SoulWell(UltraSkyWars plugin, Location loc) {
         this.plugin = plugin;
         this.loc = loc;
         this.hologram = loc.clone().add(0.5, 0, 0.5);
     }
-
+    
     public void reload() {
-        if (plugin.getAdm().hasHologramPlugin()) {
+        if(plugin.getAdm().hasHologramPlugin()){
             plugin.getAdm().createHologram(hologram, plugin.getLang().getList("holograms.soulwell"));
         }
     }
-
+    
     public Location getHologram() {
         return hologram;
     }
-
+    
     public Location getLoc() {
         return loc;
     }
-
+    
 }

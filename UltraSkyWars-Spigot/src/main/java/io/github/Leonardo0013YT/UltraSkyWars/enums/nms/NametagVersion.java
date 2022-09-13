@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum NametagVersion {
-
+    
     v1_8_R3("a", "b", "c", "e", "g", "h", "i"),
     v1_9_R2("a", "b", "c", "e", "h", "i", "j"),
     v1_10_R1("a", "b", "c", "e", "h", "i", "j"),
@@ -16,9 +16,9 @@ public enum NametagVersion {
     v1_16_R1("a", "b", "c", "e", "h", "i", "j"),
     v1_16_R2("a", "b", "c", "e", "h", "i", "j"),
     v1_16_R3("a", "b", "c", "e", "h", "i", "j");
-
+    
     private final String a, b, c, e, g, h, i;
-
+    
     NametagVersion(String a, String b, String c, String e, String g, String h, String i) {
         this.a = a;
         this.b = b;
@@ -28,5 +28,5 @@ public enum NametagVersion {
         this.h = h;
         this.i = i;
     }
-
+    
 }

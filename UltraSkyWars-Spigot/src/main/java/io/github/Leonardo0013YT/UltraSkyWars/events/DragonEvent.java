@@ -9,9 +9,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.metadata.FixedMetadataValue;
 
 public class DragonEvent extends GameEvent {
-
+    
     EnderDragon dragon;
-
+    
     public DragonEvent(UltraSkyWars plugin, int time) {
         this.time = time;
         this.reset = time;
@@ -22,7 +22,7 @@ public class DragonEvent extends GameEvent {
         this.title = plugin.getLang().get("titles." + name + ".title");
         this.subtitle = plugin.getLang().get("titles." + name + ".subtitle");
     }
-
+    
     public DragonEvent(DragonEvent e) {
         this.time = e.getReset();
         this.reset = e.getReset();
@@ -33,24 +33,24 @@ public class DragonEvent extends GameEvent {
         this.title = e.getTitle();
         this.subtitle = e.getSubTitle();
     }
-
+    
     @Override
     public void start(Game game) {
         dragon = game.getSpectator().getWorld().spawn(game.getSpectator(), EnderDragon.class);
         dragon.setNoDamageTicks(999999999);
         dragon.setMetadata("CUSTOM", new FixedMetadataValue(UltraSkyWars.get(), "CUSTOM"));
-        for (Player on : game.getCached()) {
+        for ( Player on : game.getCached() ){
             CustomSound.EVENTS_DRAGON.reproduce(on);
         }
     }
-
+    
     @Override
     public void stop(Game game) {
-        if (dragon != null) {
+        if(dragon != null){
             dragon.remove();
         }
     }
-
+    
     @Override
     public void reset() {
         this.time = this.reset;
@@ -58,10 +58,10 @@ public class DragonEvent extends GameEvent {
         this.type = "final";
         this.name = "dragon";
     }
-
+    
     @Override
     public DragonEvent clone() {
         return new DragonEvent(this);
     }
-
+    
 }

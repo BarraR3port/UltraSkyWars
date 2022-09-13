@@ -154,17 +154,17 @@ public class WorldController {
             public List<BlockPopulator> getDefaultPopulators(World world) {
                 return Collections.emptyList();
             }
-    
+            
             @Override
             public boolean canSpawn(World world, int x, int z) {
                 return true;
             }
-    
+            
             @Override
             public byte[] generate(World world, Random random, int x, int z) {
                 return new byte[32768];
             }
-    
+            
             @Override
             public ChunkData generateChunkData(World world, Random random, int x, int z, BiomeGrid biome) {
                 ChunkData chunk = createChunkData(world);
@@ -177,7 +177,7 @@ public class WorldController {
                 }
                 return chunk;
             }
-    
+            
             @Override
             public Location getFixedSpawnLocation(World world, Random random) {
                 return new Location(world, 0.0D, 75, 0.0D);

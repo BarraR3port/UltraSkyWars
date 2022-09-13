@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class Perk {
-
+    
     private final Material material;
     private final String name, lore;
     private final int id, amount, slot;
@@ -24,7 +24,7 @@ public abstract class Perk {
     private final InjectionPerks plugin;
     private final List<String> gameTypes;
     private final HashMap<Integer, PerkLevel> levels = new HashMap<>();
-
+    
     public Perk(InjectionPerks plugin, String path) {
         this.plugin = plugin;
         this.disabled = plugin.getPerks().getBooleanOrDefault(path + ".disabled", false);
@@ -35,32 +35,32 @@ public abstract class Perk {
         this.slot = plugin.getPerks().getInt(path + ".slot");
         this.amount = plugin.getPerks().getInt(path + ".icon.amount");
         this.gameTypes = plugin.getPerks().getListOrDefault(path + ".gameTypes", Arrays.asList("SOLO", "TEAM", "RANKED"));
-        if (plugin.getPerks().isSet(path + ".levels")) {
-            for (String s : plugin.getPerks().getConfig().getConfigurationSection(path + ".levels").getKeys(false)) {
+        if(plugin.getPerks().isSet(path + ".levels")){
+            for ( String s : plugin.getPerks().getConfig().getConfigurationSection(path + ".levels").getKeys(false) ){
                 PerkLevel pl = new PerkLevel(plugin, path + ".levels." + s);
                 levels.put(pl.getLevel(), pl);
             }
         }
     }
-
+    
     public boolean isDisabled() {
         return disabled;
     }
-
+    
     public List<String> getGameTypes() {
         return gameTypes;
     }
-
+    
     public ItemStack toIcon(Player p, SWPlayer sw) {
         PerkLevel pl = null;
         boolean locked = true;
-        if (sw.getPerksData().containsKey(id)) {
+        if(sw.getPerksData().containsKey(id)){
             pl = levels.get(sw.getPerksData().get(id));
             locked = false;
         }
-        if (pl == null) {
+        if(pl == null){
             pl = levels.get(1);
-            if (pl != null && !locked) {
+            if(pl != null && !locked){
                 sw.getPerksData().put(id, pl.getLevel());
             }
         }
@@ -76,29 +76,29 @@ public abstract class Perk {
         // PERK_DATA -> PerkID, Locked, Level.
         return NBTEditor.set(item, id + ":" + locked + ":" + ((pl == null) ? 1 : pl.getLevel()) + ":" + (next == null), "PERK_DATA");
     }
-
+    
     public HashMap<Integer, PerkLevel> getLevels() {
         return levels;
     }
-
+    
     public String getName() {
         return name;
     }
-
+    
     public int getSlot() {
         return slot;
     }
-
+    
     public int getId() {
         return id;
     }
-
+    
     public boolean isReduced(SWPlayer sw) {
         PerkLevel pl = levels.get(sw.getPerksData().get(id));
         int probability = (pl == null) ? 0 : pl.getProbability();
         return ThreadLocalRandom.current().nextInt(0, 100) <= probability;
     }
-
+    
     public double getNewAmount(double damage, SWPlayer sw) {
         PerkLevel pl = levels.get(sw.getPerksData().get(id));
         int percent = (pl == null) ? 0 : pl.getPercent();

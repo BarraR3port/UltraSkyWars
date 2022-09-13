@@ -9,7 +9,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 
 public class InstantFirework {
-
+    
     public InstantFirework(FireworkEffect effect, Location loc) {
         Firework f = loc.getWorld().spawn(loc, Firework.class);
         FireworkMeta fm = f.getFireworkMeta();
@@ -20,9 +20,10 @@ public class InstantFirework {
             Field fl = eF.getClass().getDeclaredField("expectedLifespan");
             fl.setAccessible(true);
             fl.set(eF, 1);
-        } catch (NoSuchMethodError | NoSuchMethodException | IllegalAccessException | InvocationTargetException | NoSuchFieldException e) {
+        } catch(NoSuchMethodError | NoSuchMethodException | IllegalAccessException | InvocationTargetException |
+                NoSuchFieldException e) {
             e.printStackTrace();
         }
     }
-
+    
 }

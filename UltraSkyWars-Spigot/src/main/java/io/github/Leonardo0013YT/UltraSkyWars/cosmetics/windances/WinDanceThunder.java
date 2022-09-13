@@ -10,14 +10,14 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 public class WinDanceThunder implements WinDance, Cloneable {
-
+    
     private static boolean loaded = false;
     private static int xOfCenter, zOfCenter, minOfCenter, maxOfCenter, taskTick;
     private BukkitTask task;
-
+    
     @Override
     public void loadCustoms(UltraSkyWars plugin, String path) {
-        if (!loaded) {
+        if(!loaded){
             xOfCenter = plugin.getWindance().getIntOrDefault(path + ".xOfCenter", 10);
             zOfCenter = plugin.getWindance().getIntOrDefault(path + ".zOfCenter", 10);
             minOfCenter = plugin.getWindance().getIntOrDefault(path + ".minOfCenter", 10);
@@ -26,7 +26,7 @@ public class WinDanceThunder implements WinDance, Cloneable {
             loaded = true;
         }
     }
-
+    
     @Override
     public void start(Player p, Game game) {
         World w = game.getSpectator().getWorld();
@@ -41,7 +41,7 @@ public class WinDanceThunder implements WinDance, Cloneable {
         task = new BukkitRunnable() {
             @Override
             public void run() {
-                if (p == null || !p.isOnline() || !w.getName().equals(p.getWorld().getName())) {
+                if(p == null || !p.isOnline() || !w.getName().equals(p.getWorld().getName())){
                     stop();
                     return;
                 }
@@ -56,21 +56,21 @@ public class WinDanceThunder implements WinDance, Cloneable {
             }
         }.runTaskTimer(UltraSkyWars.get(), 0, taskTick);
     }
-
+    
     private void thunder(Location loc) {
         loc.getWorld().strikeLightningEffect(loc);
     }
-
+    
     @Override
     public void stop() {
-        if (task != null) {
+        if(task != null){
             task.cancel();
         }
     }
-
+    
     @Override
     public WinDance clone() {
         return new WinDanceThunder();
     }
-
+    
 }

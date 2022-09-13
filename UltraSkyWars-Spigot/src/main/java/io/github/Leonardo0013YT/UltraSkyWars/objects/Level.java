@@ -8,13 +8,19 @@ import org.bukkit.entity.Player;
 import java.util.List;
 
 public class Level {
-
+    
     @Getter
-    private int id, xp, level, levelUp;
+    private final int id;
     @Getter
-    private String prefix;
-    private List<String> rewards;
-
+    private final int xp;
+    @Getter
+    private final int level;
+    @Getter
+    private final int levelUp;
+    @Getter
+    private final String prefix;
+    private final List<String> rewards;
+    
     public Level(UltraSkyWars plugin, String path, int id) {
         this.id = id;
         this.level = plugin.getLevels().getInt(path + ".level");
@@ -23,11 +29,11 @@ public class Level {
         this.prefix = plugin.getLevels().get(path + ".prefix");
         this.rewards = plugin.getLevels().getList(path + ".rewards");
     }
-
+    
     public void execute(Player p) {
-        for (String r : rewards) {
+        for ( String r : rewards ){
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), r.replaceFirst("/", "").replaceAll("<player>", p.getName()));
         }
     }
-
+    
 }

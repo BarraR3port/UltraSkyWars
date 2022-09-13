@@ -5,10 +5,10 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 public interface KillEffect {
-
+    
     void loadCustoms(UltraSkyWars plugin, String path);
-
+    
     void start(Player p, Player death, Location loc);
-
+    
     void stop();
 }

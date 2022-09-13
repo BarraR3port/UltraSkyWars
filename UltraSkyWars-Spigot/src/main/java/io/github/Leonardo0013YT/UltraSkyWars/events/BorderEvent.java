@@ -7,7 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.WorldBorder;
 
 public class BorderEvent extends GameEvent {
-
+    
     public BorderEvent(UltraSkyWars plugin, int time) {
         this.time = time;
         this.reset = time;
@@ -17,7 +17,7 @@ public class BorderEvent extends GameEvent {
         this.title = plugin.getLang().get("titles." + name + ".title");
         this.subtitle = plugin.getLang().get("titles." + name + ".subtitle");
     }
-
+    
     public BorderEvent(BorderEvent e) {
         this.time = e.getReset();
         this.reset = e.getReset();
@@ -27,7 +27,7 @@ public class BorderEvent extends GameEvent {
         this.title = e.getTitle();
         this.subtitle = e.getSubTitle();
     }
-
+    
     @Override
     public void start(Game game) {
         WorldBorder wb = game.getSpectator().getWorld().getWorldBorder();
@@ -38,23 +38,23 @@ public class BorderEvent extends GameEvent {
         wb.setSize(game.getBorderStart());
         wb.setSize(game.getBorderEnd(), UltraSkyWars.get().getCm().getTimeBorderReduction());
     }
-
+    
     @Override
     public void stop(Game game) {
         WorldBorder wb = game.getSpectator().getWorld().getWorldBorder();
         wb.reset();
     }
-
+    
     @Override
     public void reset() {
         this.time = this.reset;
         this.type = "final";
         this.name = "border";
     }
-
+    
     @Override
     public BorderEvent clone() {
         return new BorderEvent(this);
     }
-
+    
 }

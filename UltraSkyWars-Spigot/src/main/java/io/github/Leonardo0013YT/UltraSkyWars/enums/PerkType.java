@@ -1,7 +1,7 @@
 package io.github.Leonardo0013YT.UltraSkyWars.enums;
 
 public enum PerkType {
-
+    
     FALL_REDUCTION,
     FIRE_DAMAGE_REDUCTION,
     SHOT_DAMAGE_REDUCTION,
@@ -17,5 +17,5 @@ public enum PerkType {
     RESISTENCE_START,
     SPEED_START,
     SAVIOR,
-
+    
 }

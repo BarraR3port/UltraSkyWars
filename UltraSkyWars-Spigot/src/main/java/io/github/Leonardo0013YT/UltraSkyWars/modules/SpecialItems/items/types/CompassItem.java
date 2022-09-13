@@ -6,11 +6,11 @@ import lombok.Getter;
 
 @Getter
 public class CompassItem extends SpecialItem {
-
+    
     private final int time;
     private final double range;
     private final String noTarget, targeted, countdown;
-
+    
     public CompassItem(InjectionSpecialItems isi) {
         this.range = isi.getSpecial_items().getDouble("items.compass.range");
         this.time = isi.getSpecial_items().getInt("items.compass.time");
@@ -18,5 +18,5 @@ public class CompassItem extends SpecialItem {
         this.targeted = isi.getSpecial_items().get("items.compass.targeted");
         this.countdown = isi.getSpecial_items().get("items.compass.countdown");
     }
-
+    
 }

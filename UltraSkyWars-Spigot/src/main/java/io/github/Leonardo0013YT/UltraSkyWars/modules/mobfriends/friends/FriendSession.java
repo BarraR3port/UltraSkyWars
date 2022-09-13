@@ -5,15 +5,15 @@ import org.bukkit.entity.Entity;
 import java.util.ArrayList;
 
 public class FriendSession {
-
+    
     private final ArrayList<Entity> entities = new ArrayList<>();
-
+    
     public ArrayList<Entity> getEntities() {
         return entities;
     }
-
+    
     public void clear() {
         entities.forEach(Entity::remove);
     }
-
+    
 }

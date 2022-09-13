@@ -9,22 +9,22 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 
 public class GameSign {
-
+    
     private final Block retract;
     private final String type;
     private final Location loc;
     private GameData data;
     private boolean occupied;
-
+    
     public GameSign(String type, Location loc) {
         this.type = type;
         this.loc = loc;
         this.retract = Utils.getBlockFaced(loc.getBlock());
         this.occupied = false;
     }
-
+    
     public synchronized void setLines(String... line) {
-        if (loc.getBlock().getState() instanceof Sign) {
+        if(loc.getBlock().getState() instanceof Sign){
             Sign sign = (Sign) loc.getBlock().getState();
             sign.setLine(0, line[0]);
             sign.setLine(1, line[1]);
@@ -34,9 +34,9 @@ public class GameSign {
             sign.update(true);
         }
     }
-
+    
     public void setState(String state) {
-        switch (state) {
+        switch(state) {
             case "WAITING":
                 XBlock.setColor(retract, DyeColor.LIME);
                 break;
@@ -60,25 +60,25 @@ public class GameSign {
                 break;
         }
     }
-
+    
     public boolean isOccupied() {
         return occupied;
     }
-
+    
     public void setOccupied(boolean occupied) {
         this.occupied = occupied;
     }
-
+    
     public String getType() {
         return type.toLowerCase();
     }
-
+    
     public GameData getData() {
         return data;
     }
-
+    
     public void setData(GameData data) {
         this.data = data;
     }
-
+    
 }

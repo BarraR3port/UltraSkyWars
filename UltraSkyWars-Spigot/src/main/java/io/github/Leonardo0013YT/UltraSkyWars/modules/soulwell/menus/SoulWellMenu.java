@@ -19,27 +19,27 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class SoulWellMenu {
-
-    private UltraSkyWars plugin;
-    private InjectionSoulWell is;
-    private int[] slots = {10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34};
-    private DateFormat df;
-
+    
+    private final UltraSkyWars plugin;
+    private final InjectionSoulWell is;
+    private final int[] slots = {10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34};
+    private final DateFormat df;
+    
     public SoulWellMenu(UltraSkyWars plugin, InjectionSoulWell is) {
         this.plugin = plugin;
         this.is = is;
         this.df = new SimpleDateFormat(is.getSoulwell().get("date"));
     }
-
+    
     public void createHeadsSoulWellMenu(Player p) {
         Inventory inv = Bukkit.createInventory(null, 45, plugin.getLang().get(p, "menus.heads.title"));
         ItemStack back = ItemBuilder.item(XMaterial.BARRIER, plugin.getLang().get(p, "menus.back.nameItem"), plugin.getLang().get(p, "menus.back.loreItem"));
         SWPlayer sw = plugin.getDb().getSWPlayer(p);
         ItemStack stats = ItemBuilder.item(XMaterial.PLAYER_HEAD, is.getSoulwell().get(p, "heads.stats.nameItem"), is.getSoulwell().get(p, "heads.stats.loreItem").replaceAll("<heads>", "" + sw.getHeadsCollected()).replaceAll("<eww>", String.valueOf(sw.getHeadCount("eww"))).replaceAll("<disgusting>", String.valueOf(sw.getHeadCount("disgusting"))).replaceAll("<bah>", String.valueOf(sw.getHeadCount("bah"))).replaceAll("<decent>", String.valueOf(sw.getHeadCount("decent"))).replaceAll("<salty>", String.valueOf(sw.getHeadCount("salty"))).replaceAll("<tasty>", String.valueOf(sw.getHeadCount("tasty"))).replaceAll("<succulent>", String.valueOf(sw.getHeadCount("succulent"))).replaceAll("<candy>", String.valueOf(sw.getHeadCount("candy"))).replaceAll("<divine>", String.valueOf(sw.getHeadCount("divine"))).replaceAll("<heavenly>", String.valueOf(sw.getHeadCount("heavenly"))));
         int i = 0;
-        for (String rarity : sw.getHeads().keySet()) {
-            if (i >= slots.length) break;
-            for (String head : sw.getHeads().get(rarity).keySet()) {
+        for ( String rarity : sw.getHeads().keySet() ){
+            if(i >= slots.length) break;
+            for ( String head : sw.getHeads().get(rarity).keySet() ){
                 String date = df.format(new Date(sw.getHeads().get(rarity).get(head)));
                 String ra = is.getSoulwell().get("raritys." + rarity);
                 inv.setItem(slots[i], getHead(ra, head, date));
@@ -50,18 +50,18 @@ public class SoulWellMenu {
         inv.setItem(41, stats);
         p.openInventory(inv);
     }
-
+    
     public ItemStack getHead(String rarity, String player, String date) {
         return ItemBuilder.skull(XMaterial.PLAYER_HEAD, 1, is.getSoulwell().get("heads.head.nameItem").replaceAll("<name>", player), is.getSoulwell().get("heads.head.loreItem").replaceAll("<rarity>", rarity).replaceAll("<date>", date), player);
     }
-
+    
     public void createUpgradeSoulWellMenu(Player p) {
         Inventory inv = Bukkit.createInventory(null, 36, plugin.getLang().get(p, "menus.soulwellupgrade.title"));
         SWPlayer sw = plugin.getDb().getSWPlayer(p);
         ItemStack back = ItemBuilder.item(XMaterial.BARRIER, plugin.getLang().get(p, "menus.back.nameItem"), plugin.getLang().get(p, "menus.back.loreItem"));
         SoulWellUpgrade extra = is.getSwm().getExtraMax(sw.getSoulWellExtra());
-        if (extra != null) {
-            if (extra.getPrice() < plugin.getAdm().getCoins(p)) {
+        if(extra != null){
+            if(extra.getPrice() < plugin.getAdm().getCoins(p)){
                 inv.setItem(11, extra.getIcon(is.getSoulwell().get("buy")));
             } else {
                 inv.setItem(11, extra.getIcon(is.getSoulwell().get("noMoney")));
@@ -71,8 +71,8 @@ public class SoulWellMenu {
             inv.setItem(11, last.getIcon(is.getSoulwell().get("unlocked")));
         }
         SoulWellUpgrade max = is.getSwm().getMaxMax(sw.getSoulWellMax());
-        if (max != null) {
-            if (max.getPrice() < plugin.getAdm().getCoins(p)) {
+        if(max != null){
+            if(max.getPrice() < plugin.getAdm().getCoins(p)){
                 inv.setItem(15, max.getIcon(is.getSoulwell().get("buy")));
             } else {
                 inv.setItem(15, max.getIcon(is.getSoulwell().get("noMoney")));
@@ -84,17 +84,17 @@ public class SoulWellMenu {
         inv.setItem(31, back);
         p.openInventory(inv);
     }
-
+    
     public void createShopSoulWellMenu(Player p) {
         Inventory inv = Bukkit.createInventory(null, 36, plugin.getLang().get(p, "menus.soulwellshop.title"));
         ItemStack back = ItemBuilder.item(XMaterial.BARRIER, plugin.getLang().get(p, "menus.back.nameItem"), plugin.getLang().get(p, "menus.back.loreItem"));
-        for (SoulWellShop s : is.getSwm().getShops().values()) {
+        for ( SoulWellShop s : is.getSwm().getShops().values() ){
             inv.setItem(s.getSlot(), s.getIcon(plugin.getAdm().getCoins(p)));
         }
         inv.setItem(31, back);
         p.openInventory(inv);
     }
-
+    
     public void createSoulWellMenu(Player p) {
         Inventory inv = Bukkit.createInventory(null, 54, plugin.getLang().get(p, "menus.soulwells.title"));
         SWPlayer sw = plugin.getDb().getSWPlayer(p);
@@ -113,7 +113,7 @@ public class SoulWellMenu {
         inv.setItem(50, settings);
         p.openInventory(inv);
     }
-
+    
     public void createSoulWellAngelMenu(Player p) {
         Inventory inv = Bukkit.createInventory(null, 36, plugin.getLang().get(p, "menus.angelofdeath.title"));
         SWPlayer sw = plugin.getDb().getSWPlayer(p);
@@ -122,7 +122,7 @@ public class SoulWellMenu {
         inv.setItem(15, cancel);
         p.openInventory(inv);
     }
-
+    
     public void createSettingsMenu(Player p) {
         Inventory inv = Bukkit.createInventory(null, 45, plugin.getLang().get(p, "menus.soulwellsettings.title"));
         SWPlayer sw = plugin.getDb().getSWPlayer(p);
@@ -145,22 +145,22 @@ public class SoulWellMenu {
         inv.setItem(14, d3);
         inv.setItem(28, remove);
         inv.setItem(29, s1y);
-        if (sw.getRows() > 1) {
+        if(sw.getRows() > 1){
             inv.setItem(30, s2y);
         } else {
             inv.setItem(30, s2n);
         }
-        if (sw.getRows() > 2) {
+        if(sw.getRows() > 2){
             inv.setItem(31, s3y);
         } else {
             inv.setItem(31, s3n);
         }
-        if (sw.getRows() > 3) {
+        if(sw.getRows() > 3){
             inv.setItem(32, s4y);
         } else {
             inv.setItem(32, s4n);
         }
-        if (sw.getRows() > 4) {
+        if(sw.getRows() > 4){
             inv.setItem(33, s5y);
         } else {
             inv.setItem(33, s5n);
@@ -168,11 +168,11 @@ public class SoulWellMenu {
         inv.setItem(34, add);
         p.openInventory(inv);
     }
-
+    
     public ItemStack getAngelOfDeath(int levelActual) {
         SoulWellAngelOfDeath sa = is.getSwm().getAngelByLevel(levelActual);
         SoulWellAngelOfDeath na = is.getSwm().getAngelByLevel(levelActual + 1);
-        if (na == null) {
+        if(na == null){
             ItemStack angelofdeath = ItemBuilder.item(XMaterial.CHEST, sa.getName(), sa.getLore().replaceAll("<desc>", is.getSoulwell().get("angelLore"))
                     .replaceAll("<now>", "" + sa.getProbability()).replaceAll("<new>", "" + is.getSoulwell().get("unlocked")).replaceAll("<arrow>", "➤"));
             angelofdeath = NBTEditor.set(angelofdeath, sa.getLevel(), "SOULWELL", "ANGELDEATH", "LEVEL");
@@ -183,5 +183,5 @@ public class SoulWellMenu {
         angelofdeath = NBTEditor.set(angelofdeath, na.getLevel(), "SOULWELL", "ANGELDEATH", "LEVEL");
         return NBTEditor.set(angelofdeath, na.getKey(), "SOULWELL", "ANGELDEATH", "KEY");
     }
-
+    
 }
