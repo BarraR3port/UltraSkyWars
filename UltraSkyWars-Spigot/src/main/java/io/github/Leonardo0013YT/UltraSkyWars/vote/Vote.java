@@ -16,10 +16,10 @@ import org.bukkit.entity.Player;
 import java.util.*;
 
 public class Vote {
-
-    private UltraSkyWars plugin;
-    private Game game;
-    private HashMap<Player, VotePlayer> votes = new HashMap<>();
+    
+    private final UltraSkyWars plugin;
+    private final Game game;
+    private final HashMap<Player, VotePlayer> votes = new HashMap<>();
     private String chestType = null;
     private FinalType finalType = null;
     private HealthType healthType = null;
@@ -27,7 +27,7 @@ public class Vote {
     private TimeType timeType = null;
     private boolean noVoted = true;
     private int chest, finish, health, projectile, time;
-
+    
     public Vote(UltraSkyWars plugin, Game game) {
         this.plugin = plugin;
         this.game = game;
@@ -53,6 +53,7 @@ public class Vote {
         }
         if (chestType != null) {
             game.setChestType(chestType);
+            //FILL CHESTS
             game.getTeams().values().forEach(t -> t.getChest().fill(game, false));
             game.getCenter().fill(game, false);
         }

@@ -32,7 +32,9 @@ public class RefillEvent extends GameEvent {
     @Override
     public void start(Game game) {
         GameChest gc = game.getCenter();
+        //FILL CHESTS
         gc.fill(game, true);
+        //FILL CHESTS
         game.getTeams().values().forEach(t -> t.getChest().fill(game, true));
         for (Player on : game.getCached()) {
             CustomSound.EVENTS_REFILL.reproduce(on);

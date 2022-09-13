@@ -143,7 +143,7 @@ public class SetupCMD implements CommandExecutor {
                         p.getInventory().remove(plugin.getIm().getCenter());
                         p.getInventory().addItem(plugin.getIm().getSetup());
                         p.sendMessage(plugin.getLang().get("setup.arena.createMap").replace("<name>", name));
-        
+    
                     }
                     break;
                 case "edit":
@@ -316,6 +316,19 @@ public class SetupCMD implements CommandExecutor {
                     plugin.getSem().createSetupChestMenu(p);
                     break;
                 case "glass":
+                    if(args[1].equals("autocreateglass")){
+                        String schematicg = args[2].replaceAll(".schematic", "").replaceAll(".schem", "");
+                        if(!Utils.existsFile(schematicg)){
+                            p.sendMessage(plugin.getLang().get(p, "setup.noSchema"));
+                            return true;
+                        }
+                        p.sendMessage("Creating glasses...");
+                        long time = System.currentTimeMillis();
+                        boolean team = Boolean.parseBoolean(args[3]);
+                        plugin.getWc().getEdit().changeSchematicColors(p, schematicg, team);
+                        p.sendMessage("Glasses AutoCreated in: " + (System.currentTimeMillis() - time) / 1000 + "ms");
+                        return true;
+                    }
                     if(plugin.getSm().isSetupGlass(p)){
                         GlassSetup gs = plugin.getSm().getSetupGlass(p);
                         plugin.getSem().createGlassMenu(p, gs);

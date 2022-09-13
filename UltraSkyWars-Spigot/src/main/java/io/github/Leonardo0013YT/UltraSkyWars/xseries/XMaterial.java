@@ -1267,7 +1267,7 @@ public enum XMaterial {
         return false;
     }
 
-    @Nonnull
+    /*@Nonnull
     @Deprecated
     public static Optional<XMaterial> matchXMaterial(int id, byte data) {
         if (id < 0 || id > MAX_ID || data < 0) return Optional.empty();
@@ -1276,19 +1276,25 @@ public enum XMaterial {
             if (materials.data == data && materials.getId() == id) return Optional.of(materials);
         }
         return Optional.empty();
+    }*/
+    
+    @Deprecated
+    @SuppressWarnings("all")
+    public static XMaterial matchXMaterial(int id, int data) {
+        return matchDefinedXMaterial(Material.getMaterial(id).name(), (byte) data).get();
     }
-
+    
     @Nonnull
-    protected static String format(@Nonnull String name) {
+    private static String format(@Nonnull String name) {
         int len = name.length();
         char[] chs = new char[len];
         int count = 0;
         boolean appendUnderline = false;
-
-        for (int i = 0; i < len; i++) {
+        
+        for ( int i = 0; i < len; i++ ){
             char ch = name.charAt(i);
-
-            if (!appendUnderline && count != 0 && (ch == '-' || ch == ' ' || ch == '_') && chs[count] != '_')
+            
+            if(!appendUnderline && count != 0 && (ch == '-' || ch == ' ' || ch == '_') && chs[count] != '_')
                 appendUnderline = true;
             else {
                 boolean number = false;

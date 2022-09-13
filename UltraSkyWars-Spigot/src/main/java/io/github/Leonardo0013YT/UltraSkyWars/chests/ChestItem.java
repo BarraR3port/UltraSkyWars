@@ -7,15 +7,15 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class ChestItem {
-
-    private ItemStack item;
+    
+    private final ItemStack item;
     @Getter
-    private boolean center, refill;
-    private ArrayList<String> modes;
-    private int percent;
+    private final boolean center, refill;
+    private final ArrayList<String> modes;
+    private final int percent;
     @Getter
-    private int min, max;
-
+    private final int min, max;
+    
     public ChestItem(ItemStack item, int percent, int min, int max, boolean center, boolean refill, ArrayList<String> modes) {
         this.item = item;
         this.min = min;

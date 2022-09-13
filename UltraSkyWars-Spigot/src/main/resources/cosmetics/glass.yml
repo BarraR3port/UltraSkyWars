@@ -1,25 +1,526 @@
 glasses:
-  Defecto:
+  defecto:
     id: 0
     name: Defecto
-    schematic: glass.schematic
-    clear: clearGlass.schematic
+    schematic: sw_simple_cage_white_stained_glass
+    clear: sw_simple_cage_air
     item:
       ==: org.bukkit.inventory.ItemStack
-      type: GLASS
+      type: STAINED_GLASS
       meta:
         ==: ItemMeta
         meta-type: UNSPECIFIC
-        display-name: §aDefault
+        display-name: §fDefecto
         lore:
-          - §7This is a default glass
+          - §7Cristal por defecto(Blanco§7)
           - §7
-          - <price>
+          - '<price>'
           - §7
-          - §eRight-Click to preview!
-          - <status>
+          - '<status>'
+          - §7
+          - §7Click derecho para previsualizar
+          - §7Click izquierdo para aplicar
     isBuy: true
-    price: 500
+    price: 0
     slot: 10
     page: 1
-    permission: ultraskywars.glass.Defecto
+    permission: ultraskywars.glass.defecto
+    autoGivePermission: ultraskywars.glass.autogive.defecto
+    needPermToBuy: false
+    schematicTeam: sw_simple_cage_team_white_stained_glass
+    clearTeam: sw_simple_cage_team_air
+  blanco:
+    id: 1
+    name: blanco
+    schematic: sw_simple_cage_white_stained_glass
+    clear: sw_simple_cage_air
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      type: STAINED_GLASS
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §fBlanco
+        lore:
+          - §7Cristal básico blanco
+          - §7
+          - '<price>'
+          - §7
+          - '<status>'
+          - §7
+          - §7Click derecho para previsualizar
+          - §7Click izquierdo para aplicar
+    isBuy: true
+    price: 1000
+    slot: 11
+    page: 1
+    permission: ultraskywars.glass.blanco
+    autoGivePermission: ultraskywars.glass.autogive.blanco
+    needPermToBuy: false
+    schematicTeam: sw_simple_cage_team_white_stained_glass
+    clearTeam: sw_simple_cage_team_air
+  naranjo:
+    id: 2
+    name: naranjo
+    schematic: sw_simple_cage_orange_stained_glass
+    clear: sw_simple_cage_air
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      type: STAINED_GLASS
+      damage: 1
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §6Naranjo
+        lore:
+          - §7Cristal básico naranjo
+          - §7
+          - '<price>'
+          - §7
+          - '<status>'
+          - §7
+          - §7Click derecho para previsualizar
+          - §7Click izquierdo para aplicar
+    isBuy: true
+    price: 1000
+    slot: 12
+    page: 1
+    permission: ultraskywars.glass.naranjo
+    autoGivePermission: ultraskywars.glass.autogive.naranjo
+    needPermToBuy: false
+    schematicTeam: sw_simple_cage_team_orange_stained_glass
+    clearTeam: sw_simple_cage_team_air
+  magenta:
+    id: 3
+    name: magenta
+    schematic: sw_simple_cage_magenta_stained_glass
+    clear: sw_cage_simple_clear
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      type: STAINED_GLASS
+      damage: 2
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §5Magenta
+        lore:
+          - §7Cristal básico magenta
+          - §7
+          - '<price>'
+          - §7
+          - '<status>'
+          - §7
+          - §7Click derecho para previsualizar
+          - §7Click izquierdo para aplicar
+    isBuy: true
+    price: 1000
+    slot: 13
+    page: 1
+    permission: ultraskywars.glass.magenta
+    autoGivePermission: ultraskywars.glass.autogive.magenta
+    needPermToBuy: false
+    schematicTeam: sw_simple_cage_team_magenta_stained_glass
+    clearTeam: sw_simple_cage_team_air
+  celeste:
+    id: 4
+    name: celeste
+    schematic: sw_simple_cage_light_blue_stained_glass
+    clear: sw_cage_simple_clear
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      type: STAINED_GLASS
+      damage: 3
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §bCeleste
+        lore:
+          - §7Cristal básico celeste
+          - §7
+          - '<price>'
+          - §7
+          - '<status>'
+          - §7
+          - §7Click derecho para previsualizar
+          - §7Click izquierdo para aplicar
+    isBuy: true
+    price: 1000
+    slot: 14
+    page: 1
+    permission: ultraskywars.glass.celeste
+    autoGivePermission: ultraskywars.glass.autogive.celeste
+    needPermToBuy: false
+    schematicTeam: sw_simple_cage_team_light_blue_stained_glass
+    clearTeam: sw_simple_cage_team_air
+  amarillo:
+    id: 5
+    name: amarillo
+    schematic: sw_simple_cage_yellow_stained_glass
+    clear: sw_cage_simple_clear
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      type: STAINED_GLASS
+      damage: 4
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §eAmarillo
+        lore:
+          - §7Cristal básico amarillo
+          - §7
+          - '<price>'
+          - §7
+          - '<status>'
+          - §7
+          - §7Click derecho para previsualizar
+          - §7Click izquierdo para aplicar
+    isBuy: true
+    price: 1000
+    slot: 15
+    page: 1
+    permission: ultraskywars.glass.amarillo
+    autoGivePermission: ultraskywars.glass.autogive.amarillo
+    needPermToBuy: false
+    schematicTeam: sw_simple_cage_team_yellow_stained_glass
+    clearTeam: sw_simple_cage_team_air
+  lime:
+    id: 6
+    name: lime
+    schematic: sw_simple_cage_lime_stained_glass
+    clear: sw_cage_simple_clear
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      type: STAINED_GLASS
+      damage: 5
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §aLima
+        lore:
+          - §7Cristal básico lima
+          - §7
+          - '<price>'
+          - §7
+          - '<status>'
+          - §7
+          - §7Click derecho para previsualizar
+          - §7Click izquierdo para aplicar
+    isBuy: true
+    price: 1000
+    slot: 16
+    page: 1
+    permission: ultraskywars.glass.lime
+    autoGivePermission: ultraskywars.glass.autogive.lime
+    needPermToBuy: false
+    schematicTeam: sw_simple_cage_team_lime_stained_glass
+    clearTeam: sw_simple_cage_team_air
+  pink:
+    id: 7
+    name: pink
+    schematic: sw_simple_cage_pink_stained_glass
+    clear: sw_cage_simple_clear
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      type: STAINED_GLASS
+      damage: 6
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §dRosa
+        lore:
+          - §7Cristal básico rosa
+          - §7
+          - '<price>'
+          - §7
+          - '<status>'
+          - §7
+          - §7Click derecho para previsualizar
+          - §7Click izquierdo para aplicar
+    isBuy: true
+    price: 1000
+    slot: 19
+    page: 1
+    permission: ultraskywars.glass.pink
+    autoGivePermission: ultraskywars.glass.autogive.pink
+    needPermToBuy: false
+    schematicTeam: sw_simple_cage_team_pink_stained_glass
+    clearTeam: sw_simple_cage_team_air
+  gray:
+    id: 8
+    name: gray
+    schematic: sw_simple_cage_gray_stained_glass
+    clear: sw_simple_cage_air
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      type: STAINED_GLASS
+      damage: 7
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §7Gris
+        lore:
+          - §7Cristal básico gris
+          - §7
+          - '<price>'
+          - §7
+          - '<status>'
+          - §7
+          - §7Click derecho para previsualizar
+          - §7Click izquierdo para aplicar
+    isBuy: true
+    price: 1000
+    slot: 20
+    page: 1
+    permission: ultraskywars.glass.gray
+    autoGivePermission: ultraskywars.glass.autogive.gray
+    needPermToBuy: false
+    schematicTeam: sw_simple_cage_team_gray_stained_glass
+    clearTeam: sw_simple_cage_team_air
+  light_gray:
+    id: 9
+    name: light_gray
+    schematic: sw_simple_cage_light_gray_stained_glass
+    clear: sw_simple_cage_air
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      type: STAINED_GLASS
+      damage: 8
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §7Gris Claro
+        lore:
+          - §7Cristal básico gris claro
+          - §7
+          - '<price>'
+          - §7
+          - '<status>'
+          - §7
+          - §7Click derecho para previsualizar
+          - §7Click izquierdo para aplicar
+    isBuy: true
+    price: 1000
+    slot: 21
+    page: 1
+    permission: ultraskywars.glass.light_gray
+    autoGivePermission: ultraskywars.glass.autogive.light_gray
+    needPermToBuy: false
+    schematicTeam: sw_simple_cage_team_light_gray_stained_glass
+    clearTeam: sw_simple_cage_team_air
+  cyan:
+    id: 10
+    name: cyan
+    schematic: sw_simple_cage_cyan_stained_glass
+    clear: sw_simple_cage_air
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      type: STAINED_GLASS
+      damage: 9
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §9Cian
+        lore:
+          - §7Cristal básico cian
+          - §7
+          - '<price>'
+          - §7
+          - '<status>'
+          - §7
+          - §7Click derecho para previsualizar
+          - §7Click izquierdo para aplicar
+    isBuy: true
+    price: 1000
+    slot: 22
+    page: 1
+    permission: ultraskywars.glass.cyan
+    autoGivePermission: ultraskywars.glass.autogive.cyan
+    needPermToBuy: false
+    schematicTeam: sw_simple_cage_team_cyan_stained_glass
+    clearTeam: sw_simple_cage_team_air
+  purple:
+    id: 11
+    name: purple
+    schematic: sw_simple_cage_purple_stained_glass
+    clear: sw_simple_cage_air
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      type: STAINED_GLASS
+      damage: 10
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §5Morado
+        lore:
+          - §7Cristal básico morado
+          - §7
+          - '<price>'
+          - §7
+          - '<status>'
+          - §7
+          - §7Click derecho para previsualizar
+          - §7Click izquierdo para aplicar
+    isBuy: true
+    price: 1000
+    slot: 23
+    page: 1
+    permission: ultraskywars.glass.purple
+    autoGivePermission: ultraskywars.glass.autogive.purple
+    needPermToBuy: false
+    schematicTeam: sw_simple_cage_team_purple_stained_glass
+    clearTeam: sw_simple_cage_team_air
+  blue:
+    id: 12
+    name: blue
+    schematic: sw_simple_cage_blue_stained_glass
+    clear: sw_simple_cage_air
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      type: STAINED_GLASS
+      damage: 11
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §1Azul
+        lore:
+          - §7Cristal básico azul
+          - §7
+          - '<price>'
+          - §7
+          - '<status>'
+          - §7
+          - §7Click derecho para previsualizar
+          - §7Click izquierdo para aplicar
+    isBuy: true
+    price: 1000
+    slot: 24
+    page: 1
+    permission: ultraskywars.glass.blue
+    autoGivePermission: ultraskywars.glass.autogive.blue
+    needPermToBuy: false
+    schematicTeam: sw_simple_cage_team_blue_stained_glass
+    clearTeam: sw_simple_cage_team_air
+  brown:
+    id: 13
+    name: brown
+    schematic: sw_simple_cage_brown_stained_glass
+    clear: sw_simple_cage_air
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      type: STAINED_GLASS
+      damage: 12
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §8Café
+        lore:
+          - §7Cristal básico café
+          - §7
+          - '<price>'
+          - §7
+          - '<status>'
+          - §7
+          - §7Click derecho para previsualizar
+          - §7Click izquierdo para aplicar
+    isBuy: true
+    price: 1000
+    slot: 25
+    page: 1
+    permission: ultraskywars.glass.brown
+    autoGivePermission: ultraskywars.glass.autogive.brown
+    needPermToBuy: false
+    schematicTeam: sw_simple_cage_team_brown_stained_glass
+    clearTeam: sw_simple_cage_team_air
+  green:
+    id: 14
+    name: green
+    schematic: sw_simple_cage_green_stained_glass
+    clear: sw_simple_cage_air
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      type: STAINED_GLASS
+      damage: 13
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §2Verde
+        lore:
+          - §7Cristal básico verde
+          - §7
+          - '<price>'
+          - §7
+          - '<status>'
+          - §7
+          - §7Click derecho para previsualizar
+          - §7Click izquierdo para aplicar
+    isBuy: true
+    price: 1000
+    slot: 28
+    page: 1
+    permission: ultraskywars.glass.green
+    autoGivePermission: ultraskywars.glass.autogive.green
+    needPermToBuy: false
+    schematicTeam: sw_simple_cage_team_green_stained_glass
+    clearTeam: sw_simple_cage_team_air
+  red:
+    id: 15
+    name: red
+    schematic: sw_simple_cage_red_stained_glass
+    clear: sw_simple_cage_air
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      type: STAINED_GLASS
+      damage: 14
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §4Rojo
+        lore:
+          - §7Cristal básico rojo
+          - §7
+          - '<price>'
+          - §7
+          - '<status>'
+          - §7
+          - §7Click derecho para previsualizar
+          - §7Click izquierdo para aplicar
+    isBuy: true
+    price: 1000
+    slot: 28
+    page: 1
+    permission: ultraskywars.glass.red
+    autoGivePermission: ultraskywars.glass.autogive.red
+    needPermToBuy: false
+    schematicTeam: sw_simple_cage_team_red_stained_glass
+    clearTeam: sw_simple_cage_team_air
+  black:
+    id: 16
+    name: black
+    schematic: sw_simple_cage_black_stained_glass
+    clear: sw_simple_cage_air
+    item:
+      ==: org.bukkit.inventory.ItemStack
+      type: STAINED_GLASS
+      damage: 15
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §8Negro
+        lore:
+          - §7Cristal básico negro
+          - §7
+          - '<price>'
+          - §7
+          - '<status>'
+          - §7
+          - §7Click derecho para previsualizar
+          - §7Click izquierdo para aplicar
+    isBuy: true
+    price: 1000
+    slot: 29
+    page: 1
+    permission: ultraskywars.glass.black
+    autoGivePermission: ultraskywars.glass.autogive.black
+    needPermToBuy: false
+    schematicTeam: sw_simple_cage_team_black_stained_glass
+    clearTeam: sw_simple_cage_team_air

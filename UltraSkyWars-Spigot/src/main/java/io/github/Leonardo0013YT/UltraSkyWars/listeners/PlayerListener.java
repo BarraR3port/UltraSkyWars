@@ -185,6 +185,7 @@ public class PlayerListener implements Listener {
         if (sw != null) {
             plugin.getCos().executeTaunt(p, game, sw.getTaunt());
         }
+        p.setHealth(p.getMaxHealth());
     }
 
     public static void executeTag(UltraSkyWars plugin, Player p, Game game, SWPlayer sw) {

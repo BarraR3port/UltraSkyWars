@@ -15,24 +15,24 @@ public class YandereAddon implements EconomyAddon {
     
     @Override
     public void setCoins(Player p, double amount) {
-        User user = yandereCore.getPlayers().getLocalStoredPlayer(p.getUniqueId());
+        User user = yandereCore.getPlayers().getCachedPlayer(p.getUniqueId());
         yandereCore.getPlayers().setCoins(user, (long) amount);
     }
     
     @Override
     public void addCoins(Player p, double amount) {
-        User user = yandereCore.getPlayers().getLocalStoredPlayer(p.getUniqueId());
+        User user = yandereCore.getPlayers().getCachedPlayer(p.getUniqueId());
         yandereCore.getPlayers().addCoins(user, (long) amount);
     }
     
     @Override
     public void removeCoins(Player p, double amount) {
-        User user = yandereCore.getPlayers().getLocalStoredPlayer(p.getUniqueId());
+        User user = yandereCore.getPlayers().getCachedPlayer(p.getUniqueId());
         yandereCore.getPlayers().removeCoins(user, (long) amount);
     }
     
     @Override
     public double getCoins(Player p) {
-        return yandereCore.getPlayers().getLocalStoredPlayer(p.getUniqueId()).getCoins();
+        return yandereCore.getPlayers().getCachedPlayer(p.getUniqueId()).getCoins();
     }
 }

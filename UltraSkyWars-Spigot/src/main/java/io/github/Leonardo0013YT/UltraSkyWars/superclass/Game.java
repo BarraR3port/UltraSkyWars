@@ -6,10 +6,7 @@ import io.github.Leonardo0013YT.UltraSkyWars.api.events.USWGameWinEvent;
 import io.github.Leonardo0013YT.UltraSkyWars.calls.CallBackAPI;
 import io.github.Leonardo0013YT.UltraSkyWars.data.SWPlayer;
 import io.github.Leonardo0013YT.UltraSkyWars.enums.*;
-import io.github.Leonardo0013YT.UltraSkyWars.game.GameChest;
-import io.github.Leonardo0013YT.UltraSkyWars.game.GamePlayer;
-import io.github.Leonardo0013YT.UltraSkyWars.game.GameWin;
-import io.github.Leonardo0013YT.UltraSkyWars.game.UltraGameChest;
+import io.github.Leonardo0013YT.UltraSkyWars.game.*;
 import io.github.Leonardo0013YT.UltraSkyWars.interfaces.KillEffect;
 import io.github.Leonardo0013YT.UltraSkyWars.interfaces.WinDance;
 import io.github.Leonardo0013YT.UltraSkyWars.interfaces.WinEffect;
@@ -128,7 +125,7 @@ public abstract class Game {
             }
         }
         this.max = teams.size() * teamSize;
-        this.center = new GameChest(true, cen);
+        this.center = new CenterGameChest(cen);
         center.getInvs().keySet().forEach(l -> {
             l.getBlock().setMetadata("TEAM_ID_CHEST", new FixedMetadataValue(plugin, id));
             chests.put(l, -1);
@@ -182,7 +179,7 @@ public abstract class Game {
                     });
                 });
                 List<Location> chests = new ArrayList<>(center.getInvs().keySet());
-                center = new GameChest(true, chests);
+                center = new CenterGameChest(chests);
                 center.getInvs().keySet().forEach(l -> {
                     l.getBlock().setMetadata("TEAM_ID_CHEST", new FixedMetadataValue(plugin, id));
                     Game.this.chests.put(l, -1);

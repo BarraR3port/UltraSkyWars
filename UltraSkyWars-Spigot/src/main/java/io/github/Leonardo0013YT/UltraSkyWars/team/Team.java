@@ -3,6 +3,7 @@ package io.github.Leonardo0013YT.UltraSkyWars.team;
 import io.github.Leonardo0013YT.UltraSkyWars.UltraSkyWars;
 import io.github.Leonardo0013YT.UltraSkyWars.api.events.specials.PlayerNametagReceivedEvent;
 import io.github.Leonardo0013YT.UltraSkyWars.game.GameChest;
+import io.github.Leonardo0013YT.UltraSkyWars.game.TeamGameChest;
 import io.github.Leonardo0013YT.UltraSkyWars.nms.nametags.Nametags;
 import io.github.Leonardo0013YT.UltraSkyWars.superclass.Game;
 import io.github.Leonardo0013YT.UltraSkyWars.utils.Utils;
@@ -29,6 +30,7 @@ public class Team {
     private GameChest chest;
     private Nametags friendly, fire;
     private boolean created = false;
+    private final TeamStats stats;
 
     public Team(UltraSkyWars plugin, Game game, String path, int id) {
         this.plugin = plugin;
@@ -39,12 +41,13 @@ public class Team {
         this.balloon = Utils.getStringLocation(plugin.getArenas().get(path + ".balloon"));
         this.fence = Utils.getStringLocation(plugin.getArenas().get(path + ".fence"));
         List<Location> chests = new ArrayList<>();
-        for (String c : plugin.getArenas().getList(path + ".chests")) {
+        for ( String c : plugin.getArenas().getList(path + ".chests") ){
             chests.add(Utils.getStringLocation(c));
         }
-        chest = new GameChest(false, chests);
         friendly = plugin.getVc().getNameTag("A" + getName() + "FR", "AFriendly", "§a");
         fire = plugin.getVc().getNameTag("B" + getName() + "FI", "ZFire", "§c");
+        stats = new TeamStats(members.size(), chests.size());
+        chest = new TeamGameChest(chests, this);
     }
 
     public void setCenter(Player p, Location l) {
@@ -78,11 +81,12 @@ public class Team {
         center.clear();
         members.clear();
         List<Location> chests = new ArrayList<>(chest.getInvs().keySet());
-        chest = new GameChest(false, chests);
         friendly.deleteTeam("A" + getName() + "FR");
         fire.deleteTeam("B" + getName() + "FI");
         friendly = plugin.getVc().getNameTag("A" + getName() + "FR", "friendly", "§a");
         fire = plugin.getVc().getNameTag("B" + getName() + "FI", "fire", "§c");
+        stats.reset();
+        chest = new TeamGameChest(chests, this);
     }
 
     public void execute() {

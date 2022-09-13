@@ -28,6 +28,10 @@
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>3.2.4</version>
                 <configuration>
+                    <outputDirectory>target</outputDirectory>
+                    <createDependencyReducedPom>false</createDependencyReducedPom>
+                    <outputFile>${project.build.directory}/${project.parent.artifactId}-${project.parent.version}.jar
+                    </outputFile>
                     <filters>
                         <filter>
                             <artifact>*:*</artifact>
@@ -151,7 +155,7 @@
         <dependency>
             <groupId>com.podcrash.commissions.yandere.core</groupId>
             <artifactId>YandereCore-Spigot</artifactId>
-            <version>1.0.8-ALPHA</version>
+            <version>1.0.9-ALPHA</version>
             <scope>provided</scope>
             <exclusions>
                 <exclusion>
