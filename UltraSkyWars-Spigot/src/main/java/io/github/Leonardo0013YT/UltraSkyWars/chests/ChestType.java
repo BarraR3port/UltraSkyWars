@@ -8,7 +8,6 @@ import java.util.List;
 
 @Getter
 public class ChestType {
-    @Getter
     private final SWChest chest;
     private final String key, edit, vote, editLore, voteLore, editName, voteName;
     private final int setupSlot, voteSlot;

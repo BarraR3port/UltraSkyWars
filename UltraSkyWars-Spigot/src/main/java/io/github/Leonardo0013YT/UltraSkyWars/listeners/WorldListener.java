@@ -13,7 +13,7 @@ import org.bukkit.event.weather.WeatherChangeEvent;
 
 public class WorldListener implements Listener {
     
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onWeather(WeatherChangeEvent e) {
         UltraSkyWars plugin = UltraSkyWars.get();
         if(plugin.getGm().getWorlds().containsKey(e.getWorld().getName())){

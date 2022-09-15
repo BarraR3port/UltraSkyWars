@@ -244,13 +244,12 @@ public class GameManager {
         }
         USWGameJoinEvent e = new USWGameJoinEvent(p, game);
         Bukkit.getServer().getPluginManager().callEvent(e);
-        if(e.isCancelled()){
+        if (e.isCancelled())
             return;
-        }
-        if(plugin.getCm().isRankedJoin()){
+        if (plugin.getCm().isRankedJoin()){
             int l = plugin.getCm().getRankedLevels();
             boolean has = plugin.getLvl().getLevel(p).getLevel() >= l;
-            if(game.getGameType().equals("RANKED") && !has){
+            if (game.getGameType().equals("RANKED") && !has){
                 p.sendMessage(plugin.getLang().get("messages.noLevelToRanked").replace("<level>", String.valueOf(l)));
                 return;
             }
@@ -310,7 +309,7 @@ public class GameManager {
         GameData g = null;
         Stream<GameData> filter = now.stream().filter(d -> d.getState().equals("WAITING") || d.getState().equals("STARTING")).filter(d -> d.getPlayers() < d.getMax());
         List<GameData> fixed;
-        if(type.equals("ALL")){
+        if (type.equals("ALL") || type.equals("RANDOM")){
             fixed = filter.collect(Collectors.toList());
         } else {
             fixed = filter.filter(d -> d.getType().equalsIgnoreCase(type)).collect(Collectors.toList());

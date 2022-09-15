@@ -205,7 +205,7 @@ public class PlayerListener implements Listener {
         p.sendMessage(plugin.getLang().get(p, "messages.noIngame"));
     }
     
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onRespawn(PlayerRespawnEvent e) {
         Player p = e.getPlayer();
         UltraSkyWars plugin = UltraSkyWars.get();
@@ -289,7 +289,7 @@ public class PlayerListener implements Listener {
         }
     }
     
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onChat(AsyncPlayerChatEvent e) {
         Player p = e.getPlayer();
         UltraSkyWars plugin = UltraSkyWars.get();
@@ -578,7 +578,7 @@ public class PlayerListener implements Listener {
         }
     }
     
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onInteract(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         if(e.getAction().equals(Action.PHYSICAL)){

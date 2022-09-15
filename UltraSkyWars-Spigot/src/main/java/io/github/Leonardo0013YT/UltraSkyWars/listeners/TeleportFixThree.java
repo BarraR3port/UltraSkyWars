@@ -25,7 +25,7 @@ public class TeleportFixThree implements Listener {
         this.server = plugin.getServer();
     }
     
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onPlayerTeleport(PlayerTeleportEvent e) {
         Player p = e.getPlayer();
         Game game = plugin.getGm().getGameByPlayer(p);
@@ -77,14 +77,20 @@ public class TeleportFixThree implements Listener {
         }
     }
     
-    private List<Player> getPlayersWithin(Player player, int distance) {
+    private List<Player> getPlayersWithin(Player player, int distance){
         List<Player> res = new ArrayList<>();
         int d2 = distance * distance;
         for ( Player p : server.getOnlinePlayers() ){
-            if(p != player && p.getWorld() == player.getWorld() && p.getLocation().distanceSquared(player.getLocation()) <= d2){
+            if (p != player && p.getWorld() == player.getWorld() && p.getLocation().distanceSquared(player.getLocation()) <= d2){
                 res.add(p);
             }
         }
         return res;
     }
+    
+    /*@EventHandler(priority = EventPriority.MONITOR)
+    public void onPlayerTeleportLaste(PlayerTeleportEvent e) {
+        Player p = e.getPlayer();
+        System.out.println("----Teleporting " + p.getName() + " from " + e.getFrom() + " to " + e.getTo() + " cause " + e.getCause() );
+    }*/
 }

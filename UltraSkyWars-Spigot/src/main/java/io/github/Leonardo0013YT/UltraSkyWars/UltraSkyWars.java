@@ -26,6 +26,8 @@ import io.github.Leonardo0013YT.UltraSkyWars.utils.Randomizer;
 import io.github.Leonardo0013YT.UltraSkyWars.utils.Utils;
 import lombok.Getter;
 import lombok.Setter;
+import net.lymarket.lyapi.common.error.LyApiInitializationError;
+import net.lymarket.lyapi.spigot.LyApi;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import org.bukkit.Bukkit;
@@ -77,6 +79,7 @@ public class UltraSkyWars extends JavaPlugin {
     private boolean disabled = false;
     private SetupManager sm;
     private SetupMenu sem;
+    private LyApi lyApi;
     
     public static UltraSkyWars get() {
         return instance;
@@ -87,14 +90,21 @@ public class UltraSkyWars extends JavaPlugin {
     }
     
     @Override
-    public void onEnable() {
+    public void onEnable(){
         instance = this;
-        if(!getServer().getPluginManager().isPluginEnabled("WorldEdit") || !getServer().getPluginManager().isPluginEnabled("FastAsyncWorldEdit")){
+        if (!getServer().getPluginManager().isPluginEnabled("WorldEdit") || !getServer().getPluginManager().isPluginEnabled("FastAsyncWorldEdit")){
             Bukkit.getConsoleSender().sendMessage("§b§lUltraSkyWars Plugin §cNeed §eWorldEdit §c& §eFastAsyncWorldEdit§c.");
             Bukkit.getScheduler().cancelTasks(this);
             Bukkit.getPluginManager().disablePlugin(this);
             return;
         }
+        try {
+            lyApi = new LyApi(this, "UltraSkyWars");
+        } catch (LyApiInitializationError e) {
+            e.printStackTrace();
+            getServer().shutdown();
+        }
+    
         getConfig().options().copyDefaults(true);
         vc = new VersionController(this);
         saveConfig();
@@ -103,7 +113,7 @@ public class UltraSkyWars extends JavaPlugin {
         debugMode = getConfig().getBoolean("debugMode");
         du = new DependUtils(this);
         du.loadDepends();
-        if(getConfig().getBoolean("mongodb.enabled")){
+        if (getConfig().getBoolean("mongodb.enabled")){
             db = new MongoDBDatabase(this);
         } else {
             db = new MySQLDatabase(this);
@@ -153,7 +163,7 @@ public class UltraSkyWars extends JavaPlugin {
         shm = new ShopManager();
         gm.reload();
         getCommand("sw").setExecutor(new SkyWarsCMD(this));
-        if(getConfig().getBoolean("leaveCMD")){
+        if (getConfig().getBoolean("leaveCMD")){
             getCommand("leave").setExecutor(new LeaveCMD(this));
         }
         getServer().getPluginManager().registerEvents(new PlayerListener(), this);
@@ -162,11 +172,12 @@ public class UltraSkyWars extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new SpectatorListener(this), this);
         getServer().getPluginManager().registerEvents(new WorldListener(), this);
         getServer().getPluginManager().registerEvents(new GeneralListener(), this);
-        getServer().getPluginManager().registerEvents(new YandereListener(), this);
-        if(cm.isAutoLapiz()){
+        getServer().getPluginManager().registerEvents(new TeleportFixThree(this), this);
+        getServer().getPluginManager().registerEvents(new YandereListener(this), this);
+        if (cm.isAutoLapiz()){
             getServer().getPluginManager().registerEvents(new LapisListener(), this);
         }
-        if(getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")){
+        if (getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")){
             new Placeholders().register();
         }
         tsm = new TaskManager(this);
@@ -192,6 +203,7 @@ public class UltraSkyWars extends JavaPlugin {
         this.sem = new SetupMenu(this);
         getServer().getPluginManager().registerEvents(new SetupListener(this), this);
         getCommand("sws").setExecutor(new SetupCMD(this));
+    
     }
     
     public void loadMainLobby() {

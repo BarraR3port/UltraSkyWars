@@ -215,7 +215,7 @@ public abstract class Game {
         playerTeam.remove(p.getUniqueId());
         if(isState(State.WAITING) || isState(State.STARTING)){
             sendGameSound(CustomSound.QUIT_PLAYER);
-            sendGameMessage(plugin.getLang().get(p, "messages.quit").replaceAll("<player>", p.getName()).replaceAll("<players>", String.valueOf(players.size())).replaceAll("<max>", String.valueOf(getMax())));
+            sendGameMessage(plugin.getLang().get(p, "messages.quit").replace("<suffix>", plugin.getAdm().getPlayerSuffix(p)).replaceAll("<player>", p.getName()).replaceAll("<players>", String.valueOf(players.size())).replaceAll("<max>", String.valueOf(getMax())));
         }
         plugin.getGm().updateGame(name, color, state.name(), gameType, players.size(), max);
         plugin.getGem().updateInventories(gameType, "none");
@@ -487,13 +487,14 @@ public abstract class Game {
         return events.get(event);
     }
     
-    public void joinRandomTeam(Player p) {
+    public synchronized Team joinRandomTeam(Player p){
         for ( Team team : teams.values() ){
-            if(team.getTeamSize() < teamSize){
+            if (team.getTeamSize() < teamSize){
                 addPlayerTeam(p, team);
-                break;
+                return team;
             }
         }
+        return null;
     }
     
     public void removePlayerAllTeam(Player p) {

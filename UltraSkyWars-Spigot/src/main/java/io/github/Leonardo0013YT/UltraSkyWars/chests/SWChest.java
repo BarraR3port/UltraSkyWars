@@ -2,7 +2,9 @@ package io.github.Leonardo0013YT.UltraSkyWars.chests;
 
 import io.github.Leonardo0013YT.UltraSkyWars.UltraSkyWars;
 import lombok.Getter;
+import net.lymarket.lyapi.spigot.utils.ItemBuilder;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
 
@@ -64,11 +66,17 @@ public class SWChest {
                 getSpecialItems(c, item, chance, center, leggingsItems);
             } else if(item.getType().name().endsWith("BOOTS")){
                 getSpecialItems(c, item, chance, center, bootsItems);
-            } else if(item.getType().name().contains("BOW")){
+            } else if (item.getType().name().contains("BOW")){
                 getSpecialItems(c, item, chance, center, bowItems);
-            } else if(item.getType().name().contains("SNOW_BALL") || item.getType().name().contains("SNOWBALL") || item.getType().name().contains("EGG") || item.getType().name().contains("ARROW")){
+            } else if (item.getType().name().contains("TNT")){
+                ItemStack tnt = new ItemBuilder(Material.TNT)
+                        .setDisplayName("&cTNT Instantanea")
+                        .addTag("tnt-prop", "insta")
+                        .build();
+                getSpecialItems(c, tnt, chance, center, chestItems);
+            } else if (item.getType().name().contains("SNOW_BALL") || item.getType().name().contains("SNOWBALL") || item.getType().name().contains("EGG") || item.getType().name().contains("ARROW")){
                 getSpecialItems(c, item, chance, center, projectiles);
-            } else if(item.getType().isBlock()){
+            } else if (item.getType().isBlock()){
                 getSpecialItems(c, item, chance, center, blockItems);
             } else {
                 getSpecialItems(c, item, chance, center, chestItems);

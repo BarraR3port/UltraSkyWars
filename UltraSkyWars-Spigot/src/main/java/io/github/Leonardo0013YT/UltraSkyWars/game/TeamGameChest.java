@@ -6,7 +6,6 @@ import io.github.Leonardo0013YT.UltraSkyWars.chests.ChestType;
 import io.github.Leonardo0013YT.UltraSkyWars.chests.SWChest;
 import io.github.Leonardo0013YT.UltraSkyWars.superclass.Game;
 import io.github.Leonardo0013YT.UltraSkyWars.team.Team;
-import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.block.Chest;
 import org.bukkit.inventory.Inventory;
@@ -21,19 +20,19 @@ public class TeamGameChest extends GameChest {
     
     private final Team team;
     
-    public TeamGameChest(List<Location> chests, Team team) {
+    public TeamGameChest(List<Location> chests, Team team){
         super(chests);
         this.team = team;
     }
     
-    public void fill(Game game, boolean refill) {
+    public void fill(Game game, boolean refill){
         UltraSkyWars plugin = UltraSkyWars.get();
         for ( Location l : chests ){
-            if(l.getBlock().getState() instanceof Chest){
+            if (l.getBlock().getState() instanceof Chest){
                 invs.put(l, new UltraGameChest(l));
             }
         }
-        if(invs.isEmpty()) return;
+        if (invs.isEmpty()) return;
         ChestType ct = plugin.getCtm().getChests().get(game.getChestType());
         SWChest sw = ct.getChest();
         LinkedList<ItemStack> required = new LinkedList<>();
@@ -54,7 +53,7 @@ public class TeamGameChest extends GameChest {
                     sw.getRandomBowItem(ct.isRefillChange() && refill, game.getGameType()),
                     sw.getRandomProjectileItem(ct.isRefillChange() && refill, game.getGameType()).getItem(),
                     sw.getRandomProjectileItem(ct.isRefillChange() && refill, game.getGameType()).getItem()));
-            if(!ct.isArmorAllTeams()){
+            if (!ct.isArmorAllTeams()){
                 break;
             }
         }
@@ -68,56 +67,73 @@ public class TeamGameChest extends GameChest {
             selected.add(new PerChestItem(chest, slot, itemStack));
         }
         
+        LinkedList<ItemStack> selectedItems = new LinkedList<>();
         ArrayList<UltraGameChest> ugcList = new ArrayList<>(invs.values());
-        
         ThreadLocalRandom random = ThreadLocalRandom.current();
         for ( int index = 0; index < ugcList.size(); index++ ){
             UltraGameChest ugc = ugcList.get(index);
             Inventory inv = ugc.getInv();
-            if(inv == null) continue;
+            if (inv == null) continue;
             inv.clear();
             Integer[] randomizer = plugin.getRandomizer().getRandomizer();
             int added = 0;
+            for ( PerChestItem pci : selected ){
+                if (pci.getChest() == index){
+                    if (inv.getItem(pci.getSlot()) == null){
+                        inv.setItem(pci.getSlot(), pci.getItem());
+                        added++;
+                    } else {
+                        tail.add(new PerChestItem(index, 0, pci.getItem()));
+                    }
+                }
+            }
             for ( int r : randomizer ){
                 ChestItem ci;
-                if(added >= plugin.getCm().getMaxItemsChest()){
+                if (added >= plugin.getCm().getMaxItemsChest()){
                     break;
                 }
-                if(ct.isRefillChange()){
+                if (ct.isRefillChange()){
                     ci = getRandomItem(sw.getRandomItem(refill, game.getGameType()));
                 } else {
                     ci = getRandomItem(sw.getRandomItem(false, game.getGameType()));
                 }
                 
-                if(ci != null && random.nextInt(0, 10000) <= ci.getPercent()){
-                    if(inv.contains(ci.getItem().getType()) && !(random.nextInt(0, 10000) <= 700)) continue;
-                    if(inv.getItem(r) == null){
+                if (ci != null && random.nextInt(0, 10000) <= ci.getPercent()){
+                    if (inv.contains(ci.getItem().getType()) && !(random.nextInt(0, 10000) <= 700)) continue;
+                    if (selectedItems.contains(ci.getItem()) && !(random.nextInt(0, 10000) <= 700)) continue;
+                    if (inv.getItem(r) == null){
                         inv.setItem(r, ci.getItem());
+                        selectedItems.add(ci.getItem());
                     } else {
                         tail.add(new PerChestItem(index, 0, ci.getItem()));
                         // inv.addItem(ci.getItem());
                     }
                     added++;
                 } else {
-                    if(ci != null && random.nextInt(0, 10000) <= ci.getPercent()){
-                        if(inv.contains(ci.getItem().getType()) && !(random.nextInt(0, 10000) <= 700)) continue;
-                        if(inv.getItem(r) == null){
+                    if (ci != null && random.nextInt(0, 10000) <= ci.getPercent()){
+                        if (inv.contains(ci.getItem().getType()) && !(random.nextInt(0, 10000) <= 700)) continue;
+                        if (selectedItems.contains(ci.getItem()) && !(random.nextInt(0, 10000) <= 700)) continue;
+                        if (inv.getItem(r) == null){
                             inv.setItem(r, ci.getItem());
+                            selectedItems.add(ci.getItem());
                         } else {
                             tail.add(new PerChestItem(index, 0, ci.getItem()));
                             //inv.addItem(ci.getItem());
                         }
                         added++;
                     } else {
-                        if(game.getProjectileType().isAppear()){
+                        if (game.getProjectileType().isAppear()){
                             ChestItem ci2 = getRandomProjectileItem(sw.getRandomProjectileItem(ct.isRefillChange() && refill, game.getGameType()));
-                            if(ci2 != null && random.nextInt(0, 50000) <= ci2.getPercent()){
-                                if(inv.contains(ci2.getItem().getType()) && !(random.nextInt(0, 10000) <= 700))
+                            if (ci2 != null && random.nextInt(0, 50000) <= ci2.getPercent()){
+                                if (inv.contains(ci2.getItem().getType()) && !(random.nextInt(0, 10000) <= 700))
                                     continue;
-                                if(inv.getItem(r) == null){
+                                if (selectedItems.contains(ci2.getItem()) && !(random.nextInt(0, 10000) <= 700))
+                                    continue;
+                                if (inv.getItem(r) == null){
                                     inv.setItem(r, ci2.getItem());
+                                    selectedItems.add(ci2.getItem());
                                 } else {
-                                    tail.add(new PerChestItem(index, 0, ci.getItem()));
+                                    tail.add(new PerChestItem(index, 0, ci2.getItem()));
                                     //inv.addItem(ci2.getItem());
                                 }
                                 added++;
@@ -126,55 +142,42 @@ public class TeamGameChest extends GameChest {
                     }
                 }
             }
-            for ( PerChestItem pci : selected ){
-                if(pci.chest == index){
-                    if(inv.getItem(pci.getSlot()) == null){
-                        inv.setItem(pci.getSlot(), pci.getItem());
-                    } else {
-                        tail.add(new PerChestItem(index, 0, pci.getItem()));
-                        //inv.addItem(ci2.getItem());
-                    }
-                }
-            }
+            
         }
-        for ( PerChestItem pci : tail ){
+        for ( int index = 0, tailSize = tail.size(); index < tailSize; index++ ){
+            PerChestItem pci = tail.get(index);
             UltraGameChest ugc = ugcList.get(pci.getChest());
             Inventory inv = ugc.getInv();
-            if(inv == null) continue;
+            if (inv == null) continue;
+            if (inv.getContents().length >= plugin.getCm().getMaxItemsChest()) continue;
             List<Integer> available = IntStream.range(0, inv.getSize()).filter(i -> inv.getItem(i) == null).boxed().collect(Collectors.toList());
-            if(available.isEmpty()) continue;
+            if (available.isEmpty()) continue;
+            if (inv.contains(pci.getItem().getType()) && !(random.nextInt(0, 10000) <= 700)){
+                index--;
+                continue;
+            }
+            if (selectedItems.contains(pci.getItem()) && !(random.nextInt(0, 10000) <= 700)){
+                index--;
+                continue;
+            }
             int slot = available.get(random.nextInt(0, available.size()));
             inv.setItem(slot, pci.getItem());
         }
         
     }
     
-    private ChestItem getRandomProjectileItem(ChestItem item) {
-        if(item == null) return null;
-        if(!team.getStats().areProjectilesAvailable()) return null;
+    private ChestItem getRandomProjectileItem(ChestItem item){
+        if (item == null) return null;
+        if (!team.getStats().areProjectilesAvailable()) return null;
         team.getStats().addProjectiles();
         return item;
     }
     
-    private ChestItem getRandomItem(ChestItem item) {
-        if(item == null) return null;
-        if(!team.getStats().areOthersAvailable()) return null;
+    private ChestItem getRandomItem(ChestItem item){
+        if (item == null) return null;
+        if (!team.getStats().areOthersAvailable()) return null;
         team.getStats().addOthers();
         return item;
-    }
-    
-    
-    private static class PerChestItem {
-        @Getter
-        private final int chest, slot;
-        @Getter
-        private final ItemStack item;
-        
-        public PerChestItem(int chest, int slot, ItemStack item) {
-            this.chest = chest;
-            this.slot = slot;
-            this.item = item;
-        }
     }
     
     

@@ -3,6 +3,7 @@ package io.github.Leonardo0013YT.UltraSkyWars.interfaces;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.TNTPrimed;
 import org.bukkit.entity.Vehicle;
 import org.bukkit.inventory.ItemStack;
 
@@ -24,4 +25,11 @@ public interface NMS {
     
     boolean isParticle(String particle);
     
+    void setSource(TNTPrimed tnt, Player owner);
+    
+    void voidKill(Player p);
+    
+    void hideArmor(Player victim, Player receiver);
+    
+    void showArmor(Player victim, Player receiver);
 }

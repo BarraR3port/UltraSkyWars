@@ -1,8 +1,10 @@
 package io.github.Leonardo0013YT.UltraSkyWars.game;
 
 import io.github.Leonardo0013YT.UltraSkyWars.superclass.Game;
+import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.block.Chest;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,14 +24,26 @@ public abstract class GameChest {
         }
     }
     
-    public List<Location> getChests() {
+    public List<Location> getChests(){
         return chests;
     }
     
-    public Map<Location, UltraGameChest> getInvs() {
+    public Map<Location, UltraGameChest> getInvs(){
         return invs;
     }
     
     public abstract void fill(Game game, boolean refill);
+    
+    @Getter
+    protected static class PerChestItem {
+        private final int chest, slot;
+        private final ItemStack item;
+        
+        public PerChestItem(int chest, int slot, ItemStack item){
+            this.chest = chest;
+            this.slot = slot;
+            this.item = item;
+        }
+    }
     
 }

@@ -181,7 +181,7 @@ public class PartyListener implements Listener {
         }
     }
     
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onQuit(PlayerQuitEvent e) {
         Player p = e.getPlayer();
         if(ip.getPam().isLeader(p)){
@@ -189,7 +189,7 @@ public class PartyListener implements Listener {
         }
     }
     
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onKick(PlayerKickEvent e) {
         Player p = e.getPlayer();
         if(ip.getPam().isLeader(p)){

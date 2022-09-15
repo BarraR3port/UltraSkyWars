@@ -31,7 +31,7 @@ public class LobbyListener implements Listener {
         this.injection = injection;
     }
     
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onJoin(PlayerJoinEvent e) {
         if(injection.getCm().isHideJoinMessage()){
             e.setJoinMessage(null);

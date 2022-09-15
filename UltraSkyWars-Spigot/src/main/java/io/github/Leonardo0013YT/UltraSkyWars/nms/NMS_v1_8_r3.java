@@ -6,12 +6,15 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftLivingEntity;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftTNTPrimed;
 import org.bukkit.craftbukkit.v1_8_R3.inventory.CraftItemStack;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
 
+import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -92,13 +95,67 @@ public class NMS_v1_8_r3 implements NMS {
     }
     
     @Override
-    public boolean isParticle(String particle) {
+    public boolean isParticle(String particle){
         try {
             EnumParticle.valueOf(particle);
-        } catch(EnumConstantNotPresentException | IllegalArgumentException e) {
+        } catch (EnumConstantNotPresentException | IllegalArgumentException e) {
             return false;
         }
         return true;
+    }
+    
+    
+    @Override
+    public void setSource(TNTPrimed tnt, Player owner){
+        EntityLiving nmsEntityLiving = (((CraftLivingEntity) owner).getHandle());
+        EntityTNTPrimed nmsTNT = (((CraftTNTPrimed) tnt).getHandle());
+        try {
+            Field sourceField = EntityTNTPrimed.class.getDeclaredField("source");
+            sourceField.setAccessible(true);
+            sourceField.set(nmsTNT, nmsEntityLiving);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    @Override
+    public void voidKill(Player p){
+        ((CraftPlayer) p).getHandle().damageEntity(DamageSource.OUT_OF_WORLD, 1000);
+    }
+    
+    @Override
+    public void hideArmor(Player victim, Player receiver){
+        if (victim.equals(receiver)) return;
+        PacketPlayOutEntityEquipment hand = new PacketPlayOutEntityEquipment(victim.getEntityId(), 0, CraftItemStack.asNMSCopy(new ItemStack(org.bukkit.Material.AIR)));
+        PacketPlayOutEntityEquipment helmet = new PacketPlayOutEntityEquipment(victim.getEntityId(), 1, CraftItemStack.asNMSCopy(new ItemStack(org.bukkit.Material.AIR)));
+        PacketPlayOutEntityEquipment chest = new PacketPlayOutEntityEquipment(victim.getEntityId(), 2, CraftItemStack.asNMSCopy(new ItemStack(org.bukkit.Material.AIR)));
+        PacketPlayOutEntityEquipment pants = new PacketPlayOutEntityEquipment(victim.getEntityId(), 3, CraftItemStack.asNMSCopy(new ItemStack(org.bukkit.Material.AIR)));
+        PacketPlayOutEntityEquipment boots = new PacketPlayOutEntityEquipment(victim.getEntityId(), 4, CraftItemStack.asNMSCopy(new ItemStack(org.bukkit.Material.AIR)));
+        PlayerConnection boundTo = ((CraftPlayer) receiver).getHandle().playerConnection;
+        boundTo.sendPacket(hand);
+        boundTo.sendPacket(helmet);
+        boundTo.sendPacket(chest);
+        boundTo.sendPacket(pants);
+        boundTo.sendPacket(boots);
+    }
+    
+    @Override
+    public void showArmor(Player victim, Player receiver){
+        if (victim.equals(receiver)) return;
+        EntityPlayer entityPlayer = ((CraftPlayer) victim).getHandle();
+        PacketPlayOutEntityEquipment hand1 = new PacketPlayOutEntityEquipment(entityPlayer.getId(), 0, entityPlayer.inventory.getItemInHand());
+        PacketPlayOutEntityEquipment helmet = new PacketPlayOutEntityEquipment(entityPlayer.getId(), 4, entityPlayer.inventory.getArmorContents()[3]);
+        PacketPlayOutEntityEquipment chest = new PacketPlayOutEntityEquipment(entityPlayer.getId(), 3, entityPlayer.inventory.getArmorContents()[2]);
+        PacketPlayOutEntityEquipment pants = new PacketPlayOutEntityEquipment(entityPlayer.getId(), 2, entityPlayer.inventory.getArmorContents()[1]);
+        PacketPlayOutEntityEquipment boots = new PacketPlayOutEntityEquipment(entityPlayer.getId(), 1, entityPlayer.inventory.getArmorContents()[0]);
+        EntityPlayer boundTo = ((CraftPlayer) receiver).getHandle();
+        if (victim != receiver){
+            boundTo.playerConnection.sendPacket(hand1);
+        }
+        boundTo.playerConnection.sendPacket(helmet);
+        boundTo.playerConnection.sendPacket(chest);
+        boundTo.playerConnection.sendPacket(pants);
+        boundTo.playerConnection.sendPacket(boots);
     }
     
 }

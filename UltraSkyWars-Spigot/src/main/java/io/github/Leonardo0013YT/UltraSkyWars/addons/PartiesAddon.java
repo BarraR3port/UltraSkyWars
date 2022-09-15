@@ -31,11 +31,13 @@ public class PartiesAddon {
         if(party == null || party.getLeader() == null){
             return false;
         }
-        return party.getLeader().equals(p.getUniqueId());
+        return party.getLeader().equals(p.getUniqueId()) || pp.getRank() == 1;
     }
     
-    public List<Player> getPlayersParty(Player leader) {
+    public List<Player> getPlayersParty(Player leader){
         PartyPlayer pp = api.getPartyPlayer(leader.getUniqueId());
+        if (pp == null)
+            return new ArrayList<>();
         Party party = api.getParty(pp.getPartyName());
         List<Player> online = new ArrayList<>();
         party.getOnlineMembers(true).forEach(o -> online.add(Bukkit.getPlayer(o.getPlayerUUID())));
