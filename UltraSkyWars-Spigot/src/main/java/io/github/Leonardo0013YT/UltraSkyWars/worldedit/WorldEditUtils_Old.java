@@ -85,11 +85,11 @@ public class WorldEditUtils_Old implements IWorldEdit {
             for ( int x2 = clipboard.getMinimumPoint().getBlockX(); x2 <= clipboard.getMaximumPoint().getBlockX(); x2++ ){
                 for ( int y2 = clipboard.getMinimumPoint().getBlockY(); y2 <= clipboard.getMaximumPoint().getBlockY(); y2++ ){
                     for ( int z2 = clipboard.getMinimumPoint().getBlockZ(); z2 <= clipboard.getMaximumPoint().getBlockZ(); z2++ ){
-                        int x = x2 - clipboard.getMinimumPoint().getBlockX();
-                        int y = y2 - clipboard.getMinimumPoint().getBlockY();
-                        int z = z2 - clipboard.getMinimumPoint().getBlockZ();
+                        int x = x2 - clipboard.getMinimumPoint().getBlockX() - 2;
+                        int y = y2 - clipboard.getMinimumPoint().getBlockY() - 1;
+                        int z = z2 - clipboard.getMinimumPoint().getBlockZ() - 2;
                         BaseBlock block = clipboard.getBlock(new Vector(x2, y2, z2));
-                        if(!block.isAir()){
+                        if (!block.isAir()){
                             blocks.put(new org.bukkit.util.Vector(x, y, z), new GlassBlock(Material.getMaterial(block.getType()), block.getData()));
                         }
                     }
