@@ -15,8 +15,9 @@ motds:
   FINISH: '&9Terminando... &9Info: &e<map> &b<players>&7/&b<max>'
   RESTARTING: '&5Reiniciando... &9Info: &e<map> &b<players>&7/&b<max>'
 progressBar:
-  symbol: '|'
-  in: '&3'
+  #symbol: '|'
+  symbol: '■'
+  in: '&c'
   out: '&7'
   finish: '&8[<progress>&8] &e<percent>%'
   max: '&cMáximo'
@@ -26,13 +27,9 @@ team: '&a[&e<#>&a]'
 parties:
   noJoin: '&cNo puedes unirte a esta party en este momento.'
   join: |-
-    &7&m-----------------------------------------
-    &aTu party se ha unido.
-    &7&m-----------------------------------------
+    &aTu party se ha unido a la partida.
   joinGame: |-
-    &7&m-----------------------------------------
     &aHas sido llevado al juego de tu líder.
-    &7&m---------------------------------------------------------
 chat:
   mainLobby: '&f<player> &b» &7<msg>'
   spectator: '&8[Espectador] <player> &b» &7<msg>'
@@ -301,7 +298,7 @@ messages:
   canUseSoulWell: '&aPuedes usar esto en la SoulWell.'
   noAvailable: '&cNo hay SoulWells disponibles.'
   tauntPreview:
-    killer: InsiderAnh
+    killer: BarraR3port
     lines: |-
       <empty>
       <center>&e&lVISTA DE PRUEBA &7- &a<taunt>
@@ -309,11 +306,9 @@ messages:
       <lines>
       <empty>
   noMapReset: '&cEl mapa no puede ser reiniciado porque hay jugadores dentro.'
-  multiplierReceived: '&aYou have received an &ex<amount> &6<type>&a multiplier for&b
-    <time>&a.'
+  multiplierReceived: '&aYou have received an &ex<amount> &6<type>&a multiplier for&b <time>&a.'
 action:
-  spectating: '&fEspecteando &a&l<player> &7- &fDistancia &a&l<distance>m &7- &fVida
-    &a&l<health>'
+  spectating: '&fEspecteando &a&l<player> &7- &fDistancia &a&l<distance>m &7- &fVida &a&l<health>'
   kill: '&aAhora hay &c<players> &ajugadores restantes'
   selected: '&aKit seleccionado: &e<kit>'
   noSelected: '&ePuedes seleccionar un kit con el arco'
@@ -335,23 +330,23 @@ holograms:
   tops:
     kills:
       - '&e&lTop SkyWars Asesinatos'
-      - '&7( Top 10 )'
+      - '&e◂ &7Top 10 &e▸'
       - <top>
     wins:
       - '&e&lTop SkyWars Victorias'
-      - '&7( Top 10 )'
+      - '&e◂ &7Top 10 &e▸'
       - <top>
     deaths:
       - '&e&lTop SkyWars Muertes'
-      - '&7( Top 10 )'
+      - '&e◂ &7Top 10 &e▸'
       - <top>
     coins:
       - '&e&lTop SkyWars Coins'
-      - '&7( Top 10 )'
+      - '&e◂ &7Top 10 &e▸'
       - <top>
     elo:
       - '&e&lTop SkyWars Ranked'
-      - '&7( Top 10 )'
+      - '&e◂ &7Top 10 &e▸'
       - <top>
 votes:
   time:
@@ -797,18 +792,18 @@ setup:
   savePreview: '&aYou saved this preview location.'
 items:
   lobby:
-    nameItem: '&eMenú de SkyWars &7(Click Derecho)'
+    nameItem: '&eMenú de SkyWars &8╏ &7Click derecho'
     loreItem: |-
       &7
       &7Click para abrir el menú.
   setup:
-    nameItem: '&eSetup Arena'
+    nameItem: '&eSetup Arena &8╏ &7Click derecho'
     loreItem: |-
       &7Item to setup arena.
       &7
       &7Right click to open.
   center:
-    nameItem: '&eSet Center Chest &7(Click Derecho)'
+    nameItem: '&eSet Center Chest &8╏ &7Click derecho'
     loreItem: |-
       &7Item to setup center
       &7chest of arena.
@@ -816,7 +811,7 @@ items:
       &aRight click to add.
       &cLeft click to remove.
   island:
-    nameItem: '&eSet Island Chest &7(Click Derecho)'
+    nameItem: '&eSet Island Chest &8╏ &7Click derecho'
     loreItem: |-
       &7Item to setup center
       &7island of arena.
@@ -824,22 +819,22 @@ items:
       &aRight click to add.
       &cLeft click to remove.
   votes:
-    nameItem: '&6Votos &7(Click Derecho)'
+    nameItem: '&6Votos &8╏ &7Click derecho'
     loreItem: |-
       &7
       &7Click para abrir el menú.
   team:
-    nameItem: '&eSelector de equipo &7(Click Derecho)'
+    nameItem: '&eSelector de equipo &8╏ &7Click derecho'
     loreItem: |-
       &7
       &7Click para abrir el menú.
   kits:
-    nameItem: '&bKits &7(Click Derecho)'
+    nameItem: '&bKits &8╏ &7Click derecho'
     loreItem: |-
       &7
       &7Click para abrir el menú.
   spectate:
-    nameItem: '&aEspectear &7(Click Derecho)'
+    nameItem: '&aEspectear &8╏ &7Click derecho'
     loreItem: |-
       &7
       &7Abre el menú de espectador
@@ -847,7 +842,7 @@ items:
       &7
       &eClick para abrir
   options:
-    nameItem: '&aAjustes de espectador &7(Click Derecho)'
+    nameItem: '&aAjustes de espectador &8╏ &7Click derecho'
     loreItem: |-
       &7
       &7Abre el menú de ajustes
@@ -855,43 +850,43 @@ items:
       &7
       &eClick para abrir
   play:
-    nameItem: '&3Jugar de nuevo &7(Click Derecho)'
+    nameItem: '&3Jugar de nuevo &8╏ &7Click derecho'
     loreItem: |-
       &7
       &7Click para unirte a otra partida.
   challenges:
-    nameItem: '&dRetos &7(Click Derecho)'
+    nameItem: '&dRetos &8╏ &7Click derecho'
     loreItem: |-
       &7
       &7Click para abrir el menú
       &7de retos de SkyWars.
   leave:
-    nameItem: '&cSalir &7(Click Derecho)'
+    nameItem: '&cSalir &8╏ &7Click derecho'
     loreItem: |-
       &7
       &7Click para salir de la partida.
   instantTNT:
-    nameItem: '&cInstant TNT'
+    nameItem: '&cInstant TNT &8╏ &7Click derecho'
     loreItem: |-
       &7This TNT will turn on automatically
       &7when you get on the ground.
   soup:
-    nameItem: '&dSoup'
+    nameItem: '&dSoup &8╏ &7Click derecho'
     loreItem: |-
       &7Clicking on this item
       &7will regenerate hearts.
   endBuff:
-    nameItem: '&aRush EnderPearl'
+    nameItem: '&aRush EnderPearl &8╏ &7Click derecho'
     loreItem: |-
       &7You'll go up to this ender
       &7pearl and fly.
   TNTLaunch:
-    nameItem: '&cTNT Launch'
+    nameItem: '&cTNT Launch &8╏ &7Click derecho'
     loreItem: |-
       &7This TNT drives you just
       &7by putting it on.
   compass:
-    nameItem: '&aPlayer Tracker'
+    nameItem: '&aPlayer Tracker &8╏ &7Click derecho'
     loreItem: |-
       &7This item will identify
       &7you to the nearest players.
@@ -1178,9 +1173,15 @@ menus:
         &eClick para cambiar
     warrior:
       nameItem: '&eReto del Guerrero'
-      loreItem: "&7\n&7Comienzas con una espada de piedra,\n&7no podrás usar ninguna\\\
-        \ \\ otra arma o arco\n&7y no podrás equiparte ninguna \n&7armadura.\n&7\n\
-        &7Estado:\\ \\ <status>\n&7\n&eClick para cambiar"
+      loreItem: |-
+        &7
+        &7Comienzas con una espada de piedra,
+        &7no podrás usar ninguna otra arma o arco
+        &7y no podrás equiparte ninguna armadura.
+        &7
+        &7Estado: <status>
+        &7
+        &eClick para cambiar
     noblocks:
       nameItem: '&eReto Sin Bloques'
       loreItem: |-
@@ -1208,7 +1209,10 @@ menus:
       &7al menú anterior.
   last:
     nameItem: '&aPágina anterior'
-    loreItem: "&7\n&7Click para volver \n&7a la página anterior."
+    loreItem: |-
+      &7
+      &7Click para volver
+      &7a la página anterior.
   next:
     nameItem: '&aSiguiente página'
     loreItem: |-
@@ -1757,8 +1761,12 @@ menus:
         &eClick para abrir
     killeffects:
       nameItem: '&aMenú de efectos de muerte'
-      loreItem: "&7\n&7Selecciona tus efectos de \n&7muerte adquiridos.\n&7\n&eClick\\\
-        \ \\ para abrir"
+      loreItem: |-
+        &7
+        &7Selecciona tus efectos de 
+        &7muerte adquiridos.
+        &7
+        &eClick para abrir
     windances:
       nameItem: '&aMenú de bailes de victoria'
       loreItem: |-
@@ -3037,8 +3045,14 @@ menus:
         &eClick para votar
     none:
       nameItem: '&eNinguno'
-      loreItem: "&7\n&7No habrá evento de \n&7final de partida.\n&7\n&eVotos: &b<nonefinal>\n\
-        \\ &7\n&eClick para votar"
+      loreItem: |-
+        &7
+        &7No habrá evento de 
+        &7final de partida.
+        &7
+        &eVotos: &b<nonefinal>
+        &7
+        &eClick para votar
   time:
     title: '&eVotar tiempo'
     dawn:
@@ -3063,8 +3077,14 @@ menus:
         &eClick para votar
     afternoon:
       nameItem: '&6Atardecer'
-      loreItem: "&7\n&7La partida se disputará \n&7durante el atardecer.\n&e\n&eVotos:\\\
-        \ \\ &b<afternoontime>\n&7\n&eClick para votar"
+      loreItem: |-
+        &7
+        &7La partida se disputará
+        &7durante el atardecer.
+        &e
+        &eVotos:&b<afternoontime>
+        &7
+        &eClick para votar
     night:
       nameItem: '&8De noche'
       loreItem: |-
@@ -3152,8 +3172,14 @@ menus:
         &eClick para votar
     desProj:
       nameItem: '&eProyectiles destructivos'
-      loreItem: "&7\n&7Poderosos proyectiles que \n&7destruyen el suelo al impactar.\n\
-        \\ &7\n&eVotos: &b<desproj>\n&7\n&eClick para votar"
+      loreItem: |-
+        &7
+        &7Poderosos proyectiles que
+        &7destruyen el suelo al impactar.
+        &7
+        &eVotos: &b<desproj>
+        &7
+        &eClick para votar
     teleProj:
       nameItem: '&eProyectiles enderman'
       loreItem: |-
@@ -3223,7 +3249,7 @@ events:
   wither: '&8Wither'
   zombie: '&cZombies'
   border: '&cBorde'
-  none: '&cFinzaliza en'
+  none: '&cFinaliza en'
   noMore: '&fSin eventos'
 modes:
   solo: Solo
@@ -3237,15 +3263,15 @@ scoreboards:
     &4• &f&lPERFIL:
     &f  Rango: %yandere_rank_score_board%
     &f  Monedas: &c%yandere_coins_formatted%
-    &f  Ganadas: &c%usw_wins%
-    &f  Asesinatos: &c%usw_kills%
-    &f  Nivel: &c%usw_level%
+    &f  Ganadas: &c%usw_total_stat_WINS%
+    &f  Asesinatos: &c%usw_total_stat_KILLS%
     &f  Almas: &c%usw_souls%
+    &f  Nivel: &c%usw_level%
+    &f  %usw_level_bar%
     &7
     &4• &f&lSERVIDOR:
     &f  &f%yandere_server_type_name_formatted%: &c#%yandere_server_name_number%
     &f  Conectados: &c%yandere_server_size%
-    &7
     &7
     &emc.yanderecraft.com
     &7
@@ -3353,13 +3379,13 @@ taunts:
   LAVA: <death> &eintentó nadar en lava
   DROWNING: <death> &ese ahogó
   BLOCK_EXPLOSION: <death> &eexplotó en mil pedazos
-  ENTITY_EXPLOSION: <death> &eexploto en mil pedazos
+  ENTITY_EXPLOSION: <death> &eexplotó en mil pedazos
   VOID: <death> &ecayó al vacío
   LIGHTNING: <death> &efue atravesado por un rayo
   SUICIDE: <death> &ese suicidó
   STARVATION: <death> &ese murió de hambre
   POISON: <death> &emurió envenenado
-  MAGIC: <death> &emurió magicamente
+  MAGIC: <death> &emurió mágicamente
   WITHER: <death> &efue asesinado por el wither
   FALLING_BLOCK: <death> &efue aplastado
   THORNS: <death> &ehizo la automurision
@@ -3395,7 +3421,7 @@ selector:
   all: All
 order:
   KILLS: Asesinatos
-  ALPHABETICALLY: Alfabeticamente
+  ALPHABETICALLY: Alfabéticamente
   PLAYERS: Jugadores
   NONE: Ninguno
 leaderheads:
