@@ -155,7 +155,7 @@
         <dependency>
             <groupId>com.podcrash.commissions.yandere.core</groupId>
             <artifactId>YandereCore-Spigot</artifactId>
-            <version>1.0.9-ALPHA</version>
+            <version>1.1-ALPHA</version>
             <scope>provided</scope>
             <exclusions>
                 <exclusion>

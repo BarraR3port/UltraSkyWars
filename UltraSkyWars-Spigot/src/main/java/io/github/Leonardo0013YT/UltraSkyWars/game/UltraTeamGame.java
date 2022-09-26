@@ -214,6 +214,7 @@ public class UltraTeamGame extends Game {
             for ( String s : plugin.getLang().get("messages.start").split("\\n") ){
                 getCached().forEach(p -> p.sendMessage(CenterMessage.getCenteredMessage(s)));
             }
+            plugin.getWc().clearLobby(lobby);
             started = System.currentTimeMillis();
             vote.executeVotes();
             USWGameStartEvent e = new USWGameStartEvent(this, cached, teams.values(), vote);

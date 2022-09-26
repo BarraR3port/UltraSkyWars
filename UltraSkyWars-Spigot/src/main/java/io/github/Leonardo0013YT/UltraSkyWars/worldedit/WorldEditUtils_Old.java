@@ -51,10 +51,11 @@ public class WorldEditUtils_Old implements IWorldEdit {
             File file = new File(path, s + ".schematic");
             ClipboardFormat cf = ClipboardFormat.findByFile(file);
             try {
-                if(cf != null){
+                if (cf != null){
                     cache.put(s, cf.load(file));
                 }
-            } catch(IOException ignored) {
+            } catch (IOException err) {
+                err.printStackTrace();
             }
         }
         if(cache.containsKey(s)){

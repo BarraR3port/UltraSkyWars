@@ -56,12 +56,12 @@ public class YandereListener implements Listener {
     public void onPlayerPlaceBlockEvent(EntityDamageByEntityEvent e){
         if (!(e.getEntity() instanceof Player) || !(e.getDamager() instanceof Player)) return;
         Player target = (Player) e.getEntity();
-        Player p = (Player) e.getEntity();
+        Player p = (Player) e.getDamager();
         if (check(target)){
             if (target.getHealth() - e.getFinalDamage() <= 0){
-                e.setCancelled(true);
                 p.setHealth(p.getMaxHealth());
-                p.setExhaustion(20L);
+                p.setFoodLevel(20);
+                p.setSaturation(20);
             }
         }
     }
