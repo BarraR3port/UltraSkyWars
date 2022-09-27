@@ -18,38 +18,38 @@ import java.util.Map;
 
 public class VoteFinalMenu extends UltraInventory {
     
-    public VoteFinalMenu(UltraSkyWars plugin, String name) {
+    public VoteFinalMenu(UltraSkyWars plugin, String name){
         super(name);
         this.title = plugin.getLang().get("menus." + name + ".title");
         reload();
         plugin.getUim().getActions().put(title, (b) -> {
             InventoryClickEvent e = b.getInventoryClickEvent();
             Player p = b.getPlayer();
-            if(plugin.getCm().isSetupLobby(p)) return;
+            if (plugin.getCm().isSetupLobby(p)) return;
             Game g = plugin.getGm().getGameByPlayer(p);
             e.setCancelled(true);
-            if(e.getCurrentItem() == null || e.getCurrentItem().getType().equals(Material.AIR)){
+            if (e.getCurrentItem() == null || e.getCurrentItem().getType().equals(Material.AIR)){
                 return;
             }
             ItemStack item = e.getCurrentItem();
-            if(!item.hasItemMeta()){
+            if (!item.hasItemMeta()){
                 return;
             }
-            if(!item.getItemMeta().hasDisplayName()){
+            if (!item.getItemMeta().hasDisplayName()){
                 return;
             }
-            if(g == null) return;
+            if (g == null) return;
             Vote vote = g.getVote();
             ItemMeta im = item.getItemMeta();
             String display = im.getDisplayName();
-            if(display.equals(plugin.getLang().get(p, "menus.final.dragon.nameItem"))){
-                if(!p.hasPermission("ultraskywars.votes.final.*") && !p.hasPermission("ultraskywars.votes.final.dragon")){
+            if (display.equals(plugin.getLang().get(p, "menus.final.dragon.nameItem"))){
+                if (!p.hasPermission("ultraskywars.votes.final.*") && !p.hasPermission("ultraskywars.votes.final.dragon")){
                     p.sendMessage(plugin.getLang().get(p, "messages.noPermission"));
                     return;
                 }
                 Vote.VotePlayer vp = vote.getVotePlayer(p);
-                if(vp.getFinalType() != null){
-                    if(vp.getFinalType().equals(FinalType.DRAGON)){
+                if (vp.getFinalType() != null){
+                    if (vp.getFinalType().equals(FinalType.DRAGON)){
                         p.sendMessage(plugin.getLang().get(p, "messages.alreadyVoted").replaceAll("<type>", plugin.getLang().get(p, "votes.final.dragon")));
                         return;
                     }
@@ -64,14 +64,14 @@ public class VoteFinalMenu extends UltraInventory {
                         new String[]{"<witherfinal>", String.valueOf(vote.getVotes("WITHER"))},
                         new String[]{"<nonefinal>", String.valueOf(vote.getVotes("NONE"))});
             }
-            if(display.equals(plugin.getLang().get(p, "menus.final.tnt.nameItem"))){
-                if(!p.hasPermission("ultraskywars.votes.final.*") && !p.hasPermission("ultraskywars.votes.final.tnt")){
+            if (display.equals(plugin.getLang().get(p, "menus.final.tnt.nameItem"))){
+                if (!p.hasPermission("ultraskywars.votes.final.*") && !p.hasPermission("ultraskywars.votes.final.tnt")){
                     p.sendMessage(plugin.getLang().get(p, "messages.noPermission"));
                     return;
                 }
                 Vote.VotePlayer vp = vote.getVotePlayer(p);
-                if(vp.getFinalType() != null){
-                    if(vp.getFinalType().equals(FinalType.TNT)){
+                if (vp.getFinalType() != null){
+                    if (vp.getFinalType().equals(FinalType.TNT)){
                         p.sendMessage(plugin.getLang().get(p, "messages.alreadyVoted").replaceAll("<type>", plugin.getLang().get(p, "votes.final.tnt")));
                         return;
                     }
@@ -86,14 +86,14 @@ public class VoteFinalMenu extends UltraInventory {
                         new String[]{"<witherfinal>", String.valueOf(vote.getVotes("WITHER"))},
                         new String[]{"<nonefinal>", String.valueOf(vote.getVotes("NONE"))});
             }
-            if(display.equals(plugin.getLang().get(p, "menus.final.wither.nameItem"))){
-                if(!p.hasPermission("ultraskywars.votes.final.*") && !p.hasPermission("ultraskywars.votes.final.wither")){
+            if (display.equals(plugin.getLang().get(p, "menus.final.wither.nameItem"))){
+                if (!p.hasPermission("ultraskywars.votes.final.*") && !p.hasPermission("ultraskywars.votes.final.wither")){
                     p.sendMessage(plugin.getLang().get(p, "messages.noPermission"));
                     return;
                 }
                 Vote.VotePlayer vp = vote.getVotePlayer(p);
-                if(vp.getFinalType() != null){
-                    if(vp.getFinalType().equals(FinalType.WITHER)){
+                if (vp.getFinalType() != null){
+                    if (vp.getFinalType().equals(FinalType.WITHER)){
                         p.sendMessage(plugin.getLang().get(p, "messages.alreadyVoted").replaceAll("<type>", plugin.getLang().get(p, "votes.final.wither")));
                         return;
                     }
@@ -108,14 +108,14 @@ public class VoteFinalMenu extends UltraInventory {
                         new String[]{"<witherfinal>", String.valueOf(vote.getVotes("WITHER"))},
                         new String[]{"<nonefinal>", String.valueOf(vote.getVotes("NONE"))});
             }
-            if(display.equals(plugin.getLang().get(p, "menus.final.zombie.nameItem"))){
-                if(!p.hasPermission("ultraskywars.votes.final.*") && !p.hasPermission("ultraskywars.votes.final.zombie")){
+            if (display.equals(plugin.getLang().get(p, "menus.final.zombie.nameItem"))){
+                if (!p.hasPermission("ultraskywars.votes.final.*") && !p.hasPermission("ultraskywars.votes.final.zombie")){
                     p.sendMessage(plugin.getLang().get(p, "messages.noPermission"));
                     return;
                 }
                 Vote.VotePlayer vp = vote.getVotePlayer(p);
-                if(vp.getFinalType() != null){
-                    if(vp.getFinalType().equals(FinalType.ZOMBIES)){
+                if (vp.getFinalType() != null){
+                    if (vp.getFinalType().equals(FinalType.ZOMBIES)){
                         p.sendMessage(plugin.getLang().get(p, "messages.alreadyVoted").replaceAll("<type>", plugin.getLang().get(p, "votes.final.zombies")));
                         return;
                     }
@@ -130,14 +130,14 @@ public class VoteFinalMenu extends UltraInventory {
                         new String[]{"<witherfinal>", String.valueOf(vote.getVotes("WITHER"))},
                         new String[]{"<nonefinal>", String.valueOf(vote.getVotes("NONE"))});
             }
-            if(display.equals(plugin.getLang().get(p, "menus.final.none.nameItem"))){
-                if(!p.hasPermission("ultraskywars.votes.final.*") && !p.hasPermission("ultraskywars.votes.final.none")){
+            if (display.equals(plugin.getLang().get(p, "menus.final.none.nameItem"))){
+                if (!p.hasPermission("ultraskywars.votes.final.*") && !p.hasPermission("ultraskywars.votes.final.none")){
                     p.sendMessage(plugin.getLang().get(p, "messages.noPermission"));
                     return;
                 }
                 Vote.VotePlayer vp = vote.getVotePlayer(p);
-                if(vp.getFinalType() != null){
-                    if(vp.getFinalType().equals(FinalType.NONE)){
+                if (vp.getFinalType() != null){
+                    if (vp.getFinalType().equals(FinalType.NONE)){
                         p.sendMessage(plugin.getLang().get(p, "messages.alreadyVoted").replaceAll("<type>", plugin.getLang().get(p, "votes.final.none")));
                         return;
                     }
@@ -152,14 +152,14 @@ public class VoteFinalMenu extends UltraInventory {
                         new String[]{"<witherfinal>", String.valueOf(vote.getVotes("WITHER"))},
                         new String[]{"<nonefinal>", String.valueOf(vote.getVotes("NONE"))});
             }
-            if(display.equals(plugin.getLang().get(p, "menus.final.border.nameItem"))){
-                if(!p.hasPermission("ultraskywars.votes.final.*") && !p.hasPermission("ultraskywars.votes.final.border")){
+            if (display.equals(plugin.getLang().get(p, "menus.final.border.nameItem"))){
+                if (!p.hasPermission("ultraskywars.votes.final.*") && !p.hasPermission("ultraskywars.votes.final.border")){
                     p.sendMessage(plugin.getLang().get(p, "messages.noPermission"));
                     return;
                 }
                 Vote.VotePlayer vp = vote.getVotePlayer(p);
-                if(vp.getFinalType() != null){
-                    if(vp.getFinalType().equals(FinalType.BORDER)){
+                if (vp.getFinalType() != null){
+                    if (vp.getFinalType().equals(FinalType.BORDER)){
                         p.sendMessage(plugin.getLang().get(p, "messages.alreadyVoted").replaceAll("<type>", plugin.getLang().get(p, "votes.final.border")));
                         return;
                     }
@@ -178,13 +178,13 @@ public class VoteFinalMenu extends UltraInventory {
     }
     
     @Override
-    public void reload() {
+    public void reload(){
         UltraSkyWars plugin = UltraSkyWars.get();
-        if(plugin.getMenus().isSet("menus." + name)){
+        if (plugin.getMenus().isSet("menus." + name)){
             this.rows = plugin.getMenus().getInt("menus." + name + ".rows");
             Map<Integer, ItemStack> config = new HashMap<>();
             Map<Integer, ItemStack> contents = new HashMap<>();
-            if(plugin.getMenus().getConfig().isSet("menus." + name + ".items")){
+            if (plugin.getMenus().getConfig().isSet("menus." + name + ".items")){
                 ConfigurationSection conf = plugin.getMenus().getConfig().getConfigurationSection("menus." + name + ".items");
                 for ( String c : conf.getKeys(false) ){
                     int slot = Integer.parseInt(c);

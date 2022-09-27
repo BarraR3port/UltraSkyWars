@@ -17,25 +17,25 @@ public class SoulWellRewardSetup {
     private RewardType type;
     private double chance;
     
-    public SoulWellRewardSetup(String name, RewardType type, double chance) {
+    public SoulWellRewardSetup(String name, RewardType type, double chance){
         this.name = name;
         this.type = type;
         this.chance = chance;
     }
     
-    public ArrayList<String> getCmds() {
+    public ArrayList<String> getCmds(){
         return cmds;
     }
     
-    public String getName() {
+    public String getName(){
         return name;
     }
     
-    public void setName(String name) {
+    public void setName(String name){
         this.name = name;
     }
     
-    public ItemStack getIcon() {
+    public ItemStack getIcon(){
         ItemStack icon = this.icon.clone();
         ItemMeta iconM = icon.getItemMeta();
         iconM.setDisplayName(name.replaceAll("&", "§"));
@@ -45,23 +45,23 @@ public class SoulWellRewardSetup {
         return icon;
     }
     
-    public void setIcon(ItemStack icon) {
+    public void setIcon(ItemStack icon){
         this.icon = icon;
     }
     
-    public double getChance() {
+    public double getChance(){
         return chance;
     }
     
-    public void setChance(double chance) {
+    public void setChance(double chance){
         this.chance = chance;
     }
     
-    public RewardType getType() {
+    public RewardType getType(){
         return type;
     }
     
-    public void setType(RewardType type) {
+    public void setType(RewardType type){
         this.type = type;
     }
 }

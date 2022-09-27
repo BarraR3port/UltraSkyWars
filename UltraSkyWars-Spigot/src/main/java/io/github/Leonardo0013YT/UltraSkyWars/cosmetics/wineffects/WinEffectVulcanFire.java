@@ -22,14 +22,14 @@ public class WinEffectVulcanFire implements WinEffect, Cloneable {
     private BukkitTask task;
     
     @Override
-    public void start(Player p, Game game) {
+    public void start(Player p, Game game){
         UltraSkyWars plugin = UltraSkyWars.get();
         task = new BukkitRunnable() {
             final String name = game.getSpectator().getWorld().getName();
             
             @Override
-            public void run() {
-                if(p == null || !p.isOnline() || !name.equals(p.getWorld().getName())){
+            public void run(){
+                if (p == null || !p.isOnline() || !name.equals(p.getWorld().getName())){
                     stop();
                     return;
                 }
@@ -42,30 +42,30 @@ public class WinEffectVulcanFire implements WinEffect, Cloneable {
     }
     
     @Override
-    public void stop() {
-        if(task != null){
+    public void stop(){
+        if (task != null){
             task.cancel();
         }
         for ( FallingBlock fb : fires ){
-            if(fb == null) continue;
-            if(!fb.isDead()){
+            if (fb == null) continue;
+            if (!fb.isDead()){
                 fb.remove();
-            } else if(fb.isOnGround()){
+            } else if (fb.isOnGround()){
                 fb.getLocation().getBlock().setType(Material.AIR);
             }
         }
     }
     
     @Override
-    public WinEffect clone() {
+    public WinEffect clone(){
         return new WinEffectVulcanFire();
     }
     
-    protected double random(double d, double d2) {
+    protected double random(double d, double d2){
         return d + ThreadLocalRandom.current().nextDouble() * (d2 - d);
     }
     
-    private FallingBlock spawnFire(Location location, double d, double d3) {
+    private FallingBlock spawnFire(Location location, double d, double d3){
         @SuppressWarnings("deprecation")
         FallingBlock fallingBlock = location.getWorld().spawnFallingBlock(location, Material.FIRE, (byte) ThreadLocalRandom.current().nextInt(15));
         fallingBlock.setVelocity(new Vector(d, 0.75, d3));

@@ -12,7 +12,7 @@ public class WitherEvent extends GameEvent {
     
     private Wither wither;
     
-    public WitherEvent(UltraSkyWars plugin, int time) {
+    public WitherEvent(UltraSkyWars plugin, int time){
         this.time = time;
         this.reset = time;
         this.wither = null;
@@ -23,7 +23,7 @@ public class WitherEvent extends GameEvent {
         this.subtitle = plugin.getLang().get("titles." + name + ".subtitle");
     }
     
-    public WitherEvent(WitherEvent e) {
+    public WitherEvent(WitherEvent e){
         this.time = e.getReset();
         this.reset = e.getReset();
         this.wither = null;
@@ -35,7 +35,7 @@ public class WitherEvent extends GameEvent {
     }
     
     @Override
-    public void start(Game game) {
+    public void start(Game game){
         wither = game.getSpectator().getWorld().spawn(game.getSpectator(), Wither.class);
         wither.setNoDamageTicks(999999999);
         wither.setMetadata("CUSTOM", new FixedMetadataValue(UltraSkyWars.get(), "CUSTOM"));
@@ -45,14 +45,14 @@ public class WitherEvent extends GameEvent {
     }
     
     @Override
-    public void stop(Game game) {
-        if(wither != null){
+    public void stop(Game game){
+        if (wither != null){
             wither.remove();
         }
     }
     
     @Override
-    public void reset() {
+    public void reset(){
         this.time = this.reset;
         this.wither = null;
         this.type = "final";
@@ -60,7 +60,7 @@ public class WitherEvent extends GameEvent {
     }
     
     @Override
-    public WitherEvent clone() {
+    public WitherEvent clone(){
         return new WitherEvent(this);
     }
     

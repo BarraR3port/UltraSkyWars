@@ -18,35 +18,35 @@ public class USWGameStartEvent extends Event {
     private final Vote vote;
     private final boolean isCancelled = false;
     
-    public USWGameStartEvent(Game game, Collection<Player> players, Collection<Team> teams, Vote vote) {
+    public USWGameStartEvent(Game game, Collection<Player> players, Collection<Team> teams, Vote vote){
         this.game = game;
         this.players = players;
         this.teams = teams;
         this.vote = vote;
     }
     
-    public static HandlerList getHandlerList() {
+    public static HandlerList getHandlerList(){
         return HANDLERS_LIST;
     }
     
-    public Collection<Player> getPlayers() {
+    public Collection<Player> getPlayers(){
         return players;
     }
     
-    public Collection<Team> getTeams() {
+    public Collection<Team> getTeams(){
         return teams;
     }
     
-    public Game getGame() {
+    public Game getGame(){
         return game;
     }
     
-    public Vote getVote() {
+    public Vote getVote(){
         return vote;
     }
     
     @Override
-    public HandlerList getHandlers() {
+    public HandlerList getHandlers(){
         return HANDLERS_LIST;
     }
     

@@ -20,12 +20,12 @@ public class SkyWarsMigrator {
     private UltraSkyWars plugin;
     private Connection connection;
     
-    public SkyWarsMigrator(UltraSkyWars plugin) {
-        if(!plugin.getMigrators().getBoolean("skywars.enabled")) return;
+    public SkyWarsMigrator(UltraSkyWars plugin){
+        if (!plugin.getMigrators().getBoolean("skywars.enabled")) return;
         tableData = plugin.getMigrators().get(null, "skywars.data");
         enabled = plugin.getMigrators().getBoolean("skywars.mysql.enabled");
         this.plugin = plugin;
-        if(enabled){
+        if (enabled){
             hikari = new HikariDataSource();
             hikari.setDataSourceClassName("com.mysql.jdbc.jdbc2.optional.MysqlDataSource");
             hikari.addDataSourceProperty("serverName", plugin.getMigrators().get(null, "skywars.mysql.server"));
@@ -38,10 +38,10 @@ public class SkyWarsMigrator {
             plugin.sendLogMessage("Migration §bMySQL Cookloco§e connected!");
         } else {
             File DataFile = new File("plugins/SkyWars/Database.db");
-            if(!DataFile.exists()){
+            if (!DataFile.exists()){
                 try {
                     DataFile.createNewFile();
-                } catch(IOException ex) {
+                } catch (IOException ex) {
                     ex.printStackTrace();
                     Bukkit.getPluginManager().disablePlugin(plugin);
                 }
@@ -51,11 +51,11 @@ public class SkyWarsMigrator {
                 try {
                     connection = DriverManager.getConnection("jdbc:sqlite:" + DataFile);
                     plugin.sendLogMessage("Migration §bSQLLite Cookloco§e connected!");
-                } catch(SQLException ex2) {
+                } catch (SQLException ex2) {
                     ex2.printStackTrace();
                     Bukkit.getPluginManager().disablePlugin(plugin);
                 }
-            } catch(ClassNotFoundException ex3) {
+            } catch (ClassNotFoundException ex3) {
                 ex3.printStackTrace();
                 Bukkit.getPluginManager().disablePlugin(plugin);
             }
@@ -65,20 +65,20 @@ public class SkyWarsMigrator {
         plugin.getMigrators().save();
     }
     
-    public void migrate() {
+    public void migrate(){
         new BukkitRunnable() {
             int parsed = 0, failed = 0;
             
             @Override
-            public void run() {
-                if(enabled){
+            public void run(){
+                if (enabled){
                     try {
                         Connection connection = hikari.getConnection();
                         String MULTI = "SELECT * FROM " + tableData + ";";
                         PreparedStatement select = connection.prepareStatement(MULTI);
                         ResultSet result = select.executeQuery();
                         readResult(result);
-                    } catch(SQLException ignored) {
+                    } catch (SQLException ignored) {
                     }
                 } else {
                     try {
@@ -86,15 +86,15 @@ public class SkyWarsMigrator {
                         PreparedStatement select = connection.prepareStatement(MULTI);
                         ResultSet result = select.executeQuery();
                         readResult(result);
-                    } catch(SQLException ignored) {
+                    } catch (SQLException ignored) {
                     }
                 }
             }
             
-            private void readResult(ResultSet result) throws SQLException {
+            private void readResult(ResultSet result) throws SQLException{
                 while (result.next()) {
                     String name = result.getString("username");
-                    if(result.getString("uuid") == null){
+                    if (result.getString("uuid") == null){
                         plugin.sendLogMessage("§cError migrating data of §b" + name + "§e! §6SkyWars Cookloco");
                         failed++;
                         continue;
@@ -118,7 +118,7 @@ public class SkyWarsMigrator {
         }.runTaskAsynchronously(plugin);
     }
     
-    public SWPlayer getSw(int wins, int kills, int deaths, int played, int arrow_shot, int arrow_hit, int blocks_broken, int blocks_placed, int distance_walked) {
+    public SWPlayer getSw(int wins, int kills, int deaths, int played, int arrow_shot, int arrow_hit, int blocks_broken, int blocks_placed, int distance_walked){
         SWPlayer pw = new SWPlayer();
         pw.addStat(StatType.BREAK, "SOLO", blocks_broken);
         pw.addStat(StatType.DEATHS, "SOLO", deaths);

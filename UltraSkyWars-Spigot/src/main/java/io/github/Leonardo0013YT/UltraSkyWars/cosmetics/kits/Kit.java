@@ -17,14 +17,14 @@ public class Kit {
     private final String name;
     private final String permission;
     
-    public Kit(UltraSkyWars plugin, String path) {
+    public Kit(UltraSkyWars plugin, String path){
         this.id = plugin.getKits().getInt(path + ".id");
         this.slot = plugin.getKits().getInt(path + ".slot");
         this.page = plugin.getKits().getInt(path + ".page");
         this.name = plugin.getKits().get(path + ".name");
         this.permission = plugin.getKits().get(path + ".permission");
         this.modes = plugin.getKits().getListOrDefault(path + ".modes", Arrays.asList("SOLO", "TEAM", "RANKED"));
-        if(plugin.getKits().getConfig().getConfigurationSection(path + ".levels") != null){
+        if (plugin.getKits().getConfig().getConfigurationSection(path + ".levels") != null){
             for ( String level : plugin.getKits().getConfig().getConfigurationSection(path + ".levels").getKeys(false) ){
                 int nivel = Integer.parseInt(level);
                 levels.put(nivel, new KitLevel(plugin, path + ".levels." + level, this));
@@ -33,45 +33,45 @@ public class Kit {
         plugin.getKm().setLastPage(page);
     }
     
-    public int getId() {
+    public int getId(){
         return id;
     }
     
-    public KitLevel getKitLevelByItem(Player p, ItemStack item) {
+    public KitLevel getKitLevelByItem(Player p, ItemStack item){
         for ( KitLevel l : getLevels().values() ){
-            if(l.getIcon(p).getItemMeta().getDisplayName().equals(item.getItemMeta().getDisplayName())){
+            if (l.getIcon(p).getItemMeta().getDisplayName().equals(item.getItemMeta().getDisplayName())){
                 return l;
             }
         }
         return null;
     }
     
-    public HashMap<Integer, KitLevel> getLevels() {
+    public HashMap<Integer, KitLevel> getLevels(){
         return levels;
     }
     
-    public Entry<Integer, KitLevel> getFirstLevel() {
+    public Entry<Integer, KitLevel> getFirstLevel(){
         NavigableMap<Integer, KitLevel> levels = new TreeMap<>(this.levels);
         return levels.firstEntry();
     }
     
-    public List<String> getModes() {
+    public List<String> getModes(){
         return modes;
     }
     
-    public int getSlot() {
+    public int getSlot(){
         return slot;
     }
     
-    public int getPage() {
+    public int getPage(){
         return page;
     }
     
-    public String getName() {
+    public String getName(){
         return name;
     }
     
-    public String getPermission() {
+    public String getPermission(){
         return permission;
     }
 }

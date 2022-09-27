@@ -24,34 +24,34 @@ public class ItemUtils {
     private final ItemStack item;
     private final ItemMeta im;
     
-    public ItemUtils(XMaterial material) {
+    public ItemUtils(XMaterial material){
         this.item = new ItemStack(material.parseMaterial(), 1, material.getData());
         this.im = item.getItemMeta();
     }
     
-    public ItemUtils(XMaterial material, int amount) {
+    public ItemUtils(XMaterial material, int amount){
         this.item = new ItemStack(material.parseMaterial(), amount, material.getData());
         this.im = item.getItemMeta();
     }
     
-    public ItemUtils(Material material, int amount) {
+    public ItemUtils(Material material, int amount){
         this.item = new ItemStack(material, amount, (short) 0);
         this.im = item.getItemMeta();
     }
     
-    public ItemUtils(Material material, short data) {
+    public ItemUtils(Material material, short data){
         this.item = new ItemStack(material, 1, data);
         this.im = item.getItemMeta();
     }
     
-    public ItemUtils(Material material, byte amount, short data) {
+    public ItemUtils(Material material, byte amount, short data){
         this.item = new ItemStack(material, amount, data);
         this.im = item.getItemMeta();
     }
     
-    public ItemUtils(DyeColor color) {
+    public ItemUtils(DyeColor color){
         Material banner = Material.getMaterial("BANNER");
-        if(banner == null){
+        if (banner == null){
             banner = Material.getMaterial("WHITE_BANNER");
         }
         this.item = new ItemStack(banner);
@@ -60,30 +60,30 @@ public class ItemUtils {
         bm.setBaseColor(color);
     }
     
-    public ItemUtils(ItemStack item, int amount) {
+    public ItemUtils(ItemStack item, int amount){
         this.item = new ItemStack(item);
         this.item.setAmount(amount);
         this.im = item.getItemMeta();
     }
     
-    public ItemUtils(ItemStack item) {
+    public ItemUtils(ItemStack item){
         this.item = new ItemStack(item);
         this.im = item.getItemMeta();
     }
     
-    public ItemUtils setOwner(String owner) {
-        if(!item.getType().name().contains("SKULL_ITEM") && !item.getType().name().contains("PLAYER_HEAD"))
+    public ItemUtils setOwner(String owner){
+        if (!item.getType().name().contains("SKULL_ITEM") && !item.getType().name().contains("PLAYER_HEAD"))
             return this;
-        if(owner.isEmpty()) return this;
+        if (owner.isEmpty()) return this;
         SkullMeta headMeta = (SkullMeta) im;
         headMeta.setOwner(owner);
         return this;
     }
     
-    public ItemUtils setUrl(String url) {
-        if(!item.getType().name().contains("SKULL_ITEM") && !item.getType().name().contains("PLAYER_HEAD"))
+    public ItemUtils setUrl(String url){
+        if (!item.getType().name().contains("SKULL_ITEM") && !item.getType().name().contains("PLAYER_HEAD"))
             return this;
-        if(url.isEmpty()) return this;
+        if (url.isEmpty()) return this;
         SkullMeta headMeta = (SkullMeta) im;
         GameProfile profile = new GameProfile(UUID.randomUUID(), null);
         profile.getProperties().put("textures", new Property("textures", url));
@@ -91,16 +91,16 @@ public class ItemUtils {
             Field profileField = headMeta.getClass().getDeclaredField("profile");
             profileField.setAccessible(true);
             profileField.set(headMeta, profile);
-        } catch(IllegalArgumentException | NoSuchFieldException | SecurityException | IllegalAccessException error) {
+        } catch (IllegalArgumentException | NoSuchFieldException | SecurityException | IllegalAccessException error) {
             error.printStackTrace();
         }
         return this;
     }
     
-    public ItemUtils setTexture(String texture) {
-        if(!item.getType().name().contains("SKULL_ITEM") && !item.getType().name().contains("PLAYER_HEAD"))
+    public ItemUtils setTexture(String texture){
+        if (!item.getType().name().contains("SKULL_ITEM") && !item.getType().name().contains("PLAYER_HEAD"))
             return this;
-        if(texture.isEmpty()) return this;
+        if (texture.isEmpty()) return this;
         SkullMeta headMeta = (SkullMeta) im;
         GameProfile profile = new GameProfile(UUID.randomUUID(), null);
         byte[] encodedData = Base64.encodeBase64(String.format("{textures:{SKIN:{url:\"%s\"}}}", texture).getBytes());
@@ -110,43 +110,43 @@ public class ItemUtils {
             profileField = headMeta.getClass().getDeclaredField("profile");
             profileField.setAccessible(true);
             profileField.set(headMeta, profile);
-        } catch(IllegalArgumentException | IllegalAccessException | NoSuchFieldException var8) {
+        } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException var8) {
             var8.printStackTrace();
         }
         return this;
     }
     
-    public ItemUtils setDisplayName(String displayName) {
+    public ItemUtils setDisplayName(String displayName){
         this.im.setDisplayName(displayName);
         return this;
     }
     
-    public ItemUtils setLore(String lore) {
+    public ItemUtils setLore(String lore){
         this.im.setLore(lore.isEmpty() ? new ArrayList<>() : Arrays.asList(lore.split("\\n")));
         return this;
     }
     
-    public ItemUtils setLore(List<String> lore) {
+    public ItemUtils setLore(List<String> lore){
         this.im.setLore(lore);
         return this;
     }
     
-    public ItemUtils setUnbreakable(boolean unbreakable) {
+    public ItemUtils setUnbreakable(boolean unbreakable){
         this.im.spigot().setUnbreakable(unbreakable);
         return this;
     }
     
-    public ItemUtils addEnchant(Enchantment enchantment, int level) {
+    public ItemUtils addEnchant(Enchantment enchantment, int level){
         this.im.addEnchant(enchantment, level, true);
         return this;
     }
     
-    public ItemUtils applyAttributes() {
+    public ItemUtils applyAttributes(){
         this.im.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_DESTROYS, ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_PLACED_ON, ItemFlag.HIDE_POTION_EFFECTS, ItemFlag.HIDE_UNBREAKABLE);
         return this;
     }
     
-    public ItemStack build() {
+    public ItemStack build(){
         item.setItemMeta(im);
         return item;
     }

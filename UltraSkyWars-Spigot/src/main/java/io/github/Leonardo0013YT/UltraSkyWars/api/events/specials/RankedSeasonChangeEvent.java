@@ -9,20 +9,20 @@ public class RankedSeasonChangeEvent extends Event {
     
     private final int newSeason;
     
-    public RankedSeasonChangeEvent(int newSeason) {
+    public RankedSeasonChangeEvent(int newSeason){
         this.newSeason = newSeason;
     }
     
-    public static HandlerList getHandlerList() {
+    public static HandlerList getHandlerList(){
         return HANDLERS_LIST;
     }
     
-    public int getNewSeason() {
+    public int getNewSeason(){
         return newSeason;
     }
     
     @Override
-    public HandlerList getHandlers() {
+    public HandlerList getHandlers(){
         return HANDLERS_LIST;
     }
     

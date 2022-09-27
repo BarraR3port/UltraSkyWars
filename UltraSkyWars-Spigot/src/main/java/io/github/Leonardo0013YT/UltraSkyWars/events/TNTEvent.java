@@ -14,7 +14,7 @@ public class TNTEvent extends GameEvent {
     
     private BukkitTask task;
     
-    public TNTEvent(UltraSkyWars plugin, int time) {
+    public TNTEvent(UltraSkyWars plugin, int time){
         this.time = time;
         this.reset = time;
         this.task = null;
@@ -25,7 +25,7 @@ public class TNTEvent extends GameEvent {
         this.subtitle = plugin.getLang().get("titles." + name + ".subtitle");
     }
     
-    public TNTEvent(TNTEvent e) {
+    public TNTEvent(TNTEvent e){
         this.time = e.getReset();
         this.reset = e.getReset();
         this.task = null;
@@ -37,10 +37,10 @@ public class TNTEvent extends GameEvent {
     }
     
     @Override
-    public void start(Game game) {
+    public void start(Game game){
         this.task = new BukkitRunnable() {
             @Override
-            public void run() {
+            public void run(){
                 for ( Player on : game.getPlayers() ){
                     TNTPrimed tntPrimed = on.getWorld().spawn(on.getLocation().clone().add(0, 10, 0), TNTPrimed.class);
                     tntPrimed.setVelocity(new Vector(0, -2, 0));
@@ -53,14 +53,14 @@ public class TNTEvent extends GameEvent {
     }
     
     @Override
-    public void stop(Game game) {
-        if(task != null){
+    public void stop(Game game){
+        if (task != null){
             task.cancel();
         }
     }
     
     @Override
-    public void reset() {
+    public void reset(){
         this.time = this.reset;
         this.task = null;
         this.type = "final";
@@ -68,7 +68,7 @@ public class TNTEvent extends GameEvent {
     }
     
     @Override
-    public TNTEvent clone() {
+    public TNTEvent clone(){
         return new TNTEvent(this);
     }
     

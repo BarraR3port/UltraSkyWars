@@ -11,7 +11,7 @@ public class Multiplier {
     private final long remaining;
     private final double amount;
     
-    public Multiplier(int id, String type, String name, long remaining, double amount) {
+    public Multiplier(int id, String type, String name, long remaining, double amount){
         this.id = id;
         this.type = type;
         this.name = name;

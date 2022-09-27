@@ -11,17 +11,17 @@ public class TauntTypeSetup {
     private final String damage;
     private final ArrayList<String> msg;
     
-    public TauntTypeSetup(Player p, String damage, List<String> msg) {
+    public TauntTypeSetup(Player p, String damage, List<String> msg){
         this.p = p;
         this.damage = damage;
         this.msg = new ArrayList<>(msg);
     }
     
-    public String getDamage() {
+    public String getDamage(){
         return damage;
     }
     
-    public ArrayList<String> getMsg() {
+    public ArrayList<String> getMsg(){
         return msg;
     }
 }

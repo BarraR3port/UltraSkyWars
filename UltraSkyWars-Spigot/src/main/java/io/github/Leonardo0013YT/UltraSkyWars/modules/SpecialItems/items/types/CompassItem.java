@@ -11,7 +11,7 @@ public class CompassItem extends SpecialItem {
     private final double range;
     private final String noTarget, targeted, countdown;
     
-    public CompassItem(InjectionSpecialItems isi) {
+    public CompassItem(InjectionSpecialItems isi){
         this.range = isi.getSpecial_items().getDouble("items.compass.range");
         this.time = isi.getSpecial_items().getInt("items.compass.time");
         this.noTarget = isi.getSpecial_items().get("items.compass.noTarget");

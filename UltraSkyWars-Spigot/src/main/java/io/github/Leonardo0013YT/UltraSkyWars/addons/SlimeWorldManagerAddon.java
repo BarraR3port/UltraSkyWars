@@ -15,12 +15,12 @@ public class SlimeWorldManagerAddon {
     private final SlimePlugin slime;
     private final SlimeLoader loader;
     
-    public SlimeWorldManagerAddon(UltraSkyWars plugin) {
+    public SlimeWorldManagerAddon(UltraSkyWars plugin){
         this.slime = (SlimePlugin) Bukkit.getPluginManager().getPlugin("SlimeWorldManager");
         this.loader = slime.getLoader(plugin.getCm().getSlimeworldmanagerLoader());
     }
     
-    public void createWorld(String name) {
+    public void createWorld(String name){
         SlimePropertyMap slimeProperties = new SlimePropertyMap();
         slimeProperties.setInt(SlimeProperties.SPAWN_X, 0);
         slimeProperties.setInt(SlimeProperties.SPAWN_Y, 75);
@@ -32,7 +32,7 @@ public class SlimeWorldManagerAddon {
         slimeProperties.setString(SlimeProperties.ENVIRONMENT, "normal");
         try {
             slime.createEmptyWorld(loader, name, false, slimeProperties);
-        } catch(WorldAlreadyExistsException | IOException ignored) {
+        } catch (WorldAlreadyExistsException | IOException ignored) {
         }
     }
     

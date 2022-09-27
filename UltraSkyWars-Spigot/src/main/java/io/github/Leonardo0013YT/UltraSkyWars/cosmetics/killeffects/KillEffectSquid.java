@@ -19,8 +19,8 @@ public class KillEffectSquid implements KillEffect, Cloneable {
     private int pased = 0;
     
     @Override
-    public void loadCustoms(UltraSkyWars plugin, String path) {
-        if(!loaded){
+    public void loadCustoms(UltraSkyWars plugin, String path){
+        if (!loaded){
             lavaAmount = plugin.getKilleffect().getIntOrDefault(path + ".lavaAmount", 1);
             explosionAmount = plugin.getKilleffect().getIntOrDefault(path + ".explosionAmount", 1);
             loaded = true;
@@ -28,21 +28,21 @@ public class KillEffectSquid implements KillEffect, Cloneable {
     }
     
     @Override
-    public void start(Player p, Player death, Location loc) {
+    public void start(Player p, Player death, Location loc){
         Squid squid = loc.getWorld().spawn(loc, Squid.class);
         squid.setNoDamageTicks(Integer.MAX_VALUE);
         squid.setMetadata("KILLEFFECT", new FixedMetadataValue(UltraSkyWars.get(), "KILLEFFECT"));
         UltraSkyWars plugin = UltraSkyWars.get();
         task = new BukkitRunnable() {
             @Override
-            public void run() {
-                if(death == null || !death.isOnline()){
+            public void run(){
+                if (death == null || !death.isOnline()){
                     squid.remove();
                     cancel();
                     return;
                 }
                 pased++;
-                if(pased >= 20){
+                if (pased >= 20){
                     squid.remove();
                     cancel();
                     return;
@@ -57,14 +57,14 @@ public class KillEffectSquid implements KillEffect, Cloneable {
     }
     
     @Override
-    public void stop() {
-        if(task != null){
+    public void stop(){
+        if (task != null){
             task.cancel();
         }
     }
     
     @Override
-    public KillEffect clone() {
+    public KillEffect clone(){
         return new KillEffectSquid();
     }
     

@@ -17,32 +17,32 @@ public class Settings {
     private final UltraSkyWarsTNTM u;
     private final boolean comments;
     
-    public Settings(UltraSkyWarsTNTM u, String s, boolean defaults, boolean comments) {
+    public Settings(UltraSkyWarsTNTM u, String s, boolean defaults, boolean comments){
         this.u = u;
         this.comments = comments;
         this.file = new File(u.getDataFolder(), s + ".yml");
         this.config = YamlConfiguration.loadConfiguration(this.file);
         Reader reader;
-        if(comments){
+        if (comments){
             reader = new InputStreamReader(getConfigContent(new InputStreamReader(u.getResource(s + ".yml"), StandardCharsets.UTF_8)));
         } else {
             reader = new InputStreamReader(u.getResource(s + ".yml"), StandardCharsets.UTF_8);
         }
         YamlConfiguration loadConfiguration = YamlConfiguration.loadConfiguration(reader);
         try {
-            if(!this.file.exists()){
+            if (!this.file.exists()){
                 this.config.addDefaults(loadConfiguration);
                 this.config.options().copyDefaults(true);
-                if(comments){
+                if (comments){
                     save();
                 } else {
                     this.config.save(file);
                 }
             } else {
-                if(defaults){
+                if (defaults){
                     this.config.addDefaults(loadConfiguration);
                     this.config.options().copyDefaults(true);
-                    if(comments){
+                    if (comments){
                         save();
                     } else {
                         this.config.save(file);
@@ -50,26 +50,26 @@ public class Settings {
                 }
                 this.config.load(this.file);
             }
-        } catch(IOException | InvalidConfigurationException ignored) {
+        } catch (IOException | InvalidConfigurationException ignored) {
         }
     }
     
-    public void reload() {
+    public void reload(){
         try {
             this.config.load(this.file);
-        } catch(IOException | InvalidConfigurationException e) {
+        } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
     }
     
-    public InputStream getConfigContent(Reader reader) {
+    public InputStream getConfigContent(Reader reader){
         try {
             String addLine, currentLine, pluginName = u.getDescription().getName();
             int commentNum = 0;
             StringBuilder whole = new StringBuilder();
             BufferedReader bufferedReader = new BufferedReader(reader);
             while ((currentLine = bufferedReader.readLine()) != null) {
-                if(currentLine.startsWith("#")){
+                if (currentLine.startsWith("#")){
                     addLine = currentLine.replaceFirst("#", pluginName + "_COMMENT_" + commentNum + ":");
                     whole.append(addLine).append("\n");
                     commentNum++;
@@ -81,22 +81,22 @@ public class Settings {
             InputStream configStream = new ByteArrayInputStream(config.getBytes(StandardCharsets.UTF_8));
             bufferedReader.close();
             return configStream;
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
     }
     
     
-    private String prepareConfigString(String configString) {
+    private String prepareConfigString(String configString){
         String[] lines = configString.split("\n");
         StringBuilder config = new StringBuilder();
         for ( String line : lines ){
-            if(line.startsWith(u.getDescription().getName() + "_COMMENT")){
+            if (line.startsWith(u.getDescription().getName() + "_COMMENT")){
                 String comment = "#" + line.trim().substring(line.indexOf(":") + 1);
                 String normalComment;
                 
-                if(comment.startsWith("# ' ")){
+                if (comment.startsWith("# ' ")){
                     normalComment = comment.substring(0, comment.length() - 1).replaceFirst("# ' ", "# ");
                 } else {
                     normalComment = comment;
@@ -111,44 +111,44 @@ public class Settings {
     }
     
     
-    public void save() {
-        if(comments){
+    public void save(){
+        if (comments){
             try {
                 BufferedWriter writer = new BufferedWriter(new FileWriter(file));
                 writer.write(prepareConfigString(config.saveToString()));
                 writer.flush();
                 writer.close();
-            } catch(IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
             try {
                 this.config.save(file);
-            } catch(IOException ignored) {
+            } catch (IOException ignored) {
             }
         }
     }
     
-    public YamlConfiguration getConfig() {
+    public YamlConfiguration getConfig(){
         return this.config;
     }
     
-    public ItemStack getItemStack(String s) {
-        if(config.getString(s) == null){
+    public ItemStack getItemStack(String s){
+        if (config.getString(s) == null){
             return new ItemStack(Material.STONE);
         }
         return this.config.getItemStack(s);
     }
     
-    public String get(String s) {
-        if(config.getString(s) == null){
+    public String get(String s){
+        if (config.getString(s) == null){
             return "";
         }
         return this.config.getString(s).replaceAll("<l>", "¡").replaceAll("&", "§").replaceAll("-,-", "ñ");
     }
     
-    public String getOrDefault(String s, String def) {
-        if(config.isSet(s)){
+    public String getOrDefault(String s, String def){
+        if (config.isSet(s)){
             return get(s);
         }
         set(s, def);
@@ -156,12 +156,12 @@ public class Settings {
         return def;
     }
     
-    public int getInt(String s) {
+    public int getInt(String s){
         return this.config.getInt(s);
     }
     
-    public int getIntOrDefault(String s, int def) {
-        if(config.isSet(s)){
+    public int getIntOrDefault(String s, int def){
+        if (config.isSet(s)){
             return getInt(s);
         }
         set(s, def);
@@ -169,12 +169,12 @@ public class Settings {
         return def;
     }
     
-    public double getDouble(String s) {
+    public double getDouble(String s){
         return this.config.getDouble(s);
     }
     
-    public double getDoubleOrDefault(String s, double def) {
-        if(config.isSet(s)){
+    public double getDoubleOrDefault(String s, double def){
+        if (config.isSet(s)){
             return getDouble(s);
         }
         set(s, def);
@@ -182,12 +182,12 @@ public class Settings {
         return def;
     }
     
-    public List<String> getList(String s) {
+    public List<String> getList(String s){
         return this.config.getStringList(s);
     }
     
-    public List<String> getListOrDefault(String s, List<String> def) {
-        if(config.isSet(s)){
+    public List<String> getListOrDefault(String s, List<String> def){
+        if (config.isSet(s)){
             return getList(s);
         }
         set(s, def);
@@ -195,20 +195,20 @@ public class Settings {
         return def;
     }
     
-    public boolean isSet(String s) {
+    public boolean isSet(String s){
         return this.config.isSet(s);
     }
     
-    public void set(String s, Object o) {
+    public void set(String s, Object o){
         this.config.set(s, o);
     }
     
-    public boolean getBoolean(String s) {
+    public boolean getBoolean(String s){
         return this.config.getBoolean(s);
     }
     
-    public boolean getBooleanOrDefault(String s, boolean def) {
-        if(config.isSet(s)){
+    public boolean getBooleanOrDefault(String s, boolean def){
+        if (config.isSet(s)){
             return getBoolean(s);
         }
         set(s, def);

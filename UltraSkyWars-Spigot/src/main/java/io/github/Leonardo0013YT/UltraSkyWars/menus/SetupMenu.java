@@ -21,11 +21,11 @@ public class SetupMenu {
     
     private final UltraSkyWars plugin;
     
-    public SetupMenu(UltraSkyWars plugin) {
+    public SetupMenu(UltraSkyWars plugin){
         this.plugin = plugin;
     }
     
-    public void createPreviewMenu(Player p, PreviewSetup sp) {
+    public void createPreviewMenu(Player p, PreviewSetup sp){
         Inventory inv = Bukkit.createInventory(null, 36, plugin.getLang().get("menus.setupPreview.title"));
         ItemStack player = ItemBuilder.item(XMaterial.PLAYER_HEAD, 1, plugin.getLang().get("menus.setupPreview.player.nameItem"), plugin.getLang().get("menus.setupPreview.player.loreItem").replace("<loc>", Utils.getFormatedLocation(sp.getPlayer())));
         ItemStack cosmetic = ItemBuilder.item(XMaterial.ENDER_PEARL, 1, plugin.getLang().get("menus.setupPreview.cosmetic.nameItem"), plugin.getLang().get("menus.setupPreview.cosmetic.loreItem").replace("<loc>", Utils.getFormatedLocation(sp.getCosmetic())));
@@ -36,7 +36,7 @@ public class SetupMenu {
         p.openInventory(inv);
     }
     
-    public void createChestSetupMenu(Player p, ChestTypeSetup cts) {
+    public void createChestSetupMenu(Player p, ChestTypeSetup cts){
         Inventory inv = Bukkit.createInventory(null, 45, plugin.getLang().get("menus.chestsetup.title"));
         ItemStack name = ItemBuilder.item(XMaterial.PAPER, 1, plugin.getLang().get("menus.chestsetup.name.nameItem"), plugin.getLang().get("menus.chestsetup.name.loreItem").replace("<name>", cts.getName()));
         ItemStack key = ItemBuilder.item(XMaterial.MAP, 1, plugin.getLang().get("menus.chestsetup.key.nameItem"), plugin.getLang().get("menus.chestsetup.key.loreItem").replace("<key>", cts.getKey()));
@@ -57,7 +57,7 @@ public class SetupMenu {
         p.openInventory(inv);
     }
     
-    public void createSetupArenaMenu(Player p, ArenaSetup as) {
+    public void createSetupArenaMenu(Player p, ArenaSetup as){
         Inventory inv = Bukkit.createInventory(null, 54, plugin.getLang().get("menus.setup.title"));
         ItemStack lobby = ItemBuilder.item(XMaterial.COMPASS, 1, plugin.getLang().get("menus.setup.lobby.nameItem"), plugin.getLang().get("menus.setup.lobby.loreItem").replace("<lobby>", Utils.getFormatedLocation(as.getLobby())));
         ItemStack spect = ItemBuilder.item(XMaterial.COMPASS, 1, plugin.getLang().get("menus.setup.spect.nameItem"), plugin.getLang().get("menus.setup.spect.loreItem").replace("<spect>", Utils.getFormatedLocation(as.getSpectator())));
@@ -90,7 +90,7 @@ public class SetupMenu {
         p.openInventory(inv);
     }
     
-    public void createSetupBalloonsMenu(Player p, BalloonSetup bs) {
+    public void createSetupBalloonsMenu(Player p, BalloonSetup bs){
         Inventory inv = Bukkit.createInventory(null, 54, plugin.getLang().get("menus.balloons.title"));
         ItemStack icon = ItemBuilder.item(XMaterial.PLAYER_HEAD, 1, plugin.getLang().get("menus.balloons.icon.nameItem"), plugin.getLang().get("menus.balloons.icon.loreItem"));
         ItemStack price = ItemBuilder.item(XMaterial.SUNFLOWER, 1, plugin.getLang().get("menus.balloons.price.nameItem"), plugin.getLang().get("menus.balloons.price.loreItem").replaceAll("<price>", String.valueOf(bs.getPrice())));
@@ -113,20 +113,20 @@ public class SetupMenu {
         p.openInventory(inv);
     }
     
-    public void createSetupChestMenu(Player p) {
+    public void createSetupChestMenu(Player p){
         Inventory inv = Bukkit.createInventory(null, 27, plugin.getChestType().get("lang.chests.title"));
         for ( String key : plugin.getCtm().getChests().keySet() ){
             ChestType ct = plugin.getCtm().getChests().get(key);
             String u = key.toUpperCase();
             String l = key.toLowerCase();
-            if(ct != null && ct.getSetupItem() != null){
+            if (ct != null && ct.getSetupItem() != null){
                 inv.setItem(ct.getSetupSlot(), NBTEditor.set(ItemBuilder.item(ct.getSetupItem().getType(), 1, plugin.getChestType().get("lang.chests." + l + ".nameItem"), plugin.getChestType().get("lang.chests." + l + ".loreItem")), u, "SETUPVOTECHEST"));
             }
         }
         p.openInventory(inv);
     }
     
-    public void createSetupChestTypeMenu(Player p, ChestSetup gs) {
+    public void createSetupChestTypeMenu(Player p, ChestSetup gs){
         Inventory inv = Bukkit.createInventory(null, 54, plugin.getChestType().get("lang.chests.title"));
         fillChests(p, gs, inv);
         ItemStack filter = ItemBuilder.item(XMaterial.OAK_SIGN, 1, plugin.getLang().get("menus.cheststype.filter.nameItem"), plugin.getLang().get("menus.cheststype.filter.loreItem").replaceAll("<filter>", gs.getFilter()));
@@ -140,7 +140,7 @@ public class SetupMenu {
         p.openInventory(inv);
     }
     
-    public void createSetupChestRemoveMenu(Player p, ChestSetup gs) {
+    public void createSetupChestRemoveMenu(Player p, ChestSetup gs){
         Inventory inv = Bukkit.createInventory(null, 54, plugin.getLang().get("menus.chestsremove.title"));
         fillChests(p, gs, inv);
         ItemStack save = ItemBuilder.item(XMaterial.NETHER_STAR, 1, plugin.getLang().get("menus.chestsremove.save.nameItem"), plugin.getLang().get("menus.chestsremove.save.loreItem"));
@@ -148,33 +148,33 @@ public class SetupMenu {
         p.openInventory(inv);
     }
     
-    private void fillChests(Player p, ChestSetup gs, Inventory inv) {
+    private void fillChests(Player p, ChestSetup gs, Inventory inv){
         int page = plugin.getUim().getPages().getOrDefault(p.getUniqueId(), 1);
         int itt = 0, counter = 0;
         for ( ItemSetup l : gs.getItems() ){
             counter++;
-            if(counter < (page - 1) * 35){
+            if (counter < (page - 1) * 35){
                 continue;
             }
             itt++;
             inv.addItem(l.getDisplay());
-            if(itt == 36){
+            if (itt == 36){
                 break;
             }
         }
         ItemStack next = ItemBuilder.item(XMaterial.ARROW, 1, plugin.getLang().get(p, "menus.next.nameItem"), plugin.getLang().get(p, "menus.next.loreItem"));
         ItemStack last = ItemBuilder.item(XMaterial.ARROW, 1, plugin.getLang().get(p, "menus.last.nameItem"), plugin.getLang().get(p, "menus.last.loreItem"));
-        if(page > 1){
+        if (page > 1){
             inv.setItem(45, last);
         }
-        if(page < Utils.getMaxPages(gs.getItems().size(), 35)){
+        if (page < Utils.getMaxPages(gs.getItems().size(), 35)){
             inv.setItem(53, next);
         }
     }
     
-    public void createSetupChestAddMenu(Player p, ChestSetup gs) {
+    public void createSetupChestAddMenu(Player p, ChestSetup gs){
         Inventory inv = Bukkit.createInventory(null, 54, plugin.getLang().get("menus.chestsadd.title"));
-        if(!gs.getTemporarily().isEmpty()){
+        if (!gs.getTemporarily().isEmpty()){
             gs.getTemporarily().forEach(inv::addItem);
             gs.setTemporarily(new ArrayList<>());
         }
@@ -195,7 +195,7 @@ public class SetupMenu {
         p.openInventory(inv);
     }
     
-    public void createEventMenu(Player p, EventSetup es) {
+    public void createEventMenu(Player p, EventSetup es){
         Inventory inv = Bukkit.createInventory(null, 36, plugin.getLang().get("menus.event.title"));
         ItemStack info = ItemBuilder.item(XMaterial.PAPER, 1, plugin.getLang().get("menus.event.info.nameItem"), plugin.getLang().get("menus.event.info.loreItem").replace("<second>", String.valueOf(es.getSeconds())));
         ItemStack remove5 = ItemBuilder.item(XMaterial.RED_DYE, 1, plugin.getLang().get("menus.event.remove5.nameItem"), plugin.getLang().get("menus.event.remove5.loreItem").replace("<value-5>", "5"));
@@ -212,7 +212,7 @@ public class SetupMenu {
         p.openInventory(inv);
     }
     
-    public void createEventsMenu(Player p, ArenaSetup as) {
+    public void createEventsMenu(Player p, ArenaSetup as){
         Inventory inv = Bukkit.createInventory(null, 54, plugin.getLang().get("menus.events.title"));
         int t = 0;
         for ( EventSetup es : as.getEvents() ){
@@ -228,7 +228,7 @@ public class SetupMenu {
         p.openInventory(inv);
     }
     
-    public void createGlassMenu(Player p, GlassSetup gs) {
+    public void createGlassMenu(Player p, GlassSetup gs){
         Inventory inv = Bukkit.createInventory(null, 45, plugin.getLang().get("menus.glass.title"));
         ItemStack name = ItemBuilder.item(XMaterial.PAPER, 1, plugin.getLang().get("menus.glass.name.nameItem"), plugin.getLang().get("menus.glass.name.loreItem").replaceAll("<name>", gs.getName()));
         ItemStack schematic = ItemBuilder.item(XMaterial.MAP, 1, plugin.getLang().get("menus.glass.schematic.nameItem"), plugin.getLang().get("menus.glass.schematic.loreItem").replaceAll("<schematic>", gs.getSchematic()));
@@ -253,7 +253,7 @@ public class SetupMenu {
         p.openInventory(inv);
     }
     
-    public void createIslandsMenu(Player p, ArenaSetup as) {
+    public void createIslandsMenu(Player p, ArenaSetup as){
         Inventory inv = Bukkit.createInventory(null, 45, plugin.getLang().get("menus.islands.title"));
         for ( IslandArenaSetup ias : as.getIslands().values() ){
             inv.addItem(NBTEditor.set(getIslandItem(ias), ias.getId(), "ULTRASKYWARS_ISLAND_ID"));
@@ -263,10 +263,10 @@ public class SetupMenu {
         p.openInventory(inv);
     }
     
-    private ItemStack getIslandItem(IslandArenaSetup ias) {
+    private ItemStack getIslandItem(IslandArenaSetup ias){
         List<String> lore = new ArrayList<>();
         for ( String l : plugin.getLang().get("menus.islands.island.loreItem").split("\\n") ){
-            if(l.contains("<chests>")){
+            if (l.contains("<chests>")){
                 ias.getChests().forEach(o -> lore.add("§b" + Utils.getFormatedLocation(o)));
             } else {
                 lore.add(l.replace("<spawn>", Utils.getFormatedLocation(ias.getSpawn())).replace("<balloon>", Utils.getFormatedLocation(ias.getBalloon())).replace("<fence>", Utils.getFormatedLocation(ias.getFence())));
@@ -275,7 +275,7 @@ public class SetupMenu {
         return ItemBuilder.item(XMaterial.BEACON, 1, plugin.getLang().get("menus.islands.island.nameItem").replace("<#>", String.valueOf(ias.getId())), lore);
     }
     
-    public void createIslandMenu(Player p, IslandArenaSetup ias) {
+    public void createIslandMenu(Player p, IslandArenaSetup ias){
         Inventory inv = Bukkit.createInventory(null, 36, plugin.getLang().get("menus.island.title"));
         ItemStack spawn = ItemBuilder.item(XMaterial.BEACON, 1, plugin.getLang().get("menus.island.spawn.nameItem"), plugin.getLang().get("menus.island.spawn.loreItem").replace("<spawn>", Utils.getFormatedLocation(ias.getSpawn())));
         ItemStack balloon = ItemBuilder.item(XMaterial.PLAYER_HEAD, 1, plugin.getLang().get("menus.island.balloon.nameItem"), plugin.getLang().get("menus.island.balloon.loreItem").replace("<balloon>", Utils.getFormatedLocation(ias.getBalloon())));
@@ -290,7 +290,7 @@ public class SetupMenu {
         p.openInventory(inv);
     }
     
-    public void createKillSoundMenu(Player p, KillSoundSetup ks) {
+    public void createKillSoundMenu(Player p, KillSoundSetup ks){
         Inventory inv = Bukkit.createInventory(null, 54, plugin.getLang().get("menus.killsounds.title"));
         ItemStack icon = ItemBuilder.item(XMaterial.GHAST_TEAR, 1, plugin.getLang().get("menus.killsounds.icon.nameItem"), plugin.getLang().get("menus.killsounds.icon.loreItem"));
         ItemStack price = ItemBuilder.item(XMaterial.SUNFLOWER, 1, plugin.getLang().get("menus.killsounds.price.nameItem"), plugin.getLang().get("menus.killsounds.price.loreItem").replaceAll("<price>", String.valueOf(ks.getPrice())));
@@ -317,7 +317,7 @@ public class SetupMenu {
         p.openInventory(inv);
     }
     
-    public void createKitLevelMenu(Player p, KitLevelSetup kls) {
+    public void createKitLevelMenu(Player p, KitLevelSetup kls){
         Inventory inv = Bukkit.createInventory(null, 36, plugin.getLang().get("menus.kitlevel.title"));
         ItemStack slot = ItemBuilder.item(XMaterial.ANVIL, 1, plugin.getLang().get("menus.kitlevel.slot.nameItem"), plugin.getLang().get("menus.kitlevel.slot.loreItem").replaceAll("<slot>", "" + kls.getSlot()));
         ItemStack isBuy = ItemBuilder.item(XMaterial.OAK_SIGN, 1, plugin.getLang().get("menus.kitlevel.isBuy.nameItem"), plugin.getLang().get("menus.kitlevel.isBuy.loreItem").replaceAll("<purchasable>", Utils.parseBoolean(kls.isBuy())));
@@ -334,7 +334,7 @@ public class SetupMenu {
         p.openInventory(inv);
     }
     
-    public void createKitMenu(Player p, KitSetup ks) {
+    public void createKitMenu(Player p, KitSetup ks){
         Inventory inv = Bukkit.createInventory(null, 36, plugin.getLang().get("menus.kits.title"));
         ItemStack name = ItemBuilder.item(XMaterial.PAPER, 1, plugin.getLang().get("menus.kits.name.nameItem"), plugin.getLang().get("menus.kits.name.loreItem").replaceAll("<name>", ks.getName()));
         ItemStack permission = ItemBuilder.item(XMaterial.WRITABLE_BOOK, 1, plugin.getLang().get("menus.kits.permission.nameItem"), plugin.getLang().get("menus.kits.permission.loreItem").replaceAll("<permission>", ks.getPermission()));
@@ -351,7 +351,7 @@ public class SetupMenu {
         p.openInventory(inv);
     }
     
-    public void createPartingMenu(Player p, PartingSetup bs) {
+    public void createPartingMenu(Player p, PartingSetup bs){
         Inventory inv = Bukkit.createInventory(null, 45, plugin.getLang().get("menus.parting.title"));
         ItemStack icon = ItemBuilder.item(XMaterial.ARMOR_STAND, 1, plugin.getLang().get("menus.parting.icon.nameItem"), plugin.getLang().get("menus.parting.icon.loreItem"));
         ItemStack price = ItemBuilder.item(XMaterial.SUNFLOWER, 1, plugin.getLang().get("menus.parting.price.nameItem"), plugin.getLang().get("menus.parting.price.loreItem").replace("<price>", "" + bs.getPrice()));
@@ -374,7 +374,7 @@ public class SetupMenu {
         p.openInventory(inv);
     }
     
-    public void createSoulWellMenu(Player p) {
+    public void createSoulWellMenu(Player p){
         Inventory inv = Bukkit.createInventory(null, 36, plugin.getLang().get("menus.soulwell.title"));
         ItemStack rewards = ItemBuilder.item(XMaterial.CHEST, 1, plugin.getLang().get("menus.soulwell.rewards.nameItem"), plugin.getLang().get("menus.soulwell.rewards.loreItem"));
         ItemStack save = ItemBuilder.item(XMaterial.NETHER_STAR, 1, plugin.getLang().get("menus.soulwell.save.nameItem"), plugin.getLang().get("menus.soulwell.save.loreItem"));
@@ -383,7 +383,7 @@ public class SetupMenu {
         p.openInventory(inv);
     }
     
-    public void createSoulWellRewardMenu(Player p, SoulWellRewardSetup sr) {
+    public void createSoulWellRewardMenu(Player p, SoulWellRewardSetup sr){
         Inventory inv = Bukkit.createInventory(null, 36, plugin.getLang().get("menus.soulwellreward.title"));
         ItemStack name = ItemBuilder.item(XMaterial.PAPER, 1, plugin.getLang().get("menus.soulwellreward.name.nameItem"), plugin.getLang().get("menus.soulwellreward.name.loreItem").replace("<name>", String.valueOf(sr.getName())));
         ItemStack rarity = ItemBuilder.item(XMaterial.DIAMOND, 1, plugin.getLang().get("menus.soulwellreward.rarity.nameItem"), plugin.getLang().get("menus.soulwellreward.rarity.loreItem").replace("<rarity>", plugin.getLang().get(p, "soulwell.rarity." + sr.getType().name().toLowerCase())));
@@ -400,7 +400,7 @@ public class SetupMenu {
         p.openInventory(inv);
     }
     
-    public void createTauntMenu(Player p, TauntSetup ts) {
+    public void createTauntMenu(Player p, TauntSetup ts){
         Inventory inv = Bukkit.createInventory(null, 54, plugin.getLang().get("menus.taunts.title"));
         int s = 0;
         for ( String c : DamageCauses.valueOf(plugin.getVc().getVersion()).getCauses() ){
@@ -435,7 +435,7 @@ public class SetupMenu {
         p.openInventory(inv);
     }
     
-    public void createTauntTypeMenu(Player p, TauntTypeSetup tts) {
+    public void createTauntTypeMenu(Player p, TauntTypeSetup tts){
         Inventory inv = Bukkit.createInventory(null, 54, plugin.getLang().get("menus.tauntstype.title"));
         for ( String l : tts.getMsg() ){
             ItemStack it = ItemBuilder.item(XMaterial.PAPER, "§eMessage", l);
@@ -448,7 +448,7 @@ public class SetupMenu {
         p.openInventory(inv);
     }
     
-    public void createTrailMenu(Player p, TrailSetup ts) {
+    public void createTrailMenu(Player p, TrailSetup ts){
         Inventory inv = Bukkit.createInventory(null, 54, plugin.getLang().get("menus.trails.title"));
         ItemStack icon = ItemBuilder.item(XMaterial.BOW, 1, plugin.getLang().get("menus.trails.icon.nameItem"), plugin.getLang().get("menus.trails.icon.loreItem"));
         ItemStack speed = ItemBuilder.item(XMaterial.FEATHER, 1, plugin.getLang().get("menus.trails.speed.nameItem"), plugin.getLang().get("menus.trails.speed.loreItem").replaceAll("<speed>", "" + ts.getSpeed()));

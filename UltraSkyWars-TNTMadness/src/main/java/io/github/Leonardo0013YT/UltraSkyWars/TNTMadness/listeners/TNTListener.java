@@ -36,39 +36,39 @@ public class TNTListener implements Listener {
     private final UltraSkyWarsTNTM plugin;
     private final HashMap<UUID, Long> noFall = new HashMap<>();
     
-    public TNTListener(UltraSkyWarsTNTM plugin) {
+    public TNTListener(UltraSkyWarsTNTM plugin){
         this.plugin = plugin;
     }
     
     @EventHandler
-    public void onQuit(PlayerQuitEvent e) {
+    public void onQuit(PlayerQuitEvent e){
         Player p = e.getPlayer();
         noFall.remove(p.getUniqueId());
     }
     
     @EventHandler
-    public void onKick(PlayerKickEvent e) {
+    public void onKick(PlayerKickEvent e){
         Player p = e.getPlayer();
         noFall.remove(p.getUniqueId());
     }
     
     @EventHandler
-    public void onJoin(USWGamePlayerLoadEvent e) {
+    public void onJoin(USWGamePlayerLoadEvent e){
         Player p = e.getPlayer();
         Game game = e.getGame();
-        if(game.getGameType().equals("TNT_MADNESS")){
+        if (game.getGameType().equals("TNT_MADNESS")){
             p.getInventory().setItem(0, plugin.getIm().getTntMadnessBook());
         }
     }
     
     @EventHandler
-    public void onExplode(EntityExplodeEvent e) {
+    public void onExplode(EntityExplodeEvent e){
         Game game = UltraSkyWars.get().getGm().getGameByName(e.getLocation().getWorld().getName());
-        if(game != null){
+        if (game != null){
             ChestType sw = UltraSkyWars.get().getCtm().getChests().get(game.getChestType());
-            if(sw != null){
+            if (sw != null){
                 for ( Block b : e.blockList() ){
-                    if(ThreadLocalRandom.current().nextBoolean()){
+                    if (ThreadLocalRandom.current().nextBoolean()){
                         ChestItem ci = sw.getChest().getRandomItem(false, "TNT_MADNESS");
                         b.getWorld().dropItem(e.getLocation().clone().add(0.5, 0.5, 0.5), ci.getItem());
                     }
@@ -78,37 +78,37 @@ public class TNTListener implements Listener {
     }
     
     @EventHandler
-    public void onDamage(EntityDamageEvent e) {
-        if(e.getEntity() instanceof Player){
+    public void onDamage(EntityDamageEvent e){
+        if (e.getEntity() instanceof Player){
             Player p = (Player) e.getEntity();
-            if(!UltraSkyWarsAPI.isPlayerGame(p)){
+            if (!UltraSkyWarsAPI.isPlayerGame(p)){
                 return;
             }
             EntityDamageEvent.DamageCause c = e.getCause();
-            if(c.equals(EntityDamageEvent.DamageCause.FALL)){
-                if(noFall.containsKey(p.getUniqueId())){
+            if (c.equals(EntityDamageEvent.DamageCause.FALL)){
+                if (noFall.containsKey(p.getUniqueId())){
                     long finish = noFall.get(p.getUniqueId());
-                    if(finish >= System.currentTimeMillis()){
+                    if (finish >= System.currentTimeMillis()){
                         e.setDamage(0);
                     }
                     noFall.remove(p.getUniqueId());
                 }
                 return;
             }
-            if(!c.equals(EntityDamageEvent.DamageCause.ENTITY_ATTACK)){
+            if (!c.equals(EntityDamageEvent.DamageCause.ENTITY_ATTACK)){
                 e.setCancelled(true);
             }
         }
     }
     
     @EventHandler
-    public void onDamageByEntity(EntityDamageByEntityEvent e) {
-        if(!(e.getEntity() instanceof Player)) return;
-        if(e.getDamager() instanceof TNTPrimed){
+    public void onDamageByEntity(EntityDamageByEntityEvent e){
+        if (!(e.getEntity() instanceof Player)) return;
+        if (e.getDamager() instanceof TNTPrimed){
             TNTPrimed tnt = (TNTPrimed) e.getDamager();
-            if(tnt.hasMetadata("DAMAGE")){
+            if (tnt.hasMetadata("DAMAGE")){
                 boolean fall = tnt.getMetadata("DAMAGE").get(0).asBoolean();
-                if(fall){
+                if (fall){
                     Player p = (Player) e.getEntity();
                     noFall.put(p.getUniqueId(), System.currentTimeMillis() + 5000);
                 }
@@ -118,39 +118,39 @@ public class TNTListener implements Listener {
     }
     
     @EventHandler
-    public void onInteract(PlayerInteractEvent e) {
+    public void onInteract(PlayerInteractEvent e){
         Player p = e.getPlayer();
-        if(e.getAction().equals(Action.RIGHT_CLICK_BLOCK)){
-            if(!UltraSkyWarsAPI.isPlayerGame(p)){
+        if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK)){
+            if (!UltraSkyWarsAPI.isPlayerGame(p)){
                 return;
             }
             ItemStack c = p.getItemInHand();
-            if(c == null || c.getType().equals(Material.AIR)) return;
+            if (c == null || c.getType().equals(Material.AIR)) return;
             Block b = e.getClickedBlock();
             ItemStack i = c.clone();
             i.setAmount(1);
             World w = b.getWorld();
             Location loc = e.getClickedBlock().getRelative(e.getBlockFace()).getLocation().add(0.5, 0, 0.5);
-            if(plugin.getIm().getTntLaunchPad().equals(i)){
+            if (plugin.getIm().getTntLaunchPad().equals(i)){
                 removeItemInHand(p);
                 spawnTNT(w, loc.clone().add(0, 0.5, 1.0), true);
                 spawnTNT(w, loc.clone().add(0, 0.5, -1.0), true);
                 spawnTNT(w, loc.clone().add(1.0, 0.5, 0), true);
                 spawnTNT(w, loc.clone().add(-1.0, 0.5, 0), true);
             }
-            if(plugin.getIm().getInstantBoom().equals(i)){
+            if (plugin.getIm().getInstantBoom().equals(i)){
                 e.setCancelled(true);
                 removeItemInHand(p);
                 knockBack(p, loc);
                 w.getNearbyEntities(loc, 3, 3, 3).forEach(on -> {
-                    if(on instanceof Player){
+                    if (on instanceof Player){
                         Player d = (Player) on;
-                        if(d.getUniqueId().equals(p.getUniqueId())) return;
+                        if (d.getUniqueId().equals(p.getUniqueId())) return;
                         knockBack(d, loc);
                     }
                 });
             }
-            if(plugin.getIm().getNormalTNT().equals(i)){
+            if (plugin.getIm().getNormalTNT().equals(i)){
                 e.setCancelled(true);
                 removeItemInHand(p);
                 spawnTNT(w, loc.clone().add(0, 0.5, 0), false);
@@ -158,7 +158,7 @@ public class TNTListener implements Listener {
         }
     }
     
-    public void knockBack(Player d, Location l) {
+    public void knockBack(Player d, Location l){
         UltraSkyWars.get().getVc().getNMS().displayParticle(d, l, 0, 0, 0, 0, "EXPLOSION_LARGE", 1);
         d.playSound(d.getLocation(), Sound.EXPLODE, 1.0f, 10.0f);
         Vector v = d.getEyeLocation().getDirection();
@@ -166,15 +166,15 @@ public class TNTListener implements Listener {
         noFall.put(d.getUniqueId(), System.currentTimeMillis() + 5000);
     }
     
-    public void spawnTNT(World w, Location l1, boolean noFall) {
+    public void spawnTNT(World w, Location l1, boolean noFall){
         TNTPrimed t = w.spawn(l1, TNTPrimed.class);
         t.setMetadata("DAMAGE", new FixedMetadataValue(plugin, noFall));
         t.setFuseTicks(40);
     }
     
-    public void removeItemInHand(Player p) {
+    public void removeItemInHand(Player p){
         ItemStack i = p.getItemInHand();
-        if(i.getAmount() > 1){
+        if (i.getAmount() > 1){
             i.setAmount(i.getAmount() - 1);
             p.setItemInHand(i);
         } else {

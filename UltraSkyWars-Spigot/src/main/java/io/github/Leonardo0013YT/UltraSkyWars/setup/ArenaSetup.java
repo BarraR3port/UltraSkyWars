@@ -27,7 +27,7 @@ public class ArenaSetup {
     private int min = 2, teamSize = 1, borderX = 0, borderZ = 0, last = 0;
     private boolean ranked = false, votes = true;
     
-    public ArenaSetup(UltraSkyWars plugin, Player p, String name, String clone) {
+    public ArenaSetup(UltraSkyWars plugin, Player p, String name, String clone){
         this.plugin = plugin;
         this.name = name;
         String path = "arenas." + name;
@@ -46,12 +46,12 @@ public class ArenaSetup {
             String[] ev = e.split(":");
             String type = ev[0];
             int s = Integer.parseInt(ev[1]);
-            if(type.equals("REFILL")){
+            if (type.equals("REFILL")){
                 EventSetup rev = new EventSetup("refill");
                 rev.setSeconds(s);
                 events.add(rev);
             }
-            if(type.equals("FINAL")){
+            if (type.equals("FINAL")){
                 EventSetup rev = new EventSetup("final");
                 rev.setSeconds(s);
                 events.add(rev);
@@ -64,7 +64,7 @@ public class ArenaSetup {
             int id;
             try {
                 id = Integer.parseInt(c.replace("island", ""));
-            } catch(NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 id = i;
             }
             Location spawn = Utils.getStringLocation(plugin.getArenas().get(teamPath + ".spawn").replace(name, clone));
@@ -78,7 +78,7 @@ public class ArenaSetup {
             ias.setBalloon(balloon);
             ias.setFence(fence);
             islands.put(id, ias);
-            if(getLast() < id){
+            if (getLast() < id){
                 setLast(id);
             }
             i++;
@@ -88,26 +88,26 @@ public class ArenaSetup {
         }
     }
     
-    public ArenaSetup(UltraSkyWars plugin, String name) {
+    public ArenaSetup(UltraSkyWars plugin, String name){
         this.plugin = plugin;
         this.name = name;
     }
     
-    public void save(Player p, String clone) {
+    public void save(Player p, String clone){
         String path = "arenas." + clone;
-        if(lobby == null){
+        if (lobby == null){
             p.sendMessage(plugin.getLang().get(p, "setup.arena.notSet.lobby"));
             return;
         }
-        if(spectator == null){
+        if (spectator == null){
             p.sendMessage(plugin.getLang().get(p, "setup.arena.notSet.spect"));
             return;
         }
-        if(centers.isEmpty()){
+        if (centers.isEmpty()){
             p.sendMessage(plugin.getLang().get(p, "setup.arena.notSet.noCenter"));
             return;
         }
-        if(islands.size() < 2){
+        if (islands.size() < 2){
             p.sendMessage(plugin.getLang().get(p, "setup.arena.notSet.noIslands"));
             return;
         }
@@ -129,7 +129,7 @@ public class ArenaSetup {
         }
         List<String> even = new ArrayList<>();
         for ( EventSetup es : events ){
-            if(es == null) continue;
+            if (es == null) continue;
             even.add(es.getType().toUpperCase() + ":" + es.getSeconds());
         }
         ArrayList<String> chests = centers.stream().map(Utils::getLocationString).collect(Collectors.toCollection(ArrayList::new));
@@ -147,48 +147,48 @@ public class ArenaSetup {
         p.closeInventory();
     }
     
-    public HashMap<Integer, IslandArenaSetup> getIslands() {
+    public HashMap<Integer, IslandArenaSetup> getIslands(){
         return islands;
     }
     
-    public int getLast() {
+    public int getLast(){
         return last;
     }
     
-    public void setLast(int last) {
+    public void setLast(int last){
         this.last = last;
     }
     
-    public IslandArenaSetup getActual() {
+    public IslandArenaSetup getActual(){
         return actual;
     }
     
-    public void setActual(IslandArenaSetup actual) {
+    public void setActual(IslandArenaSetup actual){
         this.actual = actual;
     }
     
-    public EventSetup getEactual() {
+    public EventSetup getEactual(){
         return eactual;
     }
     
-    public void setEactual(EventSetup eactual) {
+    public void setEactual(EventSetup eactual){
         this.eactual = eactual;
     }
     
-    public void saveIsland(Player p) {
-        if(actual.getSpawn() == null){
+    public void saveIsland(Player p){
+        if (actual.getSpawn() == null){
             p.sendMessage(plugin.getLang().get(p, "setup.arena.notSet.noSpawn"));
             return;
         }
-        if(actual.getBalloon() == null){
+        if (actual.getBalloon() == null){
             p.sendMessage(plugin.getLang().get(p, "setup.arena.notSet.noBalloon"));
             return;
         }
-        if(actual.getFence() == null){
+        if (actual.getFence() == null){
             p.sendMessage(plugin.getLang().get(p, "setup.arena.notSet.noFence"));
             return;
         }
-        if(actual.getChests().isEmpty()){
+        if (actual.getChests().isEmpty()){
             p.sendMessage(plugin.getLang().get(p, "setup.arena.notSet.noChest"));
             return;
         }
@@ -198,113 +198,113 @@ public class ArenaSetup {
         p.getInventory().remove(plugin.getIm().getIsland());
     }
     
-    public void saveEvent(Player p) {
+    public void saveEvent(Player p){
         events.add(eactual);
         eactual = null;
         p.sendMessage(plugin.getLang().get(p, "setup.event.save"));
     }
     
-    public ArrayList<EventSetup> getEvents() {
+    public ArrayList<EventSetup> getEvents(){
         return events;
     }
     
-    public String getName() {
+    public String getName(){
         return name;
     }
     
-    public boolean isRanked() {
+    public boolean isRanked(){
         return ranked;
     }
     
-    public void setRanked(boolean ranked) {
+    public void setRanked(boolean ranked){
         this.ranked = ranked;
     }
     
-    public boolean isVotes() {
+    public boolean isVotes(){
         return votes;
     }
     
-    public void setVotes(boolean votes) {
+    public void setVotes(boolean votes){
         this.votes = votes;
     }
     
-    public ChatColor getColor() {
+    public ChatColor getColor(){
         return color;
     }
     
-    public void setColor(ChatColor color) {
+    public void setColor(ChatColor color){
         this.color = color;
     }
     
-    public int getBorderX() {
+    public int getBorderX(){
         return borderX;
     }
     
-    public void setBorderX(int borderX) {
+    public void setBorderX(int borderX){
         this.borderX = borderX;
     }
     
-    public int getBorderZ() {
+    public int getBorderZ(){
         return borderZ;
     }
     
-    public void setBorderZ(int borderZ) {
+    public void setBorderZ(int borderZ){
         this.borderZ = borderZ;
     }
     
-    public void removeCenter(Location loc) {
+    public void removeCenter(Location loc){
         centers.remove(loc);
     }
     
-    public void addCenter(Location loc) {
+    public void addCenter(Location loc){
         centers.add(loc);
     }
     
-    public boolean isCenter(Location loc) {
+    public boolean isCenter(Location loc){
         return centers.contains(loc);
     }
     
-    public ArrayList<Location> getCenters() {
+    public ArrayList<Location> getCenters(){
         return centers;
     }
     
-    public Location getLobby() {
+    public Location getLobby(){
         return lobby;
     }
     
-    public void setLobby(Location lobby) {
+    public void setLobby(Location lobby){
         this.lobby = lobby;
     }
     
-    public Location getSpectator() {
+    public Location getSpectator(){
         return spectator;
     }
     
-    public void setSpectator(Location spectator) {
+    public void setSpectator(Location spectator){
         this.spectator = spectator;
     }
     
-    public int getMin() {
+    public int getMin(){
         return min;
     }
     
-    public void setMin(int min) {
+    public void setMin(int min){
         this.min = min;
     }
     
-    public int getTeamSize() {
+    public int getTeamSize(){
         return teamSize;
     }
     
-    public void setTeamSize(int teamSize) {
+    public void setTeamSize(int teamSize){
         this.teamSize = teamSize;
     }
     
-    public boolean isTeam() {
+    public boolean isTeam(){
         return teamSize > 1;
     }
     
-    public int getMax() {
+    public int getMax(){
         return islands.size() * teamSize;
     }
     

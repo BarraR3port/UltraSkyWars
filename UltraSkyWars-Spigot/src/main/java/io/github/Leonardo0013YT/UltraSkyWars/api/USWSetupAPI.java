@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 
 public class USWSetupAPI {
     
-    public static boolean isLobbySetup(Player p) {
+    public static boolean isLobbySetup(Player p){
         return UltraSkyWars.get().getSm().isSetupInventory(p);
     }
     

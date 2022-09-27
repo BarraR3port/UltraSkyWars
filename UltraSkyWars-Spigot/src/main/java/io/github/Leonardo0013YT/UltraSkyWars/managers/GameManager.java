@@ -44,11 +44,11 @@ public class GameManager {
     private long lastUpdatePlayers = 0L;
     private Game bungee;
     
-    public GameManager(UltraSkyWars plugin) {
+    public GameManager(UltraSkyWars plugin){
         this.plugin = plugin;
     }
     
-    public void reload() {
+    public void reload(){
         modes.add("SOLO");
         modes.add("TEAM");
         modes.add("RANKED");
@@ -63,30 +63,30 @@ public class GameManager {
         events.put("wither", new WitherEvent(plugin, 0));
         events.put("zombies", new ZombieEvent(plugin, 0));
         events.put("border", new BorderEvent(plugin, 0));
-        if(plugin.getArenas().isSet("arenas")){
+        if (plugin.getArenas().isSet("arenas")){
             ConfigurationSection conf = plugin.getArenas().getConfig().getConfigurationSection("arenas");
             for ( String c : conf.getKeys(false) ){
                 int id = games.size();
                 boolean ranked = plugin.getArenas().getBoolean("arenas." + c + ".ranked");
                 boolean enabled = plugin.getArenas().getBooleanOrDefault("arenas." + c + ".enabled", true);
-                if(!enabled){
+                if (!enabled){
                     plugin.sendLogMessage("&cArena &e" + c + " &cis disabled.");
                     continue;
                 }
                 int teamSize = plugin.getArenas().getInt("arenas." + c + ".teamSize");
                 Game game;
                 AtomicBoolean load = new AtomicBoolean(false);
-                if(ranked){
+                if (ranked){
                     game = new UltraRankedGame(plugin, this, "arenas." + c, c, id, (b) -> setAtomic(b, c, load));
                 } else {
-                    if(teamSize > 1){
+                    if (teamSize > 1){
                         game = new UltraTeamGame(plugin, this, "arenas." + c, c, id, (b) -> setAtomic(b, c, load));
                     } else {
                         game = new UltraGame(plugin, this, "arenas." + c, c, id, (b) -> setAtomic(b, c, load));
                     }
                 }
                 game.setState(State.WAITING);
-                if(!load.get()){
+                if (!load.get()){
                     plugin.sendLogMessage("§cArena " + c + " no loaded correctly!");
                     continue;
                 }
@@ -95,7 +95,7 @@ public class GameManager {
                 worlds.put(game.getName(), id);
             }
         }
-        if(plugin.getJoin().isSet("joins")){
+        if (plugin.getJoin().isSet("joins")){
             ConfigurationSection j = plugin.getJoin().getConfig().getConfigurationSection("joins");
             for ( String s : j.getKeys(false) ){
                 String name = plugin.getJoin().get(null, "joins." + s + ".name");
@@ -104,16 +104,16 @@ public class GameManager {
         }
     }
     
-    public HashSet<String> getModes() {
+    public HashSet<String> getModes(){
         return modes;
     }
     
-    public void handleTeleport(Location l, String name, boolean add, double addX, double addY, double addZ, Player... players) {
-        if(l == null || l.getWorld() == null){
+    public void handleTeleport(Location l, String name, boolean add, double addX, double addY, double addZ, Player... players){
+        if (l == null || l.getWorld() == null){
             plugin.sendLogMessage("Location null or world null " + name);
             return;
         }
-        if(add){
+        if (add){
             l.add(addX, addY, addZ);
             for ( Player p : players ){
                 p.teleport(l);
@@ -122,8 +122,8 @@ public class GameManager {
         } else {
             for ( Player p : players ){
                 p.teleport(l);
-                if(name.equals("MainLobby") && plugin.getCm().isAutoFlyEnabled()){
-                    if(p.hasPermission(plugin.getCm().getAutoFlyPermission())){
+                if (name.equals("MainLobby") && plugin.getCm().isAutoFlyEnabled()){
+                    if (p.hasPermission(plugin.getCm().getAutoFlyPermission())){
                         p.setAllowFlight(true);
                         p.setFlying(true);
                     }
@@ -132,26 +132,26 @@ public class GameManager {
         }
     }
     
-    public void setAtomic(String b, String c, AtomicBoolean load) {
-        if(b.equals("NO_ISLANDS")){
+    public void setAtomic(String b, String c, AtomicBoolean load){
+        if (b.equals("NO_ISLANDS")){
             plugin.sendLogMessage("Arena error §c" + c + " §eno islands.");
         }
-        if(b.equals("NO_CENTERS")){
+        if (b.equals("NO_CENTERS")){
             plugin.sendLogMessage("Arena error §c" + c + " §eno center chests.");
         }
-        if(b.equals("NO_LOBBY")){
+        if (b.equals("NO_LOBBY")){
             plugin.sendLogMessage("Arena error §c" + c + " §eno lobby set.");
         }
-        if(b.equals("NO_SPECTATOR")){
+        if (b.equals("NO_SPECTATOR")){
             plugin.sendLogMessage("Arena error §c" + c + " §eno spectator set.");
         }
-        if(b.equals("DONE")){
+        if (b.equals("DONE")){
             load.set(true);
         }
     }
     
-    public void updateGame(String server, String map, String color, String state, String type, int players, int max) {
-        if(!gameData.containsKey(server)){
+    public void updateGame(String server, String map, String color, String state, String type, int players, int max){
+        if (!gameData.containsKey(server)){
             gameData.put(server, new GameData(server, map, color, state, type.toLowerCase(), players, max));
         } else {
             GameData gd = gameData.get(server);
@@ -159,13 +159,13 @@ public class GameManager {
             gd.setPlayers(players);
             gd.setMax(max);
         }
-        if(plugin.getIjm().isSignsInjection()){
+        if (plugin.getIjm().isSignsInjection()){
             plugin.getIjm().getSigns().getSim().update(type.toLowerCase(), server, map, state, players, max);
         }
     }
     
-    public void updateGame(String map, String color, String state, String type, int players, int max) {
-        if(!gameData.containsKey(map)){
+    public void updateGame(String map, String color, String state, String type, int players, int max){
+        if (!gameData.containsKey(map)){
             gameData.put(map, new GameData(map, color, state, type.toLowerCase(), players, max));
         } else {
             GameData gd = gameData.get(map);
@@ -173,49 +173,49 @@ public class GameManager {
             gd.setPlayers(players);
             gd.setMax(max);
         }
-        if(plugin.getIjm().isSignsInjection()){
+        if (plugin.getIjm().isSignsInjection()){
             plugin.getIjm().getSigns().getSim().update(type.toLowerCase(), map, state, players, max);
         }
     }
     
-    public void removeGameServer(String server) {
-        if(gameData.containsKey(server)){
+    public void removeGameServer(String server){
+        if (gameData.containsKey(server)){
             gameData.get(server).setState("EMPTY");
         }
-        if(plugin.getIjm().isSignsInjection()){
+        if (plugin.getIjm().isSignsInjection()){
             for ( GameData gd : gameData.values() ){
-                if(gd == null) continue;
+                if (gd == null) continue;
                 plugin.getIjm().getSigns().getSim().update(gd.getType().toLowerCase(), gd.getServer(), gd.getMap(), gd.getState(), gd.getPlayers(), gd.getMax());
             }
         }
     }
     
-    public void removeGameMap(String map) {
+    public void removeGameMap(String map){
         gameData.remove(map);
     }
     
-    public Game getBungee() {
-        if(bungee == null){
-            if(games.size() > 0){
+    public Game getBungee(){
+        if (bungee == null){
+            if (games.size() > 0){
                 bungee = this.games.get(0);
             }
         }
         return bungee;
     }
     
-    public synchronized void addPlayerGame(Player p, int id) {
+    public synchronized void addPlayerGame(Player p, int id){
         addPlayerGame(p, id, false);
     }
     
-    public synchronized void addPlayerGame(Player p, int id, boolean ignoreParty) {
+    public synchronized void addPlayerGame(Player p, int id, boolean ignoreParty){
         Game game = games.get(id);
-        if(checkPlayerGame(p, game)) return;
-        if(plugin.getAdm().getParties() != null && !ignoreParty){
-            if(plugin.getAdm().getParties().isInParty(p) && plugin.getAdm().getParties().isPartyLeader(p)){
+        if (checkPlayerGame(p, game)) return;
+        if (plugin.getAdm().getParties() != null && !ignoreParty){
+            if (plugin.getAdm().getParties().isInParty(p) && plugin.getAdm().getParties().isPartyLeader(p)){
                 boolean noRanked = game.getGameType().equals("RANKED") && plugin.getCm().isRankedJoin() && !plugin.getCm().isRankedJoinParties();
-                if(!noRanked){
+                if (!noRanked){
                     for ( Player on : plugin.getAdm().getParties().getPlayersParty(p) ){
-                        if(on == null || !on.isOnline()) continue;
+                        if (on == null || !on.isOnline()) continue;
                         addPartyPlayer(on, p, game);
                     }
                 } else {
@@ -223,18 +223,18 @@ public class GameManager {
                 }
                 return;
             } else {
-                if(plugin.getAdm().getParties().isInParty(p)){
+                if (plugin.getAdm().getParties().isInParty(p)){
                     p.sendMessage(plugin.getLang().get(p, "parties.noJoin"));
                     return;
                 }
             }
         }
-        if(!ignoreParty && plugin.getIjm().isParty() && plugin.getIjm().getParty().getPam().isLeader(p)){
+        if (!ignoreParty && plugin.getIjm().isParty() && plugin.getIjm().getParty().getPam().isLeader(p)){
             boolean noRanked = game.getGameType().equals("RANKED") && plugin.getCm().isRankedJoin() && !plugin.getCm().isRankedJoinParties();
-            if(!noRanked){
+            if (!noRanked){
                 for ( UUID uuid : plugin.getIjm().getParty().getPam().getPartyByPlayer(p.getUniqueId()).getMembers().keySet() ){
                     Player on = Bukkit.getPlayer(uuid);
-                    if(on == null || !on.isOnline()) continue;
+                    if (on == null || !on.isOnline()) continue;
                     addPartyPlayer(on, p, game);
                 }
             } else {
@@ -258,8 +258,8 @@ public class GameManager {
         game.addPlayer(p);
     }
     
-    public void addPartyPlayer(Player on, Player leader, Game game) {
-        if(on.equals(leader)){
+    public void addPartyPlayer(Player on, Player leader, Game game){
+        if (on.equals(leader)){
             on.sendMessage(plugin.getLang().get(on, "parties.join"));
         } else {
             on.sendMessage(plugin.getLang().get(on, "parties.joinGame"));
@@ -268,33 +268,33 @@ public class GameManager {
         addPlayerGame(on, game.getId(), true);
     }
     
-    private boolean checkPlayerGame(Player on, Game game) {
-        if(game.isState(State.FINISH) || game.isState(State.RESTARTING) || game.isState(State.GAME) || game.isState(State.PREGAME) || (game.isState(State.STARTING) && game.getStarting() < 3)){
+    private boolean checkPlayerGame(Player on, Game game){
+        if (game.isState(State.FINISH) || game.isState(State.RESTARTING) || game.isState(State.GAME) || game.isState(State.PREGAME) || (game.isState(State.STARTING) && game.getStarting() < 3)){
             on.sendMessage(plugin.getLang().get(on, "messages.alreadyStart"));
             return true;
         }
-        if(game.getCached().size() >= game.getMax()){
+        if (game.getCached().size() >= game.getMax()){
             on.sendMessage(plugin.getLang().get(on, "messages.fullGame"));
             return true;
         }
         return false;
     }
     
-    public void removePlayerGame(Player p, int id) {
+    public void removePlayerGame(Player p, int id){
         Game game = games.get(id);
         USWGameQuitEvent event = new USWGameQuitEvent(p, game);
         Bukkit.getServer().getPluginManager().callEvent(event);
         game.removePlayer(p);
     }
     
-    public GameData getGameRandomFavorites(Player p, String type) {
+    public GameData getGameRandomFavorites(Player p, String type){
         SWPlayer sw = plugin.getDb().getSWPlayer(p);
         ArrayList<GameData> games = getGamesByType(type.toLowerCase()).stream().filter(d -> d.getState().equals("WAITING") || d.getState().equals("STARTING")).filter(d -> d.getPlayers() < d.getMax()).filter(game -> sw.getFavorites().contains(game.getMap())).collect(Collectors.toCollection(ArrayList::new));
         Collections.shuffle(games);
         int alt = 0;
         GameData g = null;
         for ( GameData game : games ){
-            if(g == null || alt <= game.getPlayers()){
+            if (g == null || alt <= game.getPlayers()){
                 g = game;
                 alt = game.getPlayers();
             }
@@ -302,7 +302,7 @@ public class GameManager {
         return g;
     }
     
-    public boolean addRandomGame(Player p, String type) {
+    public boolean addRandomGame(Player p, String type){
         List<GameData> now = new ArrayList<>(gameData.values());
         Collections.shuffle(now);
         int alt = 0;
@@ -315,20 +315,20 @@ public class GameManager {
             fixed = filter.filter(d -> d.getType().equalsIgnoreCase(type)).collect(Collectors.toList());
         }
         for ( GameData game : fixed ){
-            if(g == null || alt < game.getPlayers()){
+            if (g == null || alt < game.getPlayers()){
                 g = game;
                 alt = game.getPlayers();
             }
         }
-        if(g != null){
+        if (g != null){
             addPlayerGame(p, gamesID.get(g.getMap()));
             return true;
         }
         return false;
     }
     
-    public synchronized void removePlayerAllGame(Player p) {
-        if(!playerGame.containsKey(p.getUniqueId())) return;
+    public synchronized void removePlayerAllGame(Player p){
+        if (!playerGame.containsKey(p.getUniqueId())) return;
         int id = playerGame.get(p.getUniqueId());
         removePlayerGame(p, id);
         plugin.getLvl().checkUpgrade(p);
@@ -336,67 +336,67 @@ public class GameManager {
         Utils.updateSB(p);
     }
     
-    public GameData getDataByMap(String map) {
+    public GameData getDataByMap(String map){
         for ( GameData gd : gameData.values() ){
-            if(gd.getMap().equals(map)){
+            if (gd.getMap().equals(map)){
                 return gd;
             }
         }
         return null;
     }
     
-    public Map<String, GameData> getGameData() {
+    public Map<String, GameData> getGameData(){
         return gameData;
     }
     
-    public Map<String, Integer> getWorlds() {
+    public Map<String, Integer> getWorlds(){
         return worlds;
     }
     
-    public Map<Integer, Game> getGames() {
+    public Map<Integer, Game> getGames(){
         return games;
     }
     
-    public Game getGameByPlayer(Player p) {
+    public Game getGameByPlayer(Player p){
         return games.get(playerGame.get(p.getUniqueId()));
     }
     
-    public boolean isPlayerInGame(Player p) {
+    public boolean isPlayerInGame(Player p){
         return playerGame.containsKey(p.getUniqueId());
     }
     
-    public GameData getGameByPlayers(String type, int amount, List<GameData> ready) {
+    public GameData getGameByPlayers(String type, int amount, List<GameData> ready){
         List<GameData> games = getGamesByType(type);
         for ( GameData game : games ){
-            if(game.getPlayers() == amount && !ready.contains(game)){
+            if (game.getPlayers() == amount && !ready.contains(game)){
                 return game;
             }
         }
         return null;
     }
     
-    public Game getGameByName(String name) {
+    public Game getGameByName(String name){
         for ( Game g : games.values() ){
-            if(g.getName().equals(name)){
+            if (g.getName().equals(name)){
                 return g;
             }
         }
         return null;
     }
     
-    public int getGameSize(String type) {
-        if(lastUpdatePlayers + plugin.getCm().getUpdatePlayersPlaceholder() < System.currentTimeMillis()){
+    public int getGameSize(String type){
+        if (lastUpdatePlayers + plugin.getCm().getUpdatePlayersPlaceholder() < System.currentTimeMillis()){
             updatePlayersPlaceholder();
         }
         return players.getOrDefault(type, 0);
     }
     
-    public void updatePlayersPlaceholder() {
+    public void updatePlayersPlaceholder(){
         for ( String t : modes ){
             String type = t.toLowerCase();
             int count = 0;
             for ( GameData g : getGamesByType(type) ){
-                if(g == null) continue;
+                if (g == null) continue;
                 count += g.getPlayers();
             }
             players.put(type, count);
@@ -409,10 +409,10 @@ public class GameManager {
         lastUpdatePlayers = System.currentTimeMillis();
     }
     
-    public ArrayList<GameData> getGamesByType(String type) {
+    public ArrayList<GameData> getGamesByType(String type){
         ArrayList<GameData> games = new ArrayList<>();
         for ( GameData gd : gameData.values() ){
-            if(gd.getType().equals(type.toLowerCase())){
+            if (gd.getType().equals(type.toLowerCase())){
                 games.add(gd);
             }
         }
@@ -427,23 +427,23 @@ public class GameManager {
         }
     }*/
     
-    public void updateFinish() {
+    public void updateFinish(){
         for ( int id : gamesUpdating.keySet() ){
-            if(!games.containsKey(id)) continue;
+            if (!games.containsKey(id)) continue;
             Game game = games.get(id);
             game.debug();
         }
     }
     
-    public void addGameUpdating(int id) {
-        if(!gamesUpdating.containsKey(id)){
+    public void addGameUpdating(int id){
+        if (!gamesUpdating.containsKey(id)){
             gamesUpdating.put(id, "");
-            if(tasks.containsKey(id)){
+            if (tasks.containsKey(id)){
                 tasks.get(id).cancel();
             }
             tasks.put(id, new BukkitRunnable() {
                 @Override
-                public void run() {
+                public void run(){
                     Game game = games.get(id);
                     game.update();
                 }
@@ -451,27 +451,27 @@ public class GameManager {
         }
     }
     
-    public void removeGameUpdating(int id) {
-        if(tasks.containsKey(id)){
+    public void removeGameUpdating(int id){
+        if (tasks.containsKey(id)){
             tasks.get(id).cancel();
         }
         tasks.remove(id);
         gamesUpdating.remove(id);
     }
     
-    public Map<String, CustomJoin> getJoins() {
+    public Map<String, CustomJoin> getJoins(){
         return joins;
     }
     
-    public GameEvent getEvent(String type) {
+    public GameEvent getEvent(String type){
         return events.get(type);
     }
     
-    public int getGameID(String map) {
+    public int getGameID(String map){
         return gamesID.get(map);
     }
     
-    public Map<UUID, Integer> getPlayerGame() {
+    public Map<UUID, Integer> getPlayerGame(){
         return playerGame;
     }
 }

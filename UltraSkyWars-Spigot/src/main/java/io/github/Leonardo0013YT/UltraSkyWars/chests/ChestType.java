@@ -14,7 +14,7 @@ public class ChestType {
     private final ItemStack voteItem, setupItem;
     private final boolean refillChange, armorAllTeams;
     
-    public ChestType(UltraSkyWars plugin, String key) {
+    public ChestType(UltraSkyWars plugin, String key){
         this.key = key;
         this.edit = plugin.getChestType().get("types." + key + ".edit");
         this.setupSlot = plugin.getChestType().getInt("types." + key + ".slots.setup");
@@ -31,7 +31,7 @@ public class ChestType {
         this.chest = new SWChest(plugin, "chests." + key);
     }
     
-    public String listString(List<String> list) {
+    public String listString(List<String> list){
         return String.join("\\n", list);
     }
     

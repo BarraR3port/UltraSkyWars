@@ -11,30 +11,30 @@ public class USWPlayerLoadEvent extends Event implements Cancellable {
     private final Player player;
     private boolean isCancelled = false;
     
-    public USWPlayerLoadEvent(Player player) {
+    public USWPlayerLoadEvent(Player player){
         this.player = player;
     }
     
-    public static HandlerList getHandlerList() {
+    public static HandlerList getHandlerList(){
         return HANDLERS_LIST;
     }
     
-    public Player getPlayer() {
+    public Player getPlayer(){
         return player;
     }
     
     @Override
-    public boolean isCancelled() {
+    public boolean isCancelled(){
         return isCancelled;
     }
     
     @Override
-    public void setCancelled(boolean isCancelled) {
+    public void setCancelled(boolean isCancelled){
         this.isCancelled = isCancelled;
     }
     
     @Override
-    public HandlerList getHandlers() {
+    public HandlerList getHandlers(){
         return HANDLERS_LIST;
     }
     

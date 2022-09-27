@@ -30,279 +30,279 @@ public class SetupManager {
     private final HashMap<UUID, String> delete = new HashMap<>();
     private final HashMap<UUID, ChestTypeSetup> setupChestType = new HashMap<>();
     
-    public void setSetupPreview(Player p, PreviewSetup name) {
+    public void setSetupPreview(Player p, PreviewSetup name){
         setupPreview.put(p.getUniqueId(), name);
     }
     
-    public boolean isSetupPreview(Player p) {
+    public boolean isSetupPreview(Player p){
         return setupPreview.containsKey(p.getUniqueId());
     }
     
-    public void removeSetupPreview(Player p) {
+    public void removeSetupPreview(Player p){
         setupPreview.remove(p.getUniqueId());
     }
     
-    public PreviewSetup getSetupPreview(Player p) {
+    public PreviewSetup getSetupPreview(Player p){
         return setupPreview.get(p.getUniqueId());
     }
     
-    public void setChestType(Player p, ChestTypeSetup name) {
+    public void setChestType(Player p, ChestTypeSetup name){
         setupChestType.put(p.getUniqueId(), name);
     }
     
-    public boolean isChestType(Player p) {
+    public boolean isChestType(Player p){
         return setupChestType.containsKey(p.getUniqueId());
     }
     
-    public void removeChestType(Player p) {
+    public void removeChestType(Player p){
         setupChestType.remove(p.getUniqueId());
     }
     
-    public ChestTypeSetup getChestType(Player p) {
+    public ChestTypeSetup getChestType(Player p){
         return setupChestType.get(p.getUniqueId());
     }
     
-    public void setDelete(Player p, String name) {
+    public void setDelete(Player p, String name){
         delete.put(p.getUniqueId(), name);
     }
     
-    public boolean isDelete(Player p) {
+    public boolean isDelete(Player p){
         return delete.containsKey(p.getUniqueId());
     }
     
-    public void removeDelete(Player p) {
+    public void removeDelete(Player p){
         delete.remove(p.getUniqueId());
     }
     
-    public String getDelete(Player p) {
+    public String getDelete(Player p){
         return delete.get(p.getUniqueId());
     }
     
-    public void setSetupCubeBlock(Player p) {
+    public void setSetupCubeBlock(Player p){
         setupCubeBlock.add(p.getUniqueId());
     }
     
-    public boolean isSetupCubeBlock(Player p) {
+    public boolean isSetupCubeBlock(Player p){
         return setupCubeBlock.contains(p.getUniqueId());
     }
     
-    public void removeCubeBlock(Player p) {
+    public void removeCubeBlock(Player p){
         setupCubeBlock.remove(p.getUniqueId());
     }
     
-    public void setSetupSoulBlock(Player p) {
+    public void setSetupSoulBlock(Player p){
         setupSoulBlock.add(p.getUniqueId());
     }
     
-    public boolean isSetupSoulBlock(Player p) {
+    public boolean isSetupSoulBlock(Player p){
         return setupSoulBlock.contains(p.getUniqueId());
     }
     
-    public void removeSoulBlock(Player p) {
+    public void removeSoulBlock(Player p){
         setupSoulBlock.remove(p.getUniqueId());
     }
     
-    public void setSetupSoulWell(Player p, SoulWellSetup a) {
+    public void setSetupSoulWell(Player p, SoulWellSetup a){
         setupSoulWell.put(p.getUniqueId(), a);
     }
     
-    public SoulWellSetup getSetupSoulWell(Player p) {
+    public SoulWellSetup getSetupSoulWell(Player p){
         return setupSoulWell.get(p.getUniqueId());
     }
     
-    public boolean isSetupSoulWell(Player p) {
+    public boolean isSetupSoulWell(Player p){
         return setupSoulWell.containsKey(p.getUniqueId());
     }
     
-    public void removeSoulWell(Player p) {
+    public void removeSoulWell(Player p){
         setupSoulWell.remove(p.getUniqueId());
     }
     
-    public void setSetupParting(Player p, PartingSetup a) {
+    public void setSetupParting(Player p, PartingSetup a){
         setupParting.put(p.getUniqueId(), a);
     }
     
-    public PartingSetup getSetupParting(Player p) {
+    public PartingSetup getSetupParting(Player p){
         return setupParting.get(p.getUniqueId());
     }
     
-    public boolean isSetupParting(Player p) {
+    public boolean isSetupParting(Player p){
         return setupParting.containsKey(p.getUniqueId());
     }
     
-    public void removeParting(Player p) {
+    public void removeParting(Player p){
         setupParting.remove(p.getUniqueId());
     }
     
-    public void setSetupKillSound(Player p, KillSoundSetup a) {
+    public void setSetupKillSound(Player p, KillSoundSetup a){
         setupKillSound.put(p.getUniqueId(), a);
     }
     
-    public KillSoundSetup getSetupKillSound(Player p) {
+    public KillSoundSetup getSetupKillSound(Player p){
         return setupKillSound.get(p.getUniqueId());
     }
     
-    public boolean isSetupKillSound(Player p) {
+    public boolean isSetupKillSound(Player p){
         return setupKillSound.containsKey(p.getUniqueId());
     }
     
-    public void removeKillSound(Player p) {
+    public void removeKillSound(Player p){
         setupKillSound.remove(p.getUniqueId());
     }
     
-    public void setSetupBalloon(Player p, BalloonSetup a) {
+    public void setSetupBalloon(Player p, BalloonSetup a){
         setupBalloon.put(p.getUniqueId(), a);
     }
     
-    public BalloonSetup getSetupBalloon(Player p) {
+    public BalloonSetup getSetupBalloon(Player p){
         return setupBalloon.get(p.getUniqueId());
     }
     
-    public boolean isSetupBalloon(Player p) {
+    public boolean isSetupBalloon(Player p){
         return setupBalloon.containsKey(p.getUniqueId());
     }
     
-    public void removeBalloon(Player p) {
+    public void removeBalloon(Player p){
         setupBalloon.remove(p.getUniqueId());
     }
     
-    public void setSetupTrail(Player p, TrailSetup a) {
+    public void setSetupTrail(Player p, TrailSetup a){
         setupTrail.put(p.getUniqueId(), a);
     }
     
-    public TrailSetup getSetupTrail(Player p) {
+    public TrailSetup getSetupTrail(Player p){
         return setupTrail.get(p.getUniqueId());
     }
     
-    public boolean isSetupTrail(Player p) {
+    public boolean isSetupTrail(Player p){
         return setupTrail.containsKey(p.getUniqueId());
     }
     
-    public void removeTrail(Player p) {
+    public void removeTrail(Player p){
         setupTrail.remove(p.getUniqueId());
     }
     
-    public void setSetupChest(Player p, ChestSetup a) {
+    public void setSetupChest(Player p, ChestSetup a){
         setupChest.put(p.getUniqueId(), a);
     }
     
-    public ChestSetup getSetupChest(Player p) {
+    public ChestSetup getSetupChest(Player p){
         return setupChest.get(p.getUniqueId());
     }
     
-    public boolean isSetupChest(Player p) {
+    public boolean isSetupChest(Player p){
         return setupChest.containsKey(p.getUniqueId());
     }
     
-    public void removeChest(Player p) {
+    public void removeChest(Player p){
         setupChest.remove(p.getUniqueId());
     }
     
-    public void setSetupTaunt(Player p, TauntSetup a) {
+    public void setSetupTaunt(Player p, TauntSetup a){
         setupTaunt.put(p.getUniqueId(), a);
     }
     
-    public TauntSetup getSetupTaunt(Player p) {
+    public TauntSetup getSetupTaunt(Player p){
         return setupTaunt.get(p.getUniqueId());
     }
     
-    public boolean isSetupTaunt(Player p) {
+    public boolean isSetupTaunt(Player p){
         return setupTaunt.containsKey(p.getUniqueId());
     }
     
-    public void removeTaunt(Player p) {
+    public void removeTaunt(Player p){
         setupTaunt.remove(p.getUniqueId());
     }
     
-    public void setSetupEvent(Player p, EventSetup a) {
+    public void setSetupEvent(Player p, EventSetup a){
         setupEvent.put(p.getUniqueId(), a);
     }
     
-    public boolean isSetupEvent(Player p) {
+    public boolean isSetupEvent(Player p){
         return setupEvent.containsKey(p.getUniqueId());
     }
     
-    public void removeEvent(Player p) {
+    public void removeEvent(Player p){
         setupEvent.remove(p.getUniqueId());
     }
     
-    public void setSetupName(Player p, String a) {
+    public void setSetupName(Player p, String a){
         editName.put(p.getUniqueId(), a);
     }
     
-    public String getSetupName(Player p) {
+    public String getSetupName(Player p){
         return editName.get(p.getUniqueId());
     }
     
-    public boolean isSetupName(Player p) {
+    public boolean isSetupName(Player p){
         return editName.containsKey(p.getUniqueId());
     }
     
-    public void removeName(Player p) {
+    public void removeName(Player p){
         editName.remove(p.getUniqueId());
     }
     
-    public void setSetupInventory(Player p, UltraInventory a) {
+    public void setSetupInventory(Player p, UltraInventory a){
         setupInventory.put(p.getUniqueId(), a);
     }
     
-    public UltraInventory getSetupInventory(Player p) {
+    public UltraInventory getSetupInventory(Player p){
         return setupInventory.get(p.getUniqueId());
     }
     
-    public boolean isSetupInventory(Player p) {
+    public boolean isSetupInventory(Player p){
         return setupInventory.containsKey(p.getUniqueId());
     }
     
-    public void removeInventory(Player p) {
+    public void removeInventory(Player p){
         setupInventory.remove(p.getUniqueId());
     }
     
-    public void setSetup(Player p, ArenaSetup a) {
+    public void setSetup(Player p, ArenaSetup a){
         setup.put(p.getUniqueId(), a);
     }
     
-    public ArenaSetup getSetup(Player p) {
+    public ArenaSetup getSetup(Player p){
         return setup.get(p.getUniqueId());
     }
     
-    public boolean isSetup(Player p) {
+    public boolean isSetup(Player p){
         return setup.containsKey(p.getUniqueId());
     }
     
-    public void remove(Player p) {
+    public void remove(Player p){
         setup.remove(p.getUniqueId());
     }
     
-    public void setSetupGlass(Player p, GlassSetup a) {
+    public void setSetupGlass(Player p, GlassSetup a){
         setupGlass.put(p.getUniqueId(), a);
     }
     
-    public GlassSetup getSetupGlass(Player p) {
+    public GlassSetup getSetupGlass(Player p){
         return setupGlass.get(p.getUniqueId());
     }
     
-    public boolean isSetupGlass(Player p) {
+    public boolean isSetupGlass(Player p){
         return setupGlass.containsKey(p.getUniqueId());
     }
     
-    public void removeGlass(Player p) {
+    public void removeGlass(Player p){
         setupGlass.remove(p.getUniqueId());
     }
     
-    public void setSetupKit(Player p, KitSetup a) {
+    public void setSetupKit(Player p, KitSetup a){
         setupKit.put(p.getUniqueId(), a);
     }
     
-    public KitSetup getSetupKit(Player p) {
+    public KitSetup getSetupKit(Player p){
         return setupKit.get(p.getUniqueId());
     }
     
-    public boolean isSetupKit(Player p) {
+    public boolean isSetupKit(Player p){
         return setupKit.containsKey(p.getUniqueId());
     }
     
-    public void removeKit(Player p) {
+    public void removeKit(Player p){
         setupKit.remove(p.getUniqueId());
     }
     

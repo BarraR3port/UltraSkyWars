@@ -20,7 +20,7 @@ public class SoulWellUpgrade {
     private final String type;
     private final String key;
     
-    public SoulWellUpgrade(InjectionSoulWell is, String path, String type, String key) {
+    public SoulWellUpgrade(InjectionSoulWell is, String path, String type, String key){
         this.type = type;
         this.key = key;
         this.level = is.getSoulwell().getInt(path + ".level");
@@ -32,7 +32,7 @@ public class SoulWellUpgrade {
         this.lore = is.getSoulwell().get(path + ".lore");
     }
     
-    public ItemStack getIcon(String status) {
+    public ItemStack getIcon(String status){
         ItemStack icon = ItemBuilder.item(material, 1, data, name, lore.replaceAll("<status>", status).replaceAll("<price>", String.valueOf(price)).replaceAll("<amount>", String.valueOf(amount)));
         icon = NBTEditor.set(icon, level, "SOULWELL", "UPGRADE", "LEVEL");
         return NBTEditor.set(icon, key, "SOULWELL", "UPGRADE", "KEY");

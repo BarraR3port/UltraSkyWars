@@ -18,11 +18,11 @@ public class ScoreboardManager {
     private final Netherboard board = Netherboard.instance();
     private final HashMap<String, HashMap<Integer, String>> linesUpdated = new HashMap<>();
     
-    public ScoreboardManager() {
+    public ScoreboardManager(){
         reload();
     }
     
-    public void reload() {
+    public void reload(){
         UltraSkyWars plugin = UltraSkyWars.get();
         linesUpdated.clear();
         String[] starting = plugin.getLang().get("scoreboards.starting").split("\\n");
@@ -75,17 +75,17 @@ public class ScoreboardManager {
         }
     }
     
-    public void clear(Player p) {
-        if(board.hasBoard(p)){
+    public void clear(Player p){
+        if (board.hasBoard(p)){
             board.deleteBoard(p);
         }
     }
     
-    public void update(Player p, GameEvent ge, UltraSkyWars plugin) {
-        if(p == null || !p.isOnline()) return;
-        if(plugin.getCm().isDisableAllScoreboards()) return;
-        if(!plugin.getGm().isPlayerInGame(p) && plugin.getCm().isLobbyScoreboard()){
-            if(!board.hasBoard(p)){
+    public void update(Player p, GameEvent ge, UltraSkyWars plugin){
+        if (p == null || !p.isOnline()) return;
+        if (plugin.getCm().isDisableAllScoreboards()) return;
+        if (!plugin.getGm().isPlayerInGame(p) && plugin.getCm().isLobbyScoreboard()){
+            if (!board.hasBoard(p)){
                 Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                     board.createBoard(p, plugin.getLang().get(p, "scoreboards.main-title"));
                     board.getBoard(p).setName(plugin.getLang().get(p, "scoreboards.main-title"));
@@ -101,31 +101,31 @@ public class ScoreboardManager {
             }
             return;
         }
-        if(!plugin.getGm().isPlayerInGame(p)){
+        if (!plugin.getGm().isPlayerInGame(p)){
             return;
         }
         Game game = plugin.getGm().getGameByPlayer(p);
-        if(!board.hasBoard(p)){
+        if (!board.hasBoard(p)){
             Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                 board.createBoard(p, replaceTitle(plugin.getLang().get(p, "scoreboards.lobby-title"), game, plugin));
                 setLobbyScoreboard(p, plugin, game);
             });
             return;
         }
-        if(game.isState(State.WAITING)){
+        if (game.isState(State.WAITING)){
             setLobbyScoreboard(p, plugin, game);
-        } else if(game.isState(State.STARTING)){
+        } else if (game.isState(State.STARTING)){
             board.getBoard(p).setName(replaceTitle(plugin.getLang().get(p, "scoreboards.starting-title"), game, plugin));
             for ( Map.Entry<Integer, String> entry : linesUpdated.get("starting").entrySet() ){
                 board.getBoard(p).set(starting(plugin.getAdm().parsePlaceholders(p, entry.getValue()), game, plugin), entry.getKey());
             }
-        } else if(game.isState(State.PREGAME)){
+        } else if (game.isState(State.PREGAME)){
             board.getBoard(p).setName(replaceTitle(plugin.getLang().get(p, "scoreboards.pregame-title"), game, plugin));
             for ( Map.Entry<Integer, String> entry : linesUpdated.get("pregame").entrySet() ){
                 board.getBoard(p).set(pregame(plugin.getAdm().parsePlaceholders(p, entry.getValue()), game, plugin), entry.getKey());
             }
-        } else if(game.isState(State.GAME) || game.isState(State.FINISH)){
-            switch(game.getGameType()) {
+        } else if (game.isState(State.GAME) || game.isState(State.FINISH)){
+            switch(game.getGameType()){
                 case "SOLO":
                     board.getBoard(p).setName(replaceTitle(plugin.getLang().get(p, "scoreboards.game-title"), game, plugin));
                     for ( Map.Entry<Integer, String> entry : linesUpdated.get("game").entrySet() ){
@@ -154,18 +154,18 @@ public class ScoreboardManager {
         }
     }
     
-    private void setLobbyScoreboard(Player p, UltraSkyWars plugin, Game game) {
+    private void setLobbyScoreboard(Player p, UltraSkyWars plugin, Game game){
         board.getBoard(p).setName(replaceTitle(plugin.getLang().get(p, "scoreboards.lobby-title"), game, plugin));
         for ( Map.Entry<Integer, String> entry : linesUpdated.get("lobby").entrySet() ){
             board.getBoard(p).set(lobby(plugin.getAdm().parsePlaceholders(p, entry.getValue()), game, plugin), entry.getKey());
         }
     }
     
-    private String replaceTitle(String c, Game game, UltraSkyWars plugin) {
+    private String replaceTitle(String c, Game game, UltraSkyWars plugin){
         return c.replaceAll("<mode>", plugin.getLang().get("modes." + game.getGameType().toLowerCase()));
     }
     
-    private String lobby(String c, Game game, UltraSkyWars plugin) {
+    private String lobby(String c, Game game, UltraSkyWars plugin){
         return c.replaceAll("<mode>", plugin.getLang().get("modes." + game.getGameType().toLowerCase()))
                 .replaceAll("<date>", Utils.getDate())
                 .replaceAll("<players>", String.valueOf(game.getPlayers().size()))
@@ -173,7 +173,7 @@ public class ScoreboardManager {
                 .replaceAll("<map>", game.getName());
     }
     
-    private String starting(String c, Game game, UltraSkyWars plugin) {
+    private String starting(String c, Game game, UltraSkyWars plugin){
         return c.replaceAll("<mode>", plugin.getLang().get("modes." + game.getGameType().toLowerCase()))
                 .replaceAll("<date>", Utils.getDate())
                 .replaceAll("<players>", String.valueOf(game.getPlayers().size()))
@@ -183,7 +183,7 @@ public class ScoreboardManager {
                 .replaceAll("<s>", (game.getStarting() > 1) ? "s" : "");
     }
     
-    private String pregame(String c, Game game, UltraSkyWars plugin) {
+    private String pregame(String c, Game game, UltraSkyWars plugin){
         return c.replaceAll("<mode>", plugin.getLang().get("modes." + game.getGameType().toLowerCase()))
                 .replaceAll("<date>", Utils.getDate())
                 .replaceAll("<players>", String.valueOf(game.getPlayers().size()))
@@ -193,11 +193,11 @@ public class ScoreboardManager {
                 .replaceAll("<s>", (game.getPregame() > 1) ? "s" : "");
     }
     
-    private String game(Player p, String c, Game game, GameEvent ge, UltraSkyWars plugin) {
+    private String game(Player p, String c, Game game, GameEvent ge, UltraSkyWars plugin){
         GamePlayer gp = game.getGamePlayer().get(p.getUniqueId());
         String name;
         int time;
-        if(ge == null){
+        if (ge == null){
             name = plugin.getLang().get(p, "events.noMore");
             time = 0;
         } else {
@@ -217,8 +217,8 @@ public class ScoreboardManager {
                 .replaceAll("<map>", game.getName());
     }
     
-    public void remove(Player p) {
-        if(board.hasBoard(p)){
+    public void remove(Player p){
+        if (board.hasBoard(p)){
             board.removeBoard(p);
         }
     }

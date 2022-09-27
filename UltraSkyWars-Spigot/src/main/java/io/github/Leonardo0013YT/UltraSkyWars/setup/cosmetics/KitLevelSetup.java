@@ -13,62 +13,62 @@ public class KitLevelSetup {
     private int price = 100, slot = 10;
     private boolean buy = true;
     
-    public KitLevelSetup(Player p) {
+    public KitLevelSetup(Player p){
         this.p = p;
     }
     
-    public Player getP() {
+    public Player getP(){
         return p;
     }
     
-    public boolean isBuy() {
+    public boolean isBuy(){
         return buy;
     }
     
-    public void setBuy(boolean buy) {
+    public void setBuy(boolean buy){
         this.buy = buy;
     }
     
-    public ItemStack[] getInv() {
+    public ItemStack[] getInv(){
         return inv;
     }
     
-    public void setInv(ItemStack[] inv) {
+    public void setInv(ItemStack[] inv){
         this.inv = inv;
     }
     
-    public ItemStack[] getArmors() {
+    public ItemStack[] getArmors(){
         return armors;
     }
     
-    public void setArmors(ItemStack[] armors) {
+    public void setArmors(ItemStack[] armors){
         this.armors = armors;
     }
     
-    public ItemStack getIcon() {
-        if(icon == null || icon.getType().equals(Material.AIR)){
+    public ItemStack getIcon(){
+        if (icon == null || icon.getType().equals(Material.AIR)){
             return new ItemStack(XMaterial.DIAMOND_SWORD.parseMaterial());
         }
         return icon;
     }
     
-    public void setIcon(ItemStack icon) {
+    public void setIcon(ItemStack icon){
         this.icon = icon;
     }
     
-    public int getPrice() {
+    public int getPrice(){
         return price;
     }
     
-    public void setPrice(int price) {
+    public void setPrice(int price){
         this.price = price;
     }
     
-    public int getSlot() {
+    public int getSlot(){
         return slot;
     }
     
-    public void setSlot(int slot) {
+    public void setSlot(int slot){
         this.slot = slot;
     }
     

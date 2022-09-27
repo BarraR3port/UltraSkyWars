@@ -33,11 +33,11 @@ public class ConfigManager {
     private List<String> whitelistedCMD, winCommands, killCommands, deathCommands;
     private Location previewPlayerGlass, previewCosmeticGlass, previewPlayerBalloon, previewCosmeticBalloon;
     
-    public ConfigManager() {
+    public ConfigManager(){
         reload();
     }
     
-    public void reload() {
+    public void reload(){
         UltraSkyWars plugin = UltraSkyWars.get();
         this.cosmeticsGlasses = plugin.getConfig().getBoolean("cosmetics.glasses");
         this.cosmeticsKillEffect = plugin.getConfig().getBoolean("cosmetics.killEffect");
@@ -162,10 +162,10 @@ public class ConfigManager {
         this.last = XMaterial.matchXMaterial(plugin.getConfig().getString("materials.last")).orElse(XMaterial.ARROW);
     }
     
-    public void reloadInjections() {
+    public void reloadInjections(){
         UltraSkyWars plugin = UltraSkyWars.get();
-        if(plugin.getIjm() == null) return;
-        if(plugin.getIjm().isCubeletsInjection()){
+        if (plugin.getIjm() == null) return;
+        if (plugin.getIjm().isCubeletsInjection()){
             this.ticksAni3 = plugin.getIjm().getCubelets().getCubelets().getInt("animations.flames.ticks");
             this.executesAni3 = plugin.getIjm().getCubelets().getCubelets().getInt("animations.flames.executes");
             this.url = plugin.getIjm().getCubelets().getCubelets().get(null, "animations.head.url");
@@ -177,8 +177,8 @@ public class ConfigManager {
         }
     }
     
-    public boolean isSetupLobby(Player p) {
-        if(Bukkit.getPluginManager().isPluginEnabled("UltraSkyWars-Setup")){
+    public boolean isSetupLobby(Player p){
+        if (Bukkit.getPluginManager().isPluginEnabled("UltraSkyWars-Setup")){
             return USWSetupAPI.isLobbySetup(p);
         }
         return false;

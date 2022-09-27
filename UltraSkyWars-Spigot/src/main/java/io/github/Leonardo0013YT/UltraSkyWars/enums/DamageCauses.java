@@ -16,11 +16,11 @@ public enum DamageCauses {
     
     private final String[] causes;
     
-    DamageCauses(String[] causes) {
+    DamageCauses(String[] causes){
         this.causes = causes;
     }
     
-    public String[] getCauses() {
+    public String[] getCauses(){
         return causes;
     }
 }

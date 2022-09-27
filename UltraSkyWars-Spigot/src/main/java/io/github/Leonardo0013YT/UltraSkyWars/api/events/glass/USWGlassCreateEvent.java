@@ -16,45 +16,45 @@ public class USWGlassCreateEvent extends Event implements Cancellable {
     private final boolean team;
     private boolean isCancelled = false;
     
-    public USWGlassCreateEvent(Player player, Glass glass, Location location, boolean team) {
+    public USWGlassCreateEvent(Player player, Glass glass, Location location, boolean team){
         this.player = player;
         this.glass = glass;
         this.location = location;
         this.team = team;
     }
     
-    public static HandlerList getHandlerList() {
+    public static HandlerList getHandlerList(){
         return HANDLERS_LIST;
     }
     
-    public Player getPlayer() {
+    public Player getPlayer(){
         return player;
     }
     
-    public Glass getGlass() {
+    public Glass getGlass(){
         return glass;
     }
     
-    public Location getLocation() {
+    public Location getLocation(){
         return location;
     }
     
-    public boolean isTeam() {
+    public boolean isTeam(){
         return team;
     }
     
     @Override
-    public boolean isCancelled() {
+    public boolean isCancelled(){
         return isCancelled;
     }
     
     @Override
-    public void setCancelled(boolean isCancelled) {
+    public void setCancelled(boolean isCancelled){
         this.isCancelled = isCancelled;
     }
     
     @Override
-    public HandlerList getHandlers() {
+    public HandlerList getHandlers(){
         return HANDLERS_LIST;
     }
     

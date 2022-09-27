@@ -10,24 +10,24 @@ public class TNTMadnessCMD implements CommandExecutor {
     
     private final UltraSkyWarsTNTM plugin;
     
-    public TNTMadnessCMD(UltraSkyWarsTNTM plugin) {
+    public TNTMadnessCMD(UltraSkyWarsTNTM plugin){
         this.plugin = plugin;
     }
     
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if(sender instanceof Player){
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
+        if (sender instanceof Player){
             Player p = (Player) sender;
-            if(args.length < 1){
+            if (args.length < 1){
                 sendHelp(sender);
                 return true;
             }
-            if("give".equals(args[0].toLowerCase())){
-                if(args.length < 2){
+            if ("give".equalsIgnoreCase(args[0])){
+                if (args.length < 2){
                     sendHelp(sender);
                     return true;
                 }
-                switch(args[1].toLowerCase()) {
+                switch(args[1].toLowerCase()){
                     case "instantboom":
                         p.getInventory().addItem(plugin.getIm().getInstantBoom());
                         p.sendMessage("§aSe te a entregado un InstantBoom de prueba.");
@@ -55,7 +55,7 @@ public class TNTMadnessCMD implements CommandExecutor {
         return false;
     }
     
-    private void sendHelp(CommandSender s) {
+    private void sendHelp(CommandSender s){
         s.sendMessage("§7§m--------------------------------------------");
         s.sendMessage("§e/uswt give instantboom/launchpad §7- §aEntregarte items tu mismo.");
         s.sendMessage("§7§m--------------------------------------------");

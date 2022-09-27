@@ -25,7 +25,7 @@ public class Reward {
     private final int id;
     private ItemStack icon;
     
-    public Reward(UltraSkyWars plugin, String path, int id) {
+    public Reward(UltraSkyWars plugin, String path, int id){
         this.plugin = plugin;
         this.id = id;
         this.rarity = RewardType.valueOf(plugin.getRewards().get(path + ".type"));
@@ -34,7 +34,7 @@ public class Reward {
         this.alreadyCommands = plugin.getRewards().getListOrDefault(path + ".alreadyCommands", Collections.singletonList("eco give <player> 100"));
         this.name = plugin.getRewards().get(path + ".name");
         this.chance = plugin.getRewards().getConfig().getDouble(path + ".chance");
-        if(plugin.getRewards().getConfig().get(path + ".icon") instanceof ItemStack){
+        if (plugin.getRewards().getConfig().get(path + ".icon") instanceof ItemStack){
             icon = plugin.getRewards().getConfig().getItemStack(path + ".icon");
         } else {
             ItemStack head = NBTEditor.getHead(plugin.getRewards().getConfig().getString(path + ".icon"));
@@ -44,15 +44,15 @@ public class Reward {
             head.setItemMeta(headM);
             icon = head;
         }
-        if(icon.getAmount() < 1){
+        if (icon.getAmount() < 1){
             icon.setAmount(1);
         }
         this.icon = NBTEditor.set(icon, id, "REWARD", "ID");
     }
     
-    public void execute(Player p) {
+    public void execute(Player p){
         for ( String cmd : rewards ){
-            if(useAlreadyCMD && cmd.startsWith("/sw ")){
+            if (useAlreadyCMD && cmd.startsWith("/sw ")){
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), plugin.getAdm().parsePlaceholders(p, cmd.replaceAll("<player>", p.getName())) + " " + id);
             } else {
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), plugin.getAdm().parsePlaceholders(p, cmd.replaceAll("<player>", p.getName())));
@@ -60,7 +60,7 @@ public class Reward {
         }
     }
     
-    public void executeSecond(Player p) {
+    public void executeSecond(Player p){
         p.sendMessage(plugin.getLang().get("messages.alreadyReward"));
         for ( String cmd : alreadyCommands ){
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), plugin.getAdm().parsePlaceholders(p, cmd.replaceAll("<player>", p.getName())));

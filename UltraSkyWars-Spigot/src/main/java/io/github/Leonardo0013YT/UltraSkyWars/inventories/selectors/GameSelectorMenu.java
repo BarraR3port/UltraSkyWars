@@ -18,29 +18,29 @@ public class GameSelectorMenu extends UltraInventory {
     private final ArrayList<Integer> gameSlots = new ArrayList<>();
     private final String type;
     
-    public GameSelectorMenu(UltraSkyWars plugin, String name, String type) {
+    public GameSelectorMenu(UltraSkyWars plugin, String name, String type){
         super(name);
         this.type = type;
         this.title = plugin.getLang().get("menus.selector.title").replaceAll("<type>", plugin.getLang().get("selector." + type));
         reload();
     }
     
-    public ArrayList<Integer> getExtra() {
+    public ArrayList<Integer> getExtra(){
         return extra;
     }
     
-    public HashMap<String, Integer> getSlots() {
+    public HashMap<String, Integer> getSlots(){
         return slots;
     }
     
     @Override
-    public void reload() {
+    public void reload(){
         UltraSkyWars plugin = UltraSkyWars.get();
-        if(plugin.getMenus().isSet("menus." + name)){
+        if (plugin.getMenus().isSet("menus." + name)){
             this.rows = plugin.getMenus().getInt("menus." + name + ".rows");
             Map<Integer, ItemStack> config = new HashMap<>();
             Map<Integer, ItemStack> contents = new HashMap<>();
-            if(plugin.getMenus().getConfig().isSet("menus." + name + ".items")){
+            if (plugin.getMenus().getConfig().isSet("menus." + name + ".items")){
                 ConfigurationSection conf = plugin.getMenus().getConfig().getConfigurationSection("menus." + name + ".items");
                 for ( String c : conf.getKeys(false) ){
                     int slot = Integer.parseInt(c);
@@ -53,9 +53,9 @@ public class GameSelectorMenu extends UltraInventory {
                             new String[]{"{CLOSE}", plugin.getLang().get("menus.close.nameItem"), plugin.getLang().get("menus.close.loreItem")},
                             new String[]{"{LAST}", plugin.getLang().get("menus.last.nameItem"), plugin.getLang().get("menus.last.loreItem")},
                             new String[]{"{GAMESLOT}", "", ""});
-                    if(selected.get().equals("NONE")){
+                    if (selected.get().equals("NONE")){
                         extra.add(slot);
-                    } else if(selected.get().equals("{GAMESLOT}")){
+                    } else if (selected.get().equals("{GAMESLOT}")){
                         gameSlots.add(slot);
                     } else {
                         slots.put(selected.get(), slot);
@@ -69,11 +69,11 @@ public class GameSelectorMenu extends UltraInventory {
         }
     }
     
-    public ArrayList<Integer> getGameSlots() {
+    public ArrayList<Integer> getGameSlots(){
         return gameSlots;
     }
     
-    public int getSlot(String name) {
+    public int getSlot(String name){
         return slots.getOrDefault(name, -1);
     }
     

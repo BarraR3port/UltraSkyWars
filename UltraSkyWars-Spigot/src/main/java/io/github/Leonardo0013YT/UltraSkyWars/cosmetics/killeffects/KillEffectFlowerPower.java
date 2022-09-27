@@ -21,8 +21,8 @@ public class KillEffectFlowerPower implements KillEffect, Cloneable {
     private final ItemStack[] items = {new ItemStack(Material.RED_ROSE, 1, (short) 0), new ItemStack(Material.RED_ROSE, 1, (short) 1), new ItemStack(Material.RED_ROSE, 1, (short) 2), new ItemStack(Material.RED_ROSE, 1, (short) 3), new ItemStack(Material.RED_ROSE, 1, (short) 4), new ItemStack(Material.RED_ROSE, 1, (short) 5), new ItemStack(Material.RED_ROSE, 1, (short) 6), new ItemStack(Material.RED_ROSE, 1, (short) 7), new ItemStack(Material.RED_ROSE, 1, (short) 8), new ItemStack(Material.YELLOW_FLOWER, 1, (short) 0)};
     
     @Override
-    public void loadCustoms(UltraSkyWars plugin, String path) {
-        if(!loaded){
+    public void loadCustoms(UltraSkyWars plugin, String path){
+        if (!loaded){
             xRandom = plugin.getKilleffect().getDoubleOrDefault(path + ".xRandom", 0.35);
             yRandom = plugin.getKilleffect().getDoubleOrDefault(path + ".yRandom", 0.5);
             zRandom = plugin.getKilleffect().getDoubleOrDefault(path + ".xRandom", 0.35);
@@ -33,8 +33,8 @@ public class KillEffectFlowerPower implements KillEffect, Cloneable {
     }
     
     @Override
-    public void start(Player p, Player death, Location loc) {
-        if(death == null || !death.isOnline()){
+    public void start(Player p, Player death, Location loc){
+        if (death == null || !death.isOnline()){
             return;
         }
         ArrayList<Item> it = new ArrayList<>();
@@ -43,7 +43,7 @@ public class KillEffectFlowerPower implements KillEffect, Cloneable {
         }
         new BukkitRunnable() {
             @Override
-            public void run() {
+            public void run(){
                 for ( Item itemStack : it ){
                     itemStack.remove();
                 }
@@ -52,19 +52,19 @@ public class KillEffectFlowerPower implements KillEffect, Cloneable {
     }
     
     @Override
-    public void stop() {
+    public void stop(){
     }
     
     @Override
-    public KillEffect clone() {
+    public KillEffect clone(){
         return new KillEffectFlowerPower();
     }
     
-    protected double random(double d, double d2) {
+    protected double random(double d, double d2){
         return d + ThreadLocalRandom.current().nextDouble() * (d2 - d);
     }
     
-    private Item spawnFlower(Location location, double d, double d2, double d3) {
+    private Item spawnFlower(Location location, double d, double d2, double d3){
         Item item = location.getWorld().dropItem(location, items[ThreadLocalRandom.current().nextInt(items.length)]);
         item.setVelocity(new Vector(d, d2, d3));
         item.setPickupDelay(Integer.MAX_VALUE);

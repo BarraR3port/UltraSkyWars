@@ -21,7 +21,7 @@ public class InjectionParty implements Injection {
     private PartyMenu pem;
     
     @Override
-    public void loadInjection(UltraSkyWars main) {
+    public void loadInjection(UltraSkyWars main){
         this.gson = new Gson();
         parties = new Settings("modules/parties", true, false);
         pam = new PartyManager(main, this);
@@ -32,34 +32,34 @@ public class InjectionParty implements Injection {
         main.getServer().getPluginManager().registerEvents(new PartyListener(this), main);
         CommandExecutor ce = new PartyCMD(this);
         main.getCommand("swp").setExecutor(ce);
-        if(parties.getBoolean("partyCommand")){
+        if (parties.getBoolean("partyCommand")){
             main.getCommand("party").setExecutor(ce);
         }
     }
     
     @Override
-    public void reload() {
+    public void reload(){
         pam.reload();
     }
     
     @Override
-    public void disable() {
+    public void disable(){
     
     }
     
-    public PartyMenu getPem() {
+    public PartyMenu getPem(){
         return pem;
     }
     
-    public Gson getGson() {
+    public Gson getGson(){
         return gson;
     }
     
-    public Settings getParties() {
+    public Settings getParties(){
         return parties;
     }
     
-    public PartyManager getPam() {
+    public PartyManager getPam(){
         return pam;
     }
 }

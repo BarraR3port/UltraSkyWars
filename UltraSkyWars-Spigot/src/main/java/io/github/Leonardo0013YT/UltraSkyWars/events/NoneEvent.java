@@ -6,7 +6,7 @@ import io.github.Leonardo0013YT.UltraSkyWars.superclass.GameEvent;
 
 public class NoneEvent extends GameEvent {
     
-    public NoneEvent(UltraSkyWars plugin, int time) {
+    public NoneEvent(UltraSkyWars plugin, int time){
         this.time = time;
         this.reset = time;
         this.type = "final";
@@ -16,7 +16,7 @@ public class NoneEvent extends GameEvent {
         this.subtitle = plugin.getLang().get("titles." + name + ".subtitle");
     }
     
-    public NoneEvent(NoneEvent e) {
+    public NoneEvent(NoneEvent e){
         this.time = e.getReset();
         this.reset = e.getReset();
         this.type = e.getType();
@@ -27,22 +27,22 @@ public class NoneEvent extends GameEvent {
     }
     
     @Override
-    public void start(Game game) {
+    public void start(Game game){
     }
     
     @Override
-    public void stop(Game game) {
+    public void stop(Game game){
     }
     
     @Override
-    public void reset() {
+    public void reset(){
         this.time = this.reset;
         this.type = "final";
         this.name = "none";
     }
     
     @Override
-    public NoneEvent clone() {
+    public NoneEvent clone(){
         return new NoneEvent(this);
     }
     

@@ -14,7 +14,7 @@ public enum TrailType {
     private final int count;
     private final int speed;
     
-    TrailType(double radius, int speed, int count) {
+    TrailType(double radius, int speed, int count){
         this.radius = radius;
         this.speed = speed;
         this.count = count;

@@ -32,29 +32,29 @@ public class ChallengeListener implements Listener {
     private final UltraSkyWars plugin;
     private final InjectionChallenges ic;
     
-    public ChallengeListener(UltraSkyWars plugin, InjectionChallenges ic) {
+    public ChallengeListener(UltraSkyWars plugin, InjectionChallenges ic){
         this.plugin = plugin;
         this.ic = ic;
     }
     
     @EventHandler
-    public void onFinish(USWGameWinEvent e) {
+    public void onFinish(USWGameWinEvent e){
         Game game = e.getGame();
         Team team = e.getWinner();
-        if(team != null){
+        if (team != null){
             for ( Player p : team.getMembers() ){
-                if(p == null || !p.isOnline()) continue;
+                if (p == null || !p.isOnline()) continue;
                 GamePlayer gp = game.getGamePlayer().get(p.getUniqueId());
-                if(gp == null) continue;
+                if (gp == null) continue;
                 SWPlayer sw = plugin.getDb().getSWPlayer(p);
-                if(sw == null) continue;
-                if(!gp.getChallenges().isEmpty()){
+                if (sw == null) continue;
+                if (!gp.getChallenges().isEmpty()){
                     p.sendMessage(plugin.getLang().get("messages.challenges.completedChallenge").replace("<player>", p.getName()).replace("<challenges>", getChallenges(gp)));
                 }
                 gp.getChallenges().forEach(c -> {
                     sw.addChallengeCompleted(c);
                     ChallengeType type = ChallengeType.valueOf(c);
-                    if(type.isOnWinEnabled()){
+                    if (type.isOnWinEnabled()){
                         type.getOnWinCommands().forEach(cmd -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd.replace("<player>", p.getName())));
                     }
                 });
@@ -63,19 +63,19 @@ public class ChallengeListener implements Listener {
     }
     
     @EventHandler
-    public void onMenu(InventoryClickEvent e) {
-        if(e.getCurrentItem() == null || e.getCurrentItem().getType().equals(Material.AIR) || e.getSlotType().equals(InventoryType.SlotType.OUTSIDE))
+    public void onMenu(InventoryClickEvent e){
+        if (e.getCurrentItem() == null || e.getCurrentItem().getType().equals(Material.AIR) || e.getSlotType().equals(InventoryType.SlotType.OUTSIDE))
             return;
-        if(e.getView().getTitle().equals(plugin.getLang().get("menus.challenges.title"))){
+        if (e.getView().getTitle().equals(plugin.getLang().get("menus.challenges.title"))){
             Player p = (Player) e.getWhoClicked();
             ItemStack item = e.getCurrentItem();
-            if(!plugin.getGm().isPlayerInGame(p)) return;
+            if (!plugin.getGm().isPlayerInGame(p)) return;
             Game game = plugin.getGm().getGameByPlayer(p);
             GamePlayer gp = game.getGamePlayer().get(p.getUniqueId());
             String d = item.getItemMeta().getDisplayName();
             e.setCancelled(true);
-            if(d.equals(plugin.getLang().get("menus.challenges.uhc.nameItem"))){
-                if(gp.hasChallenge("UHC")){
+            if (d.equals(plugin.getLang().get("menus.challenges.uhc.nameItem"))){
+                if (gp.hasChallenge("UHC")){
                     gp.removeChallenge("UHC");
                     p.sendMessage(plugin.getLang().get("messages.challenges.disabled").replace("<challenge>", d));
                 } else {
@@ -84,8 +84,8 @@ public class ChallengeListener implements Listener {
                 }
                 ic.getChm().createChallengeMenu(p);
             }
-            if(d.equals(plugin.getLang().get("menus.challenges.nochest.nameItem"))){
-                if(gp.hasChallenge("NO_CHEST")){
+            if (d.equals(plugin.getLang().get("menus.challenges.nochest.nameItem"))){
+                if (gp.hasChallenge("NO_CHEST")){
                     gp.removeChallenge("NO_CHEST");
                     p.sendMessage(plugin.getLang().get("messages.challenges.disabled").replace("<challenge>", d));
                 } else {
@@ -94,8 +94,8 @@ public class ChallengeListener implements Listener {
                 }
                 ic.getChm().createChallengeMenu(p);
             }
-            if(d.equals(plugin.getLang().get("menus.challenges.archery.nameItem"))){
-                if(gp.hasChallenge("ARCHERY")){
+            if (d.equals(plugin.getLang().get("menus.challenges.archery.nameItem"))){
+                if (gp.hasChallenge("ARCHERY")){
                     gp.removeChallenge("ARCHERY");
                     p.sendMessage(plugin.getLang().get("messages.challenges.disabled").replace("<challenge>", d));
                 } else {
@@ -104,8 +104,8 @@ public class ChallengeListener implements Listener {
                 }
                 ic.getChm().createChallengeMenu(p);
             }
-            if(d.equals(plugin.getLang().get("menus.challenges.paper.nameItem"))){
-                if(gp.hasChallenge("PAPER")){
+            if (d.equals(plugin.getLang().get("menus.challenges.paper.nameItem"))){
+                if (gp.hasChallenge("PAPER")){
                     gp.removeChallenge("PAPER");
                     p.sendMessage(plugin.getLang().get("messages.challenges.disabled").replace("<challenge>", d));
                 } else {
@@ -114,8 +114,8 @@ public class ChallengeListener implements Listener {
                 }
                 ic.getChm().createChallengeMenu(p);
             }
-            if(d.equals(plugin.getLang().get("menus.challenges.hearts.nameItem"))){
-                if(gp.hasChallenge("HEARTS")){
+            if (d.equals(plugin.getLang().get("menus.challenges.hearts.nameItem"))){
+                if (gp.hasChallenge("HEARTS")){
                     gp.removeChallenge("HEARTS");
                     p.sendMessage(plugin.getLang().get("messages.challenges.disabled").replace("<challenge>", d));
                 } else {
@@ -124,8 +124,8 @@ public class ChallengeListener implements Listener {
                 }
                 ic.getChm().createChallengeMenu(p);
             }
-            if(d.equals(plugin.getLang().get("menus.challenges.warrior.nameItem"))){
-                if(gp.hasChallenge("WARRIOR")){
+            if (d.equals(plugin.getLang().get("menus.challenges.warrior.nameItem"))){
+                if (gp.hasChallenge("WARRIOR")){
                     gp.removeChallenge("WARRIOR");
                     p.sendMessage(plugin.getLang().get("messages.challenges.disabled").replace("<challenge>", d));
                 } else {
@@ -134,8 +134,8 @@ public class ChallengeListener implements Listener {
                 }
                 ic.getChm().createChallengeMenu(p);
             }
-            if(d.equals(plugin.getLang().get("menus.challenges.noblocks.nameItem"))){
-                if(gp.hasChallenge("NO_BLOCKS")){
+            if (d.equals(plugin.getLang().get("menus.challenges.noblocks.nameItem"))){
+                if (gp.hasChallenge("NO_BLOCKS")){
                     gp.removeChallenge("NO_BLOCKS");
                     p.sendMessage(plugin.getLang().get("messages.challenges.disabled").replace("<challenge>", d));
                 } else {
@@ -144,8 +144,8 @@ public class ChallengeListener implements Listener {
                 }
                 ic.getChm().createChallengeMenu(p);
             }
-            if(d.equals(plugin.getLang().get("menus.challenges.noob.nameItem"))){
-                if(gp.hasChallenge("NOOB")){
+            if (d.equals(plugin.getLang().get("menus.challenges.noob.nameItem"))){
+                if (gp.hasChallenge("NOOB")){
                     gp.removeChallenge("NOOB");
                     p.sendMessage(plugin.getLang().get("messages.challenges.disabled").replace("<challenge>", d));
                 } else {
@@ -158,42 +158,42 @@ public class ChallengeListener implements Listener {
     }
     
     @EventHandler
-    public void onRegen(EntityRegainHealthEvent e) {
-        if(!(e.getEntity() instanceof Player)) return;
+    public void onRegen(EntityRegainHealthEvent e){
+        if (!(e.getEntity() instanceof Player)) return;
         Player p = (Player) e.getEntity();
-        if(!plugin.getGm().isPlayerInGame(p)) return;
+        if (!plugin.getGm().isPlayerInGame(p)) return;
         GamePlayer gp = plugin.getGm().getGameByPlayer(p).getGamePlayer().get(p.getUniqueId());
-        if(gp == null || gp.isDead() || !gp.hasChallenge("UHC")) return;
-        if(e.getRegainReason().equals(EntityRegainHealthEvent.RegainReason.EATING) || e.getRegainReason().equals(EntityRegainHealthEvent.RegainReason.SATIATED)){
+        if (gp == null || gp.isDead() || !gp.hasChallenge("UHC")) return;
+        if (e.getRegainReason().equals(EntityRegainHealthEvent.RegainReason.EATING) || e.getRegainReason().equals(EntityRegainHealthEvent.RegainReason.SATIATED)){
             e.setCancelled(true);
         }
     }
     
     @EventHandler
-    public void onInteract(PlayerInteractEvent e) {
+    public void onInteract(PlayerInteractEvent e){
         Player p = e.getPlayer();
-        if(!plugin.getGm().isPlayerInGame(p)) return;
+        if (!plugin.getGm().isPlayerInGame(p)) return;
         GamePlayer gp = plugin.getGm().getGameByPlayer(p).getGamePlayer().get(p.getUniqueId());
-        if(gp == null || gp.isDead()) return;
-        if(gp.hasChallenge("WARRIOR")){
-            if(p.getItemInHand() != null){
+        if (gp == null || gp.isDead()) return;
+        if (gp.hasChallenge("WARRIOR")){
+            if (p.getItemInHand() != null){
                 ItemStack item = p.getItemInHand();
-                if(item.getType().equals(Material.BOW)){
+                if (item.getType().equals(Material.BOW)){
                     e.setCancelled(true);
                     p.sendMessage(plugin.getLang().get("messages.challenges.warriorNoBow"));
                 }
             }
         }
-        if(e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && gp.hasChallenge("NO_CHEST")){
+        if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && gp.hasChallenge("NO_CHEST")){
             Block b = e.getClickedBlock();
-            if(b.getType().name().endsWith("CHEST")){
+            if (b.getType().name().endsWith("CHEST")){
                 e.setCancelled(true);
                 p.sendMessage(plugin.getLang().get("messages.challenges.noChest"));
             }
         }
     }
     
-    public String getChallenges(GamePlayer gp) {
+    public String getChallenges(GamePlayer gp){
         StringBuilder sb = new StringBuilder();
         for ( String s : gp.getChallenges() ){
             sb.append(", ").append(plugin.getLang().get("messages.challenges." + s));
@@ -202,12 +202,12 @@ public class ChallengeListener implements Listener {
     }
     
     @EventHandler
-    public void onArmor(ArmorEquipEvent e) {
+    public void onArmor(ArmorEquipEvent e){
         Player p = e.getPlayer();
-        if(!plugin.getGm().isPlayerInGame(p)) return;
+        if (!plugin.getGm().isPlayerInGame(p)) return;
         GamePlayer gpp = plugin.getGm().getGameByPlayer(p).getGamePlayer().get(p.getUniqueId());
-        if(gpp != null && !gpp.isDead()){
-            if(gpp.hasChallenge("WARRIOR")){
+        if (gpp != null && !gpp.isDead()){
+            if (gpp.hasChallenge("WARRIOR")){
                 e.setCancelled(true);
                 p.sendMessage(plugin.getLang().get("messages.challenges.warriorNoArmor"));
             }
@@ -215,31 +215,31 @@ public class ChallengeListener implements Listener {
     }
     
     @EventHandler
-    public void onDamageByEntity(EntityDamageByEntityEvent e) {
-        if(e.getEntity() instanceof Player){
-            if(e.getDamager() instanceof Player){
+    public void onDamageByEntity(EntityDamageByEntityEvent e){
+        if (e.getEntity() instanceof Player){
+            if (e.getDamager() instanceof Player){
                 Player p = (Player) e.getEntity();
                 Player d = (Player) e.getDamager();
-                if(!plugin.getGm().isPlayerInGame(d) || !plugin.getGm().isPlayerInGame(p)) return;
+                if (!plugin.getGm().isPlayerInGame(d) || !plugin.getGm().isPlayerInGame(p)) return;
                 GamePlayer gpd = plugin.getGm().getGameByPlayer(d).getGamePlayer().get(d.getUniqueId());
                 GamePlayer gpp = plugin.getGm().getGameByPlayer(p).getGamePlayer().get(p.getUniqueId());
-                if(gpd != null && !gpd.isDead()){
-                    if(gpd.hasChallenge("WARRIOR")){
-                        if(d.getItemInHand() != null){
+                if (gpd != null && !gpd.isDead()){
+                    if (gpd.hasChallenge("WARRIOR")){
+                        if (d.getItemInHand() != null){
                             ItemStack item = d.getItemInHand();
-                            if(!item.getType().equals(Material.STONE_SWORD)){
+                            if (!item.getType().equals(Material.STONE_SWORD)){
                                 e.setCancelled(true);
                                 p.sendMessage(plugin.getLang().get("messages.challenges.warriorSword"));
                             }
                         }
                     }
-                    if(gpd.hasChallenge("ARCHERY")){
+                    if (gpd.hasChallenge("ARCHERY")){
                         e.setCancelled(true);
                         d.sendMessage(plugin.getLang().get("messages.challenges.noBow"));
                     }
                 }
-                if(gpp != null && !gpp.isDead()){
-                    if(gpp.hasChallenge("PAPER")){
+                if (gpp != null && !gpp.isDead()){
+                    if (gpp.hasChallenge("PAPER")){
                         Vector v = p.getEyeLocation().getDirection();
                         p.setVelocity(v.multiply((v.getY() > 0 ? 1.25 : -1.25)));
                     }
@@ -249,27 +249,27 @@ public class ChallengeListener implements Listener {
     }
     
     @EventHandler
-    public void onPlace(BlockPlaceEvent e) {
+    public void onPlace(BlockPlaceEvent e){
         Player p = e.getPlayer();
-        if(!plugin.getGm().isPlayerInGame(p)) return;
+        if (!plugin.getGm().isPlayerInGame(p)) return;
         GamePlayer gp = plugin.getGm().getGameByPlayer(p).getGamePlayer().get(p.getUniqueId());
-        if(gp == null || gp.isDead() || !gp.hasChallenge("NO_BLOCKS")) return;
+        if (gp == null || gp.isDead() || !gp.hasChallenge("NO_BLOCKS")) return;
         e.setCancelled(true);
     }
     
     @EventHandler
-    public void onBreak(BlockBreakEvent e) {
+    public void onBreak(BlockBreakEvent e){
         Player p = e.getPlayer();
-        if(!plugin.getGm().isPlayerInGame(p)) return;
+        if (!plugin.getGm().isPlayerInGame(p)) return;
         Game g = plugin.getGm().getGameByPlayer(p);
-        if(g == null || !g.isState(State.GAME)) return;
+        if (g == null || !g.isState(State.GAME)) return;
         GamePlayer gp = g.getGamePlayer().get(p.getUniqueId());
-        if(gp == null || gp.isDead()) return;
-        if(gp.hasChallenge("NO_CHEST")){
+        if (gp == null || gp.isDead()) return;
+        if (gp.hasChallenge("NO_CHEST")){
             e.setCancelled(true);
             p.sendMessage(plugin.getLang().get("messages.challenges.noChest"));
         }
-        if(gp.hasChallenge("NO_BLOCKS")){
+        if (gp.hasChallenge("NO_BLOCKS")){
             e.getBlock().setType(Material.AIR);
         }
     }

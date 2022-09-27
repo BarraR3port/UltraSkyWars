@@ -19,7 +19,7 @@ public class PartyPartiesMenu extends UltraInventory {
     private final ArrayList<Integer> extra = new ArrayList<>();
     private final ArrayList<Integer> gameSlots = new ArrayList<>();
     
-    public PartyPartiesMenu(InjectionParty ip, String name) {
+    public PartyPartiesMenu(InjectionParty ip, String name){
         super(name);
         this.ip = ip;
         this.title = ip.getParties().get("menus.parties.title");
@@ -27,13 +27,13 @@ public class PartyPartiesMenu extends UltraInventory {
     }
     
     @Override
-    public void reload() {
+    public void reload(){
         UltraSkyWars plugin = UltraSkyWars.get();
-        if(plugin.getMenus().isSet("menus." + name)){
+        if (plugin.getMenus().isSet("menus." + name)){
             this.rows = plugin.getMenus().getInt("menus." + name + ".rows");
             Map<Integer, ItemStack> config = new HashMap<>();
             Map<Integer, ItemStack> contents = new HashMap<>();
-            if(plugin.getMenus().getConfig().isSet("menus." + name + ".items")){
+            if (plugin.getMenus().getConfig().isSet("menus." + name + ".items")){
                 ConfigurationSection conf = plugin.getMenus().getConfig().getConfigurationSection("menus." + name + ".items");
                 for ( String c : conf.getKeys(false) ){
                     int slot = Integer.parseInt(c);
@@ -42,9 +42,9 @@ public class PartyPartiesMenu extends UltraInventory {
                     ItemStack item = ItemBuilder.parse(plugin.getMenus().getConfig().getItemStack("menus." + name + ".items." + c).clone(), selected::set,
                             new String[]{"{PARTIESCLOSE}", ip.getParties().get("menus.parties.close.nameItem"), ip.getParties().get("menus.parties.close.loreItem")},
                             new String[]{"{PARTYSLOT}", "", ""});
-                    if(selected.get().equals("NONE")){
+                    if (selected.get().equals("NONE")){
                         extra.add(slot);
-                    } else if(selected.get().equals("{PARTYSLOT}")){
+                    } else if (selected.get().equals("{PARTYSLOT}")){
                         gameSlots.add(slot);
                     } else {
                         slots.put(selected.get(), slot);
@@ -58,15 +58,15 @@ public class PartyPartiesMenu extends UltraInventory {
         }
     }
     
-    public ArrayList<Integer> getGameSlots() {
+    public ArrayList<Integer> getGameSlots(){
         return gameSlots;
     }
     
-    public ArrayList<Integer> getExtra() {
+    public ArrayList<Integer> getExtra(){
         return extra;
     }
     
-    public int getSlot(String name) {
+    public int getSlot(String name){
         return slots.getOrDefault(name, -1);
     }
     

@@ -13,20 +13,20 @@ public class EloListener implements Listener {
     private final InjectionEloRank eloInjection;
     private final UltraSkyWars plugin;
     
-    public EloListener(UltraSkyWars plugin, InjectionEloRank eloInjection) {
+    public EloListener(UltraSkyWars plugin, InjectionEloRank eloInjection){
         this.plugin = plugin;
         this.eloInjection = eloInjection;
     }
     
     @EventHandler
-    public void onMenu(InventoryClickEvent e) {
-        if(e.getView().getTitle().equals(eloInjection.getRankeds().get("menus.title"))){
+    public void onMenu(InventoryClickEvent e){
+        if (e.getView().getTitle().equals(eloInjection.getRankeds().get("menus.title"))){
             e.setCancelled(true);
         }
     }
     
     @EventHandler
-    public void loadPlayer(USWPlayerLoadEvent e) {
+    public void loadPlayer(USWPlayerLoadEvent e){
         Player p = e.getPlayer();
         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
             eloInjection.getErm().checkUpgrateOrDegrate(p);

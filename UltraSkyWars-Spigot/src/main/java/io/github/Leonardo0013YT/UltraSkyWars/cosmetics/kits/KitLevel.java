@@ -23,7 +23,7 @@ public class KitLevel implements Purchasable {
     private final Kit kit;
     private ItemStack helmet = null, chestplate = null, leggings = null, boots = null;
     
-    public KitLevel(UltraSkyWars plugin, String path, Kit kit) {
+    public KitLevel(UltraSkyWars plugin, String path, Kit kit){
         this.kit = kit;
         this.level = plugin.getKits().getInt(path + ".level");
         this.permission = plugin.getKits().get(null, path + ".permission");
@@ -36,23 +36,23 @@ public class KitLevel implements Purchasable {
         this.inv = ((List<String>) plugin.getKits().getConfig().get(path + ".inv")).toArray(new ItemStack[0]);
         this.needPermToBuy = plugin.getKits().getBooleanOrDefault(path + ".needPermToBuy", false);
         for ( ItemStack i : armors ){
-            if(i == null || i.getType().equals(Material.AIR)) continue;
-            if(i.getType().name().endsWith("HELMET")){
+            if (i == null || i.getType().equals(Material.AIR)) continue;
+            if (i.getType().name().endsWith("HELMET")){
                 helmet = i;
             }
-            if(i.getType().name().endsWith("CHESTPLATE")){
+            if (i.getType().name().endsWith("CHESTPLATE")){
                 chestplate = i;
             }
-            if(i.getType().name().endsWith("LEGGINGS")){
+            if (i.getType().name().endsWith("LEGGINGS")){
                 leggings = i;
             }
-            if(i.getType().name().endsWith("BOOTS")){
+            if (i.getType().name().endsWith("BOOTS")){
                 boots = i;
             }
         }
     }
     
-    public void giveKitLevel(Player p) {
+    public void giveKitLevel(Player p){
         p.getInventory().setHelmet(helmet);
         p.getInventory().setChestplate(chestplate);
         p.getInventory().setLeggings(leggings);
@@ -61,21 +61,21 @@ public class KitLevel implements Purchasable {
     }
     
     @Override
-    public String getAutoGivePermission() {
+    public String getAutoGivePermission(){
         return autoGivePermission;
     }
     
-    public ItemStack getIcon(Player p) {
-        if(!icon.hasItemMeta()){
+    public ItemStack getIcon(Player p){
+        if (!icon.hasItemMeta()){
             return icon;
         }
         UltraSkyWars plugin = UltraSkyWars.get();
         SWPlayer sw = plugin.getDb().getSWPlayer(p);
         ItemStack icon = this.icon.clone();
-        if(!p.hasPermission(autoGivePermission)){
-            if(price > 0){
-                if(plugin.getCm().isRedPanelInLocked()){
-                    if(!sw.hasKitLevel(kit.getId(), level)){
+        if (!p.hasPermission(autoGivePermission)){
+            if (price > 0){
+                if (plugin.getCm().isRedPanelInLocked()){
+                    if (!sw.hasKitLevel(kit.getId(), level)){
                         icon = ItemBuilder.item(XMaterial.matchDefinedXMaterial(plugin.getCm().getRedPanelMaterial().name(), plugin.getCm().getRedPanelData()).orElse(XMaterial.RED_STAINED_GLASS_PANE), 1, icon.getItemMeta().getDisplayName(), icon.getItemMeta().getLore());
                     }
                 }
@@ -85,21 +85,21 @@ public class KitLevel implements Purchasable {
         List<String> lore = icon.getItemMeta().getLore();
         for ( int i = 0; i < lore.size(); i++ ){
             String s = lore.get(i);
-            switch(s) {
+            switch(s){
                 case "<level>":
                     lore.set(i, plugin.getLang().get(p, "menus.kitselector.level").replaceAll("<level>", String.valueOf(level)));
                     break;
                 case "<price>":
-                    if(!p.hasPermission(autoGivePermission)){
-                        if(isBuy && !sw.hasKitLevel(kit.getId(), level)){
+                    if (!p.hasPermission(autoGivePermission)){
+                        if (isBuy && !sw.hasKitLevel(kit.getId(), level)){
                             lore.set(i, plugin.getLang().get(p, "menus.kitselector.price").replaceAll("<price>", String.valueOf(price)));
-                        } else if(!isBuy && !sw.hasKitLevel(kit.getId(), level)){
-                            if(needPermToBuy && p.hasPermission(permission)){
+                        } else if (!isBuy && !sw.hasKitLevel(kit.getId(), level)){
+                            if (needPermToBuy && p.hasPermission(permission)){
                                 lore.set(i, plugin.getLang().get(p, "menus.kitselector.price").replaceAll("<price>", String.valueOf(price)));
                             } else {
                                 lore.set(i, plugin.getLang().get(p, "menus.kitselector.noBuyable"));
                             }
-                        } else if(sw.hasKitLevel(kit.getId(), level) || !needPermToBuy){
+                        } else if (sw.hasKitLevel(kit.getId(), level) || !needPermToBuy){
                             lore.set(i, plugin.getLang().get(p, "menus.kitselector.buyed"));
                         }
                     } else {
@@ -107,17 +107,17 @@ public class KitLevel implements Purchasable {
                     }
                     break;
                 case "<status>":
-                    if(!p.hasPermission(autoGivePermission)){
-                        if(sw.hasKitLevel(kit.getId(), level)){
+                    if (!p.hasPermission(autoGivePermission)){
+                        if (sw.hasKitLevel(kit.getId(), level)){
                             lore.set(i, plugin.getLang().get(p, "menus.kitselector.hasBuy"));
-                        } else if(isBuy){
-                            if(plugin.getAdm().getCoins(p) > price){
+                        } else if (isBuy){
+                            if (plugin.getAdm().getCoins(p) > price){
                                 lore.set(i, plugin.getLang().get(p, "menus.kitselector.buy"));
                             } else {
                                 lore.set(i, plugin.getLang().get(p, "menus.kitselector.noMoney"));
                             }
-                        } else if(needPermToBuy){
-                            if(plugin.getAdm().getCoins(p) > price){
+                        } else if (needPermToBuy){
+                            if (plugin.getAdm().getCoins(p) > price){
                                 lore.set(i, plugin.getLang().get(p, "menus.kitselector.buy"));
                             } else {
                                 lore.set(i, plugin.getLang().get(p, "menus.kitselector.noMoney"));
@@ -136,43 +136,43 @@ public class KitLevel implements Purchasable {
         return icon;
     }
     
-    public Kit getKit() {
+    public Kit getKit(){
         return kit;
     }
     
-    public ItemStack[] getInv() {
+    public ItemStack[] getInv(){
         return inv;
     }
     
-    public ItemStack[] getArmors() {
+    public ItemStack[] getArmors(){
         return armors;
     }
     
     @Override
-    public String getPermission() {
+    public String getPermission(){
         return permission;
     }
     
     @Override
-    public int getPrice() {
+    public int getPrice(){
         return price;
     }
     
-    public int getSlot() {
+    public int getSlot(){
         return slot;
     }
     
-    public int getLevel() {
+    public int getLevel(){
         return level;
     }
     
     @Override
-    public boolean isBuy() {
+    public boolean isBuy(){
         return isBuy;
     }
     
     @Override
-    public boolean needPermToBuy() {
+    public boolean needPermToBuy(){
         return needPermToBuy;
     }
     

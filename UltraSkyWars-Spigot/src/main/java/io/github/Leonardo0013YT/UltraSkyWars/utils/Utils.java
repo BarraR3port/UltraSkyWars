@@ -43,28 +43,28 @@ public class Utils {
             NBTEditor.getHead("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTNlNThlYTdmMzExM2NhZWNkMmIzYTZmMjdhZjUzYjljYzljZmVkN2IwNDNiYTMzNGI1MTY4ZjEzOTFkOSJ9fX0="),
             NBTEditor.getHead("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjU2MTJkYzdiODZkNzFhZmMxMTk3MzAxYzE1ZmQ5NzllOWYzOWU3YjFmNDFkOGYxZWJkZjgxMTU1NzZlMmUifX19")};
     
-    public static ItemStack getIcon(Settings config, String path) {
-        if(config.isSet(path + ".icon.value")){
+    public static ItemStack getIcon(Settings config, String path){
+        if (config.isSet(path + ".icon.value")){
             return new ItemUtils(XMaterial.PLAYER_HEAD).setUrl(config.get(path + ".icon.value")).setDisplayName(config.get(path + ".icon.meta.display-name")).setLore(config.get(path + ".icon.meta.lore")).build();
         } else {
-            if(config.isSet(path + ".icon")){
+            if (config.isSet(path + ".icon")){
                 return config.getConfig().getItemStack(path + ".icon");
             }
             return config.getConfig().getItemStack(path + ".item");
         }
     }
     
-    public static boolean isEmpty(Inventory inv) {
-        if(inv == null) return false;
+    public static boolean isEmpty(Inventory inv){
+        if (inv == null) return false;
         for ( ItemStack item : inv.getContents() ){
-            if(item != null){
+            if (item != null){
                 return false;
             }
         }
         return true;
     }
     
-    public static void firework(Location loc) {
+    public static void firework(Location loc){
         Firework fa = loc.getWorld().spawn(loc, Firework.class);
         FireworkMeta fam = fa.getFireworkMeta();
         FireworkEffect.Type tipo = FireworkEffect.Type.values()[random.nextInt(4)];
@@ -76,12 +76,12 @@ public class Utils {
         fa.setFireworkMeta(fam);
     }
     
-    public static Location getRightSide(Location l, double value) {
+    public static Location getRightSide(Location l, double value){
         float yaw = l.getYaw() / 60.0F;
         return l.clone().subtract((new Vector(Math.cos((double) yaw + 5.1D), 0.0D, Math.sin((double) yaw + 5.1D))).normalize().multiply(value));
     }
     
-    public static Giant spawn(Location ballon, Location fence, ItemStack item) {
+    public static Giant spawn(Location ballon, Location fence, ItemStack item){
         Location l = ballon.clone();
         l.setYaw(0);
         l.setPitch(0);
@@ -94,7 +94,7 @@ public class Utils {
         giant.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 999));
         ArmorStand as = getArmorStand(l);
         as.setPassenger(giant);
-        if(fence != null){
+        if (fence != null){
             Location armor = l.clone().add(-2, 9.75, 3.75);
             ArmorStand asl = getArmorStand(armor);
             Bat s = l.getWorld().spawn(armor, Bat.class);
@@ -111,13 +111,13 @@ public class Utils {
         return giant;
     }
     
-    public static ArmorStand getArmorStand(Location loc) {
+    public static ArmorStand getArmorStand(Location loc){
         ArmorStand armor = getChestStand(loc);
         armor.setMetadata("Balloon", new FixedMetadataValue(plugin, ""));
         return armor;
     }
     
-    public static ArmorStand getChestStand(Location loc) {
+    public static ArmorStand getChestStand(Location loc){
         ArmorStand armor = loc.getWorld().spawn(loc, ArmorStand.class);
         armor.setGravity(false);
         armor.setVisible(false);
@@ -125,67 +125,67 @@ public class Utils {
         return armor;
     }
     
-    public static void setData(Block b, byte data) {
+    public static void setData(Block b, byte data){
         b.setData(data);
     }
     
-    public static String formatDouble(double d) {
+    public static String formatDouble(double d){
         return df.format(d);
     }
     
-    public static List<String> orderABC(List<String> names) {
+    public static List<String> orderABC(List<String> names){
         return names.stream().sorted().collect(Collectors.toList());
     }
     
-    public static List<Integer> orderDESC(List<Integer> names) {
+    public static List<Integer> orderDESC(List<Integer> names){
         names.sort(Collections.reverseOrder());
         return names;
     }
     
-    public static String convertTime(int timeInSeconds) {
+    public static String convertTime(int timeInSeconds){
         int hours = timeInSeconds / 3600;
         int secondsLeft = timeInSeconds - hours * 3600;
         int minutes = secondsLeft / 60;
         int seconds = secondsLeft - minutes * 60;
         String formattedTime = "";
-        if(hours > 0){
-            if(hours < 10)
+        if (hours > 0){
+            if (hours < 10)
                 formattedTime += "0";
             formattedTime += hours + ":";
         }
-        if(minutes < 10)
+        if (minutes < 10)
             formattedTime += "0";
         formattedTime += minutes + ":";
-        if(seconds < 10)
+        if (seconds < 10)
             formattedTime += "0";
         formattedTime += seconds;
         return formattedTime;
     }
     
-    public static String getDate() {
+    public static String getDate(){
         return sdf.format(new Date());
     }
     
-    public static void updateSB(Player p) {
-        if(!plugin.isStop()){
+    public static void updateSB(Player p){
+        if (!plugin.isStop()){
             plugin.getSb().update(p, null, plugin);
         }
     }
     
-    public static void updateSB() {
-        if(!plugin.isStop()){
+    public static void updateSB(){
+        if (!plugin.isStop()){
             World w = Bukkit.getWorld(plugin.getCm().getLobbyWorld());
-            if(w != null){
+            if (w != null){
                 w.getPlayers().forEach(p -> plugin.getSb().update(p, null, plugin));
             }
         }
     }
     
-    public static void updateSB(Game game, boolean deleted) {
-        if(!plugin.isStop()){
+    public static void updateSB(Game game, boolean deleted){
+        if (!plugin.isStop()){
             GameEvent ge = game.getNowEvent();
             game.getCached().forEach(p -> {
-                if(deleted){
+                if (deleted){
                     plugin.getSb().clear(p);
                 }
                 plugin.getSb().update(p, ge, plugin);
@@ -193,21 +193,21 @@ public class Utils {
         }
     }
     
-    public static String parseBoolean(boolean bool) {
+    public static String parseBoolean(boolean bool){
         return (bool) ? plugin.getLang().get("activated") : plugin.getLang().get("deactivated");
     }
     
-    public static String getFormatedLocation(Location loc) {
-        if(loc == null){
+    public static String getFormatedLocation(Location loc){
+        if (loc == null){
             return "§cNot set!";
         }
         return loc.getWorld().getName() + ", " + df.format(loc.getX()) + ", " + df.format(loc.getY()) + ", " + df.format(loc.getZ());
     }
     
-    public static Location getStringLocation(String location) {
-        if(location == null) return null;
+    public static Location getStringLocation(String location){
+        if (location == null) return null;
         String[] l = location.split(";");
-        if(l.length < 6) return null;
+        if (l.length < 6) return null;
         World world = Bukkit.getWorld(l[0]);
         double x = Double.parseDouble(l[1]);
         double y = Double.parseDouble(l[2]);
@@ -217,36 +217,36 @@ public class Utils {
         return new Location(world, x, y, z, yaw, pitch);
     }
     
-    public static String getLocationString(Location loc) {
+    public static String getLocationString(Location loc){
         return loc.getWorld().getName() + ";" + loc.getX() + ";" + loc.getY() + ";" + loc.getZ() + ";" + loc.getYaw() + ";" + loc.getPitch();
     }
     
-    public static boolean existsFile(String schematic) {
+    public static boolean existsFile(String schematic){
         String s = schematic + ".schematic";
         String s2 = schematic + ".schem";
         File file = new File(Bukkit.getWorldContainer() + "/plugins/WorldEdit/schematics", s);
         File file2 = new File(Bukkit.getWorldContainer() + "/plugins/FastAsyncWorldEdit/schematics", s2);
-        if(plugin.getVc().is1_13to17()){
+        if (plugin.getVc().is1_13to17()){
             return file2.exists();
         }
         return file.exists();
     }
     
-    public static String toGson(SWPlayer sw) {
+    public static String toGson(SWPlayer sw){
         return UltraSkyWars.getGson().toJson(sw, SWPlayer.class);
     }
     
-    public static SWPlayer fromGson(String data) {
+    public static SWPlayer fromGson(String data){
         return UltraSkyWars.getGson().fromJson(data, SWPlayer.class);
     }
     
-    public static void setCleanPlayer(Player p) {
+    public static void setCleanPlayer(Player p){
         p.getInventory().clear();
         p.getInventory().setArmorContents(null);
         softCleanPlayer(p);
     }
     
-    public static void softCleanPlayer(Player p) {
+    public static void softCleanPlayer(Player p){
         for ( PotionEffect e : p.getActivePotionEffects() ){
             p.removePotionEffect(e.getType());
         }
@@ -265,8 +265,8 @@ public class Utils {
     }
     
     @SuppressWarnings("deprecation")
-    public static Block getBlockFaced(Block b) {
-        switch(b.getData()) {
+    public static Block getBlockFaced(Block b){
+        switch(b.getData()){
             case 2:
                 return b.getRelative(BlockFace.SOUTH);
             case 3:
@@ -280,22 +280,22 @@ public class Utils {
         }
     }
     
-    public static int getMaxPages(int size, int maxPerPage) {
+    public static int getMaxPages(int size, int maxPerPage){
         return (size / Math.max(maxPerPage, 1)) + 1;
     }
     
-    public static Color getRandomColor() {
+    public static Color getRandomColor(){
         Color[] colors = new Color[]{Color.RED, Color.GREEN, Color.YELLOW, Color.ORANGE, Color.AQUA, Color.LIME};
         return colors[ThreadLocalRandom.current().nextInt(0, colors.length)];
     }
     
-    public static String getProgressBar(int current, int max) {
+    public static String getProgressBar(int current, int max){
         float percent = (float) current / max;
         double por = percent * 100;
         return new DecimalFormat("####.#").format(por);
     }
     
-    public static String getProgressBar(int current, int max, int totalBars) {
+    public static String getProgressBar(int current, int max, int totalBars){
         float percent = (float) current / max;
         int progressBars = (int) (totalBars * percent);
         int leftOver = (totalBars - progressBars);
@@ -304,14 +304,14 @@ public class Utils {
         StringBuilder out = new StringBuilder();
         int a = 0;
         for ( int i = 0; i < progressBars; i++ ){
-            if(a >= totalBars){
+            if (a >= totalBars){
                 break;
             }
             in.append(plugin.getLang().get("progressBar.symbol"));
             a++;
         }
         for ( int i = 0; i < leftOver; i++ ){
-            if(a >= totalBars){
+            if (a >= totalBars){
                 break;
             }
             out.append(plugin.getLang().get("progressBar.symbol"));
@@ -326,8 +326,8 @@ public class Utils {
         return plugin.getLang().get("progressBar.finish").replaceAll("<progress>", sb.toString()).replaceAll("<percent>", p);
     }
     
-    public static void sendRewards(UltraSkyWars plugin, Player on, GamePlayer pt) {
-        if(pt == null){
+    public static void sendRewards(UltraSkyWars plugin, Player on, GamePlayer pt){
+        if (pt == null){
             return;
         }
         int gxp = pt.getXP();
@@ -340,46 +340,46 @@ public class Utils {
         Multiplier mc = plugin.getMm().getServerMultiplier("COINS");
         Multiplier ms = plugin.getMm().getServerMultiplier("SOULS");
         for ( String s : plugin.getLang().get(on, "messages.summonary").split("\\n") ){
-            if(s.contains("<center>")){
+            if (s.contains("<center>")){
                 on.sendMessage(CenterMessage.getCenteredMessage(s.replaceAll("<center>", "")));
-            } else if(s.contains("<xpGame>")){
+            } else if (s.contains("<xpGame>")){
                 on.sendMessage(plugin.getLang().get(on, "messages.xpGame").replaceAll("<amount>", String.valueOf(gxp)));
-            } else if(s.contains("<soulsGame>")){
+            } else if (s.contains("<soulsGame>")){
                 on.sendMessage(plugin.getLang().get(on, "messages.soulsGame").replaceAll("<amount>", String.valueOf(gsouls)));
-            } else if(s.contains("<coinsGame>")){
+            } else if (s.contains("<coinsGame>")){
                 on.sendMessage(plugin.getLang().get(on, "messages.coinsGame").replaceAll("<amount>", String.valueOf(gcoins)));
-            } else if(s.contains("<multiplierXP>")){
-                if(mx != null){
+            } else if (s.contains("<multiplierXP>")){
+                if (mx != null){
                     double amount = (mx.getAmount() * gxp) - gxp;
                     on.sendMessage(plugin.getLang().get(on, "messages.xp").replaceAll("<amount>", String.valueOf(amount)).replace("<player>", mx.getName()).replaceAll("<value>", "" + mx.getAmount()));
                     pt.addXP((int) amount);
                 }
-            } else if(s.contains("<multiplierXPYou>")){
-                if(plugin.getMm().getPlayerMultiplier(on, "XP", gxp) > 1){
+            } else if (s.contains("<multiplierXPYou>")){
+                if (plugin.getMm().getPlayerMultiplier(on, "XP", gxp) > 1){
                     String mxp = String.valueOf(plugin.getMm().getPlayerMultiplier(on, "XP"));
                     String xp = String.valueOf(plugin.getMm().getPlayerMultiplier(on, "XP", gxp));
                     on.sendMessage(plugin.getLang().get(on, "messages.xpYou").replaceAll("<amount>", xp).replaceAll("<value>", mxp));
                 }
-            } else if(s.contains("<multiplierSouls>")){
-                if(ms != null){
+            } else if (s.contains("<multiplierSouls>")){
+                if (ms != null){
                     double amount = (ms.getAmount() * gsouls) - gsouls;
                     on.sendMessage(plugin.getLang().get(on, "messages.souls").replaceAll("<amount>", String.valueOf(amount)).replace("<player>", ms.getName()).replaceAll("<value>", "" + ms.getAmount()));
                     pt.addSouls((int) amount);
                 }
-            } else if(s.contains("<multiplierSoulsYou>")){
-                if(plugin.getMm().getPlayerMultiplier(on, "SOULS", gsouls) > 1){
+            } else if (s.contains("<multiplierSoulsYou>")){
+                if (plugin.getMm().getPlayerMultiplier(on, "SOULS", gsouls) > 1){
                     String mxp = String.valueOf(plugin.getMm().getPlayerMultiplier(on, "SOULS"));
                     String xp = String.valueOf(plugin.getMm().getPlayerMultiplier(on, "SOULS", gsouls));
                     on.sendMessage(plugin.getLang().get(on, "messages.soulsYou").replaceAll("<amount>", xp).replaceAll("<value>", mxp));
                 }
-            } else if(s.contains("<multiplierCoins>")){
-                if(mc != null){
+            } else if (s.contains("<multiplierCoins>")){
+                if (mc != null){
                     double amount = (mc.getAmount() * gcoins) - gcoins;
                     on.sendMessage(plugin.getLang().get(on, "messages.coins").replaceAll("<amount>", String.valueOf(amount)).replace("<player>", mc.getName()).replaceAll("<value>", "" + mc.getAmount()));
                     pt.addCoins((int) amount);
                 }
-            } else if(s.contains("<multiplierCoinsYou>")){
-                if(plugin.getMm().getPlayerMultiplier(on, "COINS", gcoins) > 1){
+            } else if (s.contains("<multiplierCoinsYou>")){
+                if (plugin.getMm().getPlayerMultiplier(on, "COINS", gcoins) > 1){
                     String mxp = String.valueOf(plugin.getMm().getPlayerMultiplier(on, "COINS"));
                     String xp = String.valueOf(plugin.getMm().getPlayerMultiplier(on, "COINS", gcoins));
                     on.sendMessage(plugin.getLang().get(on, "messages.coinsYou").replaceAll("<amount>", xp).replaceAll("<value>", mxp));
@@ -392,11 +392,11 @@ public class Utils {
         }
     }
     
-    public static ItemStack[] getGifs() {
+    public static ItemStack[] getGifs(){
         return gifs;
     }
     
-    public static String formatList(Collection<String> collection) {
+    public static String formatList(Collection<String> collection){
         return collection.toString().replace("[", "§b").replace("]", "").replaceAll(", ", "§e, §b");
     }
 }

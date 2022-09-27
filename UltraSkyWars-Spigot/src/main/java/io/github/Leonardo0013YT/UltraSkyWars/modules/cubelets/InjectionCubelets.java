@@ -12,36 +12,36 @@ import java.util.ArrayList;
 
 public class InjectionCubelets implements Injection {
     
+    private final ArrayList<Entity> entities = new ArrayList<>();
     private CubeletsManager cbm;
     private Settings cubelets;
-    private final ArrayList<Entity> entities = new ArrayList<>();
     
     @Override
-    public void loadInjection(UltraSkyWars main) {
+    public void loadInjection(UltraSkyWars main){
         cubelets = new Settings("modules/cubelets", true, false);
         cbm = new CubeletsManager(main, this);
         Bukkit.getServer().getPluginManager().registerEvents(new CubeletsListener(main, this), main);
     }
     
-    public void reload() {
+    public void reload(){
         cubelets.reload();
         cbm.reload();
     }
     
     @Override
-    public void disable() {
+    public void disable(){
     
     }
     
-    public ArrayList<Entity> getEntities() {
+    public ArrayList<Entity> getEntities(){
         return entities;
     }
     
-    public Settings getCubelets() {
+    public Settings getCubelets(){
         return cubelets;
     }
     
-    public CubeletsManager getCbm() {
+    public CubeletsManager getCbm(){
         return cbm;
     }
 }

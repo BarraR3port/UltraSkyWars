@@ -21,7 +21,7 @@ public class SoulWellShop {
     private final InjectionSoulWell is;
     private final String key;
     
-    public SoulWellShop(InjectionSoulWell is, String path, String key) {
+    public SoulWellShop(InjectionSoulWell is, String path, String key){
         this.is = is;
         this.key = key;
         this.material = Material.valueOf(is.getSoulwell().get(path + ".material"));
@@ -34,7 +34,7 @@ public class SoulWellShop {
         this.lore = is.getSoulwell().get(path + ".lore");
     }
     
-    public ItemStack getIcon(double price) {
+    public ItemStack getIcon(double price){
         ItemStack icon = ItemBuilder.item(material, amount, data, name, lore.replaceAll("<status>", (price >= this.price) ? is.getSoulwell().get("buy") : is.getSoulwell().get("noMoney")).replaceAll("<price>", String.valueOf(this.price)).replaceAll("<souls>", String.valueOf(give)));
         return NBTEditor.set(icon, key, "SOULWELL", "SHOP", "SOULS");
     }

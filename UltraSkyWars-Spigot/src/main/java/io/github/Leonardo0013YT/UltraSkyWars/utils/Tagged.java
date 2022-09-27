@@ -20,14 +20,14 @@ public class Tagged {
     private final DecimalFormat f = new DecimalFormat("##.#");
     private Player last;
     
-    public Tagged(Player damaged, Game game) {
+    public Tagged(Player damaged, Game game){
         this.damaged = damaged;
         this.game = game;
     }
     
-    public void addPlayerDamage(Player p, double damage) {
+    public void addPlayerDamage(Player p, double damage){
         last = p;
-        if(!damagers.containsKey(p)){
+        if (!damagers.containsKey(p)){
             damagers.put(p, damage);
             timer.put(p, getTime());
             return;
@@ -37,14 +37,14 @@ public class Tagged {
         timer.put(p, getTime());
     }
     
-    public void removeDamage(double dam) {
+    public void removeDamage(double dam){
         List<Player> to = new ArrayList<>();
         for ( Player on : damagers.keySet() ){
-            if(timer.get(on) < System.currentTimeMillis()){
+            if (timer.get(on) < System.currentTimeMillis()){
                 to.add(on);
                 continue;
             }
-            if(damagers.get(on) - dam < 0){
+            if (damagers.get(on) - dam < 0){
                 to.add(on);
                 continue;
             }
@@ -56,15 +56,15 @@ public class Tagged {
         }
     }
     
-    public void executeRewards(double maxHealth) {
+    public void executeRewards(double maxHealth){
         List<Player> to = new ArrayList<>();
         for ( Player on : damagers.keySet() ){
-            if(on == null || !on.isOnline()) continue;
-            if(timer.get(on) < System.currentTimeMillis()){
+            if (on == null || !on.isOnline()) continue;
+            if (timer.get(on) < System.currentTimeMillis()){
                 to.add(on);
                 continue;
             }
-            if(on.getName().equals(last.getName())){
+            if (on.getName().equals(last.getName())){
                 continue;
             }
             double damage = damagers.get(on);
@@ -80,36 +80,36 @@ public class Tagged {
             timer.remove(on);
             damagers.remove(on);
         }
-        if(last != null){
-            if(!timer.containsKey(last) || !damagers.containsKey(last)){
+        if (last != null){
+            if (!timer.containsKey(last) || !damagers.containsKey(last)){
                 return;
             }
-            if(timer.get(last) < System.currentTimeMillis()){
+            if (timer.get(last) < System.currentTimeMillis()){
                 timer.remove(last);
                 return;
             }
-            if(damagers.size() == 1){
+            if (damagers.size() == 1){
                 SWPlayer up = UltraSkyWars.get().getDb().getSWPlayer(last);
-                if(up == null) return;
+                if (up == null) return;
                 double percent = (last.getHealth() * 100) / last.getMaxHealth();
-                if(percent <= 50 && percent > 25){
+                if (percent <= 50 && percent > 25){
                     up.addStat(StatType.KILL50, game.getGameType(), 1);
                 }
-                if(percent <= 25 && percent > 5){
+                if (percent <= 25 && percent > 5){
                     up.addStat(StatType.KILL25, game.getGameType(), 1);
                 }
-                if(percent <= 5 && percent > 1){
+                if (percent <= 5 && percent > 1){
                     up.addStat(StatType.KILL5, game.getGameType(), 1);
                 }
             }
         }
     }
     
-    public Player getLast() {
+    public Player getLast(){
         return last;
     }
     
-    private long getTime() {
+    private long getTime(){
         return System.currentTimeMillis() + (10 * 1000);
     }
     

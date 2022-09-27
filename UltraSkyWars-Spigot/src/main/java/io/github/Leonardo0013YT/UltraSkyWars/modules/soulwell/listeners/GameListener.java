@@ -18,13 +18,13 @@ public class GameListener implements Listener {
     private final UltraSkyWars plugin;
     private final InjectionSoulWell is;
     
-    public GameListener(UltraSkyWars plugin, InjectionSoulWell is) {
+    public GameListener(UltraSkyWars plugin, InjectionSoulWell is){
         this.plugin = plugin;
         this.is = is;
     }
     
     @EventHandler
-    public void onGameKill(USWGameKillEvent e) {
+    public void onGameKill(USWGameKillEvent e){
         Player k = e.getPlayer();
         Player d = e.getDeath();
         Game game = e.getGame();
@@ -32,8 +32,8 @@ public class GameListener implements Listener {
         SoulWellAngelOfDeath sa = is.getSwm().getAngelByLevel(sw.getSoulWellHead());
         int random = ThreadLocalRandom.current().nextInt(0, 101);
         String rarity = is.getSwm().getRandomRarity();
-        if(sa.getProbability() >= random){
-            if(!sw.hasHead(rarity, d.getName())){
+        if (sa.getProbability() >= random){
+            if (!sw.hasHead(rarity, d.getName())){
                 game.sendGameSound(CustomSound.COLLECT_HEAD);
                 game.sendGameMessage(is.getSoulwell().get("collected").replaceAll("<player>", k.getName()).replaceAll("<death>", d.getName()).replaceAll("<rarity>", is.getSoulwell().get("raritys." + rarity)));
                 sw.addHead(rarity, d.getName(), System.currentTimeMillis());

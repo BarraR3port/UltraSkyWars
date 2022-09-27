@@ -19,8 +19,8 @@ public class KillEffectSnowExplosion implements KillEffect, Cloneable {
     private static int delayDelete;
     
     @Override
-    public void loadCustoms(UltraSkyWars plugin, String path) {
-        if(!loaded){
+    public void loadCustoms(UltraSkyWars plugin, String path){
+        if (!loaded){
             xRandom = plugin.getKilleffect().getDoubleOrDefault(path + ".xRandom", 0.35);
             yRandom = plugin.getKilleffect().getDoubleOrDefault(path + ".yRandom", 0.5);
             zRandom = plugin.getKilleffect().getDoubleOrDefault(path + ".xRandom", 0.35);
@@ -31,8 +31,8 @@ public class KillEffectSnowExplosion implements KillEffect, Cloneable {
     }
     
     @Override
-    public void start(Player p, Player death, Location loc) {
-        if(death == null || !death.isOnline()){
+    public void start(Player p, Player death, Location loc){
+        if (death == null || !death.isOnline()){
             return;
         }
         ArrayList<Snowball> it = new ArrayList<>();
@@ -41,7 +41,7 @@ public class KillEffectSnowExplosion implements KillEffect, Cloneable {
         }
         new BukkitRunnable() {
             @Override
-            public void run() {
+            public void run(){
                 for ( Snowball snow : it ){
                     snow.remove();
                 }
@@ -50,19 +50,19 @@ public class KillEffectSnowExplosion implements KillEffect, Cloneable {
     }
     
     @Override
-    public void stop() {
+    public void stop(){
     }
     
     @Override
-    public KillEffect clone() {
+    public KillEffect clone(){
         return new KillEffectSnowExplosion();
     }
     
-    protected double random(double d, double d2) {
+    protected double random(double d, double d2){
         return d + ThreadLocalRandom.current().nextDouble() * (d2 - d);
     }
     
-    private Snowball spawnSnow(Location location, double d, double d2, double d3) {
+    private Snowball spawnSnow(Location location, double d, double d2, double d3){
         Snowball item = location.getWorld().spawn(location, Snowball.class);
         item.setVelocity(new Vector(d, d2, d3));
         item.setMetadata("SNOWBALL", new FixedMetadataValue(UltraSkyWars.get(), "SNOWBALL"));

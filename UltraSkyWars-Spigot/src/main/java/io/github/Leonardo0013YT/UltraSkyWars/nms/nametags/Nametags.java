@@ -17,18 +17,18 @@ public class Nametags {
     
     static Constructor<?> PacketPlayOutScoreboardTeam, ChatComponentText;
     
-    static {
+    static{
         try {
             PacketPlayOutScoreboardTeam = NMSReflection.getNMSClass("PacketPlayOutScoreboardTeam").getConstructor();
             ChatComponentText = NMSReflection.getNMSClass("ChatComponentText").getConstructor(String.class);
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
     
     Object packet;
     
-    public Nametags(String teamName, String displayName, String prefix) {
+    public Nametags(String teamName, String displayName, String prefix){
         try {
             NametagVersion version = NMSReflectionOld.getNametagVersion();
             packet = PacketPlayOutScoreboardTeam.newInstance();
@@ -40,22 +40,22 @@ public class Nametags {
             this.setField(version.getC(), XMaterial.isNewVersion() ? prefixObject : prefix);
             this.setField(version.getE(), "always");
             this.setField(version.getI(), 1);
-        } catch(InstantiationException | IllegalAccessException | InvocationTargetException e) {
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
     }
     
-    public void deleteTeam(String teamName) {
+    public void deleteTeam(String teamName){
         for ( Player pl : Bukkit.getOnlinePlayers() ){
             remove(teamName, pl);
         }
     }
     
-    public void deleteTeam(Player p, String teamName) {
+    public void deleteTeam(Player p, String teamName){
         remove(teamName, p);
     }
     
-    private void remove(String teamName, Player p) {
+    private void remove(String teamName, Player p){
         try {
             Object packet = PacketPlayOutScoreboardTeam.newInstance();
             NametagVersion version = NMSReflectionOld.getNametagVersion();
@@ -68,36 +68,36 @@ public class Nametags {
             f2.set(packet, 1);
             f2.setAccessible(false);
             UltraSkyWars.get().getVc().getReflection().sendPacket(p, packet);
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
     
-    public void addPlayer(Player pl) {
+    public void addPlayer(Player pl){
         try {
             this.add(pl);
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
     
-    public void sendToPlayer(Player pl) {
+    public void sendToPlayer(Player pl){
         UltraSkyWars.get().getVc().getReflection().sendPacket(pl, packet);
     }
     
-    public void setField(String field, Object value) {
+    public void setField(String field, Object value){
         try {
             Field f = this.packet.getClass().getDeclaredField(field);
             f.setAccessible(true);
             f.set(this.packet, value);
             f.setAccessible(false);
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
     
     @SuppressWarnings("unchecked")
-    public void add(Player pl) throws NoSuchFieldException, IllegalAccessException {
+    public void add(Player pl) throws NoSuchFieldException, IllegalAccessException{
         NametagVersion version = NMSReflectionOld.getNametagVersion();
         Field f = this.packet.getClass().getDeclaredField(version.getG());
         f.setAccessible(true);

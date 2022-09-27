@@ -16,8 +16,8 @@ public class WinDanceThunder implements WinDance, Cloneable {
     private BukkitTask task;
     
     @Override
-    public void loadCustoms(UltraSkyWars plugin, String path) {
-        if(!loaded){
+    public void loadCustoms(UltraSkyWars plugin, String path){
+        if (!loaded){
             xOfCenter = plugin.getWindance().getIntOrDefault(path + ".xOfCenter", 10);
             zOfCenter = plugin.getWindance().getIntOrDefault(path + ".zOfCenter", 10);
             minOfCenter = plugin.getWindance().getIntOrDefault(path + ".minOfCenter", 10);
@@ -28,7 +28,7 @@ public class WinDanceThunder implements WinDance, Cloneable {
     }
     
     @Override
-    public void start(Player p, Game game) {
+    public void start(Player p, Game game){
         World w = game.getSpectator().getWorld();
         Location loc1 = new Location(w, minOfCenter, w.getHighestBlockYAt(xOfCenter, zOfCenter), minOfCenter);
         Location loc2 = new Location(w, -minOfCenter, w.getHighestBlockYAt(xOfCenter, zOfCenter), minOfCenter);
@@ -40,8 +40,8 @@ public class WinDanceThunder implements WinDance, Cloneable {
         Location loc8 = new Location(w, -maxOfCenter, w.getHighestBlockYAt(xOfCenter, zOfCenter), -maxOfCenter);
         task = new BukkitRunnable() {
             @Override
-            public void run() {
-                if(p == null || !p.isOnline() || !w.getName().equals(p.getWorld().getName())){
+            public void run(){
+                if (p == null || !p.isOnline() || !w.getName().equals(p.getWorld().getName())){
                     stop();
                     return;
                 }
@@ -57,19 +57,19 @@ public class WinDanceThunder implements WinDance, Cloneable {
         }.runTaskTimer(UltraSkyWars.get(), 0, taskTick);
     }
     
-    private void thunder(Location loc) {
+    private void thunder(Location loc){
         loc.getWorld().strikeLightningEffect(loc);
     }
     
     @Override
-    public void stop() {
-        if(task != null){
+    public void stop(){
+        if (task != null){
             task.cancel();
         }
     }
     
     @Override
-    public WinDance clone() {
+    public WinDance clone(){
         return new WinDanceThunder();
     }
     

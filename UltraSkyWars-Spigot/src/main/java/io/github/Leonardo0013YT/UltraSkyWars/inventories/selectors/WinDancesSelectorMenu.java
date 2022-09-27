@@ -16,28 +16,28 @@ public class WinDancesSelectorMenu extends UltraInventory {
     private final HashMap<String, Integer> slots = new HashMap<>();
     private final ArrayList<Integer> extra = new ArrayList<>();
     
-    public WinDancesSelectorMenu(UltraSkyWars plugin, String name) {
+    public WinDancesSelectorMenu(UltraSkyWars plugin, String name){
         super(name);
         this.title = plugin.getLang().get("menus.windancesselector.title");
         reload();
     }
     
-    public ArrayList<Integer> getExtra() {
+    public ArrayList<Integer> getExtra(){
         return extra;
     }
     
-    public HashMap<String, Integer> getSlots() {
+    public HashMap<String, Integer> getSlots(){
         return slots;
     }
     
     @Override
-    public void reload() {
+    public void reload(){
         UltraSkyWars plugin = UltraSkyWars.get();
-        if(plugin.getMenus().isSet("menus." + name)){
+        if (plugin.getMenus().isSet("menus." + name)){
             this.rows = plugin.getMenus().getInt("menus." + name + ".rows");
             Map<Integer, ItemStack> config = new HashMap<>();
             Map<Integer, ItemStack> contents = new HashMap<>();
-            if(plugin.getMenus().getConfig().isSet("menus." + name + ".items")){
+            if (plugin.getMenus().getConfig().isSet("menus." + name + ".items")){
                 ConfigurationSection conf = plugin.getMenus().getConfig().getConfigurationSection("menus." + name + ".items");
                 for ( String c : conf.getKeys(false) ){
                     int slot = Integer.parseInt(c);
@@ -50,7 +50,7 @@ public class WinDancesSelectorMenu extends UltraInventory {
                             new String[]{"{CLOSE}", plugin.getLang().get("menus.windancesselector.close.nameItem"), plugin.getLang().get("menus.windancesselector.close.loreItem")},
                             new String[]{"{DESELECT}", plugin.getLang().get("menus.windancesselector.deselect.nameItem"), plugin.getLang().get("menus.windancesselector.deselect.loreItem")});
                     contents.put(slot, item);
-                    if(selected.get().equals("NONE")){
+                    if (selected.get().equals("NONE")){
                         extra.add(slot);
                     } else {
                         slots.put(selected.get(), slot);
@@ -63,7 +63,7 @@ public class WinDancesSelectorMenu extends UltraInventory {
         }
     }
     
-    public int getSlot(String name) {
+    public int getSlot(String name){
         return slots.getOrDefault(name, -1);
     }
     

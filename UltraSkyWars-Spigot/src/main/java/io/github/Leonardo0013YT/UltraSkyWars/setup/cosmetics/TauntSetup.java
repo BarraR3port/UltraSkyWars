@@ -22,7 +22,7 @@ public class TauntSetup {
     private int slot = 10, page = 1, price = 500;
     private ItemStack icon = new ItemStack(Material.ARROW);
     
-    public TauntSetup(UltraSkyWars plugin, Player p, String name) {
+    public TauntSetup(UltraSkyWars plugin, Player p, String name){
         this.plugin = plugin;
         this.name = name;
         this.permission = "ultraskywars.taunt." + name;
@@ -31,54 +31,54 @@ public class TauntSetup {
         }
     }
     
-    public String getPlayer() {
+    public String getPlayer(){
         return player;
     }
     
-    public void setPlayer(String player) {
+    public void setPlayer(String player){
         this.player = player;
     }
     
-    public String getNone() {
+    public String getNone(){
         return none;
     }
     
-    public void setNone(String none) {
+    public void setNone(String none){
         this.none = none;
     }
     
-    public String getTitle() {
+    public String getTitle(){
         return title;
     }
     
-    public void setTitle(String title) {
+    public void setTitle(String title){
         this.title = title;
     }
     
-    public String getSubtitle() {
+    public String getSubtitle(){
         return subtitle;
     }
     
-    public void setSubtitle(String subtitle) {
+    public void setSubtitle(String subtitle){
         this.subtitle = subtitle;
     }
     
-    public TauntTypeSetup getActual() {
+    public TauntTypeSetup getActual(){
         return actual;
     }
     
-    public void setActual(TauntTypeSetup actual) {
+    public void setActual(TauntTypeSetup actual){
         this.actual = actual;
     }
     
-    public void saveTauntType(Player p) {
+    public void saveTauntType(Player p){
         TauntTypeSetup tts = actual;
         taunts.put(tts.getDamage(), tts);
         actual = null;
         p.sendMessage(plugin.getLang().get(p, "setup.tauntstype.save"));
     }
     
-    public void saveTaunt(Player p) {
+    public void saveTaunt(Player p){
         plugin.getTaunt().set("taunts." + name + ".id", plugin.getCos().getNextTauntsId());
         plugin.getTaunt().set("taunts." + name + ".name", name);
         ItemStack icon = getIcon().clone();
@@ -106,66 +106,66 @@ public class TauntSetup {
         p.sendMessage(plugin.getLang().get(p, "setup.taunts.save"));
     }
     
-    public ItemStack getIcon() {
-        if(icon == null || icon.getType().equals(Material.AIR)){
+    public ItemStack getIcon(){
+        if (icon == null || icon.getType().equals(Material.AIR)){
             return new ItemStack(XMaterial.PAPER.parseMaterial());
         }
         return icon;
     }
     
-    public void setIcon(ItemStack icon) {
+    public void setIcon(ItemStack icon){
         this.icon = icon;
     }
     
-    public String getName() {
+    public String getName(){
         return name;
     }
     
-    public void setName(String name) {
+    public void setName(String name){
         this.name = name;
     }
     
-    public String getPermission() {
+    public String getPermission(){
         return permission;
     }
     
-    public void setPermission(String permission) {
+    public void setPermission(String permission){
         this.permission = permission;
     }
     
-    public boolean isBuy() {
+    public boolean isBuy(){
         return isBuy;
     }
     
-    public void setBuy(boolean buy) {
+    public void setBuy(boolean buy){
         isBuy = buy;
     }
     
-    public int getSlot() {
+    public int getSlot(){
         return slot;
     }
     
-    public void setSlot(int slot) {
+    public void setSlot(int slot){
         this.slot = slot;
     }
     
-    public int getPage() {
+    public int getPage(){
         return page;
     }
     
-    public void setPage(int page) {
+    public void setPage(int page){
         this.page = page;
     }
     
-    public int getPrice() {
+    public int getPrice(){
         return price;
     }
     
-    public void setPrice(int price) {
+    public void setPrice(int price){
         this.price = price;
     }
     
-    public HashMap<String, TauntTypeSetup> getTaunts() {
+    public HashMap<String, TauntTypeSetup> getTaunts(){
         return taunts;
     }
 }

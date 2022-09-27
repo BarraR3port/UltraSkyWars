@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 public class RefillEvent extends GameEvent {
     
-    public RefillEvent(UltraSkyWars plugin, int time) {
+    public RefillEvent(UltraSkyWars plugin, int time){
         this.time = time;
         this.reset = time;
         this.type = "game";
@@ -19,7 +19,7 @@ public class RefillEvent extends GameEvent {
         this.subtitle = plugin.getLang().get("titles." + name + ".subtitle");
     }
     
-    public RefillEvent(RefillEvent e) {
+    public RefillEvent(RefillEvent e){
         this.time = e.getReset();
         this.reset = e.getReset();
         this.type = e.getType();
@@ -30,7 +30,7 @@ public class RefillEvent extends GameEvent {
     }
     
     @Override
-    public void start(Game game) {
+    public void start(Game game){
         GameChest gc = game.getCenter();
         //FILL CHESTS
         gc.fill(game, true);
@@ -42,18 +42,18 @@ public class RefillEvent extends GameEvent {
     }
     
     @Override
-    public void stop(Game game) {
+    public void stop(Game game){
     }
     
     @Override
-    public void reset() {
+    public void reset(){
         this.time = this.reset;
         this.type = "game";
         this.name = "refill";
     }
     
     @Override
-    public RefillEvent clone() {
+    public RefillEvent clone(){
         return new RefillEvent(this);
     }
     

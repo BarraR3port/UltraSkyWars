@@ -13,7 +13,7 @@ public class WinEffectDareDevil implements WinEffect {
     private Vehicle horse;
     
     @Override
-    public void start(Player p, Game game) {
+    public void start(Player p, Game game){
         horse = UltraSkyWars.get().getVc().getNMS().spawnHorse(p.getLocation(), p);
         horse.setPassenger(p);
         horse.setMetadata("NO_TARGET", new FixedMetadataValue(UltraSkyWars.get(), ""));
@@ -21,14 +21,14 @@ public class WinEffectDareDevil implements WinEffect {
     }
     
     @Override
-    public void stop() {
-        if(horse != null){
+    public void stop(){
+        if (horse != null){
             horse.remove();
         }
     }
     
     @Override
-    public WinEffect clone() {
+    public WinEffect clone(){
         return new WinEffectDareDevil();
     }
     

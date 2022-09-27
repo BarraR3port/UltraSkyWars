@@ -20,68 +20,68 @@ public class ChestSetup {
     private ChestLoteSetup actual;
     private ArrayList<ItemStack> temporarily = new ArrayList<>();
     
-    public ChestSetup(UltraSkyWars plugin, String type) {
+    public ChestSetup(UltraSkyWars plugin, String type){
         this.plugin = plugin;
         this.type = type;
     }
     
-    public ChestLoteSetup getActual() {
+    public ChestLoteSetup getActual(){
         return actual;
     }
     
-    public void setActual(ChestLoteSetup actual) {
+    public void setActual(ChestLoteSetup actual){
         this.actual = actual;
     }
     
-    public List<ItemSetup> getItems() {
-        if(filter.equals("REFILL")){
+    public List<ItemSetup> getItems(){
+        if (filter.equals("REFILL")){
             return items.stream().filter(ItemSetup::isRefill).collect(Collectors.toList());
         }
-        if(filter.equals("SWORD")){
+        if (filter.equals("SWORD")){
             return items.stream().filter(e -> e.getItem().getType().name().endsWith("SWORD")).collect(Collectors.toList());
         }
-        if(filter.equals("HELMET")){
+        if (filter.equals("HELMET")){
             return items.stream().filter(e -> e.getItem().getType().name().endsWith("HELMET")).collect(Collectors.toList());
         }
-        if(filter.equals("BOOTS")){
+        if (filter.equals("BOOTS")){
             return items.stream().filter(e -> e.getItem().getType().name().endsWith("BOOTS")).collect(Collectors.toList());
         }
-        if(filter.equals("LEGGINGS")){
+        if (filter.equals("LEGGINGS")){
             return items.stream().filter(e -> e.getItem().getType().name().endsWith("LEGGINGS")).collect(Collectors.toList());
         }
-        if(filter.equals("CHESTPLATE")){
+        if (filter.equals("CHESTPLATE")){
             return items.stream().filter(e -> e.getItem().getType().name().endsWith("CHESTPLATE")).collect(Collectors.toList());
         }
-        if(filter.equals("CENTER")){
+        if (filter.equals("CENTER")){
             return items.stream().filter(ItemSetup::isCenter).collect(Collectors.toList());
         }
         return items;
     }
     
-    public String getType() {
+    public String getType(){
         return type;
     }
     
-    public ArrayList<ItemStack> getTemporarily() {
+    public ArrayList<ItemStack> getTemporarily(){
         return temporarily;
     }
     
-    public void setTemporarily(ArrayList<ItemStack> temporarily) {
+    public void setTemporarily(ArrayList<ItemStack> temporarily){
         this.temporarily = temporarily;
     }
     
-    public String getFilter() {
+    public String getFilter(){
         return filter;
     }
     
-    public void setFilter(String filter) {
+    public void setFilter(String filter){
         this.filter = filter;
     }
     
-    public void saveChestLote(Inventory inv) {
+    public void saveChestLote(Inventory inv){
         Collection<ItemStack> items = new ArrayList<>();
         for ( int i = 0; i < 45; i++ ){
-            if(inv.getItem(i) == null || inv.getItem(i).getType().equals(Material.AIR)){
+            if (inv.getItem(i) == null || inv.getItem(i).getType().equals(Material.AIR)){
                 continue;
             }
             items.add(inv.getItem(i));
@@ -89,7 +89,7 @@ public class ChestSetup {
         items.forEach(i -> addItem(new ItemSetup(i, actual.isCenter(), actual.isRefill(), actual.getChance(), actual.getModes())));
     }
     
-    public void saveChest(Player p) {
+    public void saveChest(Player p){
         plugin.getChests().set("chests." + type.toLowerCase(), null);
         for ( ItemSetup is : items ){
             String path = "chests." + type.toLowerCase() + "." + is.toString();
@@ -104,11 +104,11 @@ public class ChestSetup {
         p.sendMessage(plugin.getLang().get(p, "setup.chests.save"));
     }
     
-    public void addItem(ItemSetup item) {
+    public void addItem(ItemSetup item){
         items.add(item);
     }
     
-    public void removeItem(ItemStack item) {
+    public void removeItem(ItemStack item){
         items.removeIf(i -> i.getDisplay().getItemMeta().getDisplayName().equals(item.getItemMeta().getDisplayName()));
     }
     

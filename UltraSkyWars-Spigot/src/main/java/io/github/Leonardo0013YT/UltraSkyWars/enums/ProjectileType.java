@@ -13,26 +13,26 @@ public enum ProjectileType {
     private final boolean destructor;
     private final boolean teleporter;
     
-    ProjectileType(boolean appear, boolean explosive, boolean destructor, boolean teleporter) {
+    ProjectileType(boolean appear, boolean explosive, boolean destructor, boolean teleporter){
         this.appear = appear;
         this.explosive = explosive;
         this.destructor = destructor;
         this.teleporter = teleporter;
     }
     
-    public boolean isAppear() {
+    public boolean isAppear(){
         return appear;
     }
     
-    public boolean isExplosive() {
+    public boolean isExplosive(){
         return explosive;
     }
     
-    public boolean isDestructor() {
+    public boolean isDestructor(){
         return destructor;
     }
     
-    public boolean isTeleporter() {
+    public boolean isTeleporter(){
         return teleporter;
     }
 }

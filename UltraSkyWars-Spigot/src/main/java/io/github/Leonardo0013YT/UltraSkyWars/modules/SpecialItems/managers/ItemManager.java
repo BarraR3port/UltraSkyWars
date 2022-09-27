@@ -20,13 +20,13 @@ public class ItemManager {
     private ItemStack compass, instantTNT, soup, endBuff, TNTLaunch;
     private SpecialItem compassItem, instantTNTItem, soupItem, endBuffItem, TNTLaunchItem;
     
-    public ItemManager(UltraSkyWars plugin, InjectionSpecialItems isi) {
+    public ItemManager(UltraSkyWars plugin, InjectionSpecialItems isi){
         this.plugin = plugin;
         this.isi = isi;
         reload();
     }
     
-    public void reload() {
+    public void reload(){
         this.compass = ItemBuilder.item(XMaterial.COMPASS, plugin.getLang().get("items.compass.nameItem"), plugin.getLang().get("items.compass.loreItem"));
         this.instantTNT = ItemBuilder.item(XMaterial.TNT, plugin.getLang().get("items.instantTNT.nameItem"), plugin.getLang().get("items.instantTNT.loreItem"));
         this.soup = ItemBuilder.item(XMaterial.MUSHROOM_STEW, plugin.getLang().get("items.soup.nameItem"), plugin.getLang().get("items.soup.loreItem"));

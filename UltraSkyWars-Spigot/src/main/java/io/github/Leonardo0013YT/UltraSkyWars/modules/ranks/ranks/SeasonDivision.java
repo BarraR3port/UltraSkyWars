@@ -18,7 +18,7 @@ public class SeasonDivision {
     private final List<String> ranks;
     private final List<String> rewards;
     
-    public SeasonDivision(InjectionEloRank ier, String path, int season, boolean passed) {
+    public SeasonDivision(InjectionEloRank ier, String path, int season, boolean passed){
         this.topMin = ier.getRankeds().getInt(path + ".top.min");
         this.topMax = ier.getRankeds().getInt(path + ".top.max");
         this.name = ier.getRankeds().get(path + ".name");
@@ -32,11 +32,11 @@ public class SeasonDivision {
         this.icon = ItemBuilder.item(new ItemStack(XMaterial.matchDefinedXMaterial(ier.getRankeds().get(path + ".icon.material"), (byte) ier.getRankeds().getInt(path + ".icon.data")).orElse(XMaterial.OAK_WOOD).parseMaterial(), ier.getRankeds().getInt(path + ".icon.amount"), (short) ier.getRankeds().getInt(path + ".icon.data")), name + ier.getRankeds().get("format").replaceAll("<max>", String.valueOf(topMax)).replaceAll("<min>", String.valueOf(topMin)), lore);
     }
     
-    public String getName() {
+    public String getName(){
         return name;
     }
     
-    public ItemStack getIcon() {
+    public ItemStack getIcon(){
         return icon;
     }
 }

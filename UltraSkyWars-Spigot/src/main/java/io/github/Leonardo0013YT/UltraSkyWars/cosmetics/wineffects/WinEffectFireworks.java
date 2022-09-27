@@ -12,18 +12,18 @@ public class WinEffectFireworks implements WinEffect, Cloneable {
     
     private BukkitTask task;
     
-    public WinEffectFireworks() {
+    public WinEffectFireworks(){
         this.task = null;
     }
     
     @Override
-    public void start(Player p, Game game) {
+    public void start(Player p, Game game){
         task = new BukkitRunnable() {
             final String name = game.getSpectator().getWorld().getName();
             
             @Override
-            public void run() {
-                if(p == null || !p.isOnline() || !name.equals(p.getWorld().getName())){
+            public void run(){
+                if (p == null || !p.isOnline() || !name.equals(p.getWorld().getName())){
                     stop();
                     return;
                 }
@@ -33,14 +33,14 @@ public class WinEffectFireworks implements WinEffect, Cloneable {
     }
     
     @Override
-    public void stop() {
-        if(task != null){
+    public void stop(){
+        if (task != null){
             task.cancel();
         }
     }
     
     @Override
-    public WinEffect clone() {
+    public WinEffect clone(){
         return new WinEffectFireworks();
     }
 }

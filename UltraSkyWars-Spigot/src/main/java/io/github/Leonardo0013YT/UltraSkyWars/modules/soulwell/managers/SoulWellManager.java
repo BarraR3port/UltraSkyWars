@@ -41,7 +41,7 @@ public class SoulWellManager {
     private final UltraSkyWars plugin;
     private final InjectionSoulWell is;
     
-    public SoulWellManager(UltraSkyWars plugin, InjectionSoulWell is) {
+    public SoulWellManager(UltraSkyWars plugin, InjectionSoulWell is){
         this.plugin = plugin;
         this.is = is;
         for ( int i = 1; i < 6; i++ ){
@@ -60,23 +60,23 @@ public class SoulWellManager {
         loadSoulWells();
     }
     
-    public void loadSoulWells() {
+    public void loadSoulWells(){
         soulWells.clear();
-        if(plugin.getConfig().isSet("soulwells")){
+        if (plugin.getConfig().isSet("soulwells")){
             ConfigurationSection soul = plugin.getConfig().getConfigurationSection("soulwells");
             for ( String s : soul.getKeys(false) ){
                 Location loc = Utils.getStringLocation(plugin.getConfig().getString("soulwells." + s + ".loc"));
-                if(loc == null) continue;
+                if (loc == null) continue;
                 soulWells.put(loc, new SoulWell(plugin, loc));
             }
         }
-        if(is.getSoulwell().isSet("shop")){
+        if (is.getSoulwell().isSet("shop")){
             ConfigurationSection soul = is.getSoulwell().getConfig().getConfigurationSection("shop");
             for ( String s : soul.getKeys(false) ){
                 shops.put(s, new SoulWellShop(is, "shop." + s, s));
             }
         }
-        if(is.getSoulwell().isSet("upgrades.extra")){
+        if (is.getSoulwell().isSet("upgrades.extra")){
             ConfigurationSection soul = is.getSoulwell().getConfig().getConfigurationSection("upgrades.extra");
             for ( String s : soul.getKeys(false) ){
                 SoulWellUpgrade swu = new SoulWellUpgrade(is, "upgrades.extra." + s, "extra", s);
@@ -84,7 +84,7 @@ public class SoulWellManager {
                 extraLevel.put(swu.getLevel(), s);
             }
         }
-        if(is.getSoulwell().isSet("upgrades.max")){
+        if (is.getSoulwell().isSet("upgrades.max")){
             ConfigurationSection soul = is.getSoulwell().getConfig().getConfigurationSection("upgrades.max");
             for ( String s : soul.getKeys(false) ){
                 SoulWellUpgrade swu = new SoulWellUpgrade(is, "upgrades.max." + s, "max", s);
@@ -92,7 +92,7 @@ public class SoulWellManager {
                 maxLevel.put(swu.getLevel(), s);
             }
         }
-        if(is.getSoulwell().isSet("angelofdeath")){
+        if (is.getSoulwell().isSet("angelofdeath")){
             ConfigurationSection soul = is.getSoulwell().getConfig().getConfigurationSection("angelofdeath");
             for ( String s : soul.getKeys(false) ){
                 SoulWellAngelOfDeath a = new SoulWellAngelOfDeath(is, "angelofdeath." + s, s);
@@ -102,74 +102,74 @@ public class SoulWellManager {
         }
     }
     
-    public String getRandomRarity() {
+    public String getRandomRarity(){
         return rarities.get(ThreadLocalRandom.current().nextInt(0, rarities.size()));
     }
     
-    public SoulWellUpgrade getExtraByLevel(int level) {
+    public SoulWellUpgrade getExtraByLevel(int level){
         return extra.get(extraLevel.get(level));
     }
     
-    public SoulWellUpgrade getMaxByLevel(int level) {
+    public SoulWellUpgrade getMaxByLevel(int level){
         return max.get(maxLevel.get(level));
     }
     
-    public SoulWellAngelOfDeath getAngelByLevel(int level) {
+    public SoulWellAngelOfDeath getAngelByLevel(int level){
         return angel.get(angelLevel.get(level));
     }
     
-    public int getMaxSouls(int level) {
+    public int getMaxSouls(int level){
         SoulWellUpgrade swu;
-        if(level == 0){
+        if (level == 0){
             swu = max.get(maxLevel.get(1));
         } else {
             swu = max.get(maxLevel.get(level));
         }
-        if(swu != null){
+        if (swu != null){
             return swu.getAmount();
         } else {
             return 99999;
         }
     }
     
-    public SoulWellUpgrade getExtraMax(int level) {
+    public SoulWellUpgrade getExtraMax(int level){
         for ( SoulWellUpgrade swu : extra.values() ){
-            if(swu.getLevel() - 1 == level) return swu;
+            if (swu.getLevel() - 1 == level) return swu;
         }
         return null;
     }
     
-    public SoulWellUpgrade getMaxMax(int level) {
+    public SoulWellUpgrade getMaxMax(int level){
         for ( SoulWellUpgrade swu : max.values() ){
-            if(swu.getLevel() - 1 == level) return swu;
+            if (swu.getLevel() - 1 == level) return swu;
         }
         return null;
     }
     
-    public void reload() {
+    public void reload(){
         soulWells.values().forEach(SoulWell::reload);
     }
     
-    public void addSession(Player p, SoulWell sw) {
+    public void addSession(Player p, SoulWell sw){
         sessions.put(p.getUniqueId(), new SoulWellSession(plugin, is, p, sw.getLoc()));
     }
     
-    public boolean isSession(Player p) {
+    public boolean isSession(Player p){
         return sessions.containsKey(p.getUniqueId());
     }
     
-    public void removeSession(Player p) {
-        if(sessions.containsKey(p.getUniqueId())){
+    public void removeSession(Player p){
+        if (sessions.containsKey(p.getUniqueId())){
             sessions.get(p.getUniqueId()).cancel(p);
         }
         sessions.remove(p.getUniqueId());
     }
     
-    public SoulWellSession getSession(Player p) {
+    public SoulWellSession getSession(Player p){
         return sessions.get(p.getUniqueId());
     }
     
-    public ItemStack getRandomGlass() {
+    public ItemStack getRandomGlass(){
         return ItemBuilder.item(XMaterial.valueOf(colors[ThreadLocalRandom.current().nextInt(0, 11)] + "STAINED_GLASS_PANE"), 1, "§7", "§7");
     }
 }

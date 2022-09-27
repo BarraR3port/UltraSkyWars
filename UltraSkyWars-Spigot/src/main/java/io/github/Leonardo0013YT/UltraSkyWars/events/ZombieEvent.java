@@ -22,7 +22,7 @@ public class ZombieEvent extends GameEvent {
     private BukkitTask task;
     private Collection<Zombie> zombies;
     
-    public ZombieEvent(UltraSkyWars plugin, int time) {
+    public ZombieEvent(UltraSkyWars plugin, int time){
         this.time = time;
         this.reset = time;
         this.zombies = new ArrayList<>();
@@ -34,7 +34,7 @@ public class ZombieEvent extends GameEvent {
         this.subtitle = plugin.getLang().get("titles." + name + ".subtitle");
     }
     
-    public ZombieEvent(ZombieEvent e) {
+    public ZombieEvent(ZombieEvent e){
         this.time = e.getReset();
         this.reset = e.getReset();
         this.zombies = new ArrayList<>();
@@ -47,11 +47,11 @@ public class ZombieEvent extends GameEvent {
     }
     
     @Override
-    public void start(Game game) {
+    public void start(Game game){
         this.task = new BukkitRunnable() {
             @Override
-            public void run() {
-                if(zombies.size() >= 30){
+            public void run(){
+                if (zombies.size() >= 30){
                     return;
                 }
                 for ( Player on : game.getPlayers() ){
@@ -71,17 +71,17 @@ public class ZombieEvent extends GameEvent {
     }
     
     @Override
-    public void stop(Game game) {
-        if(task != null){
+    public void stop(Game game){
+        if (task != null){
             task.cancel();
         }
-        if(!zombies.isEmpty()){
+        if (!zombies.isEmpty()){
             zombies.forEach(Entity::remove);
         }
     }
     
     @Override
-    public void reset() {
+    public void reset(){
         this.time = this.reset;
         this.zombies = new ArrayList<>();
         this.task = null;
@@ -90,11 +90,11 @@ public class ZombieEvent extends GameEvent {
     }
     
     @Override
-    public ZombieEvent clone() {
+    public ZombieEvent clone(){
         return new ZombieEvent(this);
     }
     
-    public Collection<Zombie> getZombies() {
+    public Collection<Zombie> getZombies(){
         return zombies;
     }
 }

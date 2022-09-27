@@ -15,10 +15,10 @@ public abstract class GameChest {
     protected final Map<Location, UltraGameChest> invs = new HashMap<>();
     protected final List<Location> chests;
     
-    public GameChest(List<Location> chests) {
+    public GameChest(List<Location> chests){
         this.chests = chests;
         for ( Location l : chests ){
-            if(l.getBlock().getState() instanceof Chest){
+            if (l.getBlock().getState() instanceof Chest){
                 invs.put(l.getBlock().getLocation(), new UltraGameChest(l));
             }
         }

@@ -17,7 +17,7 @@ public class SoulWellAngelOfDeath {
     private final InjectionSoulWell is;
     private final String key;
     
-    public SoulWellAngelOfDeath(InjectionSoulWell is, String path, String key) {
+    public SoulWellAngelOfDeath(InjectionSoulWell is, String path, String key){
         this.is = is;
         this.key = key;
         this.level = is.getSoulwell().getInt(path + ".level");
@@ -27,7 +27,7 @@ public class SoulWellAngelOfDeath {
         this.lore = is.getSoulwell().get(path + ".lore");
     }
     
-    public ItemStack getIcon() {
+    public ItemStack getIcon(){
         ItemStack icon = ItemBuilder.item(XMaterial.WITHER_SKELETON_SKULL, name, lore.replaceAll("<desc>", is.getSoulwell().get("angelLore")));
         return icon;
     }

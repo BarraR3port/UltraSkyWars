@@ -18,38 +18,38 @@ import java.util.Map;
 
 public class VoteProjectileMenu extends UltraInventory {
     
-    public VoteProjectileMenu(UltraSkyWars plugin, String name) {
+    public VoteProjectileMenu(UltraSkyWars plugin, String name){
         super(name);
         this.title = plugin.getLang().get(null, "menus." + name + ".title");
         reload();
         plugin.getUim().getActions().put(title, (b) -> {
             InventoryClickEvent e = b.getInventoryClickEvent();
             Player p = b.getPlayer();
-            if(plugin.getCm().isSetupLobby(p)) return;
+            if (plugin.getCm().isSetupLobby(p)) return;
             Game g = plugin.getGm().getGameByPlayer(p);
             e.setCancelled(true);
-            if(e.getCurrentItem() == null || e.getCurrentItem().getType().equals(Material.AIR)){
+            if (e.getCurrentItem() == null || e.getCurrentItem().getType().equals(Material.AIR)){
                 return;
             }
             ItemStack item = e.getCurrentItem();
-            if(!item.hasItemMeta()){
+            if (!item.hasItemMeta()){
                 return;
             }
-            if(!item.getItemMeta().hasDisplayName()){
+            if (!item.getItemMeta().hasDisplayName()){
                 return;
             }
-            if(g == null) return;
+            if (g == null) return;
             Vote vote = g.getVote();
             ItemMeta im = item.getItemMeta();
             String display = im.getDisplayName();
-            if(display.equals(plugin.getLang().get(p, "menus.projectile.noProj.nameItem"))){
-                if(!p.hasPermission("ultraskywars.votes.projectile.*") && !p.hasPermission("ultraskywars.votes.projectile.noproj")){
+            if (display.equals(plugin.getLang().get(p, "menus.projectile.noProj.nameItem"))){
+                if (!p.hasPermission("ultraskywars.votes.projectile.*") && !p.hasPermission("ultraskywars.votes.projectile.noproj")){
                     p.sendMessage(plugin.getLang().get(p, "messages.noPermission"));
                     return;
                 }
                 Vote.VotePlayer vp = vote.getVotePlayer(p);
-                if(vp.getProjectileType() != null){
-                    if(vp.getProjectileType().equals(ProjectileType.NOPROJ)){
+                if (vp.getProjectileType() != null){
+                    if (vp.getProjectileType().equals(ProjectileType.NOPROJ)){
                         p.sendMessage(plugin.getLang().get(p, "messages.alreadyVoted").replaceAll("<type>", plugin.getLang().get(p, "votes.projectile.noproj")));
                         return;
                     }
@@ -63,14 +63,14 @@ public class VoteProjectileMenu extends UltraInventory {
                         new String[]{"<desproj>", String.valueOf(vote.getVotes("DESPROJ"))},
                         new String[]{"<teleproj>", String.valueOf(vote.getVotes("TELEPROJ"))});
             }
-            if(display.equals(plugin.getLang().get(p, "menus.projectile.siProj.nameItem"))){
-                if(!p.hasPermission("ultraskywars.votes.projectile.*") && !p.hasPermission("ultraskywars.votes.projectile.siproj")){
+            if (display.equals(plugin.getLang().get(p, "menus.projectile.siProj.nameItem"))){
+                if (!p.hasPermission("ultraskywars.votes.projectile.*") && !p.hasPermission("ultraskywars.votes.projectile.siproj")){
                     p.sendMessage(plugin.getLang().get(p, "messages.noPermission"));
                     return;
                 }
                 Vote.VotePlayer vp = vote.getVotePlayer(p);
-                if(vp.getProjectileType() != null){
-                    if(vp.getProjectileType().equals(ProjectileType.YESPROJ)){
+                if (vp.getProjectileType() != null){
+                    if (vp.getProjectileType().equals(ProjectileType.YESPROJ)){
                         p.sendMessage(plugin.getLang().get(p, "messages.alreadyVoted").replaceAll("<type>", plugin.getLang().get(p, "votes.projectile.yesproj")));
                         return;
                     }
@@ -84,14 +84,14 @@ public class VoteProjectileMenu extends UltraInventory {
                         new String[]{"<desproj>", String.valueOf(vote.getVotes("DESPROJ"))},
                         new String[]{"<teleproj>", String.valueOf(vote.getVotes("TELEPROJ"))});
             }
-            if(display.equals(plugin.getLang().get(p, "menus.projectile.exProj.nameItem"))){
-                if(!p.hasPermission("ultraskywars.votes.projectile.*") && !p.hasPermission("ultraskywars.votes.projectile.exproj")){
+            if (display.equals(plugin.getLang().get(p, "menus.projectile.exProj.nameItem"))){
+                if (!p.hasPermission("ultraskywars.votes.projectile.*") && !p.hasPermission("ultraskywars.votes.projectile.exproj")){
                     p.sendMessage(plugin.getLang().get(p, "messages.noPermission"));
                     return;
                 }
                 Vote.VotePlayer vp = vote.getVotePlayer(p);
-                if(vp.getProjectileType() != null){
-                    if(vp.getProjectileType().equals(ProjectileType.EXPROJ)){
+                if (vp.getProjectileType() != null){
+                    if (vp.getProjectileType().equals(ProjectileType.EXPROJ)){
                         p.sendMessage(plugin.getLang().get(p, "messages.alreadyVoted").replaceAll("<type>", plugin.getLang().get(p, "votes.projectile.exproj")));
                         return;
                     }
@@ -105,14 +105,14 @@ public class VoteProjectileMenu extends UltraInventory {
                         new String[]{"<desproj>", String.valueOf(vote.getVotes("DESPROJ"))},
                         new String[]{"<teleproj>", String.valueOf(vote.getVotes("TELEPROJ"))});
             }
-            if(display.equals(plugin.getLang().get(p, "menus.projectile.desProj.nameItem"))){
-                if(!p.hasPermission("ultraskywars.votes.projectile.*") && !p.hasPermission("ultraskywars.votes.projectile.desproj")){
+            if (display.equals(plugin.getLang().get(p, "menus.projectile.desProj.nameItem"))){
+                if (!p.hasPermission("ultraskywars.votes.projectile.*") && !p.hasPermission("ultraskywars.votes.projectile.desproj")){
                     p.sendMessage(plugin.getLang().get(p, "messages.noPermission"));
                     return;
                 }
                 Vote.VotePlayer vp = vote.getVotePlayer(p);
-                if(vp.getProjectileType() != null){
-                    if(vp.getProjectileType().equals(ProjectileType.DESPROJ)){
+                if (vp.getProjectileType() != null){
+                    if (vp.getProjectileType().equals(ProjectileType.DESPROJ)){
                         p.sendMessage(plugin.getLang().get(p, "messages.alreadyVoted").replaceAll("<type>", plugin.getLang().get(p, "votes.projectile.desproj")));
                         return;
                     }
@@ -126,14 +126,14 @@ public class VoteProjectileMenu extends UltraInventory {
                         new String[]{"<desproj>", String.valueOf(vote.getVotes("DESPROJ"))},
                         new String[]{"<teleproj>", String.valueOf(vote.getVotes("TELEPROJ"))});
             }
-            if(display.equals(plugin.getLang().get(p, "menus.projectile.teleProj.nameItem"))){
-                if(!p.hasPermission("ultraskywars.votes.projectile.*") && !p.hasPermission("ultraskywars.votes.projectile.teleproj")){
+            if (display.equals(plugin.getLang().get(p, "menus.projectile.teleProj.nameItem"))){
+                if (!p.hasPermission("ultraskywars.votes.projectile.*") && !p.hasPermission("ultraskywars.votes.projectile.teleproj")){
                     p.sendMessage(plugin.getLang().get(p, "messages.noPermission"));
                     return;
                 }
                 Vote.VotePlayer vp = vote.getVotePlayer(p);
-                if(vp.getProjectileType() != null){
-                    if(vp.getProjectileType().equals(ProjectileType.TELEPROJ)){
+                if (vp.getProjectileType() != null){
+                    if (vp.getProjectileType().equals(ProjectileType.TELEPROJ)){
                         p.sendMessage(plugin.getLang().get(p, "messages.alreadyVoted").replaceAll("<type>", plugin.getLang().get(p, "votes.projectile.teleproj")));
                         return;
                     }
@@ -151,13 +151,13 @@ public class VoteProjectileMenu extends UltraInventory {
     }
     
     @Override
-    public void reload() {
+    public void reload(){
         UltraSkyWars plugin = UltraSkyWars.get();
-        if(plugin.getMenus().isSet("menus." + name)){
+        if (plugin.getMenus().isSet("menus." + name)){
             this.rows = plugin.getMenus().getInt("menus." + name + ".rows");
             Map<Integer, ItemStack> config = new HashMap<>();
             Map<Integer, ItemStack> contents = new HashMap<>();
-            if(plugin.getMenus().getConfig().isSet("menus." + name + ".items")){
+            if (plugin.getMenus().getConfig().isSet("menus." + name + ".items")){
                 ConfigurationSection conf = plugin.getMenus().getConfig().getConfigurationSection("menus." + name + ".items");
                 for ( String c : conf.getKeys(false) ){
                     int slot = Integer.parseInt(c);

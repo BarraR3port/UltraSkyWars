@@ -13,44 +13,44 @@ public class Netherboard {
     
     private final Map<Player, BPlayerBoard> boards = new HashMap<>();
     
-    private Netherboard() {
+    private Netherboard(){
     }
     
-    public static Netherboard instance() {
-        if(instance == null)
+    public static Netherboard instance(){
+        if (instance == null)
             instance = new Netherboard();
         return instance;
     }
     
-    public BPlayerBoard createBoard(Player player, String name) {
+    public BPlayerBoard createBoard(Player player, String name){
         return createBoard(player, null, name);
     }
     
-    public BPlayerBoard createBoard(Player player, Scoreboard scoreboard, String name) {
+    public BPlayerBoard createBoard(Player player, Scoreboard scoreboard, String name){
         deleteBoard(player);
         BPlayerBoard board = new BPlayerBoard(player, scoreboard, name);
         boards.put(player, board);
         return board;
     }
     
-    public void deleteBoard(Player player) {
-        if(boards.containsKey(player))
+    public void deleteBoard(Player player){
+        if (boards.containsKey(player))
             boards.get(player).delete();
     }
     
-    public void removeBoard(Player player) {
+    public void removeBoard(Player player){
         boards.remove(player);
     }
     
-    public boolean hasBoard(Player player) {
+    public boolean hasBoard(Player player){
         return boards.containsKey(player);
     }
     
-    public BPlayerBoard getBoard(Player player) {
+    public BPlayerBoard getBoard(Player player){
         return boards.get(player);
     }
     
-    public Map<Player, BPlayerBoard> getBoards() {
+    public Map<Player, BPlayerBoard> getBoards(){
         return new HashMap<>(boards);
     }
     

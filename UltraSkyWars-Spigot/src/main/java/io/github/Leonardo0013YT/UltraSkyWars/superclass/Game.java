@@ -60,7 +60,7 @@ public abstract class Game {
     public TimeType timeType = TimeType.DAY;
     public boolean inFinish = false, inReset = false, votes;
     
-    public Game(GameManager gm, String path, String name, int id, CallBackAPI<String> correctly) {
+    public Game(GameManager gm, String path, String name, int id, CallBackAPI<String> correctly){
         UltraSkyWars plugin = UltraSkyWars.get();
         plugin.getWc().resetWorld(name);
         this.lobby = Utils.getStringLocation(plugin.getArenas().get(path + ".lobby"));
@@ -76,15 +76,15 @@ public abstract class Game {
         this.borderStart = plugin.getArenas().getIntOrDefault(path + ".borderStart", 300);
         this.borderEnd = plugin.getArenas().getIntOrDefault(path + ".borderEnd", 20);
         this.teamSize = Math.max(plugin.getArenas().getInt(path + ".teamSize"), 1);
-        if(lobby == null || lobby.getWorld() == null){
+        if (lobby == null || lobby.getWorld() == null){
             correctly.done("NO_LOBBY");
             return;
         }
-        if(spectator == null || spectator.getWorld() == null){
+        if (spectator == null || spectator.getWorld() == null){
             correctly.done("NO_SPECTATOR");
             return;
         }
-        if(plugin.getArenas().isSet(path + ".islands")){
+        if (plugin.getArenas().isSet(path + ".islands")){
             ConfigurationSection conf = plugin.getArenas().getConfig().getConfigurationSection(path + ".islands");
             for ( String c : conf.getKeys(false) ){
                 int tid = teams.size();
@@ -100,7 +100,7 @@ public abstract class Game {
             return;
         }
         List<Location> cen = new ArrayList<>();
-        if(plugin.getArenas().isSet(path + ".center")){
+        if (plugin.getArenas().isSet(path + ".center")){
             for ( String c : plugin.getArenas().getList(path + ".center") ){
                 cen.add(Utils.getStringLocation(c));
             }
@@ -113,12 +113,12 @@ public abstract class Game {
             String[] ev = e.split(":");
             String type = ev[0];
             int s = Integer.parseInt(ev[1]);
-            if(type.equals("REFILL")){
+            if (type.equals("REFILL")){
                 GameEvent rev = gm.getEvent("refill").clone();
                 rev.setTime(s);
                 events.add(rev);
             }
-            if(type.equals("FINAL")){
+            if (type.equals("FINAL")){
                 GameEvent rev = gm.getEvent("none").clone();
                 rev.setTime(s);
                 events.add(rev);
@@ -135,10 +135,10 @@ public abstract class Game {
         correctly.done("DONE");
     }
     
-    public UltraGameChest getChestByLocation(Location loc) {
-        if(chests.containsKey(loc)){
+    public UltraGameChest getChestByLocation(Location loc){
+        if (chests.containsKey(loc)){
             int id = chests.get(loc);
-            if(id == -1){
+            if (id == -1){
                 return center.getInvs().get(loc);
             } else {
                 return teams.get(id).getChest().getInvs().get(loc);
@@ -147,7 +147,7 @@ public abstract class Game {
         return null;
     }
     
-    public void reset() {
+    public void reset(){
         World s = spectator.getWorld();
         events.forEach(e -> e.stop(this));
         players.clear();
@@ -166,7 +166,7 @@ public abstract class Game {
         starting = plugin.getCm().getStarting();
         plugin.getWc().deleteWorld(s, (w) -> new BukkitRunnable() {
             @Override
-            public void run() {
+            public void run(){
                 inFinish = false;
                 updateWorld(w);
                 lobby.getWorld().setTime(500);
@@ -191,14 +191,14 @@ public abstract class Game {
         }.runTaskLater(plugin, 20L));
     }
     
-    public void removePlayer(Player p) {
+    public void removePlayer(Player p){
         removePlayerAllTeam(p);
         vote.removeVotePlayer(p);
         UltraSkyWars plugin = UltraSkyWars.get();
-        if(gamePlayer.containsKey(p.getUniqueId())){
+        if (gamePlayer.containsKey(p.getUniqueId())){
             GamePlayer gp = gamePlayer.get(p.getUniqueId());
             SWPlayer sw = plugin.getDb().getSWPlayer(p);
-            if(sw != null){
+            if (sw != null){
                 plugin.getAdm().addCoins(p, gp.getCoins());
                 sw.addSouls(gp.getSouls());
                 sw.addXp(gp.getXP());
@@ -213,24 +213,24 @@ public abstract class Game {
         gamePlayer.remove(p.getUniqueId());
         gamePlayerNames.remove(p.getName());
         playerTeam.remove(p.getUniqueId());
-        if(isState(State.WAITING) || isState(State.STARTING)){
+        if (isState(State.WAITING) || isState(State.STARTING)){
             sendGameSound(CustomSound.QUIT_PLAYER);
             sendGameMessage(plugin.getLang().get(p, "messages.quit").replace("<suffix>", plugin.getAdm().getPlayerSuffix(p)).replaceAll("<player>", p.getName()).replaceAll("<players>", String.valueOf(players.size())).replaceAll("<max>", String.valueOf(getMax())));
         }
         plugin.getGm().updateGame(name, color, state.name(), gameType, players.size(), max);
         plugin.getGem().updateInventories(gameType, "none");
-        if(winDances.containsKey(p.getUniqueId())){
+        if (winDances.containsKey(p.getUniqueId())){
             winDances.remove(p.getUniqueId()).stop();
         }
-        if(winEffects.containsKey(p.getUniqueId())){
+        if (winEffects.containsKey(p.getUniqueId())){
             winEffects.remove(p.getUniqueId()).stop();
         }
-        if(killEffects.containsKey(p.getUniqueId())){
+        if (killEffects.containsKey(p.getUniqueId())){
             killEffects.remove(p.getUniqueId()).stop();
         }
-        if(plugin.getTgm().hasTag(p)){
+        if (plugin.getTgm().hasTag(p)){
             SWPlayer sw = plugin.getDb().getSWPlayer(p);
-            if(sw != null){
+            if (sw != null){
                 PlayerListener.executeTag(plugin, p, this, sw);
                 plugin.getCos().executeTaunt(p, this, sw.getTaunt());
             }
@@ -243,7 +243,7 @@ public abstract class Game {
         Utils.updateSB(this, false);
     }
     
-    public void updateVisible() {
+    public void updateVisible(){
         for ( Player to : players ){
             for ( Player from : players ){
                 to.showPlayer(from);
@@ -252,16 +252,16 @@ public abstract class Game {
         }
     }
     
-    public void addEnderPearl(Player p) {
+    public void addEnderPearl(Player p){
         UltraSkyWars plugin = UltraSkyWars.get();
         enderpearls.put(p.getUniqueId(), System.currentTimeMillis() + (plugin.getCm().getEnderPearlSeconds() * 1000L));
     }
     
-    public int getEnderPearlCountdown(Player p) {
-        if(enderpearls.containsKey(p.getUniqueId())){
+    public int getEnderPearlCountdown(Player p){
+        if (enderpearls.containsKey(p.getUniqueId())){
             long time = enderpearls.get(p.getUniqueId());
             int restant = (int) (time - System.currentTimeMillis()) / 1000;
-            if(restant > 0){
+            if (restant > 0){
                 return restant;
             }
             enderpearls.remove(p.getUniqueId());
@@ -269,7 +269,7 @@ public abstract class Game {
         return 0;
     }
     
-    public void updateWorld(World w) {
+    public void updateWorld(World w){
         lobby.setWorld(w);
         spectator.setWorld(w);
         for ( Location l : center.getChests() ){
@@ -283,31 +283,31 @@ public abstract class Game {
         }
     }
     
-    public void remove(Player p) {
+    public void remove(Player p){
         removePlayerAllTeam(p);
         players.remove(p);
         noDamaged.remove(p);
         enderpearls.remove(p.getUniqueId());
-        if(!spectators.contains(p)){
+        if (!spectators.contains(p)){
             spectators.add(p);
         }
     }
     
-    public void forceStart(Player p) {
+    public void forceStart(Player p){
         setState(State.STARTING);
         starting = 5;
         UltraSkyWars plugin = UltraSkyWars.get();
         sendGameMessage(plugin.getLang().get("messages.forceStart").replaceAll("<player>", p.getName()));
-        if(min < max){
+        if (min < max){
             plugin.broadcastGame(this);
         }
         plugin.getGm().addGameUpdating(id);
     }
     
-    public void setSpect(Player p) {
+    public void setSpect(Player p){
         UltraSkyWars plugin = UltraSkyWars.get();
         p.spigot().setCollidesWithEntities(false);
-        if(gamePlayer.containsKey(p.getUniqueId())){
+        if (gamePlayer.containsKey(p.getUniqueId())){
             gamePlayer.get(p.getUniqueId()).setDead(true);
         } else {
             GamePlayer gp = new GamePlayer(p, this, true);
@@ -332,9 +332,9 @@ public abstract class Game {
         checkWin();
     }
     
-    public void checkStart() {
-        if(isState(State.WAITING)){
-            if(min <= players.size()){
+    public void checkStart(){
+        if (isState(State.WAITING)){
+            if (min <= players.size()){
                 updateVisible();
                 setState(State.STARTING);
                 UltraSkyWars plugin = UltraSkyWars.get();
@@ -345,9 +345,9 @@ public abstract class Game {
         }
     }
     
-    public void checkCancel() {
-        if(isState(State.STARTING)){
-            if(min > players.size()){
+    public void checkCancel(){
+        if (isState(State.STARTING)){
+            if (min > players.size()){
                 cancel();
                 UltraSkyWars plugin = UltraSkyWars.get();
                 plugin.getGm().removeGameUpdating(id);
@@ -355,21 +355,21 @@ public abstract class Game {
         }
     }
     
-    public void update() {
-        if(isState(State.WAITING)){
+    public void update(){
+        if (isState(State.WAITING)){
             updateBar();
-        } else if(isState(State.STARTING)){
+        } else if (isState(State.STARTING)){
             updateBar();
             updateStarting();
-        } else if(isState(State.PREGAME)){
+        } else if (isState(State.PREGAME)){
             updateBar();
             updatePreGame();
-        } else if(isState(State.GAME)){
+        } else if (isState(State.GAME)){
             updateGame();
-        } else if(isState(State.FINISH)){
+        } else if (isState(State.FINISH)){
             updateFinish();
-        } else if(isState(State.RESTARTING)){
-            if(!inReset){
+        } else if (isState(State.RESTARTING)){
+            if (!inReset){
                 inReset = true;
                 reset();
                 UltraSkyWars plugin = UltraSkyWars.get();
@@ -378,10 +378,10 @@ public abstract class Game {
         }
     }
     
-    public void debug() {
-        if(isState(State.FINISH) && players.isEmpty()){
+    public void debug(){
+        if (isState(State.FINISH) && players.isEmpty()){
             setState(State.RESTARTING);
-            if(!inReset){
+            if (!inReset){
                 inReset = true;
                 reset();
                 UltraSkyWars plugin = UltraSkyWars.get();
@@ -390,25 +390,25 @@ public abstract class Game {
         }
     }
     
-    public void updateGame() {
+    public void updateGame(){
         Utils.updateSB(this, false);
         GameEvent e = getNowEvent();
-        if(e == null) return;
+        if (e == null) return;
         e.update();
         int s = e.getTime();
-        if(s == 0){
+        if (s == 0){
             event++;
             UltraSkyWars plugin = UltraSkyWars.get();
-            if(plugin.getCm().isChestHolograms()){
+            if (plugin.getCm().isChestHolograms()){
                 teams.values().forEach(t -> t.getChest().getInvs().values().stream().filter(UltraGameChest::isSpawned).forEach(UltraGameChest::hide));
                 center.getInvs().values().stream().filter(UltraGameChest::isSpawned).forEach(UltraGameChest::hide);
             }
             e.start(this);
             plugin.getVc().getReflection().sendTitle(plugin.getLang().get("titles." + e.getName() + ".title"), plugin.getLang().get("titles." + e.getName() + ".subtitle"), 0, 30, 0, getPlayers());
         } else {
-            if(e.getName().equals("refill")){
+            if (e.getName().equals("refill")){
                 UltraSkyWars plugin = UltraSkyWars.get();
-                if(plugin.getCm().isChestHolograms()){
+                if (plugin.getCm().isChestHolograms()){
                     String text = plugin.getLang().get("timer").replace("<time>", Utils.convertTime(e.getTime()));
                     teams.values().forEach(t -> t.getChest().getInvs().values().stream().filter(UltraGameChest::isSpawned).forEach(c -> c.updateTimer(text)));
                     center.getInvs().values().stream().filter(UltraGameChest::isSpawned).forEach(c -> c.updateTimer(text));
@@ -417,7 +417,7 @@ public abstract class Game {
         }
     }
     
-    public void cancel() {
+    public void cancel(){
         UltraSkyWars plugin = UltraSkyWars.get();
         this.starting = plugin.getCm().getStarting();
         this.pregame = plugin.getCm().getPregame();
@@ -427,61 +427,61 @@ public abstract class Game {
         sendGameSound(CustomSound.CANCELSTART);
     }
     
-    public int getMin() {
+    public int getMin(){
         return min;
     }
     
-    public Map<Location, Integer> getChests() {
+    public Map<Location, Integer> getChests(){
         return chests;
     }
     
-    public void checkWin() {
-        if(!isState(State.GAME)) return;
-        if(getTeamAlive() <= 1){
+    public void checkWin(){
+        if (!isState(State.GAME)) return;
+        if (getTeamAlive() <= 1){
             setState(State.FINISH);
         }
     }
     
-    public void addWinDance(UUID executer, WinDance wd) {
+    public void addWinDance(UUID executer, WinDance wd){
         winDances.put(executer, wd);
     }
     
-    public void addWinEffects(UUID executer, WinEffect wd) {
+    public void addWinEffects(UUID executer, WinEffect wd){
         winEffects.put(executer, wd);
     }
     
-    public void addKillEffects(UUID executer, KillEffect wd) {
+    public void addKillEffects(UUID executer, KillEffect wd){
         killEffects.put(executer, wd);
     }
     
-    public void sendGameMessage(String msg) {
+    public void sendGameMessage(String msg){
         for ( Player p : cached ){
             p.sendMessage(msg);
         }
     }
     
-    public void sendGameTitle(String title, String subtitle, int fadeIn, int stay, int fadeOut) {
+    public void sendGameTitle(String title, String subtitle, int fadeIn, int stay, int fadeOut){
         UltraSkyWars plugin = UltraSkyWars.get();
         plugin.getVc().getReflection().sendTitle(title, subtitle, fadeIn, stay, fadeOut, cached);
     }
     
-    public void sendGameSound(CustomSound sound) {
+    public void sendGameSound(CustomSound sound){
         for ( Player p : cached ){
             sound.reproduce(p);
         }
     }
     
-    public void addPlayerTeam(Player p, Team team) {
+    public void addPlayerTeam(Player p, Team team){
         team.addMember(p);
         playerTeam.put(p.getUniqueId(), team.getId());
     }
     
-    public long getStarted() {
+    public long getStarted(){
         return started;
     }
     
-    public GameEvent getNowEvent() {
-        if(events.isEmpty() || event >= events.size()){
+    public GameEvent getNowEvent(){
+        if (events.isEmpty() || event >= events.size()){
             return null;
         }
         return events.get(event);
@@ -497,8 +497,8 @@ public abstract class Game {
         return null;
     }
     
-    public void removePlayerAllTeam(Player p) {
-        if(!playerTeam.containsKey(p.getUniqueId())){
+    public void removePlayerAllTeam(Player p){
+        if (!playerTeam.containsKey(p.getUniqueId())){
             return;
         }
         int id = playerTeam.get(p.getUniqueId());
@@ -506,214 +506,214 @@ public abstract class Game {
         playerTeam.remove(p.getUniqueId());
     }
     
-    public GamePlayer getGamePlayerByName(String name) {
-        if(gamePlayerNames.containsKey(name)){
+    public GamePlayer getGamePlayerByName(String name){
+        if (gamePlayerNames.containsKey(name)){
             return gamePlayer.get(gamePlayerNames.get(name));
         }
         return null;
     }
     
-    public GamePlayer getGamePlayerByKills(int kills, List<GamePlayer> except) {
+    public GamePlayer getGamePlayerByKills(int kills, List<GamePlayer> except){
         for ( GamePlayer gp : gamePlayer.values() ){
-            if(gp.getKills() == kills && !except.contains(gp)){
+            if (gp.getKills() == kills && !except.contains(gp)){
                 return gp;
             }
         }
         return null;
     }
     
-    public int getPregame() {
+    public int getPregame(){
         return pregame;
     }
     
-    public int getStarting() {
+    public int getStarting(){
         return starting;
     }
     
-    public int getMax() {
+    public int getMax(){
         return max;
     }
     
-    public int getId() {
+    public int getId(){
         return id;
     }
     
-    public int getTeamSize() {
+    public int getTeamSize(){
         return teamSize;
     }
     
-    public boolean isState(State state) {
+    public boolean isState(State state){
         return this.state.equals(state);
     }
     
-    public Location getLobby() {
+    public Location getLobby(){
         return lobby;
     }
     
-    public Location getSpectator() {
+    public Location getSpectator(){
         return spectator;
     }
     
-    public String getName() {
+    public String getName(){
         return name;
     }
     
-    public Team getLastTeam() {
+    public Team getLastTeam(){
         for ( Team team : teams.values() ){
-            if(team.getTeamSize() > 0){
+            if (team.getTeamSize() > 0){
                 return team;
             }
         }
         return null;
     }
     
-    public int getTeamAlive() {
+    public int getTeamAlive(){
         int c = 0;
         for ( Team team : teams.values() ){
-            if(team.getTeamSize() > 0){
+            if (team.getTeamSize() > 0){
                 c++;
             }
         }
         return c;
     }
     
-    public Team getTeamPlayer(Player p) {
-        if(!playerTeam.containsKey(p.getUniqueId())){
+    public Team getTeamPlayer(Player p){
+        if (!playerTeam.containsKey(p.getUniqueId())){
             return null;
         }
         return teams.get(playerTeam.get(p.getUniqueId()));
     }
     
-    public GameChest getCenter() {
+    public GameChest getCenter(){
         return center;
     }
     
-    public Collection<Player> getPlayers() {
+    public Collection<Player> getPlayers(){
         return players;
     }
     
-    public Collection<Player> getSpectators() {
+    public Collection<Player> getSpectators(){
         return spectators;
     }
     
-    public Map<Integer, Team> getTeams() {
+    public Map<Integer, Team> getTeams(){
         return teams;
     }
     
-    public Collection<Player> getCached() {
+    public Collection<Player> getCached(){
         return cached;
     }
     
-    public Collection<Player> getNoDamaged() {
+    public Collection<Player> getNoDamaged(){
         return noDamaged;
     }
     
-    public State getState() {
+    public State getState(){
         return state;
     }
     
-    public void setState(State state) {
+    public void setState(State state){
         this.state = state;
         UltraSkyWars plugin = UltraSkyWars.get();
         plugin.getGm().updateGame(name, color, state.name(), gameType, players.size(), max);
         plugin.getGem().updateInventories(gameType, "none");
     }
     
-    public String getChestType() {
+    public String getChestType(){
         return chestType;
     }
     
-    public void setChestType(String chestType) {
+    public void setChestType(String chestType){
         this.chestType = chestType;
     }
     
-    public FinalType getFinalType() {
+    public FinalType getFinalType(){
         return finalType;
     }
     
-    public void setFinalType(FinalType finalType) {
+    public void setFinalType(FinalType finalType){
         this.finalType = finalType;
     }
     
-    public HealthType getHealthType() {
+    public HealthType getHealthType(){
         return healthType;
     }
     
-    public void setHealthType(HealthType healthType) {
+    public void setHealthType(HealthType healthType){
         this.healthType = healthType;
     }
     
-    public ProjectileType getProjectileType() {
+    public ProjectileType getProjectileType(){
         return projectileType;
     }
     
-    public void setProjectileType(ProjectileType projectileType) {
+    public void setProjectileType(ProjectileType projectileType){
         this.projectileType = projectileType;
     }
     
-    public TimeType getTimeType() {
+    public TimeType getTimeType(){
         return timeType;
     }
     
-    public void setTimeType(TimeType timeType) {
+    public void setTimeType(TimeType timeType){
         this.timeType = timeType;
     }
     
-    public String getGameType() {
+    public String getGameType(){
         return gameType;
     }
     
-    public Map<UUID, GamePlayer> getGamePlayer() {
+    public Map<UUID, GamePlayer> getGamePlayer(){
         return gamePlayer;
     }
     
-    public Vote getVote() {
+    public Vote getVote(){
         return vote;
     }
     
-    public ArrayList<GameEvent> getEvents() {
+    public ArrayList<GameEvent> getEvents(){
         return events;
     }
     
-    public void setEvents(ArrayList<GameEvent> events) {
+    public void setEvents(ArrayList<GameEvent> events){
         this.events = events;
     }
     
-    public boolean isVotes() {
+    public boolean isVotes(){
         return votes;
     }
     
-    public String getColor() {
-        if(color.equals("none")){
+    public String getColor(){
+        if (color.equals("none")){
             return "";
         }
         return color;
     }
     
-    public int getBorderX() {
+    public int getBorderX(){
         return borderX;
     }
     
-    public int getBorderZ() {
+    public int getBorderZ(){
         return borderZ;
     }
     
-    public void updateSign() {
+    public void updateSign(){
         UltraSkyWars.get().getGm().updateGame(name, color, state.name(), gameType, players.size(), max);
     }
     
-    public void updateSpectatorOptions(Player p) {
+    public void updateSpectatorOptions(Player p){
         SWPlayer sw = UltraSkyWars.get().getDb().getSWPlayer(p);
-        if(sw == null) return;
+        if (sw == null) return;
         p.setAllowFlight(true);
         p.setFlying(true);
         p.setFlySpeed(sw.getSpeed());
-        if(sw.isNightVision()){
+        if (sw.isNightVision()){
             p.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 999999, 999999));
         } else {
             p.removePotionEffect(PotionEffectType.NIGHT_VISION);
         }
-        if(sw.isSpectatorsView()){
+        if (sw.isSpectatorsView()){
             for ( Player s : spectators ){
                 p.showPlayer(s);
             }
@@ -724,8 +724,8 @@ public abstract class Game {
         }
     }
     
-    public void updateFinish() {
-        if(!inFinish){
+    public void updateFinish(){
+        if (!inFinish){
             USWGameFinishEvent event = new USWGameFinishEvent(this, cached, teams.values(), vote);
             Bukkit.getServer().getPluginManager().callEvent(event);
             inFinish = true;
@@ -733,9 +733,9 @@ public abstract class Game {
             for ( GameEvent e : events ){
                 e.stop(this);
             }
-            if(al <= 1){
+            if (al <= 1){
                 Team team = getLastTeam();
-                if(team != null){
+                if (team != null){
                     GameWin win = new GameWin(this);
                     win.setTeamWin(team);
                     USWGameWinEvent wie = new USWGameWinEvent(this, team);
@@ -744,31 +744,31 @@ public abstract class Game {
                     UltraSkyWars plugin = UltraSkyWars.get();
                     for ( Player p : team.getMembers() ){
                         SWPlayer sp = plugin.getDb().getSWPlayer(p);
-                        if(sp == null) continue;
+                        if (sp == null) continue;
                         sp.addStat(StatType.WINS, gameType, 1);
                         GamePlayer gp = gamePlayer.get(p.getUniqueId());
-                        if(gameType.equals("RANKED")){
+                        if (gameType.equals("RANKED")){
                             int elo;
-                            if(plugin.getIjm().getEloRank().getErm().isRandomEnabled()){
+                            if (plugin.getIjm().getEloRank().getErm().isRandomEnabled()){
                                 elo = ThreadLocalRandom.current().nextInt(plugin.getIjm().getEloRank().getErm().getRandomMin(), plugin.getIjm().getEloRank().getErm().getRandomMax());
                             } else {
                                 elo = plugin.getIjm().getEloRank().getErm().getExactlyWin();
                             }
                             sp.addElo(elo);
-                            if(elo > 0){
+                            if (elo > 0){
                                 p.sendMessage(plugin.getLang().get("messages.changeEloMayor").replace("<elo>", String.valueOf(elo)));
                             } else {
                                 p.sendMessage(plugin.getLang().get("messages.changeEloMinor").replace("<elo>", String.valueOf(elo)));
                             }
                         }
-                        if(gp != null){
+                        if (gp != null){
                             gp.addCoins(plugin.getCm().getCoinsWin());
                             gp.addXP(plugin.getCm().getXpWin());
                             gp.addSouls(plugin.getCm().getSoulsWin());
                         }
                         plugin.getCos().executeWinDance(this, p, sp.getWinDance());
                         plugin.getCos().executeWinEffect(this, p, sp.getWinEffect());
-                        if(plugin.getCm().isWCMDEnabled()){
+                        if (plugin.getCm().isWCMDEnabled()){
                             plugin.getCm().getWinCommands().forEach(c -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), c.replaceAll("<player>", p.getName())));
                         }
                     }
@@ -785,7 +785,7 @@ public abstract class Game {
             UltraSkyWars plugin = UltraSkyWars.get();
             new BukkitRunnable() {
                 @Override
-                public void run() {
+                public void run(){
                     winEffects.values().forEach(WinEffect::stop);
                     winDances.values().forEach(WinDance::stop);
                     killEffects.values().forEach(KillEffect::stop);
@@ -797,11 +797,11 @@ public abstract class Game {
         }
     }
     
-    public int getBorderStart() {
+    public int getBorderStart(){
         return borderStart;
     }
     
-    public int getBorderEnd() {
+    public int getBorderEnd(){
         return borderEnd;
     }
     

@@ -12,40 +12,40 @@ public class Placeholders extends PlaceholderExpansion {
     
     private final InjectionEloRank plugin;
     
-    public Placeholders(InjectionEloRank plugin) {
+    public Placeholders(InjectionEloRank plugin){
         this.plugin = plugin;
     }
     
-    public String getIdentifier() {
+    public String getIdentifier(){
         return "uswranked";
     }
     
-    public String getAuthor() {
+    public String getAuthor(){
         return "Leonardo0013YT";
     }
     
-    public String getVersion() {
+    public String getVersion(){
         return "1.0.0";
     }
     
     @Override
-    public boolean persist() {
+    public boolean persist(){
         return true;
     }
     
     @Override
-    public String onPlaceholderRequest(Player p, String id) {
+    public String onPlaceholderRequest(Player p, String id){
         SWPlayer sw = UltraSkyWars.get().getDb().getSWPlayer(p);
-        if(sw == null){
+        if (sw == null){
             return "";
         }
-        if(id.equals("progress")){
+        if (id.equals("progress")){
             EloRank er = plugin.getErm().getEloRank(p);
             int elo = sw.getElo() - er.getMin();
             int max = er.getMax() - er.getMin();
             return Utils.getProgressBar(elo, max, UltraSkyWars.get().getCm().getProgressBarAmount());
         }
-        if(id.equals("rank")){
+        if (id.equals("rank")){
             return plugin.getErm().getEloRankChat(p);
         }
         return null;

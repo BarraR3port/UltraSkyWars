@@ -14,37 +14,37 @@ public class SoulWellSetup {
     private final ArrayList<SoulWellRewardSetup> rewards = new ArrayList<>();
     private SoulWellRewardSetup actual;
     
-    public SoulWellSetup(UltraSkyWars plugin) {
+    public SoulWellSetup(UltraSkyWars plugin){
         this.plugin = plugin;
     }
     
-    public SoulWellRewardSetup getActual() {
+    public SoulWellRewardSetup getActual(){
         return actual;
     }
     
-    public void setActual(SoulWellRewardSetup actual) {
+    public void setActual(SoulWellRewardSetup actual){
         this.actual = actual;
     }
     
-    public ArrayList<SoulWellRewardSetup> getRewards() {
+    public ArrayList<SoulWellRewardSetup> getRewards(){
         return rewards;
     }
     
-    public void saveSoulWellReward(Player p) {
+    public void saveSoulWellReward(Player p){
         SoulWellRewardSetup tts = actual;
         rewards.add(tts);
         actual = null;
         p.sendMessage(plugin.getLang().get(p, "setup.soulwellreward.save"));
     }
     
-    public void saveSoulWell(Player p) {
+    public void saveSoulWell(Player p){
         int id = plugin.getLvl().getNextID();
         for ( SoulWellRewardSetup swrs : rewards ){
             plugin.getRewards().set("rewards." + id + ".name", swrs.getName());
             plugin.getRewards().set("rewards." + id + ".type", swrs.getType().name());
             plugin.getRewards().set("rewards." + id + ".chance", swrs.getChance());
             Material m = swrs.getIcon().getType();
-            if(m.equals(XMaterial.PLAYER_HEAD.parseMaterial())){
+            if (m.equals(XMaterial.PLAYER_HEAD.parseMaterial())){
                 plugin.getRewards().set("rewards." + id + ".icon", NBTEditor.getTexture(swrs.getIcon()));
                 plugin.getRewards().set("rewards." + id + ".iconName", (swrs.getIcon().getItemMeta().hasDisplayName()) ? swrs.getIcon().getItemMeta().getDisplayName() : "§aDefault Name");
                 plugin.getRewards().set("rewards." + id + ".iconLore", (swrs.getIcon().getItemMeta().hasLore()) ? swrs.getIcon().getItemMeta().getLore() : new ArrayList<>());

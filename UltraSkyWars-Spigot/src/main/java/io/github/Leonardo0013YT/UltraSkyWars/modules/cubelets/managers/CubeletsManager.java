@@ -18,38 +18,38 @@ public class CubeletsManager {
     private final UltraSkyWars plugin;
     private final InjectionCubelets injectionCubelets;
     
-    public CubeletsManager(UltraSkyWars plugin, InjectionCubelets injectionCubelets) {
+    public CubeletsManager(UltraSkyWars plugin, InjectionCubelets injectionCubelets){
         this.plugin = plugin;
         this.injectionCubelets = injectionCubelets;
         loadCubelets();
     }
     
-    public void loadCubelets() {
+    public void loadCubelets(){
         cubelets.clear();
-        if(plugin.getConfig().isSet("cubelets")){
+        if (plugin.getConfig().isSet("cubelets")){
             ConfigurationSection soul = plugin.getConfig().getConfigurationSection("cubelets");
             for ( String s : soul.getKeys(false) ){
                 Location loc = Utils.getStringLocation(plugin.getConfig().getString("cubelets." + s + ".loc"));
-                if(loc == null) continue;
+                if (loc == null) continue;
                 cubelets.put(loc, new Cubelets(plugin, injectionCubelets, loc));
             }
         }
     }
     
-    public void executeCubelet(Player p) {
+    public void executeCubelet(Player p){
         int random = ThreadLocalRandom.current().nextInt(0, 101);
-        if(random < plugin.getCm().getCubeletChance()){
+        if (random < plugin.getCm().getCubeletChance()){
             SWPlayer sw = plugin.getDb().getSWPlayer(p);
             sw.addCubelets(1);
             p.sendMessage(plugin.getLang().get(p, "winCubelet"));
         }
     }
     
-    public HashMap<Location, Cubelets> getCubelets() {
+    public HashMap<Location, Cubelets> getCubelets(){
         return cubelets;
     }
     
-    public void reload() {
+    public void reload(){
         cubelets.values().forEach(Cubelets::reload);
     }
     

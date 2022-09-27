@@ -34,7 +34,7 @@ public class SoulWell3DAnimation implements SoulWellAnimation {
     private final Collection<Entity> items = new ArrayList<>();
     private float lastVel;
     
-    public SoulWell3DAnimation(UltraSkyWars plugin, InjectionSoulWell is, SoulWellSession sws, Player p, SoulWellRow row, Location loc) {
+    public SoulWell3DAnimation(UltraSkyWars plugin, InjectionSoulWell is, SoulWellSession sws, Player p, SoulWellRow row, Location loc){
         this.plugin = plugin;
         this.inv = Bukkit.createInventory(null, 45, plugin.getLang().get(null, "menus.soulwellmenu.title"));
         this.is = is;
@@ -45,7 +45,7 @@ public class SoulWell3DAnimation implements SoulWellAnimation {
     }
     
     @Override
-    public void execute() {
+    public void execute(){
         sws.deleteHologram();
         lastVel = p.getWalkSpeed();
         p.setWalkSpeed(0f);
@@ -67,7 +67,7 @@ public class SoulWell3DAnimation implements SoulWellAnimation {
             int i = 0;
             
             @Override
-            public void run() {
+            public void run(){
                 for ( Entity e : items ){
                     e.remove();
                 }
@@ -82,7 +82,7 @@ public class SoulWell3DAnimation implements SoulWellAnimation {
                     items.add(item);
                 }
                 i++;
-                if(i >= 30){
+                if (i >= 30){
                     for ( Entity e : items ){
                         e.remove();
                     }
@@ -98,7 +98,7 @@ public class SoulWell3DAnimation implements SoulWellAnimation {
         tasks.add(task);
     }
     
-    private void execute3DAnimation2() {
+    private void execute3DAnimation2(){
         sws.setRolling(true);
         p.openInventory(inv);
         p.setWalkSpeed(lastVel);
@@ -111,7 +111,7 @@ public class SoulWell3DAnimation implements SoulWellAnimation {
         }
         new BukkitRunnable() {
             @Override
-            public void run() {
+            public void run(){
                 sws.setRolling(false);
                 p.closeInventory();
                 is.getSwm().removeSession(p);
@@ -121,27 +121,27 @@ public class SoulWell3DAnimation implements SoulWellAnimation {
     }
     
     @Override
-    public void cancel(Player p) {
-        if(sws.isDeleted()){
+    public void cancel(Player p){
+        if (sws.isDeleted()){
             sws.recreateHologram();
         }
         for ( BukkitTask bt : tasks ){
-            if(bt == null) continue;
+            if (bt == null) continue;
             bt.cancel();
         }
         for ( ArmorStand a : armors ){
-            if(a == null || a.isDead()) continue;
+            if (a == null || a.isDead()) continue;
             a.remove();
         }
         for ( Entity i : items ){
-            if(i == null || i.isDead()) continue;
+            if (i == null || i.isDead()) continue;
             i.remove();
         }
         p.setWalkSpeed(lastVel);
     }
     
     @Override
-    public Inventory getInv() {
+    public Inventory getInv(){
         return inv;
     }
     

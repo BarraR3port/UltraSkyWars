@@ -20,57 +20,57 @@ public class SetupCMD implements CommandExecutor {
     
     private final UltraSkyWars plugin;
     
-    public SetupCMD(UltraSkyWars plugin) {
+    public SetupCMD(UltraSkyWars plugin){
         this.plugin = plugin;
     }
     
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if(sender instanceof Player){
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
+        if (sender instanceof Player){
             Player p = (Player) sender;
-            if(!p.hasPermission("usw.admin")){
+            if (!p.hasPermission("usw.admin")){
                 p.sendMessage(plugin.getLang().get(p, "messages.noPermission"));
                 return true;
             }
-            if(args.length < 1){
+            if (args.length < 1){
                 sendHelp(p);
                 return true;
             }
-            switch(args[0].toLowerCase()) {
+            switch(args[0].toLowerCase()){
                 case "setpreview":
-                    if(args.length < 2){
+                    if (args.length < 2){
                         sendHelp(p);
                         return true;
                     }
                     String type = args[1].toUpperCase();
-                    if(!type.equals("BALLOON") && !type.equals("GLASS")){
+                    if (!type.equals("BALLOON") && !type.equals("GLASS")){
                         p.sendMessage(plugin.getLang().get("setup.noTypePreview"));
                         return true;
                     }
-                    if(!plugin.getSm().isSetupPreview(p)){
+                    if (!plugin.getSm().isSetupPreview(p)){
                         plugin.getSm().setSetupPreview(p, new PreviewSetup(type));
                     }
                     PreviewSetup sp = plugin.getSm().getSetupPreview(p);
                     plugin.getSem().createPreviewMenu(p, sp);
                     break;
                 case "createchest":
-                    if(args.length < 2){
+                    if (args.length < 2){
                         sendHelp(p);
                         return true;
                     }
                     String cName = args[1];
-                    if(!plugin.getSm().isChestType(p)){
+                    if (!plugin.getSm().isChestType(p)){
                         plugin.getSm().setChestType(p, new ChestTypeSetup(cName));
                     }
                     plugin.getSem().createChestSetupMenu(p, plugin.getSm().getChestType(p));
                     break;
                 case "reload":
-                    if(args.length == 1){
+                    if (args.length == 1){
                         plugin.reload();
                         p.sendMessage(plugin.getLang().get(p, "setup.reload"));
                         return true;
                     }
-                    switch(args[1].toLowerCase()) {
+                    switch(args[1].toLowerCase()){
                         case "lang":
                             plugin.reloadLang();
                             p.sendMessage(plugin.getLang().get(p, "setup.reloadLang"));
@@ -85,23 +85,23 @@ public class SetupCMD implements CommandExecutor {
                     }
                     break;
                 case "setupblock":
-                    if(args.length < 2){
+                    if (args.length < 2){
                         sendHelp(p);
                         return true;
                     }
-                    switch(args[1].toLowerCase()) {
+                    switch(args[1].toLowerCase()){
                         case "cubelets":
-                            if(!plugin.getIjm().isCubeletsInjection()){
+                            if (!plugin.getIjm().isCubeletsInjection()){
                                 p.sendMessage(plugin.getLang().get(p, "injections.cubelets"));
                                 return true;
                             }
-                            if(!plugin.getSm().isSetupCubeBlock(p)){
+                            if (!plugin.getSm().isSetupCubeBlock(p)){
                                 plugin.getSm().setSetupCubeBlock(p);
                             }
                             p.sendMessage(plugin.getLang().get(p, "messages.addRemoveBlock"));
                             break;
                         case "soulwell":
-                            if(!plugin.getSm().isSetupSoulBlock(p)){
+                            if (!plugin.getSm().isSetupSoulBlock(p)){
                                 plugin.getSm().setSetupSoulBlock(p);
                             }
                             p.sendMessage(plugin.getLang().get(p, "messages.addRemoveBlock"));
@@ -112,22 +112,22 @@ public class SetupCMD implements CommandExecutor {
                     }
                     break;
                 case "rewards":
-                    if(!plugin.getSm().isSetupSoulWell(p)){
+                    if (!plugin.getSm().isSetupSoulWell(p)){
                         plugin.getSm().setSetupSoulWell(p, new SoulWellSetup(plugin));
                     }
                     plugin.getSem().createSoulWellMenu(p);
                     break;
                 case "create":
-                    if(args.length < 2){
+                    if (args.length < 2){
                         sendHelp(p);
                         return true;
                     }
-                    if(plugin.getSm().isSetup(p)){
+                    if (plugin.getSm().isSetup(p)){
                         p.sendMessage(plugin.getLang().get(p, "setup.alreadyCreating"));
                         return true;
                     }
                     String name = args[1];
-                    if(plugin.getGm().getGameByName(name) != null){
+                    if (plugin.getGm().getGameByName(name) != null){
                         p.sendMessage(plugin.getLang().get("setup.arena.alreadyMapEdit"));
                         return true;
                     }
@@ -137,7 +137,7 @@ public class SetupCMD implements CommandExecutor {
                     }*/
                     World w = plugin.getWc().createEmptyWorld(name);
                     w.getBlockAt(0, 75, 0).setType(Material.STONE);
-                    if(p.teleport(w.getSpawnLocation())){
+                    if (p.teleport(w.getSpawnLocation())){
                         p.getInventory().clear();
                         p.getInventory().remove(plugin.getIm().getSetup());
                         p.getInventory().remove(plugin.getIm().getCenter());
@@ -147,21 +147,21 @@ public class SetupCMD implements CommandExecutor {
                     }
                     break;
                 case "edit":
-                    if(args.length < 2){
+                    if (args.length < 2){
                         sendHelp(p);
                         return true;
                     }
-                    if(plugin.getSm().isSetup(p)){
+                    if (plugin.getSm().isSetup(p)){
                         p.sendMessage(plugin.getLang().get(p, "setup.alreadyCreating"));
                         return true;
                     }
                     String name2 = args[1];
-                    if(plugin.getGm().getGameByName(name2) == null){
+                    if (plugin.getGm().getGameByName(name2) == null){
                         return true;
                     }
                     plugin.getSm().setSetup(p, new ArenaSetup(plugin, p, name2, name2));
                     World w2 = Bukkit.getWorld(name2);
-                    if(p.teleport(w2.getSpawnLocation())){
+                    if (p.teleport(w2.getSpawnLocation())){
                         p.getInventory().clear();
                         p.getInventory().remove(plugin.getIm().getSetup());
                         p.getInventory().remove(plugin.getIm().getCenter());
@@ -169,17 +169,17 @@ public class SetupCMD implements CommandExecutor {
                         p.sendMessage("§aNow you're editing the map §e" + name2 + "§a.");
                     }
                     break;
-                case "delete": {
-                    if(args.length < 2){
+                case "delete":{
+                    if (args.length < 2){
                         sendHelp(p);
                         return true;
                     }
                     String delete = args[1];
-                    if(!plugin.getGm().getWorlds().containsKey(delete)){
+                    if (!plugin.getGm().getWorlds().containsKey(delete)){
                         p.sendMessage("§cThis game not exists.");
                         return true;
                     }
-                    if(plugin.getSm().isDelete(p)){
+                    if (plugin.getSm().isDelete(p)){
                         plugin.getArenas().set("arenas." + delete, null);
                         plugin.getArenas().save();
                         plugin.getSm().removeDelete(p);
@@ -190,18 +190,18 @@ public class SetupCMD implements CommandExecutor {
                     p.sendMessage("§cPlease config your delete executing §e/sws delete " + delete + "§c.");
                     break;
                 }
-                case "clone": {
-                    if(args.length < 3){
+                case "clone":{
+                    if (args.length < 3){
                         sendHelp(p);
                         return true;
                     }
                     String arena1 = args[1];
-                    if(!plugin.getGm().getWorlds().containsKey(arena1)){
+                    if (!plugin.getGm().getWorlds().containsKey(arena1)){
                         p.sendMessage("§cThis game not exists.");
                         return true;
                     }
                     String arena2 = args[2];
-                    if(plugin.getGm().getWorlds().containsKey(arena2)){
+                    if (plugin.getGm().getWorlds().containsKey(arena2)){
                         p.sendMessage(plugin.getLang().get("setup.arena.alreadyMapEdit"));
                         return true;
                     }
@@ -212,12 +212,12 @@ public class SetupCMD implements CommandExecutor {
                     break;
                 }
                 case "killsounds":
-                    if(plugin.getSm().isSetupKillSound(p)){
+                    if (plugin.getSm().isSetupKillSound(p)){
                         KillSoundSetup kss = plugin.getSm().getSetupKillSound(p);
                         plugin.getSem().createKillSoundMenu(p, kss);
                         return true;
                     }
-                    if(args.length < 2){
+                    if (args.length < 2){
                         sendHelp(p);
                         return true;
                     }
@@ -228,12 +228,12 @@ public class SetupCMD implements CommandExecutor {
                     p.sendMessage(plugin.getLang().get(p, "setup.killsounds.created").replaceAll("<name>", kss.getName()));
                     break;
                 case "parting":
-                    if(plugin.getSm().isSetupParting(p)){
+                    if (plugin.getSm().isSetupParting(p)){
                         PartingSetup ps = plugin.getSm().getSetupParting(p);
                         plugin.getSem().createPartingMenu(p, ps);
                         return true;
                     }
-                    if(args.length < 2){
+                    if (args.length < 2){
                         sendHelp(p);
                         return true;
                     }
@@ -244,12 +244,12 @@ public class SetupCMD implements CommandExecutor {
                     p.sendMessage(plugin.getLang().get(p, "setup.parting.created").replaceAll("<name>", ps.getName()));
                     break;
                 case "balloons":
-                    if(plugin.getSm().isSetupBalloon(p)){
+                    if (plugin.getSm().isSetupBalloon(p)){
                         BalloonSetup bs = plugin.getSm().getSetupBalloon(p);
                         plugin.getSem().createSetupBalloonsMenu(p, bs);
                         return true;
                     }
-                    if(args.length < 2){
+                    if (args.length < 2){
                         sendHelp(p);
                         return true;
                     }
@@ -260,12 +260,12 @@ public class SetupCMD implements CommandExecutor {
                     p.sendMessage(plugin.getLang().get(p, "setup.balloons.created").replaceAll("<name>", bs.getName()));
                     break;
                 case "trails":
-                    if(plugin.getSm().isSetupTrail(p)){
+                    if (plugin.getSm().isSetupTrail(p)){
                         TrailSetup ts = plugin.getSm().getSetupTrail(p);
                         plugin.getSem().createTrailMenu(p, ts);
                         return true;
                     }
-                    if(args.length < 2){
+                    if (args.length < 2){
                         sendHelp(p);
                         return true;
                     }
@@ -276,12 +276,12 @@ public class SetupCMD implements CommandExecutor {
                     p.sendMessage(plugin.getLang().get(p, "setup.trails.created").replaceAll("<name>", tts.getName()));
                     break;
                 case "taunts":
-                    if(plugin.getSm().isSetupTaunt(p)){
+                    if (plugin.getSm().isSetupTaunt(p)){
                         TauntSetup ts = plugin.getSm().getSetupTaunt(p);
                         plugin.getSem().createTauntMenu(p, ts);
                         return true;
                     }
-                    if(args.length < 2){
+                    if (args.length < 2){
                         sendHelp(p);
                         return true;
                     }
@@ -292,12 +292,12 @@ public class SetupCMD implements CommandExecutor {
                     p.sendMessage(plugin.getLang().get(p, "setup.taunts.created").replaceAll("<name>", ts.getName()));
                     break;
                 case "kits":
-                    if(plugin.getSm().isSetupKit(p)){
+                    if (plugin.getSm().isSetupKit(p)){
                         KitSetup ks = plugin.getSm().getSetupKit(p);
                         plugin.getSem().createKitMenu(p, ks);
                         return true;
                     }
-                    if(args.length < 2){
+                    if (args.length < 2){
                         sendHelp(p);
                         return true;
                     }
@@ -308,7 +308,7 @@ public class SetupCMD implements CommandExecutor {
                     p.sendMessage(plugin.getLang().get(p, "setup.kits.created").replaceAll("<name>", ks.getName()));
                     break;
                 case "chests":
-                    if(plugin.getSm().isSetupChest(p)){
+                    if (plugin.getSm().isSetupChest(p)){
                         ChestSetup gs = plugin.getSm().getSetupChest(p);
                         plugin.getSem().createSetupChestTypeMenu(p, gs);
                         return true;
@@ -316,9 +316,9 @@ public class SetupCMD implements CommandExecutor {
                     plugin.getSem().createSetupChestMenu(p);
                     break;
                 case "glass":
-                    if(args[1].equals("autocreateglass")){
+                    if (args[1].equals("autocreateglass")){
                         String schematicg = args[2].replaceAll(".schematic", "").replaceAll(".schem", "");
-                        if(!Utils.existsFile(schematicg)){
+                        if (!Utils.existsFile(schematicg)){
                             p.sendMessage(plugin.getLang().get(p, "setup.noSchema"));
                             return true;
                         }
@@ -329,19 +329,19 @@ public class SetupCMD implements CommandExecutor {
                         p.sendMessage("Glasses AutoCreated in: " + (System.currentTimeMillis() - time) / 1000 + "ms");
                         return true;
                     }
-                    if(plugin.getSm().isSetupGlass(p)){
+                    if (plugin.getSm().isSetupGlass(p)){
                         GlassSetup gs = plugin.getSm().getSetupGlass(p);
                         plugin.getSem().createGlassMenu(p, gs);
                         return true;
                     }
-                    if(args.length < 4){
+                    if (args.length < 4){
                         sendHelp(p);
                         return true;
                     }
                     String nameg = args[1];
                     String schematicg = args[2].replaceAll(".schematic", "").replaceAll(".schem", "");
                     String cleag = args[3].replaceAll(".schematic", "").replaceAll(".schem", "");
-                    if(!Utils.existsFile(schematicg)){
+                    if (!Utils.existsFile(schematicg)){
                         p.sendMessage(plugin.getLang().get(p, "setup.noSchema"));
                         return true;
                     }
@@ -358,11 +358,11 @@ public class SetupCMD implements CommandExecutor {
                     p.sendMessage(plugin.getLang().get(p, "setup.setMainLobby"));
                     break;
                 case "inventory":
-                    if(args.length < 2){
+                    if (args.length < 2){
                         sendInventories(p);
                         return true;
                     }
-                    switch(args[1].toLowerCase()) {
+                    switch(args[1].toLowerCase()){
                         case "lobby":
                         case "chest":
                         case "health":
@@ -388,7 +388,7 @@ public class SetupCMD implements CommandExecutor {
                         case "gamerankedselector":
                         case "gameallselector":
                         case "kitselector":
-                        case "soulwellmenu": {
+                        case "soulwellmenu":{
                             UltraInventory inventory = plugin.getUim().getMenus(args[1].toLowerCase());
                             plugin.getUim().openInventory(p, inventory);
                             plugin.getSm().setSetupInventory(p, inventory);
@@ -396,8 +396,8 @@ public class SetupCMD implements CommandExecutor {
                         }
                         case "mainparty":
                         case "partymember":
-                        case "partylist": {
-                            if(!plugin.getIjm().isParty()){
+                        case "partylist":{
+                            if (!plugin.getIjm().isParty()){
                                 p.sendMessage(plugin.getLang().get("injections.party"));
                                 return true;
                             }
@@ -412,11 +412,11 @@ public class SetupCMD implements CommandExecutor {
                     }
                     break;
                 case "settop":
-                    if(args.length < 2){
+                    if (args.length < 2){
                         sendHelp(sender);
                         return true;
                     }
-                    switch(args[1].toLowerCase()) {
+                    switch(args[1].toLowerCase()){
                         case "elo":
                         case "kills":
                         case "wins":
@@ -438,17 +438,17 @@ public class SetupCMD implements CommandExecutor {
                     break;
             }
         } else {
-            if(args.length < 1){
+            if (args.length < 1){
                 sendHelp(sender);
                 return true;
             }
-            if("reload".equalsIgnoreCase(args[0])){
-                if(args.length == 1){
+            if ("reload".equalsIgnoreCase(args[0])){
+                if (args.length == 1){
                     plugin.reload();
                     sender.sendMessage(plugin.getLang().get("setup.reload"));
                     return true;
                 }
-                switch(args[1].toLowerCase()) {
+                switch(args[1].toLowerCase()){
                     case "lang":
                         plugin.reloadLang();
                         sender.sendMessage(plugin.getLang().get("setup.reloadLang"));
@@ -466,7 +466,7 @@ public class SetupCMD implements CommandExecutor {
         return false;
     }
     
-    private void sendInventories(Player p) {
+    private void sendInventories(Player p){
         p.sendMessage("§cThe available menus are:");
         p.sendMessage("§7 - §eLobby");
         p.sendMessage("§7 - §eChest");
@@ -493,7 +493,7 @@ public class SetupCMD implements CommandExecutor {
         p.sendMessage("§7 - §eGameSoloSelector");
     }
     
-    private void sendHelp(CommandSender s) {
+    private void sendHelp(CommandSender s){
         s.sendMessage("§7§m---------------§r   §6§lUltraSkyWars §ev" + plugin.getDescription().getVersion() + "§r   §7§m---------------");
         s.sendMessage("§7       §7");
         s.sendMessage("§6§lUltraSkyWars §7- §a§lArena Commands");

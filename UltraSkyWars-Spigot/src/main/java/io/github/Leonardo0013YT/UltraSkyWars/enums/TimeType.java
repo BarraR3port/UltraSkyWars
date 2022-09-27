@@ -9,11 +9,11 @@ public enum TimeType {
     
     private final int time;
     
-    TimeType(int time) {
+    TimeType(int time){
         this.time = time;
     }
     
-    public int getTime() {
+    public int getTime(){
         return time;
     }
 }

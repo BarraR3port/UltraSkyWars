@@ -5,7 +5,7 @@ import io.github.Leonardo0013YT.UltraSkyWars.modules.SpecialItems.items.SpecialI
 
 public class EndBuffItem extends SpecialItem {
     
-    public EndBuffItem(InjectionSpecialItems isi) {
+    public EndBuffItem(InjectionSpecialItems isi){
     
     }
     

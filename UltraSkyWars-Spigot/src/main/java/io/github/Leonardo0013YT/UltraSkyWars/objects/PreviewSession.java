@@ -22,12 +22,12 @@ public class PreviewSession {
     private final int food;
     private final double maxHealth;
     private final double health;
-    private int id;
     private final Collection<Integer> entityId = new ArrayList<>();
     private final GameMode mode;
     private final Player p;
+    private int id;
     
-    public PreviewSession(int id, Player p) {
+    public PreviewSession(int id, Player p){
         this.id = id;
         this.p = p;
         this.inv = p.getInventory().getContents();
@@ -44,7 +44,7 @@ public class PreviewSession {
         this.lastLocation = p.getLocation();
     }
     
-    public void reset() {
+    public void reset(){
         p.getActivePotionEffects().forEach(e -> p.removePotionEffect(e.getType()));
         p.getInventory().clear();
         p.getInventory().setArmorContents(null);
@@ -63,19 +63,19 @@ public class PreviewSession {
         p.updateInventory();
     }
     
-    public Collection<Integer> getEntityId() {
+    public Collection<Integer> getEntityId(){
         return entityId;
     }
     
-    public void addEntityId(int id) {
+    public void addEntityId(int id){
         entityId.add(id);
     }
     
-    public int getId() {
+    public int getId(){
         return id;
     }
     
-    public void setId(int id) {
+    public void setId(int id){
         this.id = id;
     }
 }

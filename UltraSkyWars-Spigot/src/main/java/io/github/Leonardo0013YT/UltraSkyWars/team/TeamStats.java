@@ -9,7 +9,7 @@ public class TeamStats {
     @Getter
     private int potions, blocks, projectiles, others;
     
-    public TeamStats(int teamSize, int chests) {
+    public TeamStats(int teamSize, int chests){
         this.teamSize = teamSize;
         this.chests = chests;
         potions = 0;
@@ -19,44 +19,44 @@ public class TeamStats {
     }
     
     
-    public void addProjectiles() {
+    public void addProjectiles(){
         projectiles++;
     }
     
-    public void addPotions() {
+    public void addPotions(){
         potions++;
     }
     
-    public void addBlocks() {
+    public void addBlocks(){
         blocks++;
     }
     
-    public void addOthers() {
+    public void addOthers(){
         others++;
     }
     
-    public boolean areProjectilesAvailable() {
-        if(teamSize == 0) return true;
+    public boolean areProjectilesAvailable(){
+        if (teamSize == 0) return true;
         return projectiles <= (teamSize * chests);
     }
     
-    public boolean arePotionsAvailable() {
-        if(teamSize == 0) return true;
+    public boolean arePotionsAvailable(){
+        if (teamSize == 0) return true;
         return potions <= teamSize;
     }
     
-    public boolean areBlocksAvailable() {
-        if(teamSize == 0) return true;
+    public boolean areBlocksAvailable(){
+        if (teamSize == 0) return true;
         return blocks <= (teamSize * chests);
     }
     
-    public boolean areOthersAvailable() {
-        if(teamSize == 0) return true;
+    public boolean areOthersAvailable(){
+        if (teamSize == 0) return true;
         return others <= (teamSize * 2 * chests);
     }
     
     
-    public void reset() {
+    public void reset(){
         potions = 0;
         blocks = 0;
         others = 0;

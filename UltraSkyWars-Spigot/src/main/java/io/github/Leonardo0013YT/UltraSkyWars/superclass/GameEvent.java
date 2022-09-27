@@ -13,40 +13,40 @@ public abstract class GameEvent {
     
     public abstract GameEvent clone();
     
-    public void update() {
+    public void update(){
         time--;
     }
     
-    public int getTime() {
+    public int getTime(){
         return time;
     }
     
-    public void setTime(int time) {
+    public void setTime(int time){
         this.time = time;
         this.reset = time;
     }
     
-    public int getReset() {
+    public int getReset(){
         return reset;
     }
     
-    public String getName() {
+    public String getName(){
         return name;
     }
     
-    public String getSound() {
+    public String getSound(){
         return sound;
     }
     
-    public String getTitle() {
+    public String getTitle(){
         return title;
     }
     
-    public String getSubTitle() {
+    public String getSubTitle(){
         return subtitle;
     }
     
-    public String getType() {
+    public String getType(){
         return type;
     }
     

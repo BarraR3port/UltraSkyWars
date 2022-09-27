@@ -19,7 +19,7 @@ public class TrailSetup {
     private double range, speed;
     private boolean isBuy;
     
-    public TrailSetup(Player p, String name) {
+    public TrailSetup(Player p, String name){
         this.p = p;
         this.name = name;
         this.icon = new ItemStack(Material.BOW);
@@ -37,7 +37,7 @@ public class TrailSetup {
         this.isBuy = true;
     }
     
-    public void saveTrail(Player p) {
+    public void saveTrail(Player p){
         UltraSkyWars plugin = UltraSkyWars.get();
         plugin.getTrail().set("trails." + name + ".id", plugin.getCos().getNextTrailsId());
         plugin.getTrail().set("trails." + name + ".name", name);
@@ -64,118 +64,118 @@ public class TrailSetup {
         plugin.getCos().reload();
     }
     
-    public ItemStack getIcon() {
-        if(icon == null || icon.getType().equals(Material.AIR)){
+    public ItemStack getIcon(){
+        if (icon == null || icon.getType().equals(Material.AIR)){
             return new ItemStack(XMaterial.BOW.parseMaterial());
         }
         return icon;
     }
     
-    public void setIcon(ItemStack icon) {
+    public void setIcon(ItemStack icon){
         this.icon = icon;
     }
     
-    public String getName() {
+    public String getName(){
         return name;
     }
     
-    public void setName(String name) {
+    public void setName(String name){
         this.name = name;
     }
     
-    public String getPermission() {
+    public String getPermission(){
         return permission;
     }
     
-    public void setPermission(String permission) {
+    public void setPermission(String permission){
         this.permission = permission;
     }
     
-    public String getParticle() {
+    public String getParticle(){
         return particle;
     }
     
-    public void setParticle(String particle) {
+    public void setParticle(String particle){
         this.particle = particle;
     }
     
-    public float getOffsetX() {
+    public float getOffsetX(){
         return offsetX;
     }
     
-    public void setOffsetX(float offsetX) {
+    public void setOffsetX(float offsetX){
         this.offsetX = offsetX;
     }
     
-    public float getOffsetY() {
+    public float getOffsetY(){
         return offsetY;
     }
     
-    public void setOffsetY(float offsetY) {
+    public void setOffsetY(float offsetY){
         this.offsetY = offsetY;
     }
     
-    public float getOffsetZ() {
+    public float getOffsetZ(){
         return offsetZ;
     }
     
-    public void setOffsetZ(float offsetZ) {
+    public void setOffsetZ(float offsetZ){
         this.offsetZ = offsetZ;
     }
     
-    public int getAmount() {
+    public int getAmount(){
         return amount;
     }
     
-    public void setAmount(int amount) {
+    public void setAmount(int amount){
         this.amount = amount;
     }
     
-    public int getSlot() {
+    public int getSlot(){
         return slot;
     }
     
-    public void setSlot(int slot) {
+    public void setSlot(int slot){
         this.slot = slot;
     }
     
-    public int getPage() {
+    public int getPage(){
         return page;
     }
     
-    public void setPage(int page) {
+    public void setPage(int page){
         this.page = page;
     }
     
-    public int getPrice() {
+    public int getPrice(){
         return price;
     }
     
-    public void setPrice(int price) {
+    public void setPrice(int price){
         this.price = price;
     }
     
-    public double getRange() {
+    public double getRange(){
         return range;
     }
     
-    public void setRange(double range) {
+    public void setRange(double range){
         this.range = range;
     }
     
-    public double getSpeed() {
+    public double getSpeed(){
         return speed;
     }
     
-    public void setSpeed(double speed) {
+    public void setSpeed(double speed){
         this.speed = speed;
     }
     
-    public boolean isBuy() {
+    public boolean isBuy(){
         return isBuy;
     }
     
-    public void setBuy(boolean buy) {
+    public void setBuy(boolean buy){
         isBuy = buy;
     }
 }

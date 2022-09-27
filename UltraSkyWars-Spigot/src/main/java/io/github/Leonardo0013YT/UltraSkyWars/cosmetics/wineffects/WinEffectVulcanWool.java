@@ -22,13 +22,13 @@ public class WinEffectVulcanWool implements WinEffect, Cloneable {
     private BukkitTask task;
     
     @Override
-    public void start(Player p, Game game) {
+    public void start(Player p, Game game){
         UltraSkyWars plugin = UltraSkyWars.get();
         String name = game.getSpectator().getWorld().getName();
         task = new BukkitRunnable() {
             @Override
-            public void run() {
-                if(p == null || !p.isOnline() || !name.equals(p.getWorld().getName())){
+            public void run(){
+                if (p == null || !p.isOnline() || !name.equals(p.getWorld().getName())){
                     stop();
                     return;
                 }
@@ -41,30 +41,30 @@ public class WinEffectVulcanWool implements WinEffect, Cloneable {
     }
     
     @Override
-    public void stop() {
-        if(task != null){
+    public void stop(){
+        if (task != null){
             task.cancel();
         }
         for ( FallingBlock fb : fires ){
-            if(fb == null) continue;
-            if(!fb.isDead()){
+            if (fb == null) continue;
+            if (!fb.isDead()){
                 fb.remove();
-            } else if(fb.isOnGround()){
+            } else if (fb.isOnGround()){
                 fb.getLocation().getBlock().setType(Material.AIR);
             }
         }
     }
     
     @Override
-    public WinEffect clone() {
+    public WinEffect clone(){
         return new WinEffectVulcanWool();
     }
     
-    protected double random(double d, double d2) {
+    protected double random(double d, double d2){
         return d + ThreadLocalRandom.current().nextDouble() * (d2 - d);
     }
     
-    private FallingBlock spawnWool(Location location, double d, double d3) {
+    private FallingBlock spawnWool(Location location, double d, double d3){
         @SuppressWarnings("deprecation")
         FallingBlock fallingBlock = location.getWorld().spawnFallingBlock(location, Material.valueOf("WOOL"), (byte) ThreadLocalRandom.current().nextInt(15));
         fallingBlock.setVelocity(new Vector(d, 0.75, d3));

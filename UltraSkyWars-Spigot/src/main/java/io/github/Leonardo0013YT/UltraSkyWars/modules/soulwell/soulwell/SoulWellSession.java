@@ -24,29 +24,29 @@ public class SoulWellSession {
     
     private final UltraSkyWars plugin;
     private final InjectionSoulWell is;
-    private SoulWellAnimation animation;
     private final Player p;
     private final Location loc;
+    private SoulWellAnimation animation;
     private SoulWellRow row;
     @Setter
     @Getter
     private boolean confirm, rolling = false, deleted = false;
     
-    public SoulWellSession(UltraSkyWars plugin, InjectionSoulWell is, Player p, Location loc) {
+    public SoulWellSession(UltraSkyWars plugin, InjectionSoulWell is, Player p, Location loc){
         this.plugin = plugin;
         this.is = is;
         this.p = p;
         this.loc = loc;
     }
     
-    public void execute(SWPlayer sw, int rows) {
+    public void execute(SWPlayer sw, int rows){
         row = is.getSwm().getRows().get(rows);
         confirm = true;
-        if(sw.getSoulanimation() == 0){
+        if (sw.getSoulanimation() == 0){
             rolling = true;
             animation = new SoulWellNormalAnimation(plugin, is, this, p, row, loc);
             animation.execute();
-        } else if(sw.getSoulanimation() == 1){
+        } else if (sw.getSoulanimation() == 1){
             rolling = true;
             animation = new SoulWellFenixAnimation(plugin, is, this, p, row, loc);
             animation.execute();
@@ -57,51 +57,51 @@ public class SoulWellSession {
         }
     }
     
-    public void executeReward(Player p, ItemStack item) {
+    public void executeReward(Player p, ItemStack item){
         Reward swr = plugin.getLvl().getSoulWellRewardByIcon(item);
         swr.execute(p);
         p.sendMessage(plugin.getLang().get(p, "messages.reward").replaceAll("<name>", swr.getName()).replaceAll("<rarity>", plugin.getLang().get(p, "soulwell.rarity." + swr.getRarity().name().toLowerCase())));
-        if(swr.getRarity().equals(RewardType.COMMON)){
+        if (swr.getRarity().equals(RewardType.COMMON)){
             CustomSound.REWARDS_COMMON.reproduce(p);
-        } else if(swr.getRarity().equals(RewardType.UNCOMMON)){
+        } else if (swr.getRarity().equals(RewardType.UNCOMMON)){
             CustomSound.REWARDS_UNCOMMON.reproduce(p);
-        } else if(swr.getRarity().equals(RewardType.RARE)){
+        } else if (swr.getRarity().equals(RewardType.RARE)){
             CustomSound.REWARDS_RARE.reproduce(p);
-        } else if(swr.getRarity().equals(RewardType.EPIC)){
+        } else if (swr.getRarity().equals(RewardType.EPIC)){
             CustomSound.REWARDS_EPIC.reproduce(p);
         } else {
             CustomSound.REWARDS_LEGENDARY.reproduce(p);
         }
     }
     
-    public void firework(Location loc) {
+    public void firework(Location loc){
         new InstantFirework(FireworkEffect.builder().withColor(Utils.getRandomColor()).withFade(Utils.getRandomColor()).with(FireworkEffect.Type.BALL).build(), loc);
     }
     
-    public void deleteHologram() {
+    public void deleteHologram(){
         io.github.Leonardo0013YT.UltraSkyWars.modules.soulwell.soulwell.SoulWell sw = is.getSwm().getSoulWells().get(loc);
-        if(plugin.getAdm().hasHologramPlugin()){
-            if(!plugin.getAdm().hasHologram(sw.getHologram())) return;
+        if (plugin.getAdm().hasHologramPlugin()){
+            if (!plugin.getAdm().hasHologram(sw.getHologram())) return;
             deleted = true;
             plugin.getAdm().deleteHologram(sw.getHologram());
         }
     }
     
-    public void recreateHologram() {
+    public void recreateHologram(){
         SoulWell sw = is.getSwm().getSoulWells().get(loc);
-        if(plugin.getAdm().hasHologramPlugin()){
-            if(plugin.getAdm().hasHologram(sw.getHologram())) return;
+        if (plugin.getAdm().hasHologramPlugin()){
+            if (plugin.getAdm().hasHologram(sw.getHologram())) return;
             deleted = false;
             plugin.getAdm().createHologram(sw.getHologram(), plugin.getLang().getList("holograms.soulwell"));
         }
     }
     
-    public void cancel(Player p) {
-        if(animation == null) return;
+    public void cancel(Player p){
+        if (animation == null) return;
         animation.cancel(p);
     }
     
-    public Inventory getInv() {
+    public Inventory getInv(){
         return animation.getInv();
     }
 }

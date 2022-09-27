@@ -9,20 +9,20 @@ public class TauntType {
     private final String damage;
     private final Collection<String> messages;
     
-    public TauntType(String damage, Collection<String> messages) {
+    public TauntType(String damage, Collection<String> messages){
         this.damage = damage;
         this.messages = messages;
     }
     
-    public String getDamage() {
+    public String getDamage(){
         return damage;
     }
     
-    public Collection<String> getMessages() {
+    public Collection<String> getMessages(){
         return messages;
     }
     
-    public String getRandomMessage() {
+    public String getRandomMessage(){
         return new ArrayList<>(messages).get(ThreadLocalRandom.current().nextInt(0, messages.size()));
     }
     

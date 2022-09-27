@@ -10,7 +10,7 @@ public class TNTLaunchItem extends SpecialItem {
     private final double multiply;
     private final int noFall;
     
-    public TNTLaunchItem(InjectionSpecialItems isi) {
+    public TNTLaunchItem(InjectionSpecialItems isi){
         this.multiply = isi.getSpecial_items().getInt("items.TNTLaunch.multiply");
         this.noFall = isi.getSpecial_items().getInt("items.TNTLaunch.noFall");
     }

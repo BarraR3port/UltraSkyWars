@@ -20,13 +20,13 @@ public class WinDanceMeteors implements WinDance, Cloneable {
     private static double maxOfCenter;
     private BukkitTask task;
     
-    public WinDanceMeteors() {
+    public WinDanceMeteors(){
         this.task = null;
     }
     
     @Override
-    public void loadCustoms(UltraSkyWars plugin, String path) {
-        if(!loaded){
+    public void loadCustoms(UltraSkyWars plugin, String path){
+        if (!loaded){
             maxOfCenter = plugin.getWindance().getDoubleOrDefault(path + ".maxOfCenter", 1);
             firstUp = plugin.getWindance().getIntOrDefault(path + ".firstUp", 110);
             taskTick = plugin.getWindance().getIntOrDefault(path + ".taskTick", 2);
@@ -35,12 +35,12 @@ public class WinDanceMeteors implements WinDance, Cloneable {
     }
     
     @Override
-    public void start(Player p, Game game) {
+    public void start(Player p, Game game){
         World world = game.getSpectator().getWorld();
         Location center = new Location(world, game.getBorderX(), firstUp, game.getBorderZ());
         task = new BukkitRunnable() {
-            public void run() {
-                if(p == null || !p.isOnline() || !world.getName().equals(p.getWorld().getName())){
+            public void run(){
+                if (p == null || !p.isOnline() || !world.getName().equals(p.getWorld().getName())){
                     stop();
                     return;
                 }
@@ -51,14 +51,14 @@ public class WinDanceMeteors implements WinDance, Cloneable {
     }
     
     @Override
-    public void stop() {
-        if(task != null){
+    public void stop(){
+        if (task != null){
             task.cancel();
         }
     }
     
     @Override
-    public WinDance clone() {
+    public WinDance clone(){
         return new WinDanceMeteors();
     }
     

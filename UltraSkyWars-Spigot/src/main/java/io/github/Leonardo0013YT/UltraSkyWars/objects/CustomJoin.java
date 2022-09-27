@@ -13,25 +13,25 @@ public class CustomJoin {
     private final List<String> maps;
     private final UltraSkyWars plugin;
     
-    public CustomJoin(UltraSkyWars plugin, String path) {
+    public CustomJoin(UltraSkyWars plugin, String path){
         this.plugin = plugin;
         this.name = plugin.getJoin().get(null, path + ".name");
         this.maps = plugin.getJoin().getList(path + ".maps");
     }
     
-    public String getName() {
+    public String getName(){
         return name;
     }
     
-    public GameData getRandomGame() {
+    public GameData getRandomGame(){
         int alto = 0;
         GameData g = null;
         for ( String map : maps ){
             GameData game = plugin.getGm().getGameData().get(map);
-            if(game == null || game.isState(State.GAME) || game.isState(State.RESTARTING) || game.isState(State.FINISH) || game.isState(State.PREGAME)){
+            if (game == null || game.isState(State.GAME) || game.isState(State.RESTARTING) || game.isState(State.FINISH) || game.isState(State.PREGAME)){
                 continue;
             }
-            if(g == null || (alto < game.getPlayers())){
+            if (g == null || (alto < game.getPlayers())){
                 g = game;
                 alto = game.getPlayers();
             }
@@ -39,11 +39,11 @@ public class CustomJoin {
         return g;
     }
     
-    public int getGameSize() {
+    public int getGameSize(){
         int count = 0;
         for ( String map : maps ){
             Game game = plugin.getGm().getGameByName(map);
-            if(game == null){
+            if (game == null){
                 continue;
             }
             count += game.getPlayers().size();

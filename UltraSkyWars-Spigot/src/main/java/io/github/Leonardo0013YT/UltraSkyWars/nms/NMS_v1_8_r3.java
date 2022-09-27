@@ -21,7 +21,7 @@ import java.util.Collection;
 public class NMS_v1_8_r3 implements NMS {
     
     @Override
-    public Horse spawnHorse(Location loc, Player p) {
+    public Horse spawnHorse(Location loc, Player p){
         Horse horse = loc.getWorld().spawn(loc, Horse.class);
         horse.setVariant(Horse.Variant.SKELETON_HORSE);
         horse.setOwner(p);
@@ -32,7 +32,7 @@ public class NMS_v1_8_r3 implements NMS {
     }
     
     @Override
-    public Collection<Integer> spawn(Player p, Location loc, ItemStack head) {
+    public Collection<Integer> spawn(Player p, Location loc, ItemStack head){
         EntityGiantZombie ev = new EntityGiantZombie(((CraftWorld) loc.getWorld()).getHandle());
         EntityArmorStand ar = new EntityArmorStand(((CraftWorld) loc.getWorld()).getHandle());
         EntityBat bat = new EntityBat(((CraftWorld) loc.getWorld()).getHandle());
@@ -58,7 +58,7 @@ public class NMS_v1_8_r3 implements NMS {
     }
     
     @Override
-    public void destroy(Player p, Collection<Integer> id) {
+    public void destroy(Player p, Collection<Integer> id){
         for ( int i : id ){
             PacketPlayOutEntityDestroy ent = new PacketPlayOutEntityDestroy(i);
             ((CraftPlayer) p).getHandle().playerConnection.sendPacket(ent);
@@ -66,28 +66,28 @@ public class NMS_v1_8_r3 implements NMS {
     }
     
     @Override
-    public void followPlayer(Player player, LivingEntity entity, double d) {
+    public void followPlayer(Player player, LivingEntity entity, double d){
         float f = (float) d;
         ((EntityInsentient) ((CraftEntity) entity).getHandle()).getNavigation().a(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ(), f);
     }
     
     @Override
-    public void displayParticle(Player player, Location location, float offsetX, float offsetY, float offsetZ, int speed, String enumParticle, int amount) {
+    public void displayParticle(Player player, Location location, float offsetX, float offsetY, float offsetZ, int speed, String enumParticle, int amount){
         PacketPlayOutWorldParticles packet = new PacketPlayOutWorldParticles(EnumParticle.valueOf(enumParticle), false, (float) location.getX(), (float) location.getY(), (float) location.getZ(), offsetX, offsetY, offsetZ, speed, amount);
         ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
     }
     
     @Override
-    public void broadcastParticle(Location location, float offsetX, float offsetY, float offsetZ, int speed, String enumParticle, int amount, double range) {
+    public void broadcastParticle(Location location, float offsetX, float offsetY, float offsetZ, int speed, String enumParticle, int amount, double range){
         PacketPlayOutWorldParticles packet = new PacketPlayOutWorldParticles(EnumParticle.valueOf(enumParticle), false, (float) location.getX(), (float) location.getY(), (float) location.getZ(), offsetX, offsetY, offsetZ, speed, amount);
-        if(location.getWorld() == null) return;
+        if (location.getWorld() == null) return;
         Collection<Entity> ents;
         try {
             ents = location.getWorld().getNearbyEntities(location, range, range, range);
-        } catch(Exception ignored) {
+        } catch (Exception ignored) {
             return;
         }
-        if(ents.isEmpty()) return;
+        if (ents.isEmpty()) return;
         ents.removeIf(e -> !e.getType().equals(EntityType.PLAYER));
         for ( Entity p : ents ){
             ((CraftPlayer) p).getHandle().playerConnection.sendPacket(packet);

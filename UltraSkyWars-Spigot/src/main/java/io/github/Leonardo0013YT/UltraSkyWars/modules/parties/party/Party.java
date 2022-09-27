@@ -14,7 +14,7 @@ public class Party {
     private String leaderName;
     private boolean privacy;
     
-    public Party(UUID leader, String leaderName, boolean privacy, int maxCapacity, HashMap<UUID, String> members) {
+    public Party(UUID leader, String leaderName, boolean privacy, int maxCapacity, HashMap<UUID, String> members){
         this.leader = leader;
         this.leaderName = leaderName;
         this.privacy = privacy;
@@ -23,46 +23,46 @@ public class Party {
         this.members.put(leader, leaderName);
     }
     
-    public HashSet<UUID> getChatMembers() {
+    public HashSet<UUID> getChatMembers(){
         return chatMembers;
     }
     
-    public int getMaxCapacity() {
+    public int getMaxCapacity(){
         return maxCapacity;
     }
     
-    public boolean isPrivacy() {
+    public boolean isPrivacy(){
         return privacy;
     }
     
-    public void setPrivacy(boolean privacy) {
+    public void setPrivacy(boolean privacy){
         this.privacy = privacy;
     }
     
-    public String getLeaderName() {
+    public String getLeaderName(){
         return leaderName;
     }
     
-    public void setLeaderName(String leaderName) {
+    public void setLeaderName(String leaderName){
         this.leaderName = leaderName;
     }
     
-    public UUID getLeader() {
+    public UUID getLeader(){
         return leader;
     }
     
-    public void setLeader(UUID leader) {
+    public void setLeader(UUID leader){
         this.leader = leader;
     }
     
-    public HashMap<UUID, String> getMembers() {
+    public HashMap<UUID, String> getMembers(){
         return members;
     }
     
-    public UUID getUUIDByName(String name) {
-        if(members.containsValue(name)){
+    public UUID getUUIDByName(String name){
+        if (members.containsValue(name)){
             Map.Entry<UUID, String> entry = members.entrySet().stream().filter(e -> e.getValue().equals(name)).findFirst().orElse(null);
-            if(entry != null){
+            if (entry != null){
                 return entry.getKey();
             }
         }

@@ -15,7 +15,7 @@ public class InjectionChallenges implements Injection {
     private Settings challenges;
     
     @Override
-    public void loadInjection(UltraSkyWars main) {
+    public void loadInjection(UltraSkyWars main){
         this.chm = new ChallengeMenu(main);
         this.challenges = new Settings("modules/challenges", true, false);
         main.getServer().getPluginManager().registerEvents(new ChallengeListener(main, this), main);
@@ -32,20 +32,20 @@ public class InjectionChallenges implements Injection {
     }
     
     @Override
-    public void reload() {
+    public void reload(){
     
     }
     
     @Override
-    public void disable() {
+    public void disable(){
     
     }
     
-    public Settings getChallenges() {
+    public Settings getChallenges(){
         return challenges;
     }
     
-    public ChallengeMenu getChm() {
+    public ChallengeMenu getChm(){
         return chm;
     }
 }

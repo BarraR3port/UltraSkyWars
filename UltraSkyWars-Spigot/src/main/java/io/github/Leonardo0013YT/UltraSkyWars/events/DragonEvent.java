@@ -12,7 +12,7 @@ public class DragonEvent extends GameEvent {
     
     EnderDragon dragon;
     
-    public DragonEvent(UltraSkyWars plugin, int time) {
+    public DragonEvent(UltraSkyWars plugin, int time){
         this.time = time;
         this.reset = time;
         this.dragon = null;
@@ -23,7 +23,7 @@ public class DragonEvent extends GameEvent {
         this.subtitle = plugin.getLang().get("titles." + name + ".subtitle");
     }
     
-    public DragonEvent(DragonEvent e) {
+    public DragonEvent(DragonEvent e){
         this.time = e.getReset();
         this.reset = e.getReset();
         this.dragon = null;
@@ -35,7 +35,7 @@ public class DragonEvent extends GameEvent {
     }
     
     @Override
-    public void start(Game game) {
+    public void start(Game game){
         dragon = game.getSpectator().getWorld().spawn(game.getSpectator(), EnderDragon.class);
         dragon.setNoDamageTicks(999999999);
         dragon.setMetadata("CUSTOM", new FixedMetadataValue(UltraSkyWars.get(), "CUSTOM"));
@@ -45,14 +45,14 @@ public class DragonEvent extends GameEvent {
     }
     
     @Override
-    public void stop(Game game) {
-        if(dragon != null){
+    public void stop(Game game){
+        if (dragon != null){
             dragon.remove();
         }
     }
     
     @Override
-    public void reset() {
+    public void reset(){
         this.time = this.reset;
         this.dragon = null;
         this.type = "final";
@@ -60,7 +60,7 @@ public class DragonEvent extends GameEvent {
     }
     
     @Override
-    public DragonEvent clone() {
+    public DragonEvent clone(){
         return new DragonEvent(this);
     }
     

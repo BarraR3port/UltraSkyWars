@@ -1005,12 +1005,12 @@ public enum XSound {
     @Nullable
     private final Sound sound;
     
-    XSound(@Nonnull String... legacies) {
+    XSound(@Nonnull String... legacies){
         Sound bukkitSound = Data.BUKKIT_NAMES.get(this.name());
-        if(bukkitSound == null){
+        if (bukkitSound == null){
             for ( String legacy : legacies ){
                 bukkitSound = Data.BUKKIT_NAMES.get(legacy);
-                if(bukkitSound != null) break;
+                if (bukkitSound != null) break;
             }
         }
         this.sound = bukkitSound;
@@ -1022,7 +1022,7 @@ public enum XSound {
     }
     
     @Nonnull
-    private static String format(@Nonnull String name) {
+    private static String format(@Nonnull String name){
         int len = name.length();
         char[] chs = new char[len];
         int count = 0;
@@ -1031,17 +1031,17 @@ public enum XSound {
         for ( int i = 0; i < len; i++ ){
             char ch = name.charAt(i);
             
-            if(!appendUnderline && count != 0 && (ch == '-' || ch == ' ' || ch == '_') && chs[count] != '_')
+            if (!appendUnderline && count != 0 && (ch == '-' || ch == ' ' || ch == '_') && chs[count] != '_')
                 appendUnderline = true;
             else {
                 boolean number = false;
-                if((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z') || (number = (ch >= '0' && ch <= '9'))){
-                    if(appendUnderline){
+                if ((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z') || (number = (ch >= '0' && ch <= '9'))){
+                    if (appendUnderline){
                         chs[count++] = '_';
                         appendUnderline = false;
                     }
                     
-                    if(number) chs[count++] = ch;
+                    if (number) chs[count++] = ch;
                     else chs[count++] = (char) (ch & 0x5f);
                 }
             }
@@ -1051,22 +1051,22 @@ public enum XSound {
     }
     
     @Nonnull
-    public static Optional<XSound> matchXSound(@Nonnull String sound) {
+    public static Optional<XSound> matchXSound(@Nonnull String sound){
         Validate.notEmpty(sound, "Cannot match XSound of a null or empty sound name");
         return Optional.ofNullable(Data.NAMES.get(format(sound)));
     }
     
     @Override
-    public String toString() {
+    public String toString(){
         return WordUtils.capitalize(this.name().replace('_', ' ').toLowerCase(Locale.ENGLISH));
     }
     
     @Nullable
-    public Sound parseSound() {
+    public Sound parseSound(){
         return this.sound;
     }
     
-    public boolean isSupported() {
+    public boolean isSupported(){
         return this.parseSound() != null;
     }
     
@@ -1076,7 +1076,7 @@ public enum XSound {
         
         private static final Map<String, XSound> NAMES = new HashMap<>();
         
-        static {
+        static{
             for ( Sound sound : Sound.values() ) BUKKIT_NAMES.put(sound.name(), sound);
         }
     }

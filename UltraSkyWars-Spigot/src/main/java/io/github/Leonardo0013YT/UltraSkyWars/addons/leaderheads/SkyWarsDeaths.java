@@ -13,15 +13,15 @@ public class SkyWarsDeaths extends OnlineDataCollector {
     
     private final UltraSkyWars plugin;
     
-    public SkyWarsDeaths(UltraSkyWars plugin) {
+    public SkyWarsDeaths(UltraSkyWars plugin){
         super("usw-deaths", "UltraSkyWars", BoardType.DEFAULT, plugin.getLang().get(null, "leaderheads.skywarsdeaths.title"), "skywarsdeaths", Arrays.asList(plugin.getLang().get(null, "leaderheads.skywarsdeaths.lines.0"), plugin.getLang().get(null, "leaderheads.skywarsdeaths.lines.1"), plugin.getLang().get(null, "leaderheads.skywarsdeaths.lines.2"), plugin.getLang().get(null, "leaderheads.skywarsdeaths.lines.3")));
         this.plugin = plugin;
     }
     
     @Override
-    public Double getScore(Player p) {
+    public Double getScore(Player p){
         SWPlayer sw = plugin.getDb().getSWPlayer(p);
-        if(sw == null){
+        if (sw == null){
             return 0.0;
         }
         return (double) sw.getTotalStat(StatType.DEATHS);

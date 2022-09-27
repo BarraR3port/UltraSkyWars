@@ -16,15 +16,15 @@ public class GameSign {
     private GameData data;
     private boolean occupied;
     
-    public GameSign(String type, Location loc) {
+    public GameSign(String type, Location loc){
         this.type = type;
         this.loc = loc;
         this.retract = Utils.getBlockFaced(loc.getBlock());
         this.occupied = false;
     }
     
-    public synchronized void setLines(String... line) {
-        if(loc.getBlock().getState() instanceof Sign){
+    public synchronized void setLines(String... line){
+        if (loc.getBlock().getState() instanceof Sign){
             Sign sign = (Sign) loc.getBlock().getState();
             sign.setLine(0, line[0]);
             sign.setLine(1, line[1]);
@@ -35,8 +35,8 @@ public class GameSign {
         }
     }
     
-    public void setState(String state) {
-        switch(state) {
+    public void setState(String state){
+        switch(state){
             case "WAITING":
                 XBlock.setColor(retract, DyeColor.LIME);
                 break;
@@ -61,23 +61,23 @@ public class GameSign {
         }
     }
     
-    public boolean isOccupied() {
+    public boolean isOccupied(){
         return occupied;
     }
     
-    public void setOccupied(boolean occupied) {
+    public void setOccupied(boolean occupied){
         this.occupied = occupied;
     }
     
-    public String getType() {
+    public String getType(){
         return type.toLowerCase();
     }
     
-    public GameData getData() {
+    public GameData getData(){
         return data;
     }
     
-    public void setData(GameData data) {
+    public void setData(GameData data){
         this.data = data;
     }
     

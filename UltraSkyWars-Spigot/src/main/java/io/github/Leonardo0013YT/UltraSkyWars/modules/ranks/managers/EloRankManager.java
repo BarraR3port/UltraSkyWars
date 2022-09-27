@@ -27,13 +27,13 @@ public class EloRankManager {
     private boolean randomEnabled;
     private int randomMin, randomMax, exactlyKill, exactlyWin, exactlyDeath;
     
-    public EloRankManager(UltraSkyWars plugin, InjectionEloRank injectionEloRank) {
+    public EloRankManager(UltraSkyWars plugin, InjectionEloRank injectionEloRank){
         this.plugin = plugin;
         this.injectionEloRank = injectionEloRank;
         reload();
     }
     
-    public void reload() {
+    public void reload(){
         defaultRank = injectionEloRank.getEloRank().getOrDefault("defaultRank", "classify");
         randomEnabled = injectionEloRank.getRankeds().getBooleanOrDefault("elos.random.enabled", false);
         randomMin = injectionEloRank.getRankeds().getIntOrDefault("elos.random.min", 1);
@@ -42,7 +42,7 @@ public class EloRankManager {
         exactlyWin = injectionEloRank.getRankeds().getIntOrDefault("elos.exactly.win", 5);
         exactlyDeath = injectionEloRank.getRankeds().getIntOrDefault("elos.exactly.death", -1);
         eloRankHashMap.clear();
-        if(injectionEloRank.getEloRank().isSet("ranks")){
+        if (injectionEloRank.getEloRank().isSet("ranks")){
             ConfigurationSection conf = injectionEloRank.getEloRank().getConfig().getConfigurationSection("ranks");
             for ( String rank : conf.getKeys(false) ){
                 eloRankHashMap.put(rank, new EloRank(injectionEloRank, "ranks." + rank, rank));
@@ -50,41 +50,41 @@ public class EloRankManager {
         }
     }
     
-    public EloRank getEloRank(Player p) {
-        if(playerEloRankHashMap.containsKey(p.getUniqueId())){
+    public EloRank getEloRank(Player p){
+        if (playerEloRankHashMap.containsKey(p.getUniqueId())){
             return eloRankHashMap.get(playerEloRankHashMap.get(p.getUniqueId()));
         }
-        if(plugin.getDb().getSWPlayer(p) == null) return eloRankHashMap.get(defaultRank);
+        if (plugin.getDb().getSWPlayer(p) == null) return eloRankHashMap.get(defaultRank);
         int elo = plugin.getDb().getSWPlayer(p).getElo();
         for ( EloRank rank : eloRankHashMap.values() ){
-            if(elo >= rank.getMin() && elo < rank.getMax()){
+            if (elo >= rank.getMin() && elo < rank.getMax()){
                 playerEloRankHashMap.put(p.getUniqueId(), rank.getName());
                 return rank;
             }
         }
         EloRank rank = eloRankHashMap.get(defaultRank);
-        if(rank != null){
+        if (rank != null){
             return rank;
         } else {
             return new EloRank("§7", "§7", "§7");
         }
     }
     
-    public int getEloDiference(int eloKiller, int eloDeath) {
-        if(eloKiller >= eloDeath){
+    public int getEloDiference(int eloKiller, int eloDeath){
+        if (eloKiller >= eloDeath){
             return a(eloKiller, eloDeath);
         } else {
             return a(eloDeath, eloKiller);
         }
     }
     
-    private int a(int eloKiller, int eloDeath) {
+    private int a(int eloKiller, int eloDeath){
         DecimalFormat f = new DecimalFormat("#");
         f.setRoundingMode(RoundingMode.HALF_EVEN);
         int eloD = eloKiller - eloDeath;
         double eloO = (randomMax * eloD) * 0.01;
         double elo;
-        if(eloO > randomMax){
+        if (eloO > randomMax){
             elo = (randomMax * eloO) * 0.01;
         } else {
             elo = randomMin;
@@ -92,24 +92,24 @@ public class EloRankManager {
         return Integer.parseInt(f.format(elo));
     }
     
-    public void checkUpgrateOrDegrate(Player p) {
+    public void checkUpgrateOrDegrate(Player p){
         SWPlayer sw = plugin.getDb().getSWPlayer(p);
-        if(sw == null) return;
+        if (sw == null) return;
         String eloRank = sw.getEloRank();
         EloRank rank = getEloRank(p);
-        if(rank.getName().equals(eloRank)){
+        if (rank.getName().equals(eloRank)){
             return;
         }
         //Demote
-        if(!eloRankHashMap.containsKey(rank.getName()) || !eloRankHashMap.containsKey(eloRank)){
+        if (!eloRankHashMap.containsKey(rank.getName()) || !eloRankHashMap.containsKey(eloRank)){
             sw.setEloRank(defaultRank);
             return;
         }
-        if(eloRankHashMap.get(rank.getName()).getOrder() < eloRankHashMap.get(eloRank).getOrder()){
+        if (eloRankHashMap.get(rank.getName()).getOrder() < eloRankHashMap.get(eloRank).getOrder()){
             sw.setEloRank(rank.getName());
             CustomSound.DEGRADE.reproduce(p);
             p.sendMessage(plugin.getLang().get(p, "messages.demote.msg").replaceAll("<eloRank>", rank.getColor() + rank.getPrefix()));
-            if(plugin.getCm().isBroadcastRankLevelDown()){
+            if (plugin.getCm().isBroadcastRankLevelDown()){
                 for ( Player on : Bukkit.getOnlinePlayers() ){
                     on.sendMessage(plugin.getLang().get(p, "messages.demote.broadcast").replaceAll("<player>", p.getName()).replaceAll("<eloRank>", rank.getColor() + rank.getPrefix()));
                 }
@@ -117,11 +117,11 @@ public class EloRankManager {
             Utils.updateSB(p);
         }
         //Promote
-        if(eloRankHashMap.get(rank.getName()).getOrder() > eloRankHashMap.get(eloRank).getOrder()){
+        if (eloRankHashMap.get(rank.getName()).getOrder() > eloRankHashMap.get(eloRank).getOrder()){
             sw.setEloRank(rank.getName());
             CustomSound.UPGRADE.reproduce(p);
             p.sendMessage(plugin.getLang().get(p, "messages.promote.msg").replaceAll("<eloRank>", rank.getColor() + rank.getPrefix()));
-            if(plugin.getCm().isBroadcastRankLevelUp()){
+            if (plugin.getCm().isBroadcastRankLevelUp()){
                 for ( Player on : Bukkit.getOnlinePlayers() ){
                     on.sendMessage(plugin.getLang().get(p, "messages.promote.broadcast").replaceAll("<player>", p.getName()).replaceAll("<eloRank>", rank.getColor() + rank.getPrefix()));
                 }
@@ -130,9 +130,9 @@ public class EloRankManager {
         }
     }
     
-    public String getEloRankBetween(int amount) {
+    public String getEloRankBetween(int amount){
         for ( EloRank er : eloRankHashMap.values() ){
-            if(er.getMin() < amount && amount < er.getMax()){
+            if (er.getMin() < amount && amount < er.getMax()){
                 return er.getColor() + ":" + er.getPrefix();
             }
         }
@@ -140,11 +140,11 @@ public class EloRankManager {
         return er.getColor() + ":" + er.getPrefix();
     }
     
-    public String getEloRankSB(Player p) {
+    public String getEloRankSB(Player p){
         return getEloRank(p).getColor() + getEloRank(p).getCorto();
     }
     
-    public String getEloRankChat(Player p) {
+    public String getEloRankChat(Player p){
         return getEloRank(p).getColor() + getEloRank(p).getPrefix();
     }
     

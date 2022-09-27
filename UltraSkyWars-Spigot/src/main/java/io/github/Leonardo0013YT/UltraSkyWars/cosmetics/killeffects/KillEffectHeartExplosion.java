@@ -10,13 +10,13 @@ public class KillEffectHeartExplosion implements KillEffect, Cloneable {
     private UltraSkyWars plugin;
     
     @Override
-    public void loadCustoms(UltraSkyWars plugin, String path) {
+    public void loadCustoms(UltraSkyWars plugin, String path){
         this.plugin = plugin;
     }
     
     @Override
-    public void start(Player p, Player death, Location loc) {
-        if(death == null || !death.isOnline()){
+    public void start(Player p, Player death, Location loc){
+        if (death == null || !death.isOnline()){
             return;
         }
         for ( int i = 0; i < 10; i++ ){
@@ -25,11 +25,11 @@ public class KillEffectHeartExplosion implements KillEffect, Cloneable {
     }
     
     @Override
-    public void stop() {
+    public void stop(){
     }
     
     @Override
-    public KillEffect clone() {
+    public KillEffect clone(){
         return new KillEffectHeartExplosion();
     }
     

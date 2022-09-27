@@ -15,7 +15,7 @@ public class InjectionSpecialItems implements Injection {
     private ItemManager im;
     
     @Override
-    public void loadInjection(UltraSkyWars plugin) {
+    public void loadInjection(UltraSkyWars plugin){
         this.special_items = new Settings("modules/special_items", true, false);
         this.im = new ItemManager(plugin, this);
         plugin.getCommand("swi").setExecutor(new SpecialItemsCMD(plugin, this));
@@ -23,12 +23,12 @@ public class InjectionSpecialItems implements Injection {
     }
     
     @Override
-    public void reload() {
+    public void reload(){
     
     }
     
     @Override
-    public void disable() {
+    public void disable(){
     
     }
     

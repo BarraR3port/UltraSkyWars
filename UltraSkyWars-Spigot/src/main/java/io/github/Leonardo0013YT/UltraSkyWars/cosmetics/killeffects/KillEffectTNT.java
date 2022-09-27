@@ -15,19 +15,19 @@ public class KillEffectTNT implements KillEffect, Cloneable {
     private static int fuseTicks;
     
     @Override
-    public void loadCustoms(UltraSkyWars plugin, String path) {
-        if(!loaded){
+    public void loadCustoms(UltraSkyWars plugin, String path){
+        if (!loaded){
             fuseTicks = plugin.getKilleffect().getIntOrDefault(path + ".fuseTicks", 4);
             loaded = true;
         }
     }
     
     @Override
-    public void start(Player p, Player death, Location loc) {
-        if(p == null || !p.isOnline()){
+    public void start(Player p, Player death, Location loc){
+        if (p == null || !p.isOnline()){
             return;
         }
-        if(death == null || !death.isOnline()){
+        if (death == null || !death.isOnline()){
             return;
         }
         TNTPrimed primed = loc.getWorld().spawn(loc, TNTPrimed.class);
@@ -35,7 +35,7 @@ public class KillEffectTNT implements KillEffect, Cloneable {
         UltraSkyWars plugin = UltraSkyWars.get();
         new BukkitRunnable() {
             @Override
-            public void run() {
+            public void run(){
                 loc.getWorld().playEffect(loc, Effect.EXPLOSION_LARGE, 1);
                 CustomSound.KILLEFFECTS_TNT.reproduce(p);
                 primed.remove();
@@ -44,11 +44,11 @@ public class KillEffectTNT implements KillEffect, Cloneable {
     }
     
     @Override
-    public void stop() {
+    public void stop(){
     }
     
     @Override
-    public KillEffect clone() {
+    public KillEffect clone(){
         return new KillEffectSquid();
     }
     

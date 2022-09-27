@@ -20,14 +20,14 @@ public class WinEffectChicken implements WinEffect {
     private BukkitTask task;
     
     @Override
-    public void start(Player p, Game game) {
+    public void start(Player p, Game game){
         UltraSkyWars plugin = UltraSkyWars.get();
         task = new BukkitRunnable() {
             final String name = game.getSpectator().getWorld().getName();
             
             @Override
-            public void run() {
-                if(p == null || !p.isOnline() || !name.equals(p.getWorld().getName())){
+            public void run(){
+                if (p == null || !p.isOnline() || !name.equals(p.getWorld().getName())){
                     stop();
                     return;
                 }
@@ -35,7 +35,7 @@ public class WinEffectChicken implements WinEffect {
                 chicken.getLocation().getWorld().playSound(chicken.getLocation(), CustomSound.WINEFFECTS_CHICKEN.getSound(), CustomSound.WINEFFECTS_CHICKEN.getVolume(), CustomSound.WINEFFECTS_CHICKEN.getPitch());
                 chickens.add(chicken);
                 for ( Chicken c : new ArrayList<>(chickens) ){
-                    if(c.getTicksLived() > 30){
+                    if (c.getTicksLived() > 30){
                         c.remove();
                         plugin.getVc().getNMS().broadcastParticle(c.getLocation(), 0, 0, 0, 0, "REDSTONE", 1000, 10);
                         CustomSound.WINEFFECTS_CHICKEN.reproduce(p);
@@ -47,23 +47,23 @@ public class WinEffectChicken implements WinEffect {
     }
     
     @Override
-    public void stop() {
+    public void stop(){
         chickens.clear();
-        if(task != null){
+        if (task != null){
             task.cancel();
         }
     }
     
     @Override
-    public WinEffect clone() {
+    public WinEffect clone(){
         return new WinEffectChicken();
     }
     
-    protected double random(double d, double d2) {
+    protected double random(double d, double d2){
         return d + ThreadLocalRandom.current().nextDouble() * (d2 - d);
     }
     
-    private Chicken spawnChicken(Location location, double d, double d3) {
+    private Chicken spawnChicken(Location location, double d, double d3){
         Chicken chicken = location.getWorld().spawn(location, Chicken.class);
         chicken.setVelocity(new Vector(d, 1.5, d3));
         return chicken;

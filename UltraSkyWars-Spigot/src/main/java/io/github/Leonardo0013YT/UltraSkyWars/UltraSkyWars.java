@@ -81,11 +81,11 @@ public class UltraSkyWars extends JavaPlugin {
     private SetupMenu sem;
     private LyApi lyApi;
     
-    public static UltraSkyWars get() {
+    public static UltraSkyWars get(){
         return instance;
     }
     
-    public static Gson getGson() {
+    public static Gson getGson(){
         return gson;
     }
     
@@ -104,7 +104,7 @@ public class UltraSkyWars extends JavaPlugin {
             e.printStackTrace();
             getServer().shutdown();
         }
-    
+        
         getConfig().options().copyDefaults(true);
         vc = new VersionController(this);
         saveConfig();
@@ -186,7 +186,7 @@ public class UltraSkyWars extends JavaPlugin {
         new SkyWarsXMigrator(this);
         new BukkitRunnable() {
             @Override
-            public void run() {
+            public void run(){
                 ijm.loadInjections();
             }
         }.runTaskLater(this, 30);
@@ -203,34 +203,34 @@ public class UltraSkyWars extends JavaPlugin {
         this.sem = new SetupMenu(this);
         getServer().getPluginManager().registerEvents(new SetupListener(this), this);
         getCommand("sws").setExecutor(new SetupCMD(this));
-    
+        
     }
     
-    public void loadMainLobby() {
-        if(getConfig().getString("mainLobby") != null){
+    public void loadMainLobby(){
+        if (getConfig().getString("mainLobby") != null){
             mainLobby = Utils.getStringLocation(getConfig().getString("mainLobby"));
         }
-        if(getConfig().getString("topKills") != null){
+        if (getConfig().getString("topKills") != null){
             topKills = Utils.getStringLocation(getConfig().getString("topKills"));
         }
-        if(getConfig().getString("topWins") != null){
+        if (getConfig().getString("topWins") != null){
             topWins = Utils.getStringLocation(getConfig().getString("topWins"));
         }
-        if(getConfig().getString("topDeaths") != null){
+        if (getConfig().getString("topDeaths") != null){
             topDeaths = Utils.getStringLocation(getConfig().getString("topDeaths"));
         }
-        if(getConfig().getString("topCoins") != null){
+        if (getConfig().getString("topCoins") != null){
             topCoins = Utils.getStringLocation(getConfig().getString("topCoins"));
         }
-        if(getConfig().getString("topElo") != null){
+        if (getConfig().getString("topElo") != null){
             topElo = Utils.getStringLocation(getConfig().getString("topElo"));
         }
     }
     
     @Override
-    public void onDisable() {
-        if(disabled) return;
-        if(top != null){
+    public void onDisable(){
+        if (disabled) return;
+        if (top != null){
             getTop().remove();
         }
         stop = true;
@@ -238,7 +238,7 @@ public class UltraSkyWars extends JavaPlugin {
             getCos().remove(on);
             getGm().removePlayerAllGame(on);
         });
-        if(!getDb().getPlayers().keySet().isEmpty()){
+        if (!getDb().getPlayers().keySet().isEmpty()){
             Collection<UUID> sws = new ArrayList<>(getDb().getPlayers().keySet());
             for ( UUID sw : sws ){
                 getDb().savePlayerSync(sw);
@@ -252,25 +252,25 @@ public class UltraSkyWars extends JavaPlugin {
         db.close();
     }
     
-    public void broadcastGame(Game game) {
-        if(!getCm().isBroadcastGame()) return;
+    public void broadcastGame(Game game){
+        if (!getCm().isBroadcastGame()) return;
         FancyMessage fm = new FancyMessage(getLang().get(null, "fancy.message").replaceAll("<game>", game.getName()))
                 .addMsg(getLang().get(null, "fancy.click"))
                 .setClick(ClickEvent.Action.RUN_COMMAND, "/sw join " + game.getGameType().toLowerCase() + " " + game.getName())
                 .setHover(HoverEvent.Action.SHOW_TEXT, getLang().get(null, "fancy.hover")).build();
         for ( Player on : Bukkit.getOnlinePlayers() ){
-            if(getGm().isPlayerInGame(on)){
+            if (getGm().isPlayerInGame(on)){
                 continue;
             }
             fm.send(on);
         }
     }
     
-    public void saveSchematics() {
+    public void saveSchematics(){
         saveResource("clearGlass.schematic", true);
         saveResource("glass.schematic", true);
         File f = new File(Bukkit.getWorldContainer() + "/plugins/WorldEdit/schematics");
-        if(!f.exists()){
+        if (!f.exists()){
             f.mkdirs();
         }
         copy(getDataFolder().getAbsolutePath() + "/clearGlass.schematic", Bukkit.getWorldContainer() + "/plugins/WorldEdit/schematics/clearGlass.schematic");
@@ -278,20 +278,20 @@ public class UltraSkyWars extends JavaPlugin {
         try {
             Files.delete(Paths.get(getDataFolder().getAbsolutePath() + "/clearGlass.schematic"));
             Files.delete(Paths.get(getDataFolder().getAbsolutePath() + "/glass.schematic"));
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
     
-    public void sendDebugMessage(String... s) {
-        if(debugMode){
+    public void sendDebugMessage(String... s){
+        if (debugMode){
             for ( String st : s ){
                 Bukkit.getConsoleSender().sendMessage("§b[USW Debug] §e" + st);
             }
         }
     }
     
-    public void copy(String origin, String destiny) {
+    public void copy(String origin, String destiny){
         try (
                 InputStream in = new BufferedInputStream(new FileInputStream(origin));
                 OutputStream out = new BufferedOutputStream(new FileOutputStream(destiny))) {
@@ -301,16 +301,16 @@ public class UltraSkyWars extends JavaPlugin {
                 out.write(buffer, 0, lengthRead);
                 out.flush();
             }
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
     
-    public boolean isBungeeMode() {
+    public boolean isBungeeMode(){
         return false;
     }
     
-    public void reload() {
+    public void reload(){
         reloadConfig();
         arenas.reload();
         lang.reload();
@@ -341,93 +341,93 @@ public class UltraSkyWars extends JavaPlugin {
         ijm.reload();
     }
     
-    public void sendToServer(Player p, String server) {
+    public void sendToServer(Player p, String server){
     }
     
-    public void reloadLang() {
+    public void reloadLang(){
         lang.reload();
     }
     
-    public void sendLogMessage(String msg) {
+    public void sendLogMessage(String msg){
         Bukkit.getConsoleSender().sendMessage("§c§lUltraSkyWars §8| " + msg);
     }
     
-    public void sendLogMessage(String... msg) {
+    public void sendLogMessage(String... msg){
         for ( String m : msg ){
             Bukkit.getConsoleSender().sendMessage("§c§lUltraSkyWars §8| §e" + m);
         }
     }
     
-    public void updateDirectories() {
+    public void updateDirectories(){
         try {
             File cosmetics = new File(getDataFolder(), "cosmetics");
-            if(!cosmetics.exists()){
+            if (!cosmetics.exists()){
                 cosmetics.mkdirs();
                 File balloons = new File(getDataFolder(), "balloon.yml");
-                if(balloons.exists()){
+                if (balloons.exists()){
                     File to = new File(cosmetics, "balloon.yml");
                     Files.copy(balloons.toPath(), to.toPath());
                     balloons.delete();
                 }
                 File glass = new File(getDataFolder(), "glass.yml");
-                if(glass.exists()){
+                if (glass.exists()){
                     File to = new File(cosmetics, "glass.yml");
                     Files.copy(glass.toPath(), to.toPath());
                     glass.delete();
                 }
                 File killeffect = new File(getDataFolder(), "killeffect.yml");
-                if(killeffect.exists()){
+                if (killeffect.exists()){
                     File to = new File(cosmetics, "killeffect.yml");
                     Files.copy(killeffect.toPath(), to.toPath());
                     killeffect.delete();
                 }
                 File killsound = new File(getDataFolder(), "killsound.yml");
-                if(killsound.exists()){
+                if (killsound.exists()){
                     File to = new File(cosmetics, "killsound.yml");
                     Files.copy(killsound.toPath(), to.toPath());
                     killsound.delete();
                 }
                 File parting = new File(getDataFolder(), "parting.yml");
-                if(parting.exists()){
+                if (parting.exists()){
                     File to = new File(cosmetics, "parting.yml");
                     Files.copy(parting.toPath(), to.toPath());
                     parting.delete();
                 }
                 File taunt = new File(getDataFolder(), "taunt.yml");
-                if(taunt.exists()){
+                if (taunt.exists()){
                     File to = new File(cosmetics, "taunt.yml");
                     Files.copy(taunt.toPath(), to.toPath());
                     taunt.delete();
                 }
                 File trail = new File(getDataFolder(), "trail.yml");
-                if(trail.exists()){
+                if (trail.exists()){
                     File to = new File(cosmetics, "trail.yml");
                     Files.copy(trail.toPath(), to.toPath());
                     trail.delete();
                 }
                 File windance = new File(getDataFolder(), "windance.yml");
-                if(windance.exists()){
+                if (windance.exists()){
                     File to = new File(cosmetics, "windance.yml");
                     Files.copy(windance.toPath(), to.toPath());
                     windance.delete();
                 }
                 File wineffect = new File(getDataFolder(), "wineffect.yml");
-                if(wineffect.exists()){
+                if (wineffect.exists()){
                     File to = new File(cosmetics, "wineffect.yml");
                     Files.copy(wineffect.toPath(), to.toPath());
                     wineffect.delete();
                 }
             }
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
     
-    public SetupManager getSm() {
+    public SetupManager getSm(){
         return sm;
     }
     
-    public SetupMenu getSem() {
+    public SetupMenu getSem(){
         return sem;
     }
     

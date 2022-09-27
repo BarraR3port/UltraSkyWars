@@ -19,7 +19,7 @@ public class PartingSetup {
     private int slot, page, price;
     private boolean isBuy;
     
-    public PartingSetup(Player p, String name) {
+    public PartingSetup(Player p, String name){
         this.p = p;
         this.name = name;
         this.permission = "ultraskywars.parting." + name;
@@ -30,7 +30,7 @@ public class PartingSetup {
         this.isBuy = true;
     }
     
-    public void saveParting(Player p) {
+    public void saveParting(Player p){
         UltraSkyWars plugin = UltraSkyWars.get();
         plugin.getParting().set("partings." + name + ".id", plugin.getCos().getNextPartingId());
         plugin.getParting().set("partings." + name + ".name", name);
@@ -51,11 +51,11 @@ public class PartingSetup {
         plugin.getCos().reload();
     }
     
-    public List<String> getLines() {
+    public List<String> getLines(){
         return lines;
     }
     
-    public String getMessage() {
+    public String getMessage(){
         StringBuilder msg = new StringBuilder();
         for ( String s : lines ){
             msg.append(s).append("\n");
@@ -63,59 +63,59 @@ public class PartingSetup {
         return msg.toString();
     }
     
-    public ItemStack getIcon() {
+    public ItemStack getIcon(){
         return icon;
     }
     
-    public void setIcon(ItemStack icon) {
+    public void setIcon(ItemStack icon){
         this.icon = icon;
     }
     
-    public String getName() {
+    public String getName(){
         return name;
     }
     
-    public void setName(String name) {
+    public void setName(String name){
         this.name = name;
     }
     
-    public String getPermission() {
+    public String getPermission(){
         return permission;
     }
     
-    public void setPermission(String permission) {
+    public void setPermission(String permission){
         this.permission = permission;
     }
     
-    public int getSlot() {
+    public int getSlot(){
         return slot;
     }
     
-    public void setSlot(int slot) {
+    public void setSlot(int slot){
         this.slot = slot;
     }
     
-    public int getPage() {
+    public int getPage(){
         return page;
     }
     
-    public void setPage(int page) {
+    public void setPage(int page){
         this.page = page;
     }
     
-    public int getPrice() {
+    public int getPrice(){
         return price;
     }
     
-    public void setPrice(int price) {
+    public void setPrice(int price){
         this.price = price;
     }
     
-    public boolean isBuy() {
+    public boolean isBuy(){
         return isBuy;
     }
     
-    public void setBuy(boolean buy) {
+    public void setBuy(boolean buy){
         isBuy = buy;
     }
     

@@ -17,7 +17,7 @@ public class PrestigeIcon {
     private final int levelRequired, angelDeathRequired, slot, page;
     private final UltraSkyWars plugin;
     
-    public PrestigeIcon(UltraSkyWars plugin, String path) {
+    public PrestigeIcon(UltraSkyWars plugin, String path){
         this.plugin = plugin;
         this.id = plugin.getLevels().get(path + ".id");
         this.prefix = plugin.getLevels().get(path + ".prefix");
@@ -31,7 +31,7 @@ public class PrestigeIcon {
         this.permRequired = plugin.getLevels().get(path + ".requirements.perm");
     }
     
-    public ItemStack getItemStack(Player p, SWPlayer sw) {
+    public ItemStack getItemStack(Player p, SWPlayer sw){
         boolean required = check(p, sw);
         ItemStack i = ItemBuilder.item(material, 1, ((required) ? "§a" : "§c") + name, lore
                 .replace("<status>", (required) ? (sw.getPrestigeIcon().equals(id) ? plugin.getLang().get("menus.prestige.status.selected") : plugin.getLang().get("menus.prestige.status.select")) : plugin.getLang().get("menus.prestige.status.noHas"))
@@ -39,7 +39,7 @@ public class PrestigeIcon {
         return NBTEditor.set(NBTEditor.set(i, id, "PRESTIGE_ICON_ID"), required, "PRESTIGE_ICON_HAS");
     }
     
-    public boolean check(Player p, SWPlayer sw) {
+    public boolean check(Player p, SWPlayer sw){
         return sw.getLevel() >= levelRequired && sw.getSoulWellHead() >= angelDeathRequired && p.hasPermission(permRequired);
     }
     

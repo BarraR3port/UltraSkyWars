@@ -13,7 +13,7 @@ public class WinEffectWitherRider implements WinEffect {
     private Wither wither;
     
     @Override
-    public void start(Player p, Game game) {
+    public void start(Player p, Game game){
         wither = p.getWorld().spawn(p.getLocation(), Wither.class);
         wither.setPassenger(p);
         wither.setMetadata("NO_TARGET", new FixedMetadataValue(UltraSkyWars.get(), ""));
@@ -21,14 +21,14 @@ public class WinEffectWitherRider implements WinEffect {
     }
     
     @Override
-    public void stop() {
-        if(wither != null){
+    public void stop(){
+        if (wither != null){
             wither.remove();
         }
     }
     
     @Override
-    public WinEffect clone() {
+    public WinEffect clone(){
         return new WinEffectWitherRider();
     }
     

@@ -15,25 +15,25 @@ public class SpecialItemsCMD implements CommandExecutor {
     private final UltraSkyWars plugin;
     private final InjectionSpecialItems isi;
     
-    public SpecialItemsCMD(UltraSkyWars plugin, InjectionSpecialItems isi) {
+    public SpecialItemsCMD(UltraSkyWars plugin, InjectionSpecialItems isi){
         this.plugin = plugin;
         this.isi = isi;
     }
     
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if(sender instanceof Player){
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
+        if (sender instanceof Player){
             Player p = (Player) sender;
-            if(!p.hasPermission("usw.admin")){
+            if (!p.hasPermission("usw.admin")){
                 p.sendMessage(plugin.getLang().get(p, "messages.noPermission"));
                 return true;
             }
-            if(args.length < 1){
+            if (args.length < 1){
                 sendHelp(sender);
                 return true;
             }
-            if("getitem".equals(args[0].toLowerCase())){
-                if(args.length < 2){
+            if ("getitem".equalsIgnoreCase(args[0])){
+                if (args.length < 2){
                     p.sendMessage("§eAvailable Items:");
                     p.sendMessage("§7 - §aCompass");
                     p.sendMessage("§7 - §aInstantTNT");
@@ -42,7 +42,7 @@ public class SpecialItemsCMD implements CommandExecutor {
                     p.sendMessage("§7 - §aTNTLaunch");
                     return true;
                 }
-                switch(args[1].toLowerCase()) {
+                switch(args[1].toLowerCase()){
                     case "compass":
                         p.getInventory().addItem(isi.getIm().getCompass());
                         break;
@@ -64,7 +64,7 @@ public class SpecialItemsCMD implements CommandExecutor {
         return false;
     }
     
-    private void sendHelp(CommandSender s) {
+    private void sendHelp(CommandSender s){
         s.sendMessage("§7§m---------------§r   §6§lUltraSkyWars §ev" + plugin.getDescription().getVersion() + "§r   §7§m---------------");
         s.sendMessage("§7       §7");
         new FancyMessage("§b/swi getitem <name> §7- §eGet the item.").setHover(HoverEvent.Action.SHOW_TEXT, "§fClick to execute!").setClick(ClickEvent.Action.SUGGEST_COMMAND, "/swi getitem ").build().send(s);

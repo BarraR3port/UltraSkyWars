@@ -13,35 +13,35 @@ public class USWGameJoinEvent extends Event implements Cancellable {
     private final Game game;
     private boolean isCancelled = false;
     
-    public USWGameJoinEvent(Player player, Game game) {
+    public USWGameJoinEvent(Player player, Game game){
         this.player = player;
         this.game = game;
     }
     
-    public static HandlerList getHandlerList() {
+    public static HandlerList getHandlerList(){
         return HANDLERS_LIST;
     }
     
-    public Game getGame() {
+    public Game getGame(){
         return game;
     }
     
-    public Player getPlayer() {
+    public Player getPlayer(){
         return player;
     }
     
     @Override
-    public boolean isCancelled() {
+    public boolean isCancelled(){
         return isCancelled;
     }
     
     @Override
-    public void setCancelled(boolean isCancelled) {
+    public void setCancelled(boolean isCancelled){
         this.isCancelled = isCancelled;
     }
     
     @Override
-    public HandlerList getHandlers() {
+    public HandlerList getHandlers(){
         return HANDLERS_LIST;
     }
     

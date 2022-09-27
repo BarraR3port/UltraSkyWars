@@ -21,15 +21,15 @@ import java.util.UUID;
 public class Balloon extends Cosmetic {
     
     private final ItemStack icon;
-    private String url;
     private final List<ItemStack> heads = new ArrayList<>();
     private final HashMap<UUID, Giant> giants = new HashMap<>();
+    private String url;
     private int animation = 0;
     
-    public Balloon(UltraSkyWars plugin, String path) {
+    public Balloon(UltraSkyWars plugin, String path){
         super(plugin.getBalloon(), path, "balloon");
         Object url = plugin.getBalloon().getConfig().get(path + ".url");
-        if(url instanceof String){
+        if (url instanceof String){
             heads.add(ItemBuilder.createSkull("", "", url.toString()));
             this.url = url.toString();
         } else {
@@ -42,36 +42,36 @@ public class Balloon extends Cosmetic {
         plugin.getCos().setLastPage("Balloon", page);
     }
     
-    public List<ItemStack> getHeads() {
+    public List<ItemStack> getHeads(){
         return heads;
     }
     
-    public int spawn(Player p, Location balloon, Location fence) {
+    public int spawn(Player p, Location balloon, Location fence){
         giants.put(p.getUniqueId(), Utils.spawn(balloon, fence, getActualHead()));
         return id;
     }
     
-    public void remove(Player p) {
-        if(giants.containsKey(p.getUniqueId())){
+    public void remove(Player p){
+        if (giants.containsKey(p.getUniqueId())){
             Giant g = giants.get(p.getUniqueId());
-            if(g != null && !g.isDead()){
+            if (g != null && !g.isDead()){
                 g.remove();
             }
         }
         giants.remove(p.getUniqueId());
     }
     
-    public boolean needUpdate() {
+    public boolean needUpdate(){
         return !giants.isEmpty();
     }
     
-    public void update() {
+    public void update(){
         ItemStack head = getActualHead();
         giants.values().forEach(g -> g.getEquipment().setItemInHand(head));
     }
     
-    public ItemStack getIcon(Player p) {
-        if(!icon.hasItemMeta()){
+    public ItemStack getIcon(Player p){
+        if (!icon.hasItemMeta()){
             return icon;
         }
         UltraSkyWars plugin = UltraSkyWars.get();
@@ -81,18 +81,18 @@ public class Balloon extends Cosmetic {
         List<String> lore = icon.getItemMeta().getLore();
         for ( int i = 0; i < lore.size(); i++ ){
             String s = lore.get(i);
-            switch(s) {
+            switch(s){
                 case "<price>":
-                    if(!p.hasPermission(autoGivePermission)){
-                        if(isBuy && !sw.getBalloons().contains(id)){
+                    if (!p.hasPermission(autoGivePermission)){
+                        if (isBuy && !sw.getBalloons().contains(id)){
                             lore.set(i, plugin.getLang().get(p, "menus.balloonsselector.price").replaceAll("<price>", String.valueOf(price)));
-                        } else if(!isBuy && !sw.getBalloons().contains(id)){
-                            if(needPermToBuy && p.hasPermission(permission)){
+                        } else if (!isBuy && !sw.getBalloons().contains(id)){
+                            if (needPermToBuy && p.hasPermission(permission)){
                                 lore.set(i, plugin.getLang().get(p, "menus.balloonsselector.price").replaceAll("<price>", String.valueOf(price)));
                             } else {
                                 lore.set(i, plugin.getLang().get(p, "menus.balloonsselector.noBuyable"));
                             }
-                        } else if(sw.getBalloons().contains(id) || !needPermToBuy){
+                        } else if (sw.getBalloons().contains(id) || !needPermToBuy){
                             lore.set(i, plugin.getLang().get(p, "menus.balloonsselector.buyed"));
                         }
                     } else {
@@ -100,17 +100,17 @@ public class Balloon extends Cosmetic {
                     }
                     break;
                 case "<status>":
-                    if(!p.hasPermission(autoGivePermission)){
-                        if(sw.getBalloons().contains(id)){
+                    if (!p.hasPermission(autoGivePermission)){
+                        if (sw.getBalloons().contains(id)){
                             lore.set(i, plugin.getLang().get(p, "menus.balloonsselector.hasBuy"));
-                        } else if(isBuy){
-                            if(plugin.getAdm().getCoins(p) > price){
+                        } else if (isBuy){
+                            if (plugin.getAdm().getCoins(p) > price){
                                 lore.set(i, plugin.getLang().get(p, "menus.balloonsselector.buy"));
                             } else {
                                 lore.set(i, plugin.getLang().get(p, "menus.balloonsselector.noMoney"));
                             }
-                        } else if(needPermToBuy){
-                            if(plugin.getAdm().getCoins(p) > price){
+                        } else if (needPermToBuy){
+                            if (plugin.getAdm().getCoins(p) > price){
                                 lore.set(i, plugin.getLang().get(p, "menus.balloonsselector.buy"));
                             } else {
                                 lore.set(i, plugin.getLang().get(p, "menus.balloonsselector.noMoney"));
@@ -126,9 +126,9 @@ public class Balloon extends Cosmetic {
         }
         iconM.setLore(lore);
         icon.setItemMeta(iconM);
-        if(!p.hasPermission(autoGivePermission)){
-            if(price > 0){
-                if(plugin.getCm().isRedPanelInLocked() && !sw.getBalloons().contains(id)){
+        if (!p.hasPermission(autoGivePermission)){
+            if (price > 0){
+                if (plugin.getCm().isRedPanelInLocked() && !sw.getBalloons().contains(id)){
                     icon = NBTEditor.set(ItemBuilder.item(XMaterial.matchDefinedXMaterial(plugin.getCm().getRedPanelMaterial().name(), plugin.getCm().getRedPanelData()).orElse(XMaterial.RED_STAINED_GLASS_PANE), 1, icon.getItemMeta().getDisplayName(), icon.getItemMeta().getLore()), id, "ULTRASKYWARS", "BALLOON");
                     return icon;
                 }
@@ -137,19 +137,19 @@ public class Balloon extends Cosmetic {
         return NBTEditor.set(ItemBuilder.createSkull(icon.getItemMeta().getDisplayName(), lore, url), id, "ULTRASKYWARS", "BALLOON");
     }
     
-    public String getUrl() {
+    public String getUrl(){
         return url;
     }
     
-    public boolean isAnimated() {
+    public boolean isAnimated(){
         return heads.size() > 1;
     }
     
-    public ItemStack getActualHead() {
-        if(isAnimated()){
+    public ItemStack getActualHead(){
+        if (isAnimated()){
             int a = animation;
             animation++;
-            if(animation >= heads.size()){
+            if (animation >= heads.size()){
                 animation = 0;
             }
             return heads.get(a);

@@ -12,30 +12,30 @@ public class USWGameKillEvent extends Event {
     private final Player death;
     private final Game game;
     
-    public USWGameKillEvent(Player player, Player death, Game game) {
+    public USWGameKillEvent(Player player, Player death, Game game){
         this.player = player;
         this.death = death;
         this.game = game;
     }
     
-    public static HandlerList getHandlerList() {
+    public static HandlerList getHandlerList(){
         return HANDLERS_LIST;
     }
     
-    public Game getGame() {
+    public Game getGame(){
         return game;
     }
     
-    public Player getDeath() {
+    public Player getDeath(){
         return death;
     }
     
-    public Player getPlayer() {
+    public Player getPlayer(){
         return player;
     }
     
     @Override
-    public HandlerList getHandlers() {
+    public HandlerList getHandlers(){
         return HANDLERS_LIST;
     }
 }

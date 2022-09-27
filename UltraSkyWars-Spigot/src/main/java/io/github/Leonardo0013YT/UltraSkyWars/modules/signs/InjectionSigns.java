@@ -13,28 +13,28 @@ public class InjectionSigns implements Injection {
     private Settings signs;
     
     @Override
-    public void loadInjection(UltraSkyWars main) {
+    public void loadInjection(UltraSkyWars main){
         signs = new Settings("modules/signs", false, false);
         sim = new SignsManager(main, this);
         Bukkit.getServer().getPluginManager().registerEvents(new SignsListener(main, this), main);
     }
     
     @Override
-    public void reload() {
+    public void reload(){
         signs.reload();
         sim.reload();
     }
     
     @Override
-    public void disable() {
+    public void disable(){
     
     }
     
-    public SignsManager getSim() {
+    public SignsManager getSim(){
         return sim;
     }
     
-    public Settings getSigns() {
+    public Settings getSigns(){
         return signs;
     }
 }

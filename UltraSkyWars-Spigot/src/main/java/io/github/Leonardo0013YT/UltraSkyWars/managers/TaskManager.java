@@ -11,14 +11,14 @@ public class TaskManager {
     private final UltraSkyWars plugin;
     private int amount = 0;
     
-    public TaskManager(UltraSkyWars plugin) {
+    public TaskManager(UltraSkyWars plugin){
         this.plugin = plugin;
         loadTasks();
     }
     
-    public void loadTasks() {
+    public void loadTasks(){
         Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> {
-            if(amount >= 5){
+            if (amount >= 5){
                 Utils.updateSB();
                 amount = 0;
             }
@@ -38,7 +38,7 @@ public class TaskManager {
         }), 6000L, 6000L);
         new BukkitRunnable() {
             @Override
-            public void run() {
+            public void run(){
                 plugin.getTop().createTops();
             }
         }.runTaskLater(plugin, 20 * 10);

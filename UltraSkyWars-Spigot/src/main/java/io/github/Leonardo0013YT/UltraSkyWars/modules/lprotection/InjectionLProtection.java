@@ -14,34 +14,34 @@ public class InjectionLProtection implements Injection {
     private ConfigManager cm;
     
     @Override
-    public void loadInjection(UltraSkyWars main) {
+    public void loadInjection(UltraSkyWars main){
         lobbyOptions = new Settings("modules/lobbyOptions", true, false);
         cm = new ConfigManager(main, this);
         Bukkit.getServer().getPluginManager().registerEvents(new LobbyListener(main, this), main);
-        if(cm.isNoDayCycle()){
+        if (cm.isNoDayCycle()){
             World w = Bukkit.getWorld(cm.getLobbyWorld());
-            if(w != null){
+            if (w != null){
                 w.setGameRuleValue("doDaylightCycle", "false");
             }
         }
     }
     
     @Override
-    public void reload() {
+    public void reload(){
         lobbyOptions.reload();
         cm.reload();
     }
     
     @Override
-    public void disable() {
+    public void disable(){
     
     }
     
-    public Settings getLobbyOptions() {
+    public Settings getLobbyOptions(){
         return lobbyOptions;
     }
     
-    public ConfigManager getCm() {
+    public ConfigManager getCm(){
         return cm;
     }
 }

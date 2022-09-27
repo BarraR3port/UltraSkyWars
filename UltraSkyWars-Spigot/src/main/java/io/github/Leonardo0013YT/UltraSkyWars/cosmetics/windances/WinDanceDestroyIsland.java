@@ -18,8 +18,8 @@ public class WinDanceDestroyIsland implements WinDance, Cloneable {
     private BukkitTask task;
     
     @Override
-    public void loadCustoms(UltraSkyWars plugin, String path) {
-        if(!loaded){
+    public void loadCustoms(UltraSkyWars plugin, String path){
+        if (!loaded){
             spawnLaterTick = plugin.getWindance().getIntOrDefault(path + ".spawnLaterTick", 20);
             amountTNT = plugin.getWindance().getIntOrDefault(path + ".amountTNT", 4);
             perFuseAmount = plugin.getWindance().getIntOrDefault(path + ".perFuseAmount", 15);
@@ -28,11 +28,11 @@ public class WinDanceDestroyIsland implements WinDance, Cloneable {
     }
     
     @Override
-    public void start(Player p, Game game) {
+    public void start(Player p, Game game){
         World world = game.getSpectator().getWorld();
         task = new BukkitRunnable() {
-            public void run() {
-                if(p == null || !p.isOnline() || !world.getName().equals(p.getWorld().getName())){
+            public void run(){
+                if (p == null || !p.isOnline() || !world.getName().equals(p.getWorld().getName())){
                     stop();
                     return;
                 }
@@ -43,7 +43,7 @@ public class WinDanceDestroyIsland implements WinDance, Cloneable {
         }.runTaskLater(UltraSkyWars.get(), spawnLaterTick);
     }
     
-    private void explode(Location loc) {
+    private void explode(Location loc){
         loc.setY(loc.getWorld().getHighestBlockYAt(loc.getBlockX(), loc.getBlockZ()));
         loc.getWorld().strikeLightning(loc);
         int pa = perFuseAmount;
@@ -55,14 +55,14 @@ public class WinDanceDestroyIsland implements WinDance, Cloneable {
     }
     
     @Override
-    public void stop() {
-        if(task != null){
+    public void stop(){
+        if (task != null){
             task.cancel();
         }
     }
     
     @Override
-    public WinDance clone() {
+    public WinDance clone(){
         return new WinDanceDestroyIsland();
     }
 }

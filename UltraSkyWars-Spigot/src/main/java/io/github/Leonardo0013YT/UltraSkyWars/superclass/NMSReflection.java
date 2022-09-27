@@ -13,22 +13,22 @@ public abstract class NMSReflection {
     
     private final static String version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
     
-    public static NametagVersion getNametagVersion() {
+    public static NametagVersion getNametagVersion(){
         return NametagVersion.valueOf(version);
     }
     
-    public static Class<?> getNMSClass(String name) {
+    public static Class<?> getNMSClass(String name){
         try {
             return Class.forName("net.minecraft.server." + version + "." + name);
-        } catch(Exception var3) {
+        } catch (Exception var3) {
             return null;
         }
     }
     
-    public static Class<?> getOBClass(String name) {
+    public static Class<?> getOBClass(String name){
         try {
             return Class.forName("org.bukkit.craftbukkit." + version + "." + name);
-        } catch(Exception var3) {
+        } catch (Exception var3) {
             return null;
         }
     }

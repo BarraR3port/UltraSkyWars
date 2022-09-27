@@ -9,7 +9,7 @@ public abstract class Cosmetic implements Purchasable {
     public boolean isBuy, needPermToBuy;
     public int id, slot, page, price;
     
-    public Cosmetic(Settings config, String path, String type) {
+    public Cosmetic(Settings config, String path, String type){
         this.name = config.get(path + ".name");
         this.id = config.getInt(path + ".id");
         this.slot = config.getInt(path + ".slot");
@@ -22,43 +22,43 @@ public abstract class Cosmetic implements Purchasable {
     }
     
     @Override
-    public String getPermission() {
+    public String getPermission(){
         return permission;
     }
     
     @Override
-    public String getAutoGivePermission() {
+    public String getAutoGivePermission(){
         return autoGivePermission;
     }
     
     @Override
-    public boolean isBuy() {
+    public boolean isBuy(){
         return isBuy;
     }
     
     @Override
-    public boolean needPermToBuy() {
+    public boolean needPermToBuy(){
         return needPermToBuy;
     }
     
     @Override
-    public int getPrice() {
+    public int getPrice(){
         return price;
     }
     
-    public String getName() {
+    public String getName(){
         return name;
     }
     
-    public int getSlot() {
+    public int getSlot(){
         return slot;
     }
     
-    public int getPage() {
+    public int getPage(){
         return page;
     }
     
-    public int getId() {
+    public int getId(){
         return id;
     }
 }

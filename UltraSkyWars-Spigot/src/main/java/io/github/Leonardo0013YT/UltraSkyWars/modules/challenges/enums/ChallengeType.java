@@ -22,7 +22,7 @@ public enum ChallengeType {
     private int iconSlot, statusSlot;
     private List<String> onWinCommands;
     
-    ChallengeType(boolean enabled, boolean onWinEnabled, Material material, int iconSlot, int statusSlot, List<String> onWinCommands) {
+    ChallengeType(boolean enabled, boolean onWinEnabled, Material material, int iconSlot, int statusSlot, List<String> onWinCommands){
         this.enabled = enabled;
         this.onWinEnabled = onWinEnabled;
         this.material = material;
@@ -31,51 +31,51 @@ public enum ChallengeType {
         this.onWinCommands = onWinCommands;
     }
     
-    public int getIconSlot() {
+    public int getIconSlot(){
         return iconSlot;
     }
     
-    public void setIconSlot(int iconSlot) {
+    public void setIconSlot(int iconSlot){
         this.iconSlot = iconSlot;
     }
     
-    public int getStatusSlot() {
+    public int getStatusSlot(){
         return statusSlot;
     }
     
-    public void setStatusSlot(int statusSlot) {
+    public void setStatusSlot(int statusSlot){
         this.statusSlot = statusSlot;
     }
     
-    public Material getMaterial() {
+    public Material getMaterial(){
         return material;
     }
     
-    public void setMaterial(Material material) {
+    public void setMaterial(Material material){
         this.material = material;
     }
     
-    public boolean isEnabled() {
+    public boolean isEnabled(){
         return enabled;
     }
     
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(boolean enabled){
         this.enabled = enabled;
     }
     
-    public boolean isOnWinEnabled() {
+    public boolean isOnWinEnabled(){
         return onWinEnabled;
     }
     
-    public void setOnWinEnabled(boolean onWinEnabled) {
+    public void setOnWinEnabled(boolean onWinEnabled){
         this.onWinEnabled = onWinEnabled;
     }
     
-    public List<String> getOnWinCommands() {
+    public List<String> getOnWinCommands(){
         return onWinCommands;
     }
     
-    public void setOnWinCommands(List<String> onWinCommands) {
+    public void setOnWinCommands(List<String> onWinCommands){
         this.onWinCommands = onWinCommands;
     }
 }

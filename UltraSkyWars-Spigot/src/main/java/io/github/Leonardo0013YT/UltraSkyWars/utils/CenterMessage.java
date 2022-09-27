@@ -6,8 +6,8 @@ public class CenterMessage {
     
     public static HashMap<String, String> cached = new HashMap<>();
     
-    public static String getCenteredMessage(String string) {
-        if(cached.containsKey(string)){
+    public static String getCenteredMessage(String string){
+        if (cached.containsKey(string)){
             return cached.get(string);
         }
         Object object;
@@ -15,13 +15,13 @@ public class CenterMessage {
         boolean bl = false;
         boolean bl2 = false;
         for ( int n2 : string.toCharArray() ){
-            if(n2 == 167){
+            if (n2 == 167){
                 bl = true;
                 continue;
             }
-            if(bl){
+            if (bl){
                 bl = false;
-                if(n2 == 108 || n2 == 76){
+                if (n2 == 108 || n2 == 76){
                     bl2 = true;
                     continue;
                 }
@@ -145,29 +145,29 @@ public class CenterMessage {
         private final char character;
         private final int length;
         
-        DefaultFontInfo(char c, int n2) {
+        DefaultFontInfo(char c, int n2){
             this.character = c;
             this.length = n2;
         }
         
-        public static DefaultFontInfo getDefaultFontInfo(char c) {
+        public static DefaultFontInfo getDefaultFontInfo(char c){
             for ( DefaultFontInfo defaultFontInfo : DefaultFontInfo.values() ){
-                if(defaultFontInfo.getCharacter() != c) continue;
+                if (defaultFontInfo.getCharacter() != c) continue;
                 return defaultFontInfo;
             }
             return DEFAULT;
         }
         
-        public char getCharacter() {
+        public char getCharacter(){
             return this.character;
         }
         
-        public int getLength() {
+        public int getLength(){
             return this.length;
         }
         
-        public int getBoldLength() {
-            if(this == SPACE){
+        public int getBoldLength(){
+            if (this == SPACE){
                 return this.getLength();
             }
             return this.length + 1;

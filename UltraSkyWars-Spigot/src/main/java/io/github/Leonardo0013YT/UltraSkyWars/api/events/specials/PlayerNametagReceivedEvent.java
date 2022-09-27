@@ -14,40 +14,40 @@ public class PlayerNametagReceivedEvent extends Event implements Cancellable {
     private final Nametags red;
     private boolean isCancelled = false;
     
-    public PlayerNametagReceivedEvent(Player player, Nametags green, Nametags red) {
+    public PlayerNametagReceivedEvent(Player player, Nametags green, Nametags red){
         this.player = player;
         this.green = green;
         this.red = red;
     }
     
-    public static HandlerList getHandlerList() {
+    public static HandlerList getHandlerList(){
         return HANDLERS_LIST;
     }
     
-    public Player getPlayer() {
+    public Player getPlayer(){
         return player;
     }
     
-    public Nametags getGreen() {
+    public Nametags getGreen(){
         return green;
     }
     
-    public Nametags getRed() {
+    public Nametags getRed(){
         return red;
     }
     
     @Override
-    public boolean isCancelled() {
+    public boolean isCancelled(){
         return isCancelled;
     }
     
     @Override
-    public void setCancelled(boolean isCancelled) {
+    public void setCancelled(boolean isCancelled){
         this.isCancelled = isCancelled;
     }
     
     @Override
-    public HandlerList getHandlers() {
+    public HandlerList getHandlers(){
         return HANDLERS_LIST;
     }
     

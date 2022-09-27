@@ -17,7 +17,7 @@ public class ItemSetup {
     private final int chance;
     private final ArrayList<String> modes;
     
-    public ItemSetup(ItemStack item, boolean center, boolean refill, int chance, ArrayList<String> modes) {
+    public ItemSetup(ItemStack item, boolean center, boolean refill, int chance, ArrayList<String> modes){
         this.item = item;
         this.display = item.clone();
         this.center = center;
@@ -30,32 +30,32 @@ public class ItemSetup {
         display.setItemMeta(im);
     }
     
-    public ItemStack getItem() {
+    public ItemStack getItem(){
         return item;
     }
     
-    public boolean isRefill() {
+    public boolean isRefill(){
         return refill;
     }
     
-    public ArrayList<String> getModes() {
+    public ArrayList<String> getModes(){
         return modes;
     }
     
-    public boolean isCenter() {
+    public boolean isCenter(){
         return center;
     }
     
-    public int getChance() {
+    public int getChance(){
         return chance;
     }
     
-    public ItemStack getDisplay() {
+    public ItemStack getDisplay(){
         return display;
     }
     
     @Override
-    public String toString() {
+    public String toString(){
         return item.getType().name().toLowerCase() + "_" + item.getAmount() + "_" + item.getDurability() + "_" + item.getData().getData() + "_" + ThreadLocalRandom.current().nextInt(0, 999);
     }
     

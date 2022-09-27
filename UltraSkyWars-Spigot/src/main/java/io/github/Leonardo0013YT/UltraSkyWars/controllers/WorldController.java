@@ -17,7 +17,7 @@ public class WorldController {
     private final String clear;
     private final IWorldEdit edit;
     
-    public WorldController() {
+    public WorldController(){
         UltraSkyWars plugin = UltraSkyWars.get();
         clear = plugin.getConfig().getString("schemaToClearLobby");
         /*if (plugin.getVc().is1_13to17()) {
@@ -28,39 +28,39 @@ public class WorldController {
         edit = new WorldEditUtils_Old(plugin);
     }
     
-    public void clearLobby(Location lobby) {
+    public void clearLobby(Location lobby){
         edit.paste(lobby, clear, true, (b) -> {
         });
     }
     
-    public void deleteWorld(World w, CallBackAPI<World> done) {
+    public void deleteWorld(World w, CallBackAPI<World> done){
         UltraSkyWars plugin = UltraSkyWars.get();
         String name = w.getName();
         w.getPlayers().forEach(p -> {
-            if(plugin.getMainLobby() != null){
+            if (plugin.getMainLobby() != null){
                 plugin.getGm().handleTeleport(plugin.getMainLobby(), "MainLobby", false, 0, 0, 0, p);
             } else {
                 World wo = Bukkit.getWorlds().get(0);
-                if(wo != null){
+                if (wo != null){
                     p.teleport(wo.getSpawnLocation());
                 } else {
                     p.kickPlayer(plugin.getLang().get("messages.noMapReset"));
                 }
             }
         });
-        if(!w.getPlayers().isEmpty()){
+        if (!w.getPlayers().isEmpty()){
             w.getPlayers().forEach(p -> p.sendMessage(plugin.getLang().get("messages.noMapReset")));
         }
         Bukkit.unloadWorld(w, false);
         done.done(resetWorld(name));
     }
     
-    public void deleteWorld(String name) {
+    public void deleteWorld(String name){
         File path = new File(Bukkit.getWorldContainer(), name);
         deleteDirectory(path);
     }
     
-    public World resetWorld(String name) {
+    public World resetWorld(String name){
         File target = new File(Bukkit.getWorldContainer(), name);
         deleteDirectory(target);
         File source = new File(UltraSkyWars.get().getDataFolder(), "maps/" + name);
@@ -68,7 +68,7 @@ public class WorldController {
         return createEmptyWorld(name);
     }
     
-    public World createEmptyWorld(String name) {
+    public World createEmptyWorld(String name){
         WorldCreator wc = new WorldCreator(name);
         wc.environment(World.Environment.NORMAL);
         wc.type(WorldType.FLAT);
@@ -93,7 +93,7 @@ public class WorldController {
         return w;
     }
     
-    public void backUpWorld(World w, String name) {
+    public void backUpWorld(World w, String name){
         World tp = Bukkit.getWorlds().get(0);
         for ( Player on : w.getPlayers() ){
             on.teleport(tp.getSpawnLocation());
@@ -105,12 +105,12 @@ public class WorldController {
         copyWorld(source, target);
     }
     
-    public void copyWorld(File source, File target) {
+    public void copyWorld(File source, File target){
         try {
             ArrayList<String> ignore = new ArrayList<>(Arrays.asList("uid.dat", "session.lock", "Village.dat", "villages.dat"));
-            if(!ignore.contains(source.getName())){
-                if(source.isDirectory()){
-                    if(!target.exists())
+            if (!ignore.contains(source.getName())){
+                if (source.isDirectory()){
+                    if (!target.exists())
                         target.mkdirs();
                     String[] files = source.list();
                     for ( String file : files ){
@@ -129,17 +129,17 @@ public class WorldController {
                     out.close();
                 }
             }
-        } catch(IOException ignored) {
+        } catch (IOException ignored) {
         }
     }
     
-    public void deleteDirectory(File source) {
+    public void deleteDirectory(File source){
         ArrayList<String> ignore = new ArrayList<>(Arrays.asList("uid.dat", "session.lock", "Village.dat", "villages.dat"));
-        if(!source.exists()) return;
+        if (!source.exists()) return;
         for ( File f : source.listFiles() ){
-            if(f == null) continue;
-            if(!ignore.contains(f.getName())){
-                if(f.isDirectory()){
+            if (f == null) continue;
+            if (!ignore.contains(f.getName())){
+                if (f.isDirectory()){
                     deleteDirectory(f);
                 } else {
                     f.delete();
@@ -148,25 +148,25 @@ public class WorldController {
         }
     }
     
-    public ChunkGenerator getChunkGenerator() {
+    public ChunkGenerator getChunkGenerator(){
         return new ChunkGenerator() {
             @Override
-            public List<BlockPopulator> getDefaultPopulators(World world) {
+            public List<BlockPopulator> getDefaultPopulators(World world){
                 return Collections.emptyList();
             }
             
             @Override
-            public boolean canSpawn(World world, int x, int z) {
+            public boolean canSpawn(World world, int x, int z){
                 return true;
             }
             
             @Override
-            public byte[] generate(World world, Random random, int x, int z) {
+            public byte[] generate(World world, Random random, int x, int z){
                 return new byte[32768];
             }
             
             @Override
-            public ChunkData generateChunkData(World world, Random random, int x, int z, BiomeGrid biome) {
+            public ChunkData generateChunkData(World world, Random random, int x, int z, BiomeGrid biome){
                 ChunkData chunk = createChunkData(world);
                 for ( int X = 0; X < 16; X++ ){
                     for ( int Z = 0; Z < 16; Z++ ){
@@ -179,17 +179,17 @@ public class WorldController {
             }
             
             @Override
-            public Location getFixedSpawnLocation(World world, Random random) {
+            public Location getFixedSpawnLocation(World world, Random random){
                 return new Location(world, 0.0D, 75, 0.0D);
             }
         };
     }
     
-    public IWorldEdit getEdit() {
+    public IWorldEdit getEdit(){
         return edit;
     }
     
-    private void changeSchemColor(Color color) {
+    private void changeSchemColor(Color color){
     
     }
 }

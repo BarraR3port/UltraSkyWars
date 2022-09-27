@@ -32,40 +32,40 @@ public class SpectatorListener implements Listener {
     
     private final UltraSkyWars plugin;
     
-    public SpectatorListener(UltraSkyWars plugin) {
+    public SpectatorListener(UltraSkyWars plugin){
         this.plugin = plugin;
     }
     
     @EventHandler
-    public void onBlockPlace(BlockPlaceEvent e) {
+    public void onBlockPlace(BlockPlaceEvent e){
         Player p = e.getPlayer();
         Game game = plugin.getGm().getGameByPlayer(p);
-        if(game == null){
+        if (game == null){
             return;
         }
-        if(game.getSpectators().contains(p)){
+        if (game.getSpectators().contains(p)){
             e.setCancelled(true);
         }
     }
     
     @EventHandler
-    public void onDrop(PlayerDropItemEvent e) {
+    public void onDrop(PlayerDropItemEvent e){
         Player p = e.getPlayer();
         Game game = plugin.getGm().getGameByPlayer(p);
-        if(game == null){
+        if (game == null){
             return;
         }
-        if(game.getSpectators().contains(p)){
+        if (game.getSpectators().contains(p)){
             e.setCancelled(true);
         }
     }
     
     @EventHandler
-    public void onChest(PlayerInteractEvent e) {
+    public void onChest(PlayerInteractEvent e){
         Player p = e.getPlayer();
         Game game = plugin.getGm().getGameByPlayer(p);
-        if(game != null){
-            if(game.getSpectators().contains(p)){
+        if (game != null){
+            if (game.getSpectators().contains(p)){
                 e.setCancelled(true);
                 e.setUseInteractedBlock(Event.Result.DENY);
                 e.setUseItemInHand(Event.Result.DENY);
@@ -74,24 +74,24 @@ public class SpectatorListener implements Listener {
     }
     
     @EventHandler
-    public void onInventoryClick(InventoryClickEvent e) {
+    public void onInventoryClick(InventoryClickEvent e){
         Player p = (Player) e.getWhoClicked();
         Game game = plugin.getGm().getGameByPlayer(p);
-        if(game != null){
-            if(game.getSpectators().contains(p)){
-                if(e.getClick().isShiftClick()){
+        if (game != null){
+            if (game.getSpectators().contains(p)){
+                if (e.getClick().isShiftClick()){
                     Inventory clicked = e.getClickedInventory();
-                    if(clicked == e.getWhoClicked().getInventory()){
+                    if (clicked == e.getWhoClicked().getInventory()){
                         ItemStack clickedOn = e.getCurrentItem();
-                        if(clickedOn != null){
+                        if (clickedOn != null){
                             e.setCancelled(true);
                         }
                     }
                 }
                 Inventory clicked = e.getClickedInventory();
-                if(clicked != e.getWhoClicked().getInventory()){
+                if (clicked != e.getWhoClicked().getInventory()){
                     ItemStack onCursor = e.getCursor();
-                    if(onCursor != null){
+                    if (onCursor != null){
                         e.setCancelled(true);
                     }
                 }
@@ -100,37 +100,37 @@ public class SpectatorListener implements Listener {
     }
     
     @EventHandler
-    public void onDrag(InventoryDragEvent e) {
+    public void onDrag(InventoryDragEvent e){
         Player p = (Player) e.getWhoClicked();
         Game game = plugin.getGm().getGameByPlayer(p);
-        if(game != null){
-            if(game.getSpectators().contains(p)){
+        if (game != null){
+            if (game.getSpectators().contains(p)){
                 e.setCancelled(true);
             }
         }
     }
     
     @EventHandler
-    protected void onEntityDamageEvent(EntityDamageByEntityEvent e) {
-        if(e.getDamager() instanceof Player){
+    protected void onEntityDamageEvent(EntityDamageByEntityEvent e){
+        if (e.getDamager() instanceof Player){
             Player d = (Player) e.getDamager();
             Game game = plugin.getGm().getGameByPlayer(d);
-            if(game != null && game.getSpectators().contains(d)){
+            if (game != null && game.getSpectators().contains(d)){
                 e.setCancelled(true);
             }
         }
     }
     
     @EventHandler(priority = EventPriority.HIGHEST)
-    protected void onPotionSplash(PotionSplashEvent e) {
+    protected void onPotionSplash(PotionSplashEvent e){
         ThrownPotion potion = e.getPotion();
         ArrayList<Player> online = new ArrayList<>();
         for ( LivingEntity ent : e.getAffectedEntities() ){
-            if(!(ent instanceof Player)) continue;
+            if (!(ent instanceof Player)) continue;
             Player p = (Player) ent;
             Game game = plugin.getGm().getGameByPlayer(p);
-            if(game != null){
-                if(game.getSpectators().contains(p)){
+            if (game != null){
+                if (game.getSpectators().contains(p)){
                     online.add(p);
                 }
             }
@@ -143,36 +143,36 @@ public class SpectatorListener implements Listener {
     }
     
     @EventHandler
-    protected void onPlayerPickupItem(PlayerPickupItemEvent e) {
+    protected void onPlayerPickupItem(PlayerPickupItemEvent e){
         Player p = e.getPlayer();
         Game game = plugin.getGm().getGameByPlayer(p);
-        if(game != null){
-            if(game.getSpectators().contains(p)){
+        if (game != null){
+            if (game.getSpectators().contains(p)){
                 e.setCancelled(true);
             }
         }
     }
     
     @EventHandler
-    protected void onEntityTarget(EntityTargetEvent e) {
-        if(e.getTarget() == null){
+    protected void onEntityTarget(EntityTargetEvent e){
+        if (e.getTarget() == null){
             return;
         }
-        if(e.getTarget() instanceof Player){
+        if (e.getTarget() instanceof Player){
             Player p = (Player) e.getTarget();
             Game game = plugin.getGm().getGameByPlayer(p);
-            if(game != null){
-                if(!e.getTarget().hasMetadata("NPC") && game.getSpectators().contains(p)){
+            if (game != null){
+                if (!e.getTarget().hasMetadata("NPC") && game.getSpectators().contains(p)){
                     e.setCancelled(true);
                 }
             }
         }
-        if(e.getTarget() instanceof Player){
+        if (e.getTarget() instanceof Player){
             Player p = (Player) e.getTarget();
             Game game = plugin.getGm().getGameByPlayer(p);
-            if(game != null){
-                if(game.getSpectators().contains(p)){
-                    if(e.getEntity() instanceof ExperienceOrb){
+            if (game != null){
+                if (game.getSpectators().contains(p)){
+                    if (e.getEntity() instanceof ExperienceOrb){
                         repellExpOrb((Player) e.getTarget(), (ExperienceOrb) e.getEntity());
                         e.setCancelled(true);
                         e.setTarget(null);
@@ -183,23 +183,23 @@ public class SpectatorListener implements Listener {
     }
     
     @EventHandler
-    protected void onBlockDamage(BlockDamageEvent e) {
+    protected void onBlockDamage(BlockDamageEvent e){
         Player p = e.getPlayer();
         Game game = plugin.getGm().getGameByPlayer(p);
-        if(game != null){
-            if(game.getSpectators().contains(p)){
+        if (game != null){
+            if (game.getSpectators().contains(p)){
                 e.setCancelled(true);
             }
         }
     }
     
     @EventHandler
-    protected void onEntityDamage(EntityDamageEvent e) {
-        if(e.getEntity() instanceof Player){
+    protected void onEntityDamage(EntityDamageEvent e){
+        if (e.getEntity() instanceof Player){
             Player p = (Player) e.getEntity();
             Game game = plugin.getGm().getGameByPlayer(p);
-            if(game != null){
-                if(!e.getEntity().hasMetadata("NPC") && game.getSpectators().contains(p)){
+            if (game != null){
+                if (!e.getEntity().hasMetadata("NPC") && game.getSpectators().contains(p)){
                     e.setCancelled(true);
                     e.getEntity().setFireTicks(0);
                 }
@@ -208,12 +208,12 @@ public class SpectatorListener implements Listener {
     }
     
     @EventHandler
-    protected void onFoodLevelChange(FoodLevelChangeEvent e) {
-        if(e.getEntity() instanceof Player){
+    protected void onFoodLevelChange(FoodLevelChangeEvent e){
+        if (e.getEntity() instanceof Player){
             Player p = (Player) e.getEntity();
             Game game = plugin.getGm().getGameByPlayer(p);
-            if(game != null){
-                if(!e.getEntity().hasMetadata("NPC") && game.getSpectators().contains(p)){
+            if (game != null){
+                if (!e.getEntity().hasMetadata("NPC") && game.getSpectators().contains(p)){
                     e.setCancelled(true);
                     p.setFoodLevel(20);
                     p.setSaturation(20);
@@ -223,36 +223,36 @@ public class SpectatorListener implements Listener {
     }
     
     @EventHandler
-    public void onVehicleEnter(VehicleEnterEvent e) {
-        if(e.getEntered() instanceof Player){
+    public void onVehicleEnter(VehicleEnterEvent e){
+        if (e.getEntered() instanceof Player){
             Player p = (Player) e.getEntered();
             Game game = plugin.getGm().getGameByPlayer(p);
-            if(game != null){
-                if(game.getSpectators().contains(p)){
+            if (game != null){
+                if (game.getSpectators().contains(p)){
                     e.setCancelled(true);
                 }
             }
         }
     }
     
-    void repellExpOrb(Player player, ExperienceOrb orb) {
+    void repellExpOrb(Player player, ExperienceOrb orb){
         Location pLoc = player.getLocation();
         Location oLoc = orb.getLocation();
         Vector dir = oLoc.toVector().subtract(pLoc.toVector());
         double dx = Math.abs(dir.getX());
         double dz = Math.abs(dir.getZ());
-        if((dx == 0.0) && (dz == 0.0)){
+        if ((dx == 0.0) && (dz == 0.0)){
             dir.setX(0.001);
         }
-        if((dx < 3.0) && (dz < 3.0)){
+        if ((dx < 3.0) && (dz < 3.0)){
             Vector nDir = dir.normalize();
             Vector newV = nDir.clone().multiply(0.3);
             newV.setY(0);
             orb.setVelocity(newV);
-            if((dx < 1.0) && (dz < 1.0)){
+            if ((dx < 1.0) && (dz < 1.0)){
                 orb.teleport(oLoc.clone().add(nDir.multiply(1.0)), PlayerTeleportEvent.TeleportCause.PLUGIN);
             }
-            if((dx < 0.5) && (dz < 0.5)){
+            if ((dx < 0.5) && (dz < 0.5)){
                 orb.remove();
             }
         }

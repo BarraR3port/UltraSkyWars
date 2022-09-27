@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class SpectateOptionsMenu extends UltraInventory {
     
-    public SpectateOptionsMenu(UltraSkyWars plugin, String name) {
+    public SpectateOptionsMenu(UltraSkyWars plugin, String name){
         super(name);
         this.title = plugin.getLang().get(null, "menus." + name + ".title");
         reload();
@@ -25,52 +25,52 @@ public class SpectateOptionsMenu extends UltraInventory {
             InventoryClickEvent e = b.getInventoryClickEvent();
             Player p = b.getPlayer();
             e.setCancelled(true);
-            if(e.getCurrentItem() == null || e.getCurrentItem().getType().equals(Material.AIR)){
+            if (e.getCurrentItem() == null || e.getCurrentItem().getType().equals(Material.AIR)){
                 return;
             }
             ItemStack item = e.getCurrentItem();
-            if(!item.hasItemMeta()){
+            if (!item.hasItemMeta()){
                 return;
             }
-            if(!item.getItemMeta().hasDisplayName()){
+            if (!item.getItemMeta().hasDisplayName()){
                 return;
             }
             Game game = plugin.getGm().getGameByPlayer(p);
             SWPlayer sw = plugin.getDb().getSWPlayer(p);
             ItemMeta im = item.getItemMeta();
             String display = im.getDisplayName();
-            if(display.equals(plugin.getLang().get(p, "menus.options.speedI.nameItem"))){
+            if (display.equals(plugin.getLang().get(p, "menus.options.speedI.nameItem"))){
                 sw.setSpeed(0.2F);
                 game.updateSpectatorOptions(p);
                 p.sendMessage(plugin.getLang().get(p, "messages.setSpeed").replaceAll("<speed>", "I"));
                 p.closeInventory();
             }
-            if(display.equals(plugin.getLang().get(p, "menus.options.speedII.nameItem"))){
+            if (display.equals(plugin.getLang().get(p, "menus.options.speedII.nameItem"))){
                 sw.setSpeed(0.4F);
                 game.updateSpectatorOptions(p);
                 p.sendMessage(plugin.getLang().get(p, "messages.setSpeed").replaceAll("<speed>", "II"));
                 p.closeInventory();
             }
-            if(display.equals(plugin.getLang().get(p, "menus.options.speedIII.nameItem"))){
+            if (display.equals(plugin.getLang().get(p, "menus.options.speedIII.nameItem"))){
                 sw.setSpeed(0.6F);
                 game.updateSpectatorOptions(p);
                 p.sendMessage(plugin.getLang().get(p, "messages.setSpeed").replaceAll("<speed>", "III"));
                 p.closeInventory();
             }
-            if(display.equals(plugin.getLang().get(p, "menus.options.speedIV.nameItem"))){
+            if (display.equals(plugin.getLang().get(p, "menus.options.speedIV.nameItem"))){
                 sw.setSpeed(0.8F);
                 game.updateSpectatorOptions(p);
                 p.sendMessage(plugin.getLang().get(p, "messages.setSpeed").replaceAll("<speed>", "IV"));
                 p.closeInventory();
             }
-            if(display.equals(plugin.getLang().get(p, "menus.options.speedV.nameItem"))){
+            if (display.equals(plugin.getLang().get(p, "menus.options.speedV.nameItem"))){
                 sw.setSpeed(1.0F);
                 game.updateSpectatorOptions(p);
                 p.sendMessage(plugin.getLang().get(p, "messages.setSpeed").replaceAll("<speed>", "V"));
                 p.closeInventory();
             }
-            if(display.equals(plugin.getLang().get(p, "menus.options.nightvision.nameItem"))){
-                if(!sw.isNightVision()){
+            if (display.equals(plugin.getLang().get(p, "menus.options.nightvision.nameItem"))){
+                if (!sw.isNightVision()){
                     sw.setNightVision(true);
                     p.sendMessage(plugin.getLang().get(p, "messages.setNightVision").replaceAll("<state>", plugin.getLang().get(p, "activated")));
                 } else {
@@ -79,8 +79,8 @@ public class SpectateOptionsMenu extends UltraInventory {
                 }
                 game.updateSpectatorOptions(p);
             }
-            if(display.equals(plugin.getLang().get(p, "menus.options.spects.nameItem"))){
-                if(!sw.isSpectatorsView()){
+            if (display.equals(plugin.getLang().get(p, "menus.options.spects.nameItem"))){
+                if (!sw.isSpectatorsView()){
                     sw.setSpectatorsView(true);
                     p.sendMessage(plugin.getLang().get(p, "messages.setSpectator").replaceAll("<state>", plugin.getLang().get(p, "activated")));
                 } else {
@@ -89,8 +89,8 @@ public class SpectateOptionsMenu extends UltraInventory {
                 }
                 game.updateSpectatorOptions(p);
             }
-            if(display.equals(plugin.getLang().get(p, "menus.options.first.nameItem"))){
-                if(!sw.isFirstPerson()){
+            if (display.equals(plugin.getLang().get(p, "menus.options.first.nameItem"))){
+                if (!sw.isFirstPerson()){
                     sw.setFirstPerson(true);
                     p.sendMessage(plugin.getLang().get(p, "messages.setFirstPerson").replaceAll("<state>", plugin.getLang().get(p, "activated")));
                 } else {
@@ -103,13 +103,13 @@ public class SpectateOptionsMenu extends UltraInventory {
     }
     
     @Override
-    public void reload() {
+    public void reload(){
         UltraSkyWars plugin = UltraSkyWars.get();
-        if(plugin.getMenus().isSet("menus." + name)){
+        if (plugin.getMenus().isSet("menus." + name)){
             this.rows = plugin.getMenus().getInt("menus." + name + ".rows");
             Map<Integer, ItemStack> config = new HashMap<>();
             Map<Integer, ItemStack> contents = new HashMap<>();
-            if(plugin.getMenus().getConfig().isSet("menus." + name + ".items")){
+            if (plugin.getMenus().getConfig().isSet("menus." + name + ".items")){
                 ConfigurationSection conf = plugin.getMenus().getConfig().getConfigurationSection("menus." + name + ".items");
                 for ( String c : conf.getKeys(false) ){
                     int slot = Integer.parseInt(c);

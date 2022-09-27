@@ -19,25 +19,25 @@ public class InjectionSoulWell implements Injection {
     private SoulWellMenu wel;
     
     @Override
-    public void loadInjection(UltraSkyWars plugin) {
+    public void loadInjection(UltraSkyWars plugin){
         this.plugin = plugin;
         this.soulwell = new Settings("modules/soulwell", true, false);
         this.swm = new SoulWellManager(plugin, this);
         this.wel = new SoulWellMenu(plugin, this);
         plugin.getServer().getPluginManager().registerEvents(new PlayerListener(plugin, this), plugin);
         plugin.getServer().getPluginManager().registerEvents(new MenuListener(plugin, this), plugin);
-        if(!plugin.getCm().isBungeeModeLobby()){
+        if (!plugin.getCm().isBungeeModeLobby()){
             plugin.getServer().getPluginManager().registerEvents(new GameListener(plugin, this), plugin);
         }
     }
     
     @Override
-    public void reload() {
+    public void reload(){
     
     }
     
     @Override
-    public void disable() {
+    public void disable(){
     }
     
 }

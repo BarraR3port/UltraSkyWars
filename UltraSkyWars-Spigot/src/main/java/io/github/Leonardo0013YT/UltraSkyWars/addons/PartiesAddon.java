@@ -14,21 +14,21 @@ public class PartiesAddon {
     
     private final PartiesAPI api;
     
-    public PartiesAddon() {
+    public PartiesAddon(){
         api = Parties.getApi();
     }
     
-    public boolean isInParty(Player p) {
+    public boolean isInParty(Player p){
         return !api.getPartyPlayer(p.getUniqueId()).getPartyName().isEmpty();
     }
     
-    public boolean isPartyLeader(Player p) {
+    public boolean isPartyLeader(Player p){
         PartyPlayer pp = api.getPartyPlayer(p.getUniqueId());
-        if(pp == null){
+        if (pp == null){
             return false;
         }
         Party party = api.getParty(pp.getPartyName());
-        if(party == null || party.getLeader() == null){
+        if (party == null || party.getLeader() == null){
             return false;
         }
         return party.getLeader().equals(p.getUniqueId()) || pp.getRank() == 1;

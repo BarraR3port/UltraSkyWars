@@ -16,7 +16,7 @@ public class ChestItem {
     @Getter
     private final int min, max;
     
-    public ChestItem(ItemStack item, int percent, int min, int max, boolean center, boolean refill, ArrayList<String> modes) {
+    public ChestItem(ItemStack item, int percent, int min, int max, boolean center, boolean refill, ArrayList<String> modes){
         this.item = item;
         this.min = min;
         this.max = max;
@@ -26,17 +26,17 @@ public class ChestItem {
         this.modes = modes;
     }
     
-    public ArrayList<String> getModes() {
+    public ArrayList<String> getModes(){
         return modes;
     }
     
-    public int getPercent() {
+    public int getPercent(){
         return percent * 100;
     }
     
-    public ItemStack getItem() {
+    public ItemStack getItem(){
         ItemStack item = this.item.clone();
-        if(min != max){
+        if (min != max){
             int now = new Random().nextInt(this.max - this.min + 1) + this.min;
             item.setAmount(now);
             return item;

@@ -13,12 +13,12 @@ public class ConfigManager {
     private boolean noBreakArmorStand, noInteractArmorStand, noBreakFarm, igniteProtect, hideJoinMessage, hideQuitMessage, opBypass, noBreak, noPlace, noDamage, noHunger, noWeather, noExplosion, noDayCycle, noMobSpawn, noDrop, joinTeleport, voidTeleport;
     private List<String> interactBlocked;
     
-    public ConfigManager(UltraSkyWars plugin, InjectionLProtection injection) {
+    public ConfigManager(UltraSkyWars plugin, InjectionLProtection injection){
         this.injection = injection;
         reload();
     }
     
-    public void reload() {
+    public void reload(){
         lobbyWorld = injection.getLobbyOptions().get("options.lobbyWorld");
         noBreakArmorStand = injection.getLobbyOptions().getBooleanOrDefault("options.noBreakArmorStand", true);
         noInteractArmorStand = injection.getLobbyOptions().getBooleanOrDefault("options.noInteractArmorStand", true);
@@ -41,83 +41,83 @@ public class ConfigManager {
         interactBlocked = injection.getLobbyOptions().getListOrDefault("options.interactBlocked", new ArrayList<>());
     }
     
-    public boolean isNoBreakArmorStand() {
+    public boolean isNoBreakArmorStand(){
         return noBreakArmorStand;
     }
     
-    public boolean isNoInteractArmorStand() {
+    public boolean isNoInteractArmorStand(){
         return noInteractArmorStand;
     }
     
-    public boolean isNoBreakFarm() {
+    public boolean isNoBreakFarm(){
         return noBreakFarm;
     }
     
-    public boolean isIgniteProtect() {
+    public boolean isIgniteProtect(){
         return igniteProtect;
     }
     
-    public boolean isHideJoinMessage() {
+    public boolean isHideJoinMessage(){
         return hideJoinMessage;
     }
     
-    public boolean isHideQuitMessage() {
+    public boolean isHideQuitMessage(){
         return hideQuitMessage;
     }
     
-    public String getLobbyWorld() {
+    public String getLobbyWorld(){
         return lobbyWorld;
     }
     
-    public List<String> getInteractBlocked() {
+    public List<String> getInteractBlocked(){
         return interactBlocked;
     }
     
-    public boolean isOpBypass() {
+    public boolean isOpBypass(){
         return opBypass;
     }
     
-    public boolean isJoinTeleport() {
+    public boolean isJoinTeleport(){
         return joinTeleport;
     }
     
-    public boolean isVoidTeleport() {
+    public boolean isVoidTeleport(){
         return voidTeleport;
     }
     
-    public boolean isNoDrop() {
+    public boolean isNoDrop(){
         return noDrop;
     }
     
-    public boolean isNoBreak() {
+    public boolean isNoBreak(){
         return noBreak;
     }
     
-    public boolean isNoPlace() {
+    public boolean isNoPlace(){
         return noPlace;
     }
     
-    public boolean isNoDamage() {
+    public boolean isNoDamage(){
         return noDamage;
     }
     
-    public boolean isNoHunger() {
+    public boolean isNoHunger(){
         return noHunger;
     }
     
-    public boolean isNoWeather() {
+    public boolean isNoWeather(){
         return noWeather;
     }
     
-    public boolean isNoExplosion() {
+    public boolean isNoExplosion(){
         return noExplosion;
     }
     
-    public boolean isNoDayCycle() {
+    public boolean isNoDayCycle(){
         return noDayCycle;
     }
     
-    public boolean isNoMobSpawn() {
+    public boolean isNoMobSpawn(){
         return noMobSpawn;
     }
 }

@@ -16,8 +16,8 @@ public class WinDanceDayNight implements WinDance, Cloneable {
     private BukkitTask task;
     
     @Override
-    public void loadCustoms(UltraSkyWars plugin, String path) {
-        if(!loaded){
+    public void loadCustoms(UltraSkyWars plugin, String path){
+        if (!loaded){
             perTickTime = plugin.getWindance().getIntOrDefault(path + ".perTickTime", 700);
             taskTick = plugin.getWindance().getIntOrDefault(path + ".taskTick", 1);
             loaded = true;
@@ -25,11 +25,11 @@ public class WinDanceDayNight implements WinDance, Cloneable {
     }
     
     @Override
-    public void start(Player p, Game game) {
+    public void start(Player p, Game game){
         World world = game.getSpectator().getWorld();
         task = new BukkitRunnable() {
-            public void run() {
-                if(p == null || !p.isOnline() || !world.getName().equals(p.getWorld().getName())){
+            public void run(){
+                if (p == null || !p.isOnline() || !world.getName().equals(p.getWorld().getName())){
                     stop();
                     return;
                 }
@@ -40,14 +40,14 @@ public class WinDanceDayNight implements WinDance, Cloneable {
     }
     
     @Override
-    public void stop() {
-        if(task != null){
+    public void stop(){
+        if (task != null){
             task.cancel();
         }
     }
     
     @Override
-    public WinDance clone() {
+    public WinDance clone(){
         return new WinDanceDayNight();
     }
 }

@@ -18,18 +18,18 @@ public class KitSetup {
     private String name;
     private String permission;
     
-    public KitSetup(UltraSkyWars plugin, Player p, String name) {
+    public KitSetup(UltraSkyWars plugin, Player p, String name){
         this.plugin = plugin;
         this.p = p;
         this.name = name;
         this.permission = "ultraskywars.kit." + name;
     }
     
-    public Player getP() {
+    public Player getP(){
         return p;
     }
     
-    public void saveKit(Player p) {
+    public void saveKit(Player p){
         int id = plugin.getKm().getNextId();
         plugin.getKits().set("kits." + name + ".id", id);
         plugin.getKits().set("kits." + name + ".name", name);
@@ -56,8 +56,8 @@ public class KitSetup {
         plugin.getKm().setLastID(id + 1);
     }
     
-    public void saveKitLevel(Player p) {
-        if(kls.getInv() == null && kls.getArmors() == null){
+    public void saveKitLevel(Player p){
+        if (kls.getInv() == null && kls.getArmors() == null){
             p.sendMessage(plugin.getLang().get(p, "setup.kits.notSet.noInv"));
             return;
         }
@@ -66,47 +66,47 @@ public class KitSetup {
         p.sendMessage(plugin.getLang().get(p, "setup.kitlevel.save"));
     }
     
-    public KitLevelSetup getKls() {
+    public KitLevelSetup getKls(){
         return kls;
     }
     
-    public void setKls(KitLevelSetup kls) {
+    public void setKls(KitLevelSetup kls){
         this.kls = kls;
     }
     
-    public String getPermission() {
+    public String getPermission(){
         return permission;
     }
     
-    public void setPermission(String permission) {
+    public void setPermission(String permission){
         this.permission = permission;
     }
     
-    public HashMap<Integer, KitLevelSetup> getLevels() {
+    public HashMap<Integer, KitLevelSetup> getLevels(){
         return levels;
     }
     
-    public int getSlot() {
+    public int getSlot(){
         return slot;
     }
     
-    public void setSlot(int slot) {
+    public void setSlot(int slot){
         this.slot = slot;
     }
     
-    public int getPage() {
+    public int getPage(){
         return page;
     }
     
-    public void setPage(int page) {
+    public void setPage(int page){
         this.page = page;
     }
     
-    public String getName() {
+    public String getName(){
         return name;
     }
     
-    public void setName(String name) {
+    public void setName(String name){
         this.name = name;
     }
 }

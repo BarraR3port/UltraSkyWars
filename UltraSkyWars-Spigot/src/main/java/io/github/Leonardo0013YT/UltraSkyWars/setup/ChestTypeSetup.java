@@ -10,7 +10,7 @@ public class ChestTypeSetup {
     private int slotSetup, slotVotes;
     private boolean refillChange, armorAllTeams;
     
-    public ChestTypeSetup(String name) {
+    public ChestTypeSetup(String name){
         this.name = name;
         this.key = name.toLowerCase();
         this.edit = "{CHEST" + name.toUpperCase() + "}";
@@ -19,7 +19,7 @@ public class ChestTypeSetup {
         this.refillChange = false;
     }
     
-    public void save() {
+    public void save(){
         UltraSkyWars plugin = UltraSkyWars.get();
         plugin.getChestType().set("types." + key + ".key", key);
         plugin.getChestType().set("types." + key + ".edit", edit);
@@ -38,59 +38,59 @@ public class ChestTypeSetup {
         plugin.getCtm().reload();
     }
     
-    public boolean isArmorAllTeams() {
+    public boolean isArmorAllTeams(){
         return armorAllTeams;
     }
     
-    public void setArmorAllTeams(boolean armorAllTeams) {
+    public void setArmorAllTeams(boolean armorAllTeams){
         this.armorAllTeams = armorAllTeams;
     }
     
-    public boolean isRefillChange() {
+    public boolean isRefillChange(){
         return refillChange;
     }
     
-    public void setRefillChange(boolean refillChange) {
+    public void setRefillChange(boolean refillChange){
         this.refillChange = refillChange;
     }
     
-    public String getName() {
+    public String getName(){
         return name;
     }
     
-    public void setName(String name) {
+    public void setName(String name){
         this.name = name;
     }
     
-    public String getKey() {
+    public String getKey(){
         return key;
     }
     
-    public void setKey(String key) {
+    public void setKey(String key){
         this.key = key;
     }
     
-    public String getEdit() {
+    public String getEdit(){
         return edit;
     }
     
-    public void setEdit(String edit) {
+    public void setEdit(String edit){
         this.edit = edit;
     }
     
-    public int getSlotSetup() {
+    public int getSlotSetup(){
         return slotSetup;
     }
     
-    public void setSlotSetup(int slotSetup) {
+    public void setSlotSetup(int slotSetup){
         this.slotSetup = slotSetup;
     }
     
-    public int getSlotVotes() {
+    public int getSlotVotes(){
         return slotVotes;
     }
     
-    public void setSlotVotes(int slotVotes) {
+    public void setSlotVotes(int slotVotes){
         this.slotVotes = slotVotes;
     }
 }

@@ -9,23 +9,23 @@ public class SoulWell {
     private final Location loc;
     private final Location hologram;
     
-    public SoulWell(UltraSkyWars plugin, Location loc) {
+    public SoulWell(UltraSkyWars plugin, Location loc){
         this.plugin = plugin;
         this.loc = loc;
         this.hologram = loc.clone().add(0.5, 0, 0.5);
     }
     
-    public void reload() {
-        if(plugin.getAdm().hasHologramPlugin()){
+    public void reload(){
+        if (plugin.getAdm().hasHologramPlugin()){
             plugin.getAdm().createHologram(hologram, plugin.getLang().getList("holograms.soulwell"));
         }
     }
     
-    public Location getHologram() {
+    public Location getHologram(){
         return hologram;
     }
     
-    public Location getLoc() {
+    public Location getLoc(){
         return loc;
     }
     

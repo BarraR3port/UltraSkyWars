@@ -37,17 +37,17 @@ public class WorldEditUtils_Old implements IWorldEdit {
     private final String path;
     private final WorldEdit worldEdit;
     
-    public WorldEditUtils_Old(UltraSkyWars plugin) {
+    public WorldEditUtils_Old(UltraSkyWars plugin){
         this.path = Bukkit.getWorldContainer() + "/plugins/WorldEdit/schematics";
         this.worldEdit = WorldEdit.getInstance();
     }
     
     @Override
-    public void paste(Location loc, String schematic, boolean air, CallBackAPI<Boolean> done) {
+    public void paste(Location loc, String schematic, boolean air, CallBackAPI<Boolean> done){
         String s = schematic.replaceAll(".schematic", "");
         Vector v = new Vector(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
         World w = FaweAPI.getWorld(loc.getWorld().getName());
-        if(!cache.containsKey(s)){
+        if (!cache.containsKey(s)){
             File file = new File(path, s + ".schematic");
             ClipboardFormat cf = ClipboardFormat.findByFile(file);
             try {
@@ -58,7 +58,7 @@ public class WorldEditUtils_Old implements IWorldEdit {
                 err.printStackTrace();
             }
         }
-        if(cache.containsKey(s)){
+        if (cache.containsKey(s)){
             Schematic sh = cache.get(s);
             EditSession editSession = sh.paste(w, v, false, air, null);
             editSession.flushQueue();
@@ -67,20 +67,20 @@ public class WorldEditUtils_Old implements IWorldEdit {
     }
     
     @Override
-    public HashMap<org.bukkit.util.Vector, GlassBlock> getBlocks(String schematic) {
+    public HashMap<org.bukkit.util.Vector, GlassBlock> getBlocks(String schematic){
         HashMap<org.bukkit.util.Vector, GlassBlock> blocks = new HashMap<>();
         String s = schematic.replaceAll(".schematic", "");
-        if(!cache.containsKey(s)){
+        if (!cache.containsKey(s)){
             File file = new File(path, s + ".schematic");
             ClipboardFormat cf = ClipboardFormat.findByFile(file);
             try {
-                if(cf != null){
+                if (cf != null){
                     cache.put(s, cf.load(file));
                 }
-            } catch(IOException ignored) {
+            } catch (IOException ignored) {
             }
         }
-        if(cache.containsKey(s)){
+        if (cache.containsKey(s)){
             Schematic sh = cache.get(s);
             Clipboard clipboard = sh.getClipboard();
             for ( int x2 = clipboard.getMinimumPoint().getBlockX(); x2 <= clipboard.getMaximumPoint().getBlockX(); x2++ ){
@@ -101,13 +101,13 @@ public class WorldEditUtils_Old implements IWorldEdit {
     }
     
     @Override
-    public void changeSchematicColors(Player p, String schematic, boolean team) {
+    public void changeSchematicColors(Player p, String schematic, boolean team){
         String s = schematic.replaceAll(".schematic", "");
         File file = new File(path, s + ".schematic");
         ClipboardFormat cf = ClipboardFormat.findByFile(file);
         WorldEditPlugin worldEditPlugin = (WorldEditPlugin) Bukkit.getPluginManager().getPlugin("WorldEdit");
         try {
-            if(cf != null){
+            if (cf != null){
                 Schematic sh = cf.load(file);
                 Clipboard clipboard = sh.getClipboard();
                 for ( int color = 0; color <= 16; color++ ){
@@ -116,11 +116,11 @@ public class WorldEditUtils_Old implements IWorldEdit {
                         for ( int y2 = clipboard.getMinimumPoint().getBlockY(); y2 <= clipboard.getMaximumPoint().getBlockY(); y2++ ){
                             for ( int z2 = clipboard.getMinimumPoint().getBlockZ(); z2 <= clipboard.getMaximumPoint().getBlockZ(); z2++ ){
                                 BaseBlock block = clipboard.getBlock(new Vector(x2, y2, z2));
-                                if(!block.isAir()){
-                                    if(block.getType() == 95){
+                                if (!block.isAir()){
+                                    if (block.getType() == 95){
                                         try {
                                             colorClipboard.setBlock(new Vector(x2, y2, z2), color != 16 ? (new BaseBlock(95, color, block.getNbtData())) : new BaseBlock(0));
-                                        } catch(WorldEditException e) {
+                                        } catch (WorldEditException e) {
                                             e.printStackTrace();
                                         }
                                     }
@@ -133,13 +133,13 @@ public class WorldEditUtils_Old implements IWorldEdit {
                     try {
                         com.sk89q.worldedit.entity.Player player = new BukkitPlayer(worldEditPlugin, null, p);
                         save(player, schem, (color != 16 ? "sw_simple_cage_" + (team ? "team_" : "") + XMaterial.matchXMaterial(95, color).name() : "air").toLowerCase());
-                    } catch(FilenameException | NullPointerException |
-                            NoSuchElementException e) {
+                    } catch (FilenameException | NullPointerException |
+                             NoSuchElementException e) {
                         e.printStackTrace();
                     }
                 }
             }
-        } catch(IOException err) {
+        } catch (IOException err) {
             err.printStackTrace();
         }
         
@@ -147,14 +147,14 @@ public class WorldEditUtils_Old implements IWorldEdit {
     }
     
     
-    private void save(com.sk89q.worldedit.entity.Player player, Schematic schematic, String fileName) throws FilenameException {
+    private void save(com.sk89q.worldedit.entity.Player player, Schematic schematic, String fileName) throws FilenameException{
         final LocalConfiguration config = this.worldEdit.getConfiguration();
         File dir = this.worldEdit.getWorkingDirectoryFile(config.saveDir);
         ClipboardFormat format = ClipboardFormat.findByAlias("schematic");
         File f = this.worldEdit.getSafeSaveFile(player, dir, fileName, format.getExtension(), format.getExtension());
-        if(f.getName().replaceAll("." + format.getExtension(), "").isEmpty()){
+        if (f.getName().replaceAll("." + format.getExtension(), "").isEmpty()){
             File directory = f.getParentFile();
-            if(directory.exists()){
+            if (directory.exists()){
                 int max = MainUtil.getMaxFileId(directory);
                 f = new File(directory, max + "." + format.getExtension());
             } else {
@@ -162,11 +162,11 @@ public class WorldEditUtils_Old implements IWorldEdit {
             }
         }
         final File parent = f.getParentFile();
-        if((parent != null) && !parent.exists()){
-            if(!parent.mkdirs()){
+        if ((parent != null) && !parent.exists()){
+            if (!parent.mkdirs()){
                 try {
                     Files.createDirectories(parent.toPath());
-                } catch(IOException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                     System.out.println("Could not create folder for schematics!");
                     return;
@@ -174,7 +174,7 @@ public class WorldEditUtils_Old implements IWorldEdit {
             }
         }
         try {
-            if(!f.exists()){
+            if (!f.exists()){
                 f.createNewFile();
             }
             try (FileOutputStream fos = new FileOutputStream(f)) {
@@ -183,7 +183,7 @@ public class WorldEditUtils_Old implements IWorldEdit {
                 
                 //if(holder instanceof URIClipboardHolder) uri = ((URIClipboardHolder) holder).getURI(clipboard);
                 try (ClipboardWriter writer = format.getWriter(fos)) {
-                    if(writer instanceof StructureFormat){
+                    if (writer instanceof StructureFormat){
                         ((StructureFormat) writer).write(clipboard, null, player.getName());
                     } else {
                         writer.write(clipboard, null);
@@ -193,10 +193,10 @@ public class WorldEditUtils_Old implements IWorldEdit {
                 }
                 
             }
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             player.printError("Unknown filename: " + fileName);
             e.printStackTrace();
-        } catch(IOException e) {
+        } catch (IOException e) {
             player.printError("Schematic could not written: " + e.getMessage());
             e.printStackTrace();
         }

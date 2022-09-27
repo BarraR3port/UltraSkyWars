@@ -17,7 +17,7 @@ public class ItemManager {
     private final UltraSkyWarsTNTM plugin;
     private final ItemStack tntLaunchPad, instantBoom, normalTNT, tntMadnessBook;
     
-    public ItemManager(UltraSkyWarsTNTM plugin) {
+    public ItemManager(UltraSkyWarsTNTM plugin){
         this.plugin = plugin;
         this.tntMadnessBook = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta bm = (BookMeta) tntMadnessBook.getItemMeta();

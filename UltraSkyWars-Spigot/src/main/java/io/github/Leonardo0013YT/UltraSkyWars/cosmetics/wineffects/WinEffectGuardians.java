@@ -20,7 +20,7 @@ public class WinEffectGuardians implements WinEffect, Cloneable {
     private BukkitTask task;
     
     @Override
-    public void start(Player p, Game game) {
+    public void start(Player p, Game game){
         World world = game.getSpectator().getWorld();
         Location l1 = getCicle(p.getLocation(), 0, 2);
         Location l2 = getCicle(p.getLocation(), 10, 2);
@@ -49,12 +49,12 @@ public class WinEffectGuardians implements WinEffect, Cloneable {
             double angle = 0;
             
             @Override
-            public void run() {
-                if(!p.getWorld().getName().equals(world.getName())){
+            public void run(){
+                if (!p.getWorld().getName().equals(world.getName())){
                     cancel();
                     return;
                 }
-                if(!p.isOnline()){
+                if (!p.isOnline()){
                     cancel();
                     return;
                 }
@@ -69,40 +69,40 @@ public class WinEffectGuardians implements WinEffect, Cloneable {
     }
     
     @Override
-    public void stop() {
+    public void stop(){
         for ( Guardian s : guardians ){
-            if(s == null || s.isDead()) continue;
+            if (s == null || s.isDead()) continue;
             s.remove();
         }
         for ( ArmorStand s : armors ){
-            if(s == null || s.isDead()) continue;
+            if (s == null || s.isDead()) continue;
             s.remove();
         }
         guardians.clear();
         armors.clear();
-        if(task != null){
+        if (task != null){
             task.cancel();
         }
     }
     
     @Override
-    public WinEffect clone() {
+    public WinEffect clone(){
         return new WinEffectGuardians();
     }
     
-    public Guardian apply(Guardian g) {
+    public Guardian apply(Guardian g){
         g.setNoDamageTicks(Integer.MAX_VALUE);
         return g;
     }
     
-    public ArmorStand apply(ArmorStand a) {
+    public ArmorStand apply(ArmorStand a){
         a.setGravity(false);
         a.setSmall(true);
         a.setVisible(false);
         return a;
     }
     
-    public Location getCicle(Location loc, double angle, double radius) {
+    public Location getCicle(Location loc, double angle, double radius){
         double x = radius * Math.cos(angle);
         double z = radius * Math.sin(angle);
         return loc.clone().add(x, 0, z);

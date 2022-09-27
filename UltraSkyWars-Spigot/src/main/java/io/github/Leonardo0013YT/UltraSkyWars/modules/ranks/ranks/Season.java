@@ -9,10 +9,10 @@ public class Season {
     private final int season;
     private final HashMap<Integer, SeasonDivision> divisions = new HashMap<>();
     
-    public Season(InjectionEloRank ier, String path, int season) {
+    public Season(InjectionEloRank ier, String path, int season){
         this.season = season;
         int actSeason = ier.getRankeds().getInt("data.season");
-        if(ier.getRankeds().isSet(path + "divisions")){
+        if (ier.getRankeds().isSet(path + "divisions")){
             for ( String d : ier.getRankeds().getConfig().getConfigurationSection(path + "divisions").getKeys(false) ){
                 int order = ier.getRankeds().getInt("divisions." + d + ".order");
                 divisions.put(order, new SeasonDivision(ier, path + "divisions." + d, season, actSeason > season));
@@ -20,15 +20,15 @@ public class Season {
         }
     }
     
-    public void execute() {
+    public void execute(){
     
     }
     
-    public int getSeason() {
+    public int getSeason(){
         return season;
     }
     
-    public HashMap<Integer, SeasonDivision> getDivisions() {
+    public HashMap<Integer, SeasonDivision> getDivisions(){
         return divisions;
     }
 }

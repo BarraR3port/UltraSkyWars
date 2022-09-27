@@ -9,11 +9,11 @@ public class PreviewSetup {
     private final String type;
     private Location player, cosmetic;
     
-    public PreviewSetup(String type) {
+    public PreviewSetup(String type){
         this.type = type;
     }
     
-    public void save() {
+    public void save(){
         UltraSkyWars plugin = UltraSkyWars.get();
         plugin.getConfig().set("previews." + type.toLowerCase() + ".player", Utils.getLocationString(player));
         plugin.getConfig().set("previews." + type.toLowerCase() + ".cosmetic", Utils.getLocationString(cosmetic));
@@ -21,23 +21,23 @@ public class PreviewSetup {
         plugin.reload();
     }
     
-    public String getType() {
+    public String getType(){
         return type;
     }
     
-    public Location getCosmetic() {
+    public Location getCosmetic(){
         return cosmetic;
     }
     
-    public void setCosmetic(Location cosmetic) {
+    public void setCosmetic(Location cosmetic){
         this.cosmetic = cosmetic;
     }
     
-    public Location getPlayer() {
+    public Location getPlayer(){
         return player;
     }
     
-    public void setPlayer(Location player) {
+    public void setPlayer(Location player){
         this.player = player;
     }
 }

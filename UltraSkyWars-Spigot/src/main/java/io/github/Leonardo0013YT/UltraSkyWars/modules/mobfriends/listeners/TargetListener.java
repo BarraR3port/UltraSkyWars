@@ -17,26 +17,26 @@ public class TargetListener implements Listener {
     
     private final UltraSkyWars plugin;
     
-    public TargetListener(UltraSkyWars plugin) {
+    public TargetListener(UltraSkyWars plugin){
         this.plugin = plugin;
     }
     
     @EventHandler
-    public void onSplash(PotionSplashEvent e) {
-        if(e.getEntity().getShooter() instanceof Witch){
+    public void onSplash(PotionSplashEvent e){
+        if (e.getEntity().getShooter() instanceof Witch){
             Witch w = (Witch) e.getEntity().getShooter();
-            if(w.hasMetadata("OWNER") && w.hasMetadata("TEAM")){
+            if (w.hasMetadata("OWNER") && w.hasMetadata("TEAM")){
                 Player p = Bukkit.getPlayer(UUID.fromString(w.getMetadata("OWNER").get(0).asString()));
-                if(p == null) return;
+                if (p == null) return;
                 Game g = plugin.getGm().getGameByPlayer(p);
-                if(g == null) return;
+                if (g == null) return;
                 Team t = g.getTeams().get(w.getMetadata("TEAM").get(0).asInt());
-                if(t == null) return;
+                if (t == null) return;
                 for ( LivingEntity le : e.getAffectedEntities() ){
-                    if(le instanceof Player){
+                    if (le instanceof Player){
                         Player on = (Player) le;
                         Team to = g.getTeamPlayer(on);
-                        if(to != null && to.getId() == t.getId()){
+                        if (to != null && to.getId() == t.getId()){
                             e.getAffectedEntities().remove(le);
                         }
                     }

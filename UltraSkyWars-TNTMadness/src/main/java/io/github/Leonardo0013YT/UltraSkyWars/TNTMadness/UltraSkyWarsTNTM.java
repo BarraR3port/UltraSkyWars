@@ -15,7 +15,7 @@ public class UltraSkyWarsTNTM extends JavaPlugin {
     private ItemManager im;
     
     @Override
-    public void onEnable() {
+    public void onEnable(){
         instance = this;
         this.tntLang = new Settings(this, "tntLang", true, false);
         this.im = new ItemManager(this);
@@ -24,7 +24,7 @@ public class UltraSkyWarsTNTM extends JavaPlugin {
     }
     
     @Override
-    public void onDisable() {
+    public void onDisable(){
         
     }
 }

@@ -25,18 +25,18 @@ public class MongoDBDatabase implements Database {
     private final DBCollection multipliers;
     private final UltraSkyWars plugin;
     
-    public MongoDBDatabase(UltraSkyWars plugin) {
+    public MongoDBDatabase(UltraSkyWars plugin){
         this.plugin = plugin;
         MongoCredential c = MongoCredential.createCredential(plugin.getConfig().getString("mongodb.username"), plugin.getConfig().getString("mongodb.database"), plugin.getConfig().getString("mongodb.password").toCharArray());
         mc = new MongoClient(new ServerAddress(plugin.getConfig().getString("mongodb.host"), plugin.getConfig().getInt("mongodb.port")), Collections.singletonList(c));
         admin = mc.getDB(plugin.getConfig().getString("mongodb.database"));
         plugin.sendLogMessage("§aBase de datos MongoDB iniciada correctamente.");
-        if(!admin.collectionExists("usw_players")){
+        if (!admin.collectionExists("usw_players")){
             admin.createCollection("usw_players", new BasicDBObject("capped", false));
             plugin.sendLogMessage("§aLa coleccion de datos §eJugadores §aa sido creada.");
         }
         players = admin.getCollection("players");
-        if(!admin.collectionExists("usw_multipliers")){
+        if (!admin.collectionExists("usw_multipliers")){
             admin.createCollection("usw_multipliers", new BasicDBObject("capped", false));
             plugin.sendLogMessage("§aLa coleccion de datos §eMultipliers §aa sido creada.");
         }
@@ -45,23 +45,23 @@ public class MongoDBDatabase implements Database {
     }
     
     @Override
-    public HashMap<UUID, SWPlayer> getPlayers() {
+    public HashMap<UUID, SWPlayer> getPlayers(){
         return SWPlayers;
     }
     
-    private boolean hasPlayer(UUID p) {
+    private boolean hasPlayer(UUID p){
         DBObject dbo = new BasicDBObject("uuid", p.toString());
         DBObject r = players.findOne(dbo);
         return r != null;
     }
     
     @Override
-    public int getRanking(UUID uuid) {
+    public int getRanking(UUID uuid){
         return 0;
     }
     
     @Override
-    public void loadMultipliers(CallBackAPI<Boolean> request) {
+    public void loadMultipliers(CallBackAPI<Boolean> request){
         plugin.getMm().clear();
         for ( DBObject m : multipliers.find() ){
             String type = (String) m.get("Type");
@@ -74,7 +74,7 @@ public class MongoDBDatabase implements Database {
     }
     
     @Override
-    public void createMultiplier(String type, String name, double amount, long ending, CallBackAPI<Boolean> request) {
+    public void createMultiplier(String type, String name, double amount, long ending, CallBackAPI<Boolean> request){
         DBObject now = new BasicDBObject("ID", multipliers.find().size());
         now.put("Type", type);
         now.put("Name", name);
@@ -85,10 +85,10 @@ public class MongoDBDatabase implements Database {
     }
     
     @Override
-    public boolean removeMultiplier(int id) {
+    public boolean removeMultiplier(int id){
         DBObject find = new BasicDBObject("ID", id);
         DBObject now = multipliers.findOne(find);
-        if(now != null){
+        if (now != null){
             DBObject save = new BasicDBObject("ID", id);
             save.put("Type", now.get("Type"));
             save.put("Name", now.get("Name"));
@@ -100,7 +100,7 @@ public class MongoDBDatabase implements Database {
     }
     
     @Override
-    public void loadTopElo() {
+    public void loadTopElo(){
         int pos = 1;
         List<String> tops = new ArrayList<>();
         for ( DBObject m : players.find().sort(new BasicDBObject("elo", -1)).limit(10) ){
@@ -111,7 +111,7 @@ public class MongoDBDatabase implements Database {
     }
     
     @Override
-    public void loadTopCoins() {
+    public void loadTopCoins(){
         int pos = 1;
         List<String> tops = new ArrayList<>();
         for ( DBObject m : players.find().sort(new BasicDBObject("coins", -1)).limit(10) ){
@@ -122,7 +122,7 @@ public class MongoDBDatabase implements Database {
     }
     
     @Override
-    public void loadTopKills() {
+    public void loadTopKills(){
         int pos = 1;
         List<String> tops = new ArrayList<>();
         for ( DBObject m : players.find().sort(new BasicDBObject("kills", -1)).limit(10) ){
@@ -133,7 +133,7 @@ public class MongoDBDatabase implements Database {
     }
     
     @Override
-    public void loadTopWins() {
+    public void loadTopWins(){
         int pos = 1;
         List<String> tops = new ArrayList<>();
         for ( DBObject m : players.find().sort(new BasicDBObject("wins", -1)).limit(10) ){
@@ -144,7 +144,7 @@ public class MongoDBDatabase implements Database {
     }
     
     @Override
-    public void loadTopDeaths() {
+    public void loadTopDeaths(){
         int pos = 1;
         List<String> tops = new ArrayList<>();
         for ( DBObject m : players.find().sort(new BasicDBObject("deaths", -1)).limit(10) ){
@@ -155,8 +155,8 @@ public class MongoDBDatabase implements Database {
     }
     
     @Override
-    public void loadPlayer(Player p) {
-        if(!hasPlayer(p.getUniqueId())){
+    public void loadPlayer(Player p){
+        if (!hasPlayer(p.getUniqueId())){
             SWPlayer sw = new SWPlayer();
             DBObject now = new BasicDBObject("uuid", p.getUniqueId().toString());
             now.put("name", p.getName());
@@ -168,10 +168,10 @@ public class MongoDBDatabase implements Database {
         }
         DBObject now = new BasicDBObject("uuid", p.getUniqueId().toString());
         DBObject data = players.findOne(now);
-        if(data != null){
-            if(data.containsKey("skywars")){
+        if (data != null){
+            if (data.containsKey("skywars")){
                 SWPlayer sw = Utils.fromGson(data.get("skywars").toString());
-                if(sw != null){
+                if (sw != null){
                     sw.setName(p.getName());
                     addPlayer(p.getUniqueId(), sw);
                 } else {
@@ -191,17 +191,17 @@ public class MongoDBDatabase implements Database {
     }
     
     @Override
-    public void savePlayer(Player p) {
+    public void savePlayer(Player p){
         b(p);
     }
     
-    private void b(Player p) {
-        if(p == null){
+    private void b(Player p){
+        if (p == null){
             return;
         }
         DBObject now = new BasicDBObject("uuid", p.getUniqueId().toString());
         DBObject data = players.findOne(now);
-        if(data != null){
+        if (data != null){
             DBObject save = new BasicDBObject("uuid", p.getUniqueId().toString());
             SWPlayer sw = SWPlayers.get(p.getUniqueId());
             save.put("name", sw.getName());
@@ -211,10 +211,10 @@ public class MongoDBDatabase implements Database {
     }
     
     @Override
-    public void saveAll(CallBackAPI<Boolean> done) {
+    public void saveAll(CallBackAPI<Boolean> done){
         new BukkitRunnable() {
             @Override
-            public void run() {
+            public void run(){
                 Bukkit.getOnlinePlayers().forEach(p -> {
                     b(p);
                 });
@@ -224,10 +224,10 @@ public class MongoDBDatabase implements Database {
     }
     
     @Override
-    public void savePlayerSync(UUID uuid) {
+    public void savePlayerSync(UUID uuid){
         DBObject now = new BasicDBObject("uuid", uuid.toString());
         DBObject data = players.findOne(now);
-        if(data != null){
+        if (data != null){
             DBObject save = new BasicDBObject("uuid", uuid.toString());
             SWPlayer sw = SWPlayers.get(uuid);
             save.put("name", sw.getName());
@@ -237,19 +237,19 @@ public class MongoDBDatabase implements Database {
     }
     
     @Override
-    public void close() {
+    public void close(){
         mc.close();
     }
     
     @Override
-    public void createPlayer(UUID uuid, String name, SWPlayer ps) {
+    public void createPlayer(UUID uuid, String name, SWPlayer ps){
         DBObject now = new BasicDBObject("uuid", uuid.toString());
         now.put("name", name);
         a(ps, now);
         players.insert(now);
     }
     
-    private void a(SWPlayer ps, DBObject now) {
+    private void a(SWPlayer ps, DBObject now){
         now.put("skywars", Utils.toGson(ps));
         now.put("kills", ps.getTotalStat(StatType.KILLS));
         now.put("wins", ps.getTotalStat(StatType.WINS));
@@ -258,22 +258,22 @@ public class MongoDBDatabase implements Database {
         now.put("elo", ps.getElo());
     }
     
-    private void addPlayer(UUID uuid, SWPlayer sw) {
+    private void addPlayer(UUID uuid, SWPlayer sw){
         SWPlayers.put(uuid, sw);
     }
     
     @Override
-    public Connection getConnection() {
+    public Connection getConnection(){
         return null;
     }
     
     @Override
-    public void clearStats(Player p) {
+    public void clearStats(Player p){
     
     }
     
     @Override
-    public SWPlayer getSWPlayer(Player p) {
+    public SWPlayer getSWPlayer(Player p){
         return SWPlayers.get(p.getUniqueId());
     }
     

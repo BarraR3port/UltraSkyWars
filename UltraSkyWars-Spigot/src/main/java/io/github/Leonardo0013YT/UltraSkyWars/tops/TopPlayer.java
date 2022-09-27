@@ -14,7 +14,7 @@ public class TopPlayer {
     private final int amount;
     
     @Override
-    public String toString() {
+    public String toString(){
         return type + ":" + uuid + ":" + amount;
     }
     

@@ -10,16 +10,16 @@ public enum HealthType {
     private final int amount;
     private final boolean regen;
     
-    HealthType(int amount, boolean regen) {
+    HealthType(int amount, boolean regen){
         this.amount = amount;
         this.regen = regen;
     }
     
-    public int getAmount() {
+    public int getAmount(){
         return amount;
     }
     
-    public boolean isRegen() {
+    public boolean isRegen(){
         return regen;
     }
 }

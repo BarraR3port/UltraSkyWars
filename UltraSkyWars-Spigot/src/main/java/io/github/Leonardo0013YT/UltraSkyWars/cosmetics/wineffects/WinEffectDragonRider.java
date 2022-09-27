@@ -13,7 +13,7 @@ public class WinEffectDragonRider implements WinEffect {
     private EnderDragon dragon;
     
     @Override
-    public void start(Player p, Game game) {
+    public void start(Player p, Game game){
         dragon = p.getWorld().spawn(p.getLocation(), EnderDragon.class);
         dragon.setPassenger(p);
         dragon.setMetadata("NO_TARGET", new FixedMetadataValue(UltraSkyWars.get(), ""));
@@ -21,14 +21,14 @@ public class WinEffectDragonRider implements WinEffect {
     }
     
     @Override
-    public void stop() {
-        if(dragon != null){
+    public void stop(){
+        if (dragon != null){
             dragon.remove();
         }
     }
     
     @Override
-    public WinEffect clone() {
+    public WinEffect clone(){
         return new WinEffectDragonRider();
     }
     

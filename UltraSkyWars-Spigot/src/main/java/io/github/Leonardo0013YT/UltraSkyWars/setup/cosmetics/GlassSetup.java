@@ -19,7 +19,7 @@ public class GlassSetup {
     private boolean isBuy;
     private int price, slot, page;
     
-    public GlassSetup(Player p, String name, String schematic, String clear) {
+    public GlassSetup(Player p, String name, String schematic, String clear){
         this.p = p;
         this.name = name;
         this.schematic = schematic;
@@ -32,7 +32,7 @@ public class GlassSetup {
         this.permission = "ultraskywars.glass." + name;
     }
     
-    public void save(UltraSkyWars plugin, Player p) {
+    public void save(UltraSkyWars plugin, Player p){
         String path = "glasses." + name;
         plugin.getGlass().set(path + ".id", plugin.getCos().getNextGlassId());
         plugin.getGlass().set(path + ".name", name);
@@ -55,82 +55,82 @@ public class GlassSetup {
         plugin.getCos().reload();
     }
     
-    public Player getP() {
+    public Player getP(){
         return p;
     }
     
-    public String getPermission() {
+    public String getPermission(){
         return permission;
     }
     
-    public void setPermission(String permission) {
+    public void setPermission(String permission){
         this.permission = permission;
     }
     
-    public ItemStack getItem() {
-        if(item == null || item.getType().equals(Material.AIR)){
+    public ItemStack getItem(){
+        if (item == null || item.getType().equals(Material.AIR)){
             return new ItemStack(Material.GLASS);
         }
         return item;
     }
     
-    public void setItem(ItemStack item) {
+    public void setItem(ItemStack item){
         this.item = item;
     }
     
-    public boolean isBuy() {
+    public boolean isBuy(){
         return isBuy;
     }
     
-    public void setBuy(boolean buy) {
+    public void setBuy(boolean buy){
         isBuy = buy;
     }
     
-    public String getSchematic() {
+    public String getSchematic(){
         return schematic;
     }
     
-    public void setSchematic(String schematic) {
+    public void setSchematic(String schematic){
         this.schematic = schematic;
     }
     
-    public String getClear() {
+    public String getClear(){
         return clear;
     }
     
-    public void setClear(String clear) {
+    public void setClear(String clear){
         this.clear = clear;
     }
     
-    public String getName() {
+    public String getName(){
         return name;
     }
     
-    public void setName(String name) {
+    public void setName(String name){
         this.name = name;
     }
     
-    public int getPrice() {
+    public int getPrice(){
         return price;
     }
     
-    public void setPrice(int price) {
+    public void setPrice(int price){
         this.price = price;
     }
     
-    public int getSlot() {
+    public int getSlot(){
         return slot;
     }
     
-    public void setSlot(int slot) {
+    public void setSlot(int slot){
         this.slot = slot;
     }
     
-    public int getPage() {
+    public int getPage(){
         return page;
     }
     
-    public void setPage(int page) {
+    public void setPage(int page){
         this.page = page;
     }
 }

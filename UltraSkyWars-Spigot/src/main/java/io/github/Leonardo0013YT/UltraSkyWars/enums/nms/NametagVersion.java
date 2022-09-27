@@ -19,7 +19,7 @@ public enum NametagVersion {
     
     private final String a, b, c, e, g, h, i;
     
-    NametagVersion(String a, String b, String c, String e, String g, String h, String i) {
+    NametagVersion(String a, String b, String c, String e, String g, String h, String i){
         this.a = a;
         this.b = b;
         this.c = c;

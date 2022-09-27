@@ -23,14 +23,14 @@ public class WinEffectNotes implements WinEffect {
     private BukkitTask task;
     
     @Override
-    public void start(Player p, Game game) {
+    public void start(Player p, Game game){
         UltraSkyWars plugin = UltraSkyWars.get();
         task = new BukkitRunnable() {
             final String name = game.getSpectator().getWorld().getName();
             
             @Override
-            public void run() {
-                if(p == null || !p.isOnline() || !name.equals(p.getWorld().getName())){
+            public void run(){
+                if (p == null || !p.isOnline() || !name.equals(p.getWorld().getName())){
                     stop();
                     return;
                 }
@@ -39,7 +39,7 @@ public class WinEffectNotes implements WinEffect {
                 plugin.getVc().getNMS().broadcastParticle(p.getLocation(), ThreadLocalRandom.current().nextInt(0, 24), 0, 0, 1, "NOTE", 5, 10);
                 items.add(item);
                 for ( Item c : new ArrayList<>(items) ){
-                    if(c.getTicksLived() > 30){
+                    if (c.getTicksLived() > 30){
                         c.remove();
                         plugin.getVc().getNMS().broadcastParticle(item.getLocation(), ThreadLocalRandom.current().nextInt(0, 24), 0, 0, 1, "NOTE", 5, 10);
                         items.remove(c);
@@ -50,23 +50,23 @@ public class WinEffectNotes implements WinEffect {
     }
     
     @Override
-    public void stop() {
+    public void stop(){
         items.clear();
-        if(task != null){
+        if (task != null){
             task.cancel();
         }
     }
     
     @Override
-    public WinEffect clone() {
+    public WinEffect clone(){
         return new WinEffectNotes();
     }
     
-    protected double random(double d, double d2) {
+    protected double random(double d, double d2){
         return d + ThreadLocalRandom.current().nextDouble() * (d2 - d);
     }
     
-    private Item spawnDisc(Location location, double d, double d3) {
+    private Item spawnDisc(Location location, double d, double d3){
         ItemStack itemStack = new ItemStack(this.discs[ThreadLocalRandom.current().nextInt(this.discs.length)]);
         Item item = location.getWorld().dropItem(location, itemStack);
         item.setPickupDelay(Integer.MAX_VALUE);

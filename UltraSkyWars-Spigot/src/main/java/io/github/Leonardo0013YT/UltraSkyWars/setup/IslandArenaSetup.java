@@ -12,56 +12,56 @@ public class IslandArenaSetup {
     private final ArrayList<Location> chests = new ArrayList<>();
     private Location spawn, balloon, fence;
     
-    public IslandArenaSetup(Player p, int id) {
+    public IslandArenaSetup(Player p, int id){
         this.p = p;
         this.id = id;
     }
     
-    public int getId() {
+    public int getId(){
         return id;
     }
     
-    public Player getP() {
+    public Player getP(){
         return p;
     }
     
-    public Location getSpawn() {
+    public Location getSpawn(){
         return spawn;
     }
     
-    public void setSpawn(Location spawn) {
+    public void setSpawn(Location spawn){
         this.spawn = spawn;
     }
     
-    public Location getFence() {
+    public Location getFence(){
         return fence;
     }
     
-    public void setFence(Location fence) {
+    public void setFence(Location fence){
         this.fence = fence;
     }
     
-    public Location getBalloon() {
+    public Location getBalloon(){
         return balloon;
     }
     
-    public void setBalloon(Location balloon) {
+    public void setBalloon(Location balloon){
         this.balloon = balloon;
     }
     
-    public ArrayList<Location> getChests() {
+    public ArrayList<Location> getChests(){
         return chests;
     }
     
-    public boolean isChest(Location l) {
+    public boolean isChest(Location l){
         return chests.contains(l);
     }
     
-    public void addChest(Location l) {
+    public void addChest(Location l){
         chests.add(l);
     }
     
-    public void removeChest(Location l) {
+    public void removeChest(Location l){
         chests.remove(l);
     }
     

@@ -18,57 +18,57 @@ public class VersionController {
     private String version;
     private NMS nms;
     
-    public VersionController(UltraSkyWars plugin) {
+    public VersionController(UltraSkyWars plugin){
         this.plugin = plugin;
         setupVersion();
         this.reflection = new NMSReflectionOld();
         
     }
     
-    private void setupVersion() {
+    private void setupVersion(){
         try {
             version = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];
-            if("v1_8_R3".equals(version)){
+            if ("v1_8_R3".equals(version)){
                 nms = new NMS_v1_8_r3();
             } else {
                 plugin.sendLogMessage("§cYou have an outdated version §e1.8§c, please use version §a1.8.8§c.");
                 disable();
             }
-        } catch(ArrayIndexOutOfBoundsException ex) {
+        } catch (ArrayIndexOutOfBoundsException ex) {
             ex.printStackTrace();
         }
     }
     
-    public void disable() {
+    public void disable(){
         Bukkit.getScheduler().cancelTasks(plugin);
         Bukkit.getPluginManager().disablePlugin(plugin);
     }
     
-    public NMS getNMS() {
+    public NMS getNMS(){
         return nms;
     }
     
-    public Nametags getNameTag(String name, String display, String prefix) {
+    public Nametags getNameTag(String name, String display, String prefix){
         return new Nametags(name, display, prefix);
     }
     
-    public NMSReflection getReflection() {
+    public NMSReflection getReflection(){
         return reflection;
     }
     
-    public String getVersion() {
+    public String getVersion(){
         return version;
     }
     
-    public boolean is1_12() {
+    public boolean is1_12(){
         return is1_12;
     }
     
-    public boolean is1_9to17() {
+    public boolean is1_9to17(){
         return is1_9to17;
     }
     
-    public boolean is1_13to17() {
+    public boolean is1_13to17(){
         return is1_13to17;
     }
 }

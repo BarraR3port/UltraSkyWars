@@ -26,24 +26,24 @@ import org.bukkit.potion.PotionEffectType;
 
 public class UltraTeamGame extends Game {
     
-    public UltraTeamGame(UltraSkyWars plugin, GameManager gm, String path, String name, int id, CallBackAPI<String> correctly) {
+    public UltraTeamGame(UltraSkyWars plugin, GameManager gm, String path, String name, int id, CallBackAPI<String> correctly){
         super(gm, path, name, id, correctly);
         this.gameType = plugin.getArenas().getOrDefault(path + ".gameType", "TEAM").toUpperCase();
         this.pregame = plugin.getCm().getPregame();
     }
     
     @Override
-    public void resetTime() {
+    public void resetTime(){
         UltraSkyWars plugin = UltraSkyWars.get();
         this.pregame = plugin.getCm().getPregame();
     }
     
-    public void addPlayer(Player p) {
+    public void addPlayer(Player p){
         UltraSkyWars plugin = UltraSkyWars.get();
         p.setGameMode(GameMode.ADVENTURE);
         cached.add(p);
         players.add(p);
-        if(players.size() >= max && starting > 10){
+        if (players.size() >= max && starting > 10){
             starting = 10;
             sendGameMessage(plugin.getLang().get("messages.gameFull"));
         }
@@ -61,16 +61,16 @@ public class UltraTeamGame extends Game {
         Utils.setCleanPlayer(p);
     }
     
-    public void updateBar() {
+    public void updateBar(){
         UltraSkyWars plugin = UltraSkyWars.get();
         for ( Player p : players ){
             SWPlayer sw = plugin.getDb().getSWPlayer(p);
-            if(sw == null){
+            if (sw == null){
                 continue;
             }
-            if(sw.getTeamKit() != 999999){
+            if (sw.getTeamKit() != 999999){
                 Kit k = plugin.getKm().getKits().get(sw.getTeamKit());
-                if(k != null){
+                if (k != null){
                     plugin.getVc().getReflection().sendActionBar(plugin.getLang().get(p, "action.selected").replaceAll("<kit>", k.getName()), p);
                 }
             } else {
@@ -79,26 +79,26 @@ public class UltraTeamGame extends Game {
         }
     }
     
-    public void updateStarting() {
+    public void updateStarting(){
         Utils.updateSB(this, false);
         UltraSkyWars plugin = UltraSkyWars.get();
-        if(starting == 30 || starting == 15 || starting == 10 || (starting <= 5 && starting > 0)){
+        if (starting == 30 || starting == 15 || starting == 10 || (starting <= 5 && starting > 0)){
             sendGameTitle(plugin.getLang().get("titles.starting.title").replaceAll("<time>", String.valueOf(starting)), plugin.getLang().get("titles.starting.subtitle").replaceAll("<time>", String.valueOf(starting)), 0, 40, 0);
             sendGameMessage(plugin.getLang().get("messages.starting").replaceAll("<time>", String.valueOf(starting)).replaceAll("<s>", (starting > 1) ? "s" : ""));
             sendGameSound(CustomSound.STARTING);
         }
-        if(starting == 29 || starting == 14 || starting == 9 || starting == 0){
+        if (starting == 29 || starting == 14 || starting == 9 || starting == 0){
             sendGameTitle("", "", 0, 1, 0);
         }
-        if(starting == 2){
+        if (starting == 2){
             for ( Player on : cached ){
                 on.closeInventory();
                 on.getInventory().remove(plugin.getIm().getTeam());
             }
         }
-        if(starting == 1){
+        if (starting == 1){
             for ( Player on : cached ){
-                if(getTeamPlayer(on) == null){
+                if (getTeamPlayer(on) == null){
                     joinRandomTeam(on);
                 }
             }
@@ -108,12 +108,12 @@ public class UltraTeamGame extends Game {
                     Location sp = team.getSpawn().clone().add(0, amount * 10, 0);
                     SWPlayer sw = plugin.getDb().getSWPlayer(p);
                     Glass g = plugin.getCos().getGlass(sw.getGlass());
-                    if(g != null){
-                        if(plugin.getCm().isTeamOneCage()){
-                            if(!team.isCreated()){
+                    if (g != null){
+                        if (plugin.getCm().isTeamOneCage()){
+                            if (!team.isCreated()){
                                 USWGlassCreateEvent e = new USWGlassCreateEvent(p, g, team.getSpawn(), true);
                                 Bukkit.getPluginManager().callEvent(e);
-                                if(!e.isCancelled()){
+                                if (!e.isCancelled()){
                                     g.createCage(team.getSpawn(), true, (b) -> {
                                     });
                                     team.setCreated(true);
@@ -122,7 +122,7 @@ public class UltraTeamGame extends Game {
                         } else {
                             USWGlassCreateEvent e = new USWGlassCreateEvent(p, g, team.getSpawn(), false);
                             Bukkit.getPluginManager().callEvent(e);
-                            if(!e.isCancelled()){
+                            if (!e.isCancelled()){
                                 g.createCage(sp, false, (b) -> {
                                 });
                                 team.setCenter(p, sp);
@@ -130,8 +130,8 @@ public class UltraTeamGame extends Game {
                         }
                     }
                     Balloon b = plugin.getCos().getBalloon(sw.getBalloon());
-                    if(b != null){
-                        if(!balloons.containsKey(team.getId())){
+                    if (b != null){
+                        if (!balloons.containsKey(team.getId())){
                             balloons.put(team.getId(), b.spawn(p, team.getBalloon(), team.getFence()));
                         }
                     }
@@ -139,14 +139,14 @@ public class UltraTeamGame extends Game {
                 }
             }
         }
-        if(starting == 0){
+        if (starting == 0){
             updateVisible();
             for ( Team team : teams.values() ){
                 for ( Player t : team.getMembers() ){
-                    if(plugin.getCm().isTeamOneCage()){
+                    if (plugin.getCm().isTeamOneCage()){
                         t.teleport(team.getSpawn().clone().add(0, 0.5, 0));
                     } else {
-                        if(team.getCenter(t) != null){
+                        if (team.getCenter(t) != null){
                             t.teleport(team.getCenter(t).clone().add(0, 0.5, 0));
                         }
                     }
@@ -158,21 +158,21 @@ public class UltraTeamGame extends Game {
         starting--;
     }
     
-    public void updatePreGame() {
+    public void updatePreGame(){
         Utils.updateSB(this, false);
         UltraSkyWars plugin = UltraSkyWars.get();
-        if(pregame == 30 || pregame == 15 || pregame == 10 || (pregame <= 5 && pregame > 0)){
+        if (pregame == 30 || pregame == 15 || pregame == 10 || (pregame <= 5 && pregame > 0)){
             sendGameTitle(plugin.getLang().get("titles.pregame.title").replaceAll("<time>", String.valueOf(pregame)), plugin.getLang().get("titles.pregame.subtitle").replaceAll("<time>", String.valueOf(pregame)), 0, 40, 0);
             sendGameMessage(plugin.getLang().get("messages.pregame").replaceAll("<time>", String.valueOf(pregame)).replaceAll("<s>", (pregame > 1) ? "s" : ""));
             sendGameSound(CustomSound.PREGAME);
         }
-        if(pregame == 29 || pregame == 14 || pregame == 9 || pregame == 0){
+        if (pregame == 29 || pregame == 14 || pregame == 9 || pregame == 0){
             sendGameTitle("", "", 0, 1, 0);
         }
-        if(pregame == 5){
+        if (pregame == 5){
             plugin.getWc().clearLobby(lobby);
         }
-        if(pregame == 0){
+        if (pregame == 0){
             for ( Team team : teams.values() ){
                 for ( Player p : team.getMembers() ){
                     p.setGameMode(GameMode.SURVIVAL);
@@ -182,11 +182,11 @@ public class UltraTeamGame extends Game {
                     p.getInventory().setArmorContents(null);
                     addEnderPearl(p);
                     SWPlayer sw = plugin.getDb().getSWPlayer(p);
-                    if(sw != null){
+                    if (sw != null){
                         sw.addStat(StatType.PLAYED, gameType, 1);
                         Glass g = plugin.getCos().getGlass(sw.getGlass());
-                        if(g != null){
-                            if(plugin.getCm().isTeamOneCage()){
+                        if (g != null){
+                            if (plugin.getCm().isTeamOneCage()){
                                 Bukkit.getPluginManager().callEvent(new USWGlassDeleteEvent(p, g, team.getSpawn(), true));
                                 g.deleteCage(team.getSpawn(), true, (b) -> {
                                 });
@@ -197,11 +197,11 @@ public class UltraTeamGame extends Game {
                             }
                         }
                         GamePlayer gop = gamePlayer.get(p.getUniqueId());
-                        if(gop != null && !gop.hasChallenge("NOOB")){
-                            if(sw.getTeamKit() != 999999){
+                        if (gop != null && !gop.hasChallenge("NOOB")){
+                            if (sw.getTeamKit() != 999999){
                                 Kit k = plugin.getKm().getKits().get(sw.getTeamKit());
-                                if(k != null){
-                                    if(k.getModes().contains(gameType) && k.getLevels().get(sw.getTeamKitLevel()) != null){
+                                if (k != null){
+                                    if (k.getModes().contains(gameType) && k.getLevels().get(sw.getTeamKitLevel()) != null){
                                         k.getLevels().get(sw.getTeamKitLevel()).giveKitLevel(p);
                                     }
                                 }
@@ -225,9 +225,9 @@ public class UltraTeamGame extends Game {
         pregame--;
     }
     
-    public void removePlayerTeam(Player p, Team team) {
+    public void removePlayerTeam(Player p, Team team){
         UltraSkyWars plugin = UltraSkyWars.get();
-        if(balloons.containsKey(team.getId())){
+        if (balloons.containsKey(team.getId())){
             int b = balloons.get(team.getId());
             Balloon bl = plugin.getCos().getBalloon(b);
             bl.remove(p);
@@ -235,16 +235,16 @@ public class UltraTeamGame extends Game {
         }
         team.removeMember(p);
         SWPlayer sw = plugin.getDb().getSWPlayer(p);
-        if(sw == null) return;
-        if(isState(State.WAITING) || isState(State.STARTING)){
+        if (sw == null) return;
+        if (isState(State.WAITING) || isState(State.STARTING)){
             Glass g = plugin.getCos().getGlass(sw.getGlass());
-            if(plugin.getCm().isTeamOneCage()){
-                if(g != null){
+            if (plugin.getCm().isTeamOneCage()){
+                if (g != null){
                     g.deleteCage(team.getSpawn(), true, (b) -> {
                     });
                 }
             } else {
-                if(g != null){
+                if (g != null){
                     g.deleteCage(team.getCenter(p), false, (b) -> {
                     });
                 }
@@ -252,7 +252,7 @@ public class UltraTeamGame extends Game {
         }
     }
     
-    public Team getTeamByID(int id) {
+    public Team getTeamByID(int id){
         return teams.get(id);
     }
     

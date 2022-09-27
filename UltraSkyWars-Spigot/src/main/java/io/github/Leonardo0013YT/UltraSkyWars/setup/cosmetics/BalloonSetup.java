@@ -14,7 +14,7 @@ public class BalloonSetup {
     private int slot, page, price;
     private boolean isBuy;
     
-    public BalloonSetup(Player p, String name) {
+    public BalloonSetup(Player p, String name){
         this.p = p;
         this.name = name;
         this.permission = "ultraskywars.ballons." + name;
@@ -26,7 +26,7 @@ public class BalloonSetup {
         this.isBuy = true;
     }
     
-    public void saveBalloon(Player p) {
+    public void saveBalloon(Player p){
         UltraSkyWars plugin = UltraSkyWars.get();
         plugin.getBalloon().set("balloons." + name + ".id", plugin.getCos().getNextBalloonsId());
         plugin.getBalloon().set("balloons." + name + ".name", name);
@@ -42,67 +42,67 @@ public class BalloonSetup {
         plugin.getCos().reload();
     }
     
-    public ItemStack getIcon() {
+    public ItemStack getIcon(){
         return icon;
     }
     
-    public void setIcon(ItemStack icon) {
+    public void setIcon(ItemStack icon){
         this.icon = icon;
     }
     
-    public String getName() {
+    public String getName(){
         return name;
     }
     
-    public void setName(String name) {
+    public void setName(String name){
         this.name = name;
     }
     
-    public String getPermission() {
+    public String getPermission(){
         return permission;
     }
     
-    public void setPermission(String permission) {
+    public void setPermission(String permission){
         this.permission = permission;
     }
     
-    public String getUrl() {
+    public String getUrl(){
         return url;
     }
     
-    public void setUrl(String url) {
+    public void setUrl(String url){
         this.url = url;
     }
     
-    public int getSlot() {
+    public int getSlot(){
         return slot;
     }
     
-    public void setSlot(int slot) {
+    public void setSlot(int slot){
         this.slot = slot;
     }
     
-    public int getPage() {
+    public int getPage(){
         return page;
     }
     
-    public void setPage(int page) {
+    public void setPage(int page){
         this.page = page;
     }
     
-    public int getPrice() {
+    public int getPrice(){
         return price;
     }
     
-    public void setPrice(int price) {
+    public void setPrice(int price){
         this.price = price;
     }
     
-    public boolean isBuy() {
+    public boolean isBuy(){
         return isBuy;
     }
     
-    public void setBuy(boolean buy) {
+    public void setBuy(boolean buy){
         isBuy = buy;
     }
 }

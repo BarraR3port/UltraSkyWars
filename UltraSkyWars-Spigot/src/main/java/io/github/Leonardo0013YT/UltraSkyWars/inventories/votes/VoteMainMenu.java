@@ -18,31 +18,31 @@ import java.util.Map;
 
 public class VoteMainMenu extends UltraInventory {
     
-    public VoteMainMenu(UltraSkyWars plugin, String name) {
+    public VoteMainMenu(UltraSkyWars plugin, String name){
         super(name);
         this.title = plugin.getLang().get(null, "menus." + name + ".title");
         reload();
         plugin.getUim().getActions().put(title, (b) -> {
             InventoryClickEvent e = b.getInventoryClickEvent();
             Player p = b.getPlayer();
-            if(plugin.getCm().isSetupLobby(p)) return;
+            if (plugin.getCm().isSetupLobby(p)) return;
             Game g = plugin.getGm().getGameByPlayer(p);
             e.setCancelled(true);
-            if(e.getCurrentItem() == null || e.getCurrentItem().getType().equals(Material.AIR)){
+            if (e.getCurrentItem() == null || e.getCurrentItem().getType().equals(Material.AIR)){
                 return;
             }
             ItemStack item = e.getCurrentItem();
-            if(!item.hasItemMeta()){
+            if (!item.hasItemMeta()){
                 return;
             }
-            if(!item.getItemMeta().hasDisplayName()){
+            if (!item.getItemMeta().hasDisplayName()){
                 return;
             }
-            if(g == null) return;
+            if (g == null) return;
             Vote vote = g.getVote();
             ItemMeta im = item.getItemMeta();
             String display = im.getDisplayName();
-            if(display.equals(plugin.getLang().get(p, "menus.votes.chest.nameItem"))){
+            if (display.equals(plugin.getLang().get(p, "menus.votes.chest.nameItem"))){
                 String[][] replacements = new String[plugin.getCtm().getChests().size()][3];
                 int i = 0;
                 for ( ChestType ct : plugin.getCtm().getChests().values() ){
@@ -53,7 +53,7 @@ public class VoteMainMenu extends UltraInventory {
                 }
                 plugin.getUim().openChestInventory(p, plugin.getUim().getMenus("chest"), replacements);
             }
-            if(display.equals(plugin.getLang().get(p, "menus.votes.final.nameItem"))){
+            if (display.equals(plugin.getLang().get(p, "menus.votes.final.nameItem"))){
                 plugin.getUim().openInventory(p, plugin.getUim().getMenus("final"),
                         new String[]{"<dragonfinal>", String.valueOf(vote.getVotes("DRAGON"))},
                         new String[]{"<borderfinal>", String.valueOf(vote.getVotes("BORDER"))},
@@ -62,14 +62,14 @@ public class VoteMainMenu extends UltraInventory {
                         new String[]{"<witherfinal>", String.valueOf(vote.getVotes("WITHER"))},
                         new String[]{"<nonefinal>", String.valueOf(vote.getVotes("NONE"))});
             }
-            if(display.equals(plugin.getLang().get(p, "menus.votes.health.nameItem"))){
+            if (display.equals(plugin.getLang().get(p, "menus.votes.health.nameItem"))){
                 plugin.getUim().openInventory(p, plugin.getUim().getMenus("health"),
                         new String[]{"<health5>", String.valueOf(vote.getVotes("HEALTH5"))},
                         new String[]{"<health10>", String.valueOf(vote.getVotes("HEALTH10"))},
                         new String[]{"<health20>", String.valueOf(vote.getVotes("HEALTH20"))},
                         new String[]{"<healthuhc>", String.valueOf(vote.getVotes("UHC"))});
             }
-            if(display.equals(plugin.getLang().get(p, "menus.votes.projectile.nameItem"))){
+            if (display.equals(plugin.getLang().get(p, "menus.votes.projectile.nameItem"))){
                 plugin.getUim().openInventory(p, plugin.getUim().getMenus("projectile"),
                         new String[]{"<noproj>", String.valueOf(vote.getVotes("NOPROJ"))},
                         new String[]{"<yesproj>", String.valueOf(vote.getVotes("YESPROJ"))},
@@ -77,7 +77,7 @@ public class VoteMainMenu extends UltraInventory {
                         new String[]{"<desproj>", String.valueOf(vote.getVotes("DESPROJ"))},
                         new String[]{"<teleproj>", String.valueOf(vote.getVotes("TELEPROJ"))});
             }
-            if(display.equals(plugin.getLang().get(p, "menus.votes.time.nameItem"))){
+            if (display.equals(plugin.getLang().get(p, "menus.votes.time.nameItem"))){
                 plugin.getUim().openInventory(p, plugin.getUim().getMenus("time"),
                         new String[]{"<dawntime>", String.valueOf(vote.getVotes("DAWN"))},
                         new String[]{"<daytime>", String.valueOf(vote.getVotes("DAY"))},
@@ -88,13 +88,13 @@ public class VoteMainMenu extends UltraInventory {
     }
     
     @Override
-    public void reload() {
+    public void reload(){
         UltraSkyWars plugin = UltraSkyWars.get();
-        if(plugin.getMenus().isSet("menus." + name)){
+        if (plugin.getMenus().isSet("menus." + name)){
             this.rows = plugin.getMenus().getInt("menus." + name + ".rows");
             Map<Integer, ItemStack> config = new HashMap<>();
             Map<Integer, ItemStack> contents = new HashMap<>();
-            if(plugin.getMenus().getConfig().isSet("menus." + name + ".items")){
+            if (plugin.getMenus().getConfig().isSet("menus." + name + ".items")){
                 ConfigurationSection conf = plugin.getMenus().getConfig().getConfigurationSection("menus." + name + ".items");
                 for ( String c : conf.getKeys(false) ){
                     int slot = Integer.parseInt(c);

@@ -15,14 +15,14 @@ public class WinDanceWolfs implements WinDance, Cloneable {
     private static boolean loaded = false;
     
     @Override
-    public void loadCustoms(UltraSkyWars plugin, String path) {
-        if(!loaded){
+    public void loadCustoms(UltraSkyWars plugin, String path){
+        if (!loaded){
             loaded = true;
         }
     }
     
     @Override
-    public void start(Player p, Game game) {
+    public void start(Player p, Game game){
         World world = game.getSpectator().getWorld();
         for ( int i = 0; i < 20; i++ ){
             int x = ThreadLocalRandom.current().nextInt(0, 4);
@@ -35,12 +35,12 @@ public class WinDanceWolfs implements WinDance, Cloneable {
     }
     
     @Override
-    public void stop() {
+    public void stop(){
     
     }
     
     @Override
-    public WinDance clone() {
+    public WinDance clone(){
         return new WinDanceWolfs();
     }
     

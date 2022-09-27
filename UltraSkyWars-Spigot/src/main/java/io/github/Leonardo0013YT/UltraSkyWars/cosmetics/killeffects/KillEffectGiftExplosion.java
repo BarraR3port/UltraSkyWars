@@ -19,8 +19,8 @@ public class KillEffectGiftExplosion implements KillEffect, Cloneable {
     private static boolean loaded = false;
     
     @Override
-    public void loadCustoms(UltraSkyWars plugin, String path) {
-        if(!loaded){
+    public void loadCustoms(UltraSkyWars plugin, String path){
+        if (!loaded){
             xRandom = plugin.getKilleffect().getDoubleOrDefault(path + ".xRandom", 0.35);
             yRandom = plugin.getKilleffect().getDoubleOrDefault(path + ".yRandom", 0.5);
             zRandom = plugin.getKilleffect().getDoubleOrDefault(path + ".xRandom", 0.35);
@@ -31,8 +31,8 @@ public class KillEffectGiftExplosion implements KillEffect, Cloneable {
     }
     
     @Override
-    public void start(Player p, Player death, Location loc) {
-        if(death == null || !death.isOnline()){
+    public void start(Player p, Player death, Location loc){
+        if (death == null || !death.isOnline()){
             return;
         }
         ArrayList<Item> it = new ArrayList<>();
@@ -41,7 +41,7 @@ public class KillEffectGiftExplosion implements KillEffect, Cloneable {
         }
         new BukkitRunnable() {
             @Override
-            public void run() {
+            public void run(){
                 for ( Item itemStack : it ){
                     itemStack.remove();
                 }
@@ -50,19 +50,19 @@ public class KillEffectGiftExplosion implements KillEffect, Cloneable {
     }
     
     @Override
-    public void stop() {
+    public void stop(){
     }
     
     @Override
-    public KillEffect clone() {
+    public KillEffect clone(){
         return new KillEffectGiftExplosion();
     }
     
-    protected double random(double d, double d2) {
+    protected double random(double d, double d2){
         return d + ThreadLocalRandom.current().nextDouble() * (d2 - d);
     }
     
-    private Item spawnGift(Location location, double d, double d2, double d3) {
+    private Item spawnGift(Location location, double d, double d2, double d3){
         Item item = location.getWorld().dropItem(location, Utils.getGifs()[ThreadLocalRandom.current().nextInt(Utils.getGifs().length)]);
         item.setVelocity(new Vector(d, d2, d3));
         item.setPickupDelay(Integer.MAX_VALUE);

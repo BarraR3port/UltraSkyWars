@@ -24,16 +24,16 @@ public class KillEffectHead implements KillEffect, Cloneable {
     private int pased = 0;
     
     @Override
-    public void loadCustoms(UltraSkyWars plugin, String path) {
-        if(!loaded){
+    public void loadCustoms(UltraSkyWars plugin, String path){
+        if (!loaded){
             punchSound = XSound.matchXSound(plugin.getKilleffect().getOrDefault(path + ".punchSound", XSound.ENTITY_FIREWORK_ROCKET_BLAST.parseSound().name())).orElse(XSound.ENTITY_FIREWORK_ROCKET_BLAST);
             loaded = true;
         }
     }
     
     @Override
-    public void start(Player p, Player death, Location loc) {
-        if(death == null || !death.isOnline()){
+    public void start(Player p, Player death, Location loc){
+        if (death == null || !death.isOnline()){
             return;
         }
         ItemStack head = ItemBuilder.skull(XMaterial.PLAYER_HEAD, 1, "§e", "§e", death.getName());
@@ -47,9 +47,9 @@ public class KillEffectHead implements KillEffect, Cloneable {
         armor.setMetadata("KILLEFFECT", new FixedMetadataValue(plugin, "KILLEFFECT"));
         task = new BukkitRunnable() {
             @Override
-            public void run() {
+            public void run(){
                 pased++;
-                if(pased >= 20){
+                if (pased >= 20){
                     armor.getWorld().playEffect(armor.getLocation(), Effect.STEP_SOUND, Material.COAL_BLOCK);
                     p.playSound(p.getLocation(), punchSound.parseSound(), 1.0f, 1.0f);
                     armor.remove();
@@ -68,14 +68,14 @@ public class KillEffectHead implements KillEffect, Cloneable {
     }
     
     @Override
-    public void stop() {
-        if(task != null){
+    public void stop(){
+        if (task != null){
             task.cancel();
         }
     }
     
     @Override
-    public KillEffect clone() {
+    public KillEffect clone(){
         return new KillEffectHead();
     }
     

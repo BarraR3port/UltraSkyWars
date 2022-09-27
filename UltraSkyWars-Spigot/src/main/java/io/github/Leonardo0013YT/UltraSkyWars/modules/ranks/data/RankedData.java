@@ -6,11 +6,11 @@ public class RankedData {
     
     public HashMap<String, Integer> ranked = new HashMap<>();
     
-    public HashMap<String, Integer> getRanked() {
+    public HashMap<String, Integer> getRanked(){
         return ranked;
     }
     
-    public void setRanked(HashMap<String, Integer> ranked) {
+    public void setRanked(HashMap<String, Integer> ranked){
         this.ranked = ranked;
     }
 }

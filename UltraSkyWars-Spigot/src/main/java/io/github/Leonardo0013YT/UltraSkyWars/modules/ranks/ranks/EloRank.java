@@ -12,7 +12,7 @@ public class EloRank {
     private final String corto;
     private final String name;
     
-    public EloRank(String color, String corto, String prefix) {
+    public EloRank(String color, String corto, String prefix){
         this.color = color;
         this.corto = corto;
         this.prefix = prefix;
@@ -22,7 +22,7 @@ public class EloRank {
         this.order = 0;
     }
     
-    public EloRank(InjectionEloRank plugin, String path, String name) {
+    public EloRank(InjectionEloRank plugin, String path, String name){
         this.name = name;
         this.min = plugin.getEloRank().getInt(path + ".min");
         this.max = plugin.getEloRank().getInt(path + ".max");
@@ -32,31 +32,31 @@ public class EloRank {
         this.corto = plugin.getEloRank().get(null, path + ".short");
     }
     
-    public String getPrefix() {
+    public String getPrefix(){
         return prefix;
     }
     
-    public String getCorto() {
+    public String getCorto(){
         return corto;
     }
     
-    public String getColor() {
+    public String getColor(){
         return color;
     }
     
-    public int getOrder() {
+    public int getOrder(){
         return order;
     }
     
-    public int getMax() {
+    public int getMax(){
         return max;
     }
     
-    public int getMin() {
+    public int getMin(){
         return min;
     }
     
-    public String getName() {
+    public String getName(){
         return name;
     }
 }

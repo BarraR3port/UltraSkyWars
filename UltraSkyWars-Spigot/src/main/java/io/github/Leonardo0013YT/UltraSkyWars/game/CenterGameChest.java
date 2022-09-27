@@ -18,7 +18,7 @@ import java.util.stream.IntStream;
 
 public class CenterGameChest extends GameChest {
     
-    public CenterGameChest(List<Location> chests) {
+    public CenterGameChest(List<Location> chests){
         super(chests);
     }
     
@@ -31,7 +31,7 @@ public class CenterGameChest extends GameChest {
             }
         }
         if (invs.isEmpty()) return;
-    
+        
         LinkedList<PerChestItem> tail = new LinkedList<>();
         ChestType ct = plugin.getCtm().getChests().get(game.getChestType());
         SWChest sw = ct.getChest();
@@ -53,7 +53,7 @@ public class CenterGameChest extends GameChest {
                     ci = sw.getCenterItem(false, game.getGameType());
                 }
                 
-                if(ci != null && random.nextInt(0, 10000) <= ci.getPercent()){
+                if (ci != null && random.nextInt(0, 10000) <= ci.getPercent()){
                     if (inv.getItem(r) == null){
                         inv.setItem(r, ci.getItem());
                     } else {

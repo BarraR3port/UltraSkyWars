@@ -17,17 +17,17 @@ public class WinDanceAnvilLand implements WinDance, Cloneable {
     
     private static boolean loaded = false;
     private static int maxOfCenter, firstUp, maxRandomUp, taskTick;
-    private BukkitTask task;
     private final Random random;
+    private BukkitTask task;
     
-    public WinDanceAnvilLand() {
+    public WinDanceAnvilLand(){
         this.task = null;
         this.random = ThreadLocalRandom.current();
     }
     
     @Override
-    public void loadCustoms(UltraSkyWars plugin, String path) {
-        if(!loaded){
+    public void loadCustoms(UltraSkyWars plugin, String path){
+        if (!loaded){
             maxOfCenter = plugin.getWindance().getIntOrDefault(path + ".maxOfCenter", 25);
             firstUp = plugin.getWindance().getIntOrDefault(path + ".firstUp", 110);
             maxRandomUp = plugin.getWindance().getIntOrDefault(path + ".maxRandomUp", 5);
@@ -37,11 +37,11 @@ public class WinDanceAnvilLand implements WinDance, Cloneable {
     }
     
     @Override
-    public void start(Player p, Game game) {
+    public void start(Player p, Game game){
         World world = game.getSpectator().getWorld();
         task = new BukkitRunnable() {
-            public void run() {
-                if(p == null || !p.isOnline() || !world.getName().equals(p.getWorld().getName())){
+            public void run(){
+                if (p == null || !p.isOnline() || !world.getName().equals(p.getWorld().getName())){
                     stop();
                     return;
                 }
@@ -54,14 +54,14 @@ public class WinDanceAnvilLand implements WinDance, Cloneable {
     }
     
     @Override
-    public void stop() {
-        if(task != null){
+    public void stop(){
+        if (task != null){
             task.cancel();
         }
     }
     
     @Override
-    public WinDance clone() {
+    public WinDance clone(){
         return new WinDanceAnvilLand();
     }
     

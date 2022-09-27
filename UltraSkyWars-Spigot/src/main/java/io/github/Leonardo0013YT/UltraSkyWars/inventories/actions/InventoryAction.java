@@ -10,7 +10,7 @@ public class InventoryAction {
     private final InventoryClickEvent inventoryClickEvent;
     private final Player player;
     
-    public InventoryAction(InventoryClickEvent inventoryClickEvent, Player player) {
+    public InventoryAction(InventoryClickEvent inventoryClickEvent, Player player){
         this.inventoryClickEvent = inventoryClickEvent;
         this.player = player;
     }

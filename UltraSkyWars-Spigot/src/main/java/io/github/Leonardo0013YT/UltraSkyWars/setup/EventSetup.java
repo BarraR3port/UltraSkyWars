@@ -5,28 +5,28 @@ public class EventSetup {
     private final String type;
     private int seconds;
     
-    public EventSetup(String type) {
+    public EventSetup(String type){
         this.type = type;
         this.seconds = 60;
     }
     
-    public String getType() {
+    public String getType(){
         return type;
     }
     
-    public int getSeconds() {
+    public int getSeconds(){
         return seconds;
     }
     
-    public void setSeconds(int seconds) {
+    public void setSeconds(int seconds){
         this.seconds = seconds;
     }
     
-    public void addSeconds(int seconds) {
+    public void addSeconds(int seconds){
         this.seconds += seconds;
     }
     
-    public void removeSeconds(int seconds) {
+    public void removeSeconds(int seconds){
         this.seconds -= seconds;
     }
     

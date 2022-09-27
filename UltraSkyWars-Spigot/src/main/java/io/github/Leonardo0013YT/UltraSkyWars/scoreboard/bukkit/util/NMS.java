@@ -27,7 +27,7 @@ public class NMS {
     private static final Version version;
     private static final Map<Class<?>, Method> handles = new HashMap<>();
     
-    static {
+    static{
         String name = Bukkit.getServer().getClass().getPackage().getName();
         
         String ver = name.substring(name.lastIndexOf('.') + 1);
@@ -75,7 +75,7 @@ public class NMS {
             
             packetObj = packetObjClass.getConstructor(objClass, int.class);
             
-            switch(version.getMajor()) {
+            switch(version.getMajor()){
                 case "1.7":
                     packetScore = packetScoreClass.getConstructor(scoreClass, int.class);
                     break;
@@ -100,7 +100,7 @@ public class NMS {
             
             playerConnection = playerClass.getField("playerConnection");
             sendPacket = playerConnectionClass.getMethod("sendPacket", packetClass);
-        } catch(Exception ignored) {
+        } catch (Exception ignored) {
         }
         
         PLAYER_SCORES = playerScores;
@@ -121,27 +121,27 @@ public class NMS {
         SEND_PACKET = sendPacket;
     }
     
-    public static Version getVersion() {
+    public static Version getVersion(){
         return version;
     }
     
-    public static Class<?> getClass(String name) {
+    public static Class<?> getClass(String name){
         try {
             return Class.forName(packageName + "." + name);
-        } catch(ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             return null;
         }
     }
     
     public static Object getHandle(Object obj) throws NoSuchMethodException,
-            InvocationTargetException, IllegalAccessException {
+            InvocationTargetException, IllegalAccessException{
         
         Class<?> clazz = obj.getClass();
         
-        if(!handles.containsKey(clazz)){
+        if (!handles.containsKey(clazz)){
             Method method = clazz.getDeclaredMethod("getHandle");
             
-            if(!method.isAccessible())
+            if (!method.isAccessible())
                 method.setAccessible(true);
             
             handles.put(clazz, method);
@@ -150,12 +150,12 @@ public class NMS {
         return handles.get(clazz).invoke(obj);
     }
     
-    public static void sendPacket(Object packet, Player... players) {
+    public static void sendPacket(Object packet, Player... players){
         for ( Player p : players ){
             try {
                 Object playerConnection = PLAYER_CONNECTION.get(getHandle(p));
                 SEND_PACKET.invoke(playerConnection, packet);
-            } catch(IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+            } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             }
         }
     }
@@ -167,7 +167,7 @@ public class NMS {
         private final String major;
         private final String minor;
         
-        Version(String name) {
+        Version(String name){
             this.name = name;
             
             String[] splitted = name.split("_");
@@ -176,15 +176,15 @@ public class NMS {
             this.minor = splitted[2].substring(1);
         }
         
-        public String getName() {
+        public String getName(){
             return name;
         }
         
-        public String getMajor() {
+        public String getMajor(){
             return major;
         }
         
-        public String getMinor() {
+        public String getMinor(){
             return minor;
         }
         

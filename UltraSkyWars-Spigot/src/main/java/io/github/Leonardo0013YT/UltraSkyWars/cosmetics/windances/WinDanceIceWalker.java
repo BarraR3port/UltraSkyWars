@@ -23,8 +23,8 @@ public class WinDanceIceWalker implements WinDance, Cloneable {
     private BukkitTask task;
     
     @Override
-    public void loadCustoms(UltraSkyWars plugin, String path) {
-        if(!loaded){
+    public void loadCustoms(UltraSkyWars plugin, String path){
+        if (!loaded){
             rangePerRound = plugin.getWindance().getIntOrDefault(path + ".rangePerRound", 5);
             taskTick = plugin.getWindance().getIntOrDefault(path + ".taskTick", 20);
             loaded = true;
@@ -32,12 +32,12 @@ public class WinDanceIceWalker implements WinDance, Cloneable {
     }
     
     @Override
-    public void start(Player p, Game game) {
+    public void start(Player p, Game game){
         World world = game.getSpectator().getWorld();
         task = new BukkitRunnable() {
             @Override
-            public void run() {
-                if(p == null || !p.isOnline() || !world.getName().equals(p.getWorld().getName())){
+            public void run(){
+                if (p == null || !p.isOnline() || !world.getName().equals(p.getWorld().getName())){
                     stop();
                     return;
                 }
@@ -50,17 +50,17 @@ public class WinDanceIceWalker implements WinDance, Cloneable {
         }.runTaskTimer(UltraSkyWars.get(), 0, taskTick);
     }
     
-    public BukkitTask getTask() {
+    public BukkitTask getTask(){
         return task;
     }
     
-    private List<Block> getNearbyBlocks(Location location, int radius) {
+    private List<Block> getNearbyBlocks(Location location, int radius){
         List<Block> blocks = new ArrayList<>();
         for ( int x = location.getBlockX() - radius; x <= location.getBlockX() + radius; x++ ){
             for ( int y = location.getBlockY() - radius; y <= location.getBlockY() + radius; y++ ){
                 for ( int z = location.getBlockZ() - radius; z <= location.getBlockZ() + radius; z++ ){
                     Block block = location.getWorld().getBlockAt(x, y, z);
-                    if(block.getType() == Material.AIR || block.getType() == Material.ICE || block.getType() == Material.PACKED_ICE){
+                    if (block.getType() == Material.AIR || block.getType() == Material.ICE || block.getType() == Material.PACKED_ICE){
                         continue;
                     }
                     blocks.add(block);
@@ -71,14 +71,14 @@ public class WinDanceIceWalker implements WinDance, Cloneable {
     }
     
     @Override
-    public void stop() {
-        if(task != null){
+    public void stop(){
+        if (task != null){
             task.cancel();
         }
     }
     
     @Override
-    public WinDance clone() {
+    public WinDance clone(){
         return new WinDanceIceWalker();
     }
     

@@ -17,12 +17,12 @@ public class SeasonManager {
     private int season;
     private long restTime;
     
-    public SeasonManager(InjectionEloRank ier) {
+    public SeasonManager(InjectionEloRank ier){
         this.ier = ier;
         this.timeUnit = TimeUnit.valueOf(ier.getRankeds().get("timeUnit"));
         this.season = ier.getRankeds().getConfig().getInt("data.season");
         this.restTime = ier.getRankeds().getConfig().getLong("data.finish");
-        if(restTime <= 0){
+        if (restTime <= 0){
             backup();
             season++;
             restTime = timeUnit.toMillis(ier.getRankeds().getInt("duration"));
@@ -34,13 +34,13 @@ public class SeasonManager {
         reload();
     }
     
-    public Season getActualSeason() {
+    public Season getActualSeason(){
         return lasted.get(season);
     }
     
-    public void reload() {
+    public void reload(){
         lasted.clear();
-        if(ier.getRankeds().isSet("backup")){
+        if (ier.getRankeds().isSet("backup")){
             for ( String s : ier.getRankeds().getConfig().getConfigurationSection("backup").getKeys(false) ){
                 int season = Integer.parseInt(s);
                 lasted.put(season, new Season(ier, "backup." + season + ".", season));
@@ -49,8 +49,8 @@ public class SeasonManager {
         lasted.put(season, new Season(ier, "", season));
     }
     
-    public void backup() {
-        if(ier.getRankeds().isSet("divisions")){
+    public void backup(){
+        if (ier.getRankeds().isSet("divisions")){
             for ( String s : ier.getRankeds().getConfig().getConfigurationSection("divisions").getKeys(false) ){
                 String path = "divisions." + s;
                 String backupPath = "backup." + season + ".divisions." + s;
@@ -68,10 +68,10 @@ public class SeasonManager {
         ier.getRankeds().save();
     }
     
-    public void reduce() {
+    public void reduce(){
         restTime = restTime - 5000;
         ier.getRankeds().set("data.finish", restTime);
-        if(restTime <= 0){
+        if (restTime <= 0){
             backup();
             season++;
             restTime = timeUnit.toMillis(ier.getRankeds().getInt("duration"));
@@ -82,15 +82,15 @@ public class SeasonManager {
         ier.getRankeds().save();
     }
     
-    public int getSeason() {
+    public int getSeason(){
         return season;
     }
     
-    public long getRestTime() {
+    public long getRestTime(){
         return restTime;
     }
     
-    public HashMap<Integer, Season> getLasted() {
+    public HashMap<Integer, Season> getLasted(){
         return lasted;
     }
 }

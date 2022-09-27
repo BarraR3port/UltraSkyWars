@@ -8,11 +8,11 @@ public class FriendSession {
     
     private final ArrayList<Entity> entities = new ArrayList<>();
     
-    public ArrayList<Entity> getEntities() {
+    public ArrayList<Entity> getEntities(){
         return entities;
     }
     
-    public void clear() {
+    public void clear(){
         entities.forEach(Entity::remove);
     }
     

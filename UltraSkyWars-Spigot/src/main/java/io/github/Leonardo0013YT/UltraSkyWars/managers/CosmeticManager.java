@@ -47,41 +47,41 @@ public class CosmeticManager {
     private final HashMap<UUID, String> playerPreview = new HashMap<>();
     private final UltraSkyWars plugin;
     
-    public CosmeticManager(UltraSkyWars plugin) {
+    public CosmeticManager(UltraSkyWars plugin){
         this.plugin = plugin;
     }
     
-    public void remove(Player p) {
-        if(playerPreview.containsKey(p.getUniqueId())){
+    public void remove(Player p){
+        if (playerPreview.containsKey(p.getUniqueId())){
             PreviewCosmetic pc = getPreviewCosmetic(playerPreview.get(p.getUniqueId()));
             pc.removePreview(p);
             playerPreview.remove(p.getUniqueId());
         }
     }
     
-    public PreviewCosmetic getPreviewCosmetic(String type) {
+    public PreviewCosmetic getPreviewCosmetic(String type){
         return previews.get(type);
     }
     
-    public HashMap<UUID, String> getPlayerPreview() {
+    public HashMap<UUID, String> getPlayerPreview(){
         return playerPreview;
     }
     
-    public int getLastPage(String type) {
+    public int getLastPage(String type){
         return lastPage.getOrDefault(type, 0);
     }
     
-    public void setLastPage(String type, int lastPage) {
-        if(getLastPage(type) < lastPage){
+    public void setLastPage(String type, int lastPage){
+        if (getLastPage(type) < lastPage){
             this.lastPage.put(type, lastPage);
         }
     }
     
-    public void reload() {
-        if(plugin.getCm().getPreviewPlayerGlass() != null && plugin.getCm().getPreviewCosmeticGlass() != null){
+    public void reload(){
+        if (plugin.getCm().getPreviewPlayerGlass() != null && plugin.getCm().getPreviewCosmeticGlass() != null){
             previews.put("glass", new PreviewCosmetic("glass", plugin.getCm().getPreviewPlayerGlass(), plugin.getCm().getPreviewCosmeticGlass()));
         }
-        if(plugin.getCm().getPreviewPlayerBalloon() != null && plugin.getCm().getPreviewCosmeticBalloon() != null){
+        if (plugin.getCm().getPreviewPlayerBalloon() != null && plugin.getCm().getPreviewCosmeticBalloon() != null){
             previews.put("balloon", new PreviewCosmetic("balloon", plugin.getCm().getPreviewPlayerBalloon(), plugin.getCm().getPreviewCosmeticBalloon()));
         }
         glasses.clear();
@@ -93,7 +93,7 @@ public class CosmeticManager {
         winDance.clear();
         winEffects.clear();
         partings.clear();
-        if(plugin.getCm().isCosmeticsPartings() && plugin.getParting().isSet("partings")){
+        if (plugin.getCm().isCosmeticsPartings() && plugin.getParting().isSet("partings")){
             ConfigurationSection conf = plugin.getParting().getConfig().getConfigurationSection("partings");
             for ( String c : conf.getKeys(false) ){
                 int id = plugin.getParting().getInt("partings." + c + ".id");
@@ -101,16 +101,16 @@ public class CosmeticManager {
                 plugin.sendDebugMessage("§aParting §b" + c + "§a loaded correctly.");
             }
         }
-        if(plugin.getWineffect().isSet("wineffects")){
+        if (plugin.getWineffect().isSet("wineffects")){
             ConfigurationSection conf = plugin.getWineffect().getConfig().getConfigurationSection("wineffects");
             for ( String c : conf.getKeys(false) ){
                 int id = plugin.getWineffect().getInt("wineffects." + c + ".id");
-                if(id != 0 && !plugin.getCm().isCosmeticsWinEffects()) continue;
+                if (id != 0 && !plugin.getCm().isCosmeticsWinEffects()) continue;
                 winEffects.put(id, new UltraWinEffect(plugin, "wineffects." + c));
                 plugin.sendDebugMessage("§aWinEffect §b" + c + "§a loaded correctly.");
             }
         }
-        if(plugin.getCm().isCosmeticsWinDance() && plugin.getWindance().isSet("windances")){
+        if (plugin.getCm().isCosmeticsWinDance() && plugin.getWindance().isSet("windances")){
             ConfigurationSection conf = plugin.getWindance().getConfig().getConfigurationSection("windances");
             for ( String c : conf.getKeys(false) ){
                 int id = plugin.getWindance().getInt("windances." + c + ".id");
@@ -118,7 +118,7 @@ public class CosmeticManager {
                 plugin.sendDebugMessage("§aWinDance §b" + c + "§a loaded correctly.");
             }
         }
-        if(plugin.getCm().isCosmeticsTrails() && plugin.getTrail().isSet("trails")){
+        if (plugin.getCm().isCosmeticsTrails() && plugin.getTrail().isSet("trails")){
             ConfigurationSection conf = plugin.getTrail().getConfig().getConfigurationSection("trails");
             for ( String c : conf.getKeys(false) ){
                 int id = plugin.getTrail().getInt("trails." + c + ".id");
@@ -126,16 +126,16 @@ public class CosmeticManager {
                 plugin.sendDebugMessage("§aTrail §b" + c + "§a loaded correctly.");
             }
         }
-        if(plugin.getTaunt().isSet("taunts")){
+        if (plugin.getTaunt().isSet("taunts")){
             ConfigurationSection conf = plugin.getTaunt().getConfig().getConfigurationSection("taunts");
             for ( String c : conf.getKeys(false) ){
                 int id = plugin.getTaunt().getInt("taunts." + c + ".id");
-                if(id != 0 && !plugin.getCm().isCosmeticsTaunts()) continue;
+                if (id != 0 && !plugin.getCm().isCosmeticsTaunts()) continue;
                 taunts.put(id, new Taunt(plugin, "taunts." + c));
                 plugin.sendDebugMessage("§aTaunt §b" + c + "§a loaded correctly.");
             }
         }
-        if(plugin.getCm().isCosmeticsKillSounds() && plugin.getKillsound().isSet("killsounds")){
+        if (plugin.getCm().isCosmeticsKillSounds() && plugin.getKillsound().isSet("killsounds")){
             ConfigurationSection conf = plugin.getKillsound().getConfig().getConfigurationSection("killsounds");
             for ( String c : conf.getKeys(false) ){
                 int id = plugin.getKillsound().getInt("killsounds." + c + ".id");
@@ -143,13 +143,13 @@ public class CosmeticManager {
                 plugin.sendDebugMessage("§aKillSound §b" + c + "§a loaded correctly.");
             }
         }
-        if(plugin.getCm().isCosmeticsBalloons() && plugin.getBalloon().isSet("balloons")){
+        if (plugin.getCm().isCosmeticsBalloons() && plugin.getBalloon().isSet("balloons")){
             ConfigurationSection conf = plugin.getBalloon().getConfig().getConfigurationSection("balloons");
             for ( String c : conf.getKeys(false) ){
                 int id = plugin.getBalloon().getInt("balloons." + c + ".id");
                 Balloon balloon = new Balloon(plugin, "balloons." + c);
-                if(balloon.getHeads().isEmpty()) continue;
-                if(balloon.isAnimated()){
+                if (balloon.getHeads().isEmpty()) continue;
+                if (balloon.isAnimated()){
                     animatedBalloons.put(id, balloon);
                 } else {
                     balloons.put(id, balloon);
@@ -157,7 +157,7 @@ public class CosmeticManager {
                 plugin.sendDebugMessage("§aBalloon §b" + c + "§a loaded correctly.");
             }
         }
-        if(plugin.getCm().isCosmeticsKillEffect() && plugin.getKilleffect().isSet("killeffects")){
+        if (plugin.getCm().isCosmeticsKillEffect() && plugin.getKilleffect().isSet("killeffects")){
             ConfigurationSection conf = plugin.getKilleffect().getConfig().getConfigurationSection("killeffects");
             for ( String c : conf.getKeys(false) ){
                 int id = plugin.getKilleffect().getInt("killeffects." + c + ".id");
@@ -165,81 +165,81 @@ public class CosmeticManager {
                 plugin.sendDebugMessage("§aKillEffect §b" + c + "§a loaded correctly.");
             }
         }
-        if(plugin.getGlass().isSet("glasses")){
+        if (plugin.getGlass().isSet("glasses")){
             ConfigurationSection conf = plugin.getGlass().getConfig().getConfigurationSection("glasses");
             for ( String c : conf.getKeys(false) ){
                 int id = plugin.getGlass().getInt("glasses." + c + ".id");
-                if(id != 0 && !plugin.getCm().isCosmeticsGlasses()) continue;
+                if (id != 0 && !plugin.getCm().isCosmeticsGlasses()) continue;
                 glasses.put(id, new Glass(plugin, "glasses." + c));
                 plugin.sendDebugMessage("§aGlass §b" + c + "§a loaded correctly.");
             }
         }
     }
     
-    public int getPartingsSize() {
+    public int getPartingsSize(){
         return partings.size();
     }
     
-    public int getNextPartingId() {
+    public int getNextPartingId(){
         return partings.size();
     }
     
-    public int getNextTauntsId() {
+    public int getNextTauntsId(){
         return taunts.size();
     }
     
-    public int getNextGlassId() {
+    public int getNextGlassId(){
         return glasses.size();
     }
     
-    public int getNextKillSoundId() {
+    public int getNextKillSoundId(){
         return killSounds.size();
     }
     
-    public int getNextBalloonsId() {
+    public int getNextBalloonsId(){
         return balloons.size();
     }
     
-    public int getNextTrailsId() {
+    public int getNextTrailsId(){
         return trails.size();
     }
     
-    public Glass getGlass(int id) {
-        if(id == 999999){
+    public Glass getGlass(int id){
+        if (id == 999999){
             return glasses.get(0);
         }
         return glasses.get(id);
     }
     
-    public Balloon getBalloon(int id) {
-        if(animatedBalloons.containsKey(id)){
+    public Balloon getBalloon(int id){
+        if (animatedBalloons.containsKey(id)){
             return animatedBalloons.get(id);
         }
         return balloons.get(id);
     }
     
-    public Glass getGlassByItem(ItemStack item) {
-        if(!NBTEditor.contains(item, "ULTRASKYWARS", "GLASS")){
+    public Glass getGlassByItem(ItemStack item){
+        if (!NBTEditor.contains(item, "ULTRASKYWARS", "GLASS")){
             return null;
         }
         int id = NBTEditor.getInt(item, "ULTRASKYWARS", "GLASS");
         return glasses.getOrDefault(id, null);
     }
     
-    public UltraKillEffect getKillEffectByItem(ItemStack item) {
-        if(!NBTEditor.contains(item, "ULTRASKYWARS", "KILLEFFECT")){
+    public UltraKillEffect getKillEffectByItem(ItemStack item){
+        if (!NBTEditor.contains(item, "ULTRASKYWARS", "KILLEFFECT")){
             return null;
         }
         int id = NBTEditor.getInt(item, "ULTRASKYWARS", "KILLEFFECT");
         return killEffect.getOrDefault(id, null);
     }
     
-    public HashMap<Integer, Parting> getPartings() {
+    public HashMap<Integer, Parting> getPartings(){
         return partings;
     }
     
-    public Parting getPartingByItem(ItemStack item) {
-        if(!NBTEditor.contains(item, "ULTRASKYWARS", "PARTING")){
+    public Parting getPartingByItem(ItemStack item){
+        if (!NBTEditor.contains(item, "ULTRASKYWARS", "PARTING")){
             return null;
         }
         int id = NBTEditor.getInt(item, "ULTRASKYWARS", "PARTING");
@@ -247,140 +247,140 @@ public class CosmeticManager {
     }
     
     
-    public KillSound getKillSoundByItem(ItemStack item) {
-        if(!NBTEditor.contains(item, "ULTRASKYWARS", "KILLSOUND")){
+    public KillSound getKillSoundByItem(ItemStack item){
+        if (!NBTEditor.contains(item, "ULTRASKYWARS", "KILLSOUND")){
             return null;
         }
         int id = NBTEditor.getInt(item, "ULTRASKYWARS", "KILLSOUND");
         return killSounds.getOrDefault(id, null);
     }
     
-    public Balloon getBalloonByItem(ItemStack item) {
-        if(!NBTEditor.contains(item, "ULTRASKYWARS", "BALLOON")){
+    public Balloon getBalloonByItem(ItemStack item){
+        if (!NBTEditor.contains(item, "ULTRASKYWARS", "BALLOON")){
             return null;
         }
         int id = NBTEditor.getInt(item, "ULTRASKYWARS", "BALLOON");
-        if(animatedBalloons.containsKey(id)){
+        if (animatedBalloons.containsKey(id)){
             return animatedBalloons.getOrDefault(id, null);
         }
         return balloons.getOrDefault(id, null);
     }
     
-    public Taunt getTauntByItem(ItemStack item) {
-        if(!NBTEditor.contains(item, "ULTRASKYWARS", "TAUNT")){
+    public Taunt getTauntByItem(ItemStack item){
+        if (!NBTEditor.contains(item, "ULTRASKYWARS", "TAUNT")){
             return null;
         }
         int id = NBTEditor.getInt(item, "ULTRASKYWARS", "TAUNT");
         return taunts.getOrDefault(id, null);
     }
     
-    public Trail getTrailByItem(ItemStack item) {
-        if(!NBTEditor.contains(item, "ULTRASKYWARS", "TRAIL")){
+    public Trail getTrailByItem(ItemStack item){
+        if (!NBTEditor.contains(item, "ULTRASKYWARS", "TRAIL")){
             return null;
         }
         int id = NBTEditor.getInt(item, "ULTRASKYWARS", "TRAIL");
         return trails.getOrDefault(id, null);
     }
     
-    public UltraWinDance getWinDanceByItem(ItemStack item) {
-        if(!NBTEditor.contains(item, "ULTRASKYWARS", "WINDANCE")){
+    public UltraWinDance getWinDanceByItem(ItemStack item){
+        if (!NBTEditor.contains(item, "ULTRASKYWARS", "WINDANCE")){
             return null;
         }
         int id = NBTEditor.getInt(item, "ULTRASKYWARS", "WINDANCE");
         return winDance.getOrDefault(id, null);
     }
     
-    public UltraWinEffect getWinEffectByItem(ItemStack item) {
-        if(!NBTEditor.contains(item, "ULTRASKYWARS", "WINEFFECT")){
+    public UltraWinEffect getWinEffectByItem(ItemStack item){
+        if (!NBTEditor.contains(item, "ULTRASKYWARS", "WINEFFECT")){
             return null;
         }
         int id = NBTEditor.getInt(item, "ULTRASKYWARS", "WINEFFECT");
         return winEffects.getOrDefault(id, null);
     }
     
-    public int getGlassesSize() {
+    public int getGlassesSize(){
         return glasses.size();
     }
     
-    public int getKillEffectSize() {
+    public int getKillEffectSize(){
         return killEffect.size();
     }
     
-    public int getKillSoundsSize() {
+    public int getKillSoundsSize(){
         return killSounds.size();
     }
     
-    public int getTauntsSize() {
+    public int getTauntsSize(){
         return taunts.size();
     }
     
-    public int getBalloonSize() {
+    public int getBalloonSize(){
         return balloons.size() + animatedBalloons.size();
     }
     
-    public int getWinDancesSize() {
+    public int getWinDancesSize(){
         return winDance.size();
     }
     
-    public int getTrailsSize() {
+    public int getTrailsSize(){
         return trails.size();
     }
     
-    public int getWinEffectsSize() {
+    public int getWinEffectsSize(){
         return winEffects.size();
     }
     
-    public HashMap<Integer, Glass> getGlasses() {
+    public HashMap<Integer, Glass> getGlasses(){
         return glasses;
     }
     
-    public HashMap<Integer, UltraKillEffect> getKillEffect() {
+    public HashMap<Integer, UltraKillEffect> getKillEffect(){
         return killEffect;
     }
     
-    public HashMap<Integer, KillSound> getKillSounds() {
+    public HashMap<Integer, KillSound> getKillSounds(){
         return killSounds;
     }
     
-    public HashMap<Integer, Balloon> getBalloons() {
+    public HashMap<Integer, Balloon> getBalloons(){
         HashMap<Integer, Balloon> balloon = new HashMap<>(balloons);
         balloon.putAll(animatedBalloons);
         return balloon;
     }
     
-    public HashMap<Integer, Taunt> getTaunts() {
+    public HashMap<Integer, Taunt> getTaunts(){
         return taunts;
     }
     
-    public HashMap<Integer, Trail> getTrails() {
+    public HashMap<Integer, Trail> getTrails(){
         return trails;
     }
     
-    public HashMap<Integer, UltraWinDance> getWinDance() {
+    public HashMap<Integer, UltraWinDance> getWinDance(){
         return winDance;
     }
     
-    public HashMap<Integer, UltraWinEffect> getWinEffects() {
+    public HashMap<Integer, UltraWinEffect> getWinEffects(){
         return winEffects;
     }
     
-    public String getSelected(int id, HashMap<Integer, ? extends Cosmetic> map) {
-        if(map.containsKey(id)){
+    public String getSelected(int id, HashMap<Integer, ? extends Cosmetic> map){
+        if (map.containsKey(id)){
             return map.get(id).getName();
         }
         return plugin.getLang().get("messages.noSelected");
     }
     
-    public void executeParting(Player d, int id) {
+    public void executeParting(Player d, int id){
         Parting parting = partings.get(id);
-        if(parting == null){
+        if (parting == null){
             return;
         }
         parting.execute(d);
     }
     
-    public void spawnTrail(Projectile proj, Trail trail) {
-        if(trail.getParticle().equals("NONE")){
+    public void spawnTrail(Projectile proj, Trail trail){
+        if (trail.getParticle().equals("NONE")){
             return;
         }
         TrailType t = trail.getType();
@@ -389,13 +389,13 @@ public class CosmeticManager {
             int executes = 0;
             
             @Override
-            public void run() {
-                if(executes >= 40){
+            public void run(){
+                if (executes >= 40){
                     cancel();
                     return;
                 }
-                if(!proj.isOnGround() && !proj.isDead()){
-                    if(!t.equals(TrailType.NORMAL)){
+                if (!proj.isOnGround() && !proj.isDead()){
+                    if (!t.equals(TrailType.NORMAL)){
                         helix.spawn(proj.getLocation());
                     } else {
                         plugin.getVc().getNMS().broadcastParticle(proj.getLocation(), trail.getOffsetX(), trail.getOffsetY(), trail.getOffsetZ(), (int) trail.getSpeed(), trail.getParticle(), trail.getAmount(), trail.getRange());
@@ -408,37 +408,37 @@ public class CosmeticManager {
         }.runTaskTimerAsynchronously(plugin, 0, 1);
     }
     
-    public void executeKillSound(Player k, Player d, int id) {
+    public void executeKillSound(Player k, Player d, int id){
         KillSound ks = killSounds.get(id);
-        if(ks == null){
+        if (ks == null){
             return;
         }
         ks.execute(k, d);
     }
     
-    public void executeTaunt(Player p, EntityDamageEvent.DamageCause cause, Game game, int id) {
-        if(taunts.get(id) == null){
+    public void executeTaunt(Player p, EntityDamageEvent.DamageCause cause, Game game, int id){
+        if (taunts.get(id) == null){
             taunts.get(0).execute(p, cause, game);
         } else {
             taunts.get(id).execute(p, cause, game);
         }
     }
     
-    public void executeTaunt(Player p, Game game, int id) {
-        if(taunts.get(id) == null){
+    public void executeTaunt(Player p, Game game, int id){
+        if (taunts.get(id) == null){
             taunts.get(0).execute(p, game);
         } else {
             taunts.get(id).execute(p, game);
         }
     }
     
-    public void executeWinEffect(Game game, Player p, int id) {
+    public void executeWinEffect(Game game, Player p, int id){
         UltraWinEffect uwe = winEffects.get(id);
-        if(uwe == null || uwe.getType().equals("none")){
+        if (uwe == null || uwe.getType().equals("none")){
             return;
         }
         WinEffect we;
-        switch(uwe.getType()) {
+        switch(uwe.getType()){
             case "fireworks":
                 we = new WinEffectFireworks();
                 break;
@@ -474,13 +474,13 @@ public class CosmeticManager {
         game.addWinEffects(p.getUniqueId(), we);
     }
     
-    public void executeWinDance(Game game, Player p, int id) {
+    public void executeWinDance(Game game, Player p, int id){
         UltraWinDance uwe = winDance.get(id);
-        if(uwe == null || uwe.getType().equals("none")){
+        if (uwe == null || uwe.getType().equals("none")){
             return;
         }
         WinDance we;
-        switch(uwe.getType()) {
+        switch(uwe.getType()){
             case "meteors":
                 we = new WinDanceMeteors();
                 break;
@@ -514,13 +514,13 @@ public class CosmeticManager {
         game.addWinDance(p.getUniqueId(), we);
     }
     
-    public void executeKillEffect(Game game, Player p, Player death, Location loc, int id) {
+    public void executeKillEffect(Game game, Player p, Player death, Location loc, int id){
         UltraKillEffect uwe = killEffect.get(id);
-        if(uwe == null || uwe.getType().equals("none")){
+        if (uwe == null || uwe.getType().equals("none")){
             return;
         }
         KillEffect we;
-        switch(uwe.getType().toLowerCase()) {
+        switch(uwe.getType().toLowerCase()){
             case "blood":
                 we = new KillEffectBlood();
                 break;
@@ -563,7 +563,7 @@ public class CosmeticManager {
         game.addKillEffects(p.getUniqueId(), we);
     }
     
-    public HashMap<Integer, Balloon> getAnimatedBalloons() {
+    public HashMap<Integer, Balloon> getAnimatedBalloons(){
         return animatedBalloons;
     }
 }

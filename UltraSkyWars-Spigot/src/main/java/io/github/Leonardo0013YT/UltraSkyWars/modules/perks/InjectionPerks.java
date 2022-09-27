@@ -14,35 +14,35 @@ public class InjectionPerks implements Injection {
     private Settings perks;
     
     @Override
-    public void loadInjection(UltraSkyWars main) {
+    public void loadInjection(UltraSkyWars main){
         instance = this;
         perks = new Settings("modules/perks", true, false);
         pem = new PerkManager(this);
-        if(!main.getCm().isBungeeModeLobby()){
+        if (!main.getCm().isBungeeModeLobby()){
             Bukkit.getServer().getPluginManager().registerEvents(new PerksListener(main, this), main);
         }
     }
     
     @Override
-    public void reload() {
+    public void reload(){
         perks.reload();
         pem.loadPerks();
     }
     
     @Override
-    public void disable() {
+    public void disable(){
     
     }
     
-    public Settings getPerks() {
+    public Settings getPerks(){
         return perks;
     }
     
-    public PerkManager getPem() {
+    public PerkManager getPem(){
         return pem;
     }
     
-    public Injection getInstance() {
+    public Injection getInstance(){
         return instance;
     }
 }

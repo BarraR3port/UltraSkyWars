@@ -21,7 +21,7 @@ public class Level {
     private final String prefix;
     private final List<String> rewards;
     
-    public Level(UltraSkyWars plugin, String path, int id) {
+    public Level(UltraSkyWars plugin, String path, int id){
         this.id = id;
         this.level = plugin.getLevels().getInt(path + ".level");
         this.xp = plugin.getLevels().getInt(path + ".xp");
@@ -30,7 +30,7 @@ public class Level {
         this.rewards = plugin.getLevels().getList(path + ".rewards");
     }
     
-    public void execute(Player p) {
+    public void execute(Player p){
         for ( String r : rewards ){
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), r.replaceFirst("/", "").replaceAll("<player>", p.getName()));
         }

@@ -19,7 +19,7 @@ public class InjectionEloRank implements Injection {
     private RankedMenu rem;
     
     @Override
-    public void loadInjection(UltraSkyWars main) {
+    public void loadInjection(UltraSkyWars main){
         instance = this;
         eloRank = new Settings("modules/eloRank", false, false);
         rankeds = new Settings("modules/rankeds", false, false);
@@ -31,41 +31,41 @@ public class InjectionEloRank implements Injection {
     }
     
     @Override
-    public void reload() {
+    public void reload(){
         eloRank.reload();
         erm.reload();
     }
     
     @Override
-    public void disable() {
+    public void disable(){
     
     }
     
-    public Settings getRankeds() {
+    public Settings getRankeds(){
         return rankeds;
     }
     
-    public Settings getEloRank() {
+    public Settings getEloRank(){
         return eloRank;
     }
     
-    public RankedMenu getRem() {
+    public RankedMenu getRem(){
         return rem;
     }
     
-    public SeasonManager getSm() {
+    public SeasonManager getSm(){
         return sm;
     }
     
-    public EloRankManager getErm() {
+    public EloRankManager getErm(){
         return erm;
     }
     
-    public Injection getInstance() {
+    public Injection getInstance(){
         return instance;
     }
     
-    public void loadPlaceholders() {
+    public void loadPlaceholders(){
         new Placeholders(this).register();
     }
     

@@ -14,51 +14,51 @@ public abstract class UltraInventory {
     public int rows = 6;
     public String name;
     
-    public UltraInventory(String name) {
+    public UltraInventory(String name){
         this.name = name;
     }
     
-    public String getTitle() {
+    public String getTitle(){
         return title;
     }
     
-    public void setTitle(String title) {
+    public void setTitle(String title){
         this.title = title;
     }
     
-    public Map<Integer, ItemStack> getConfig() {
+    public Map<Integer, ItemStack> getConfig(){
         return config;
     }
     
-    public void setConfig(Map<Integer, ItemStack> config) {
+    public void setConfig(Map<Integer, ItemStack> config){
         this.config = config;
     }
     
-    public Map<Integer, ItemStack> getContents() {
+    public Map<Integer, ItemStack> getContents(){
         return contents;
     }
     
-    public void setContents(Map<Integer, ItemStack> contents) {
+    public void setContents(Map<Integer, ItemStack> contents){
         this.contents = contents;
     }
     
-    public int getRows() {
+    public int getRows(){
         return rows;
     }
     
-    public void setRows(int rows) {
+    public void setRows(int rows){
         this.rows = rows;
     }
     
-    public String getName() {
+    public String getName(){
         return name;
     }
     
-    public void setName(String name) {
+    public void setName(String name){
         this.name = name;
     }
     
-    public void save() {
+    public void save(){
         UltraSkyWars plugin = UltraSkyWars.get();
         plugin.getMenus().set("menus." + name + ".rows", rows);
         plugin.getMenus().set("menus." + name + ".items", null);

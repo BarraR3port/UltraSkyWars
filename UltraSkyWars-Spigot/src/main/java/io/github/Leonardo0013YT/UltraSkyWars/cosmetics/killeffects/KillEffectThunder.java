@@ -10,29 +10,29 @@ public class KillEffectThunder implements KillEffect, Cloneable {
     private static boolean loaded = false;
     
     @Override
-    public void loadCustoms(UltraSkyWars plugin, String path) {
-        if(!loaded){
+    public void loadCustoms(UltraSkyWars plugin, String path){
+        if (!loaded){
             loaded = true;
         }
     }
     
     @Override
-    public void start(Player p, Player death, Location loc) {
-        if(p == null || !p.isOnline()){
+    public void start(Player p, Player death, Location loc){
+        if (p == null || !p.isOnline()){
             return;
         }
-        if(death == null || !death.isOnline()){
+        if (death == null || !death.isOnline()){
             return;
         }
         death.getLocation().getWorld().strikeLightningEffect(loc);
     }
     
     @Override
-    public void stop() {
+    public void stop(){
     }
     
     @Override
-    public KillEffect clone() {
+    public KillEffect clone(){
         return new KillEffectSquid();
     }
 }

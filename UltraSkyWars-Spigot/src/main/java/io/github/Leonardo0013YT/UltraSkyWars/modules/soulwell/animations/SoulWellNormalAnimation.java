@@ -33,7 +33,7 @@ public class SoulWellNormalAnimation implements SoulWellAnimation {
     private ItemStack orange;
     private int executes;
     
-    public SoulWellNormalAnimation(UltraSkyWars plugin, InjectionSoulWell is, SoulWellSession sws, Player p, SoulWellRow row, Location loc) {
+    public SoulWellNormalAnimation(UltraSkyWars plugin, InjectionSoulWell is, SoulWellSession sws, Player p, SoulWellRow row, Location loc){
         this.plugin = plugin;
         this.inv = Bukkit.createInventory(null, 45, plugin.getLang().get(null, "menus.soulwellmenu.title"));
         this.black = ItemBuilder.item(XMaterial.BLACK_STAINED_GLASS, 1, plugin.getLang().get(null, "soulwell.rolling"), "§7");
@@ -45,15 +45,15 @@ public class SoulWellNormalAnimation implements SoulWellAnimation {
     }
     
     @Override
-    public void execute() {
+    public void execute(){
         for ( int i : row.getGlass() ){
             inv.setItem(i, black);
         }
         p.openInventory(inv);
         BukkitTask task = new BukkitRunnable() {
             @Override
-            public void run() {
-                if(executes == 21){
+            public void run(){
+                if (executes == 21){
                     executes = 0;
                     executePhase2();
                     cancel();
@@ -73,7 +73,7 @@ public class SoulWellNormalAnimation implements SoulWellAnimation {
                 executes++;
                 CustomSound.SOULWELL.reproduce(p);
                 for ( int i = 0; i < inv.getSize(); i++ ){
-                    if(inv.getItem(i) == null || inv.getItem(i).getType().name().endsWith("STAINED_GLASS_PANE")){
+                    if (inv.getItem(i) == null || inv.getItem(i).getType().name().endsWith("STAINED_GLASS_PANE")){
                         inv.setItem(i, is.getSwm().getRandomGlass());
                     }
                 }
@@ -82,11 +82,11 @@ public class SoulWellNormalAnimation implements SoulWellAnimation {
         tasks.add(task);
     }
     
-    private void executePhase2() {
+    private void executePhase2(){
         BukkitTask task = new BukkitRunnable() {
             @Override
-            public void run() {
-                if(executes == 7){
+            public void run(){
+                if (executes == 7){
                     executes = 0;
                     executePhase3();
                     cancel();
@@ -106,7 +106,7 @@ public class SoulWellNormalAnimation implements SoulWellAnimation {
                 executes++;
                 CustomSound.SOULWELL.reproduce(p);
                 for ( int i = 0; i < inv.getSize(); i++ ){
-                    if(inv.getItem(i) == null || inv.getItem(i).getType().name().endsWith("STAINED_GLASS_PANE")){
+                    if (inv.getItem(i) == null || inv.getItem(i).getType().name().endsWith("STAINED_GLASS_PANE")){
                         inv.setItem(i, is.getSwm().getRandomGlass());
                     }
                 }
@@ -115,11 +115,11 @@ public class SoulWellNormalAnimation implements SoulWellAnimation {
         tasks.add(task);
     }
     
-    private void executePhase3() {
+    private void executePhase3(){
         BukkitTask task = new BukkitRunnable() {
             @Override
-            public void run() {
-                if(executes == 4){
+            public void run(){
+                if (executes == 4){
                     executes = 0;
                     for ( SoulWellPath path : row.getPaths() ){
                         sws.executeReward(p, inv.getItem(path.getThree()));
@@ -128,7 +128,7 @@ public class SoulWellNormalAnimation implements SoulWellAnimation {
                     sws.setRolling(false);
                     new BukkitRunnable() {
                         @Override
-                        public void run() {
+                        public void run(){
                             is.getSwm().removeSession(p);
                             p.closeInventory();
                         }
@@ -150,7 +150,7 @@ public class SoulWellNormalAnimation implements SoulWellAnimation {
                 executes++;
                 CustomSound.SOULWELL.reproduce(p);
                 for ( int i = 0; i < inv.getSize(); i++ ){
-                    if(inv.getItem(i) == null || inv.getItem(i).getType().name().endsWith("STAINED_GLASS_PANE")){
+                    if (inv.getItem(i) == null || inv.getItem(i).getType().name().endsWith("STAINED_GLASS_PANE")){
                         inv.setItem(i, is.getSwm().getRandomGlass());
                     }
                 }
@@ -160,15 +160,15 @@ public class SoulWellNormalAnimation implements SoulWellAnimation {
     }
     
     @Override
-    public void cancel(Player p) {
+    public void cancel(Player p){
         for ( BukkitTask bt : tasks ){
-            if(bt == null) continue;
+            if (bt == null) continue;
             bt.cancel();
         }
     }
     
     @Override
-    public Inventory getInv() {
+    public Inventory getInv(){
         return inv;
     }
 }

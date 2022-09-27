@@ -20,7 +20,7 @@ public class KillSoundSetup {
     private float vol1, vol2;
     private Sound sound;
     
-    public KillSoundSetup(Player p, String name) {
+    public KillSoundSetup(Player p, String name){
         this.p = p;
         this.name = name;
         this.permission = "ultraskywars.killsound." + name;
@@ -34,7 +34,7 @@ public class KillSoundSetup {
         this.isBuy = true;
     }
     
-    public void saveKillSound(Player p) {
+    public void saveKillSound(Player p){
         UltraSkyWars plugin = UltraSkyWars.get();
         plugin.getKillsound().set("killsounds." + name + ".id", plugin.getCos().getNextKillSoundId());
         plugin.getKillsound().set("killsounds." + name + ".name", name);
@@ -58,86 +58,86 @@ public class KillSoundSetup {
         plugin.getCos().reload();
     }
     
-    public Sound getSound() {
+    public Sound getSound(){
         return sound;
     }
     
-    public void setSound(Sound sound) {
+    public void setSound(Sound sound){
         this.sound = sound;
     }
     
-    public float getVol2() {
+    public float getVol2(){
         return vol2;
     }
     
-    public void setVol2(float vol2) {
+    public void setVol2(float vol2){
         this.vol2 = vol2;
     }
     
-    public float getVol1() {
+    public float getVol1(){
         return vol1;
     }
     
-    public void setVol1(float vol1) {
+    public void setVol1(float vol1){
         this.vol1 = vol1;
     }
     
-    public ItemStack getIcon() {
-        if(icon == null || icon.getType().equals(Material.AIR)){
+    public ItemStack getIcon(){
+        if (icon == null || icon.getType().equals(Material.AIR)){
             return new ItemStack(XMaterial.GHAST_TEAR.parseMaterial());
         }
         return icon;
     }
     
-    public void setIcon(ItemStack icon) {
+    public void setIcon(ItemStack icon){
         this.icon = icon;
     }
     
-    public String getName() {
+    public String getName(){
         return name;
     }
     
-    public void setName(String name) {
+    public void setName(String name){
         this.name = name;
     }
     
-    public String getPermission() {
+    public String getPermission(){
         return permission;
     }
     
-    public void setPermission(String permission) {
+    public void setPermission(String permission){
         this.permission = permission;
     }
     
-    public int getSlot() {
+    public int getSlot(){
         return slot;
     }
     
-    public void setSlot(int slot) {
+    public void setSlot(int slot){
         this.slot = slot;
     }
     
-    public int getPage() {
+    public int getPage(){
         return page;
     }
     
-    public void setPage(int page) {
+    public void setPage(int page){
         this.page = page;
     }
     
-    public int getPrice() {
+    public int getPrice(){
         return price;
     }
     
-    public void setPrice(int price) {
+    public void setPrice(int price){
         this.price = price;
     }
     
-    public boolean isBuy() {
+    public boolean isBuy(){
         return isBuy;
     }
     
-    public void setBuy(boolean buy) {
+    public void setBuy(boolean buy){
         isBuy = buy;
     }
     

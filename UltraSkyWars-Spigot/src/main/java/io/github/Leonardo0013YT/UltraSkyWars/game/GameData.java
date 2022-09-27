@@ -15,7 +15,7 @@ public class GameData {
     @Setter
     private String color;
     
-    public GameData(String server, String map, String color, String state, String type, int players, int max) {
+    public GameData(String server, String map, String color, String state, String type, int players, int max){
         this.map = map;
         this.server = server;
         this.color = color;
@@ -25,16 +25,16 @@ public class GameData {
         this.type = type.toLowerCase();
     }
     
-    public GameData(String map, String color, String state, String type, int players, int max) {
+    public GameData(String map, String color, String state, String type, int players, int max){
         this("", map, color, state, type, players, max);
     }
     
-    public boolean isState(State state) {
+    public boolean isState(State state){
         return State.valueOf(this.state.toUpperCase()).equals(state);
     }
     
-    public String getColor() {
-        if(color.equals("none")){
+    public String getColor(){
+        if (color.equals("none")){
             return "";
         }
         return color;

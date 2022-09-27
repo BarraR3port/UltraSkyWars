@@ -23,8 +23,8 @@ public class KillEffectCookieFountain implements KillEffect, Cloneable {
     private BukkitTask task;
     
     @Override
-    public void loadCustoms(UltraSkyWars plugin, String path) {
-        if(!loaded){
+    public void loadCustoms(UltraSkyWars plugin, String path){
+        if (!loaded){
             xRandom = plugin.getKilleffect().getDoubleOrDefault(path + ".xRandom", 0.35);
             yRandom = plugin.getKilleffect().getDoubleOrDefault(path + ".yRandom", 0.5);
             zRandom = plugin.getKilleffect().getDoubleOrDefault(path + ".xRandom", 0.35);
@@ -35,17 +35,17 @@ public class KillEffectCookieFountain implements KillEffect, Cloneable {
     }
     
     @Override
-    public void start(Player p, Player death, Location loc) {
+    public void start(Player p, Player death, Location loc){
         task = new BukkitRunnable() {
             int executes = 0;
             
             @Override
-            public void run() {
-                if(death == null || !death.isOnline()){
+            public void run(){
+                if (death == null || !death.isOnline()){
                     stop();
                     return;
                 }
-                if(executes >= flowersAmount){
+                if (executes >= flowersAmount){
                     stop();
                     return;
                 }
@@ -57,7 +57,7 @@ public class KillEffectCookieFountain implements KillEffect, Cloneable {
         }.runTaskTimer(UltraSkyWars.get(), 2, 2);
         new BukkitRunnable() {
             @Override
-            public void run() {
+            public void run(){
                 for ( Item itemStack : it ){
                     itemStack.remove();
                 }
@@ -66,8 +66,8 @@ public class KillEffectCookieFountain implements KillEffect, Cloneable {
     }
     
     @Override
-    public void stop() {
-        if(task != null){
+    public void stop(){
+        if (task != null){
             task.cancel();
         }
         for ( Item itemStack : it ){
@@ -77,15 +77,15 @@ public class KillEffectCookieFountain implements KillEffect, Cloneable {
     }
     
     @Override
-    public KillEffect clone() {
+    public KillEffect clone(){
         return new KillEffectCookieFountain();
     }
     
-    protected double random(double d, double d2) {
+    protected double random(double d, double d2){
         return d + ThreadLocalRandom.current().nextDouble() * (d2 - d);
     }
     
-    private Item spawnCookie(Location location, double d, double d2, double d3) {
+    private Item spawnCookie(Location location, double d, double d2, double d3){
         Item item = location.getWorld().dropItem(location, new ItemStack(Material.COOKIE));
         item.setVelocity(new Vector(d, d2, d3));
         item.setPickupDelay(Integer.MAX_VALUE);

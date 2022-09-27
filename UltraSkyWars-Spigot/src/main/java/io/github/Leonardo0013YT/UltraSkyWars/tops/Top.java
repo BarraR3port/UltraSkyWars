@@ -13,7 +13,7 @@ public class Top {
     private final Map<Integer, TopPlayer> tops = new HashMap<>();
     private final TopType type;
     
-    public Top(TopType type, List<String> tops) {
+    public Top(TopType type, List<String> tops){
         this.type = type;
         for ( String top : tops ){
             String[] t = top.split(":");
