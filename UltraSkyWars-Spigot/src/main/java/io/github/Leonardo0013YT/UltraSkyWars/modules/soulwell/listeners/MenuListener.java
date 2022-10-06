@@ -1,5 +1,6 @@
 package io.github.Leonardo0013YT.UltraSkyWars.modules.soulwell.listeners;
 
+import com.podcrash.commissions.yandere.core.common.data.user.props.GainSource;
 import io.github.Leonardo0013YT.UltraSkyWars.UltraSkyWars;
 import io.github.Leonardo0013YT.UltraSkyWars.data.SWPlayer;
 import io.github.Leonardo0013YT.UltraSkyWars.enums.CustomSound;
@@ -64,7 +65,7 @@ public class MenuListener implements Listener {
             if (key == null) return;
             SWPlayer sw = plugin.getDb().getSWPlayer(p);
             SoulWellAngelOfDeath sa = is.getSwm().getAngel().get(key);
-            plugin.getAdm().removeCoins(p, sa.getPrice());
+            plugin.getAdm().removeCoins(p, sa.getPrice(), GainSource.BUY);
             sw.setSoulWellHead(sa.getLevel());
             p.closeInventory();
             p.sendMessage(is.getSoulwell().get("angelBuyed").replaceAll("<name>", sa.getName()));
@@ -101,7 +102,7 @@ public class MenuListener implements Listener {
                     p.sendMessage(is.getSoulwell().get("noMoney"));
                     return;
                 }
-                plugin.getAdm().removeCoins(p, swu.getPrice());
+                plugin.getAdm().removeCoins(p, swu.getPrice(), GainSource.BUY);
                 sw.setSoulWellExtra(swu.getLevel());
                 p.sendMessage(is.getSoulwell().get("extraBuyed").replaceAll("<name>", swu.getName()));
                 is.getWel().createUpgradeSoulWellMenu(p);
@@ -116,7 +117,7 @@ public class MenuListener implements Listener {
                     p.sendMessage(is.getSoulwell().get("noMoney"));
                     return;
                 }
-                plugin.getAdm().removeCoins(p, swu.getPrice());
+                plugin.getAdm().removeCoins(p, swu.getPrice(), GainSource.BUY);
                 sw.setSoulWellMax(swu.getLevel());
                 p.sendMessage(is.getSoulwell().get("maxBuyed").replaceAll("<name>", swu.getName()));
                 is.getWel().createUpgradeSoulWellMenu(p);
@@ -153,7 +154,7 @@ public class MenuListener implements Listener {
                 p.sendMessage(plugin.getLang().get("messages.maxSouls"));
                 return;
             }
-            plugin.getAdm().removeCoins(p, s.getPrice());
+            plugin.getAdm().removeCoins(p, s.getPrice(), GainSource.BUY);
             sw.addSouls(s.getGive());
             p.sendMessage(is.getSoulwell().get("buyed").replaceAll("<name>", s.getName()).replaceAll("<souls>", "" + s.getGive()));
             is.getWel().createShopSoulWellMenu(p);

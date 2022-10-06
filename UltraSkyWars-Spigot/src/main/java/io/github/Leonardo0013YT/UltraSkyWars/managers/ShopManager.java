@@ -1,5 +1,6 @@
 package io.github.Leonardo0013YT.UltraSkyWars.managers;
 
+import com.podcrash.commissions.yandere.core.common.data.user.props.GainSource;
 import io.github.Leonardo0013YT.UltraSkyWars.UltraSkyWars;
 import io.github.Leonardo0013YT.UltraSkyWars.cosmetics.Balloon;
 import io.github.Leonardo0013YT.UltraSkyWars.cosmetics.Glass;
@@ -32,7 +33,7 @@ public class ShopManager {
             return;
         }
         SWPlayer sw = plugin.getDb().getSWPlayer(p);
-        plugin.getAdm().removeCoins(p, purchasable.getPrice());
+        plugin.getAdm().removeCoins(p, purchasable.getPrice(), GainSource.BUY);
         if (purchasable instanceof KitLevel){
             KitLevel k = (KitLevel) purchasable;
             if (plugin.getCm().isKitLevelsOrder() && !isLastLevel(sw, k)){

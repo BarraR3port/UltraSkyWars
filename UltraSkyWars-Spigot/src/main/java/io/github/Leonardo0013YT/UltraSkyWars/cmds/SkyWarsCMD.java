@@ -1,5 +1,6 @@
 package io.github.Leonardo0013YT.UltraSkyWars.cmds;
 
+import com.podcrash.commissions.yandere.core.common.data.user.props.GainSource;
 import io.github.Leonardo0013YT.UltraSkyWars.UltraSkyWars;
 import io.github.Leonardo0013YT.UltraSkyWars.data.SWPlayer;
 import io.github.Leonardo0013YT.UltraSkyWars.enums.State;
@@ -965,7 +966,7 @@ public class SkyWarsCMD implements CommandExecutor {
                                 p.sendMessage(plugin.getLang().get(p, "setup.noNumber"));
                                 return true;
                             }
-                            plugin.getAdm().addCoins(on, amount);
+                            plugin.getAdm().addCoins(on, amount, GainSource.COMMAND);
                             p.sendMessage(plugin.getLang().get(p, "coins.add.you").replaceAll("<coins>", String.valueOf(amount)).replaceAll("<player>", on.getName()));
                             on.sendMessage(plugin.getLang().get(p, "coins.add.receiver").replaceAll("<coins>", String.valueOf(amount)).replaceAll("<sender>", p.getName()));
                             Utils.updateSB(on);
@@ -983,7 +984,7 @@ public class SkyWarsCMD implements CommandExecutor {
                                 p.sendMessage(plugin.getLang().get(p, "setup.noNumber"));
                                 return true;
                             }
-                            plugin.getAdm().removeCoins(on1, amount1);
+                            plugin.getAdm().removeCoins(on1, amount1, GainSource.COMMAND);
                             p.sendMessage(plugin.getLang().get(p, "coins.remove.you").replaceAll("<coins>", String.valueOf(amount1)).replaceAll("<player>", on1.getName()));
                             on1.sendMessage(plugin.getLang().get(p, "coins.remove.receiver").replaceAll("<coins>", String.valueOf(amount1)).replaceAll("<sender>", p.getName()));
                             Utils.updateSB(on1);
@@ -1001,7 +1002,7 @@ public class SkyWarsCMD implements CommandExecutor {
                                 p.sendMessage(plugin.getLang().get(p, "setup.noNumber"));
                                 return true;
                             }
-                            plugin.getAdm().setCoins(on2, amount2);
+                            plugin.getAdm().setCoins(on2, amount2, GainSource.COMMAND);
                             p.sendMessage(plugin.getLang().get(p, "coins.set.you").replaceAll("<coins>", String.valueOf(amount2)).replaceAll("<player>", on2.getName()));
                             on2.sendMessage(plugin.getLang().get(p, "coins.set.receiver").replaceAll("<coins>", String.valueOf(amount2)).replaceAll("<sender>", p.getName()));
                             Utils.updateSB(on2);
@@ -1968,7 +1969,7 @@ public class SkyWarsCMD implements CommandExecutor {
                                 sender.sendMessage(plugin.getLang().get("setup.noNumber"));
                                 return true;
                             }
-                            plugin.getAdm().addCoins(on, amount);
+                            plugin.getAdm().addCoins(on, amount, GainSource.COMMAND);
                             sender.sendMessage(plugin.getLang().get("coins.add.you").replaceAll("<coins>", String.valueOf(amount)).replaceAll("<player>", on.getName()));
                             on.sendMessage(plugin.getLang().get("coins.add.receiver").replaceAll("<coins>", String.valueOf(amount)).replaceAll("<sender>", sender.getName()));
                             Utils.updateSB(on);
@@ -1987,7 +1988,7 @@ public class SkyWarsCMD implements CommandExecutor {
                                 return true;
                             }
                             SWPlayer sw1 = plugin.getDb().getSWPlayer(on1);
-                            plugin.getAdm().removeCoins(on1, amount1);
+                            plugin.getAdm().removeCoins(on1, amount1, GainSource.COMMAND);
                             sender.sendMessage(plugin.getLang().get("coins.remove.you").replaceAll("<coins>", String.valueOf(amount1)).replaceAll("<player>", on1.getName()));
                             on1.sendMessage(plugin.getLang().get("coins.remove.receiver").replaceAll("<coins>", String.valueOf(amount1)).replaceAll("<sender>", sender.getName()));
                             Utils.updateSB(on1);
@@ -2006,7 +2007,7 @@ public class SkyWarsCMD implements CommandExecutor {
                                 return true;
                             }
                             SWPlayer sw2 = plugin.getDb().getSWPlayer(on2);
-                            plugin.getAdm().setCoins(on2, amount2);
+                            plugin.getAdm().setCoins(on2, amount2, GainSource.COMMAND);
                             sender.sendMessage(plugin.getLang().get("coins.set.you").replaceAll("<coins>", String.valueOf(amount2)).replaceAll("<player>", on2.getName()));
                             on2.sendMessage(plugin.getLang().get("coins.set.receiver").replaceAll("<coins>", String.valueOf(amount2)).replaceAll("<sender>", sender.getName()));
                             Utils.updateSB(on2);

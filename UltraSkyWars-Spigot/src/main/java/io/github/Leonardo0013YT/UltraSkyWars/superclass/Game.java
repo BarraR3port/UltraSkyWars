@@ -1,5 +1,6 @@
 package io.github.Leonardo0013YT.UltraSkyWars.superclass;
 
+import com.podcrash.commissions.yandere.core.common.data.user.props.GainSource;
 import io.github.Leonardo0013YT.UltraSkyWars.UltraSkyWars;
 import io.github.Leonardo0013YT.UltraSkyWars.api.events.USWGameFinishEvent;
 import io.github.Leonardo0013YT.UltraSkyWars.api.events.USWGameWinEvent;
@@ -199,7 +200,7 @@ public abstract class Game {
             GamePlayer gp = gamePlayer.get(p.getUniqueId());
             SWPlayer sw = plugin.getDb().getSWPlayer(p);
             if (sw != null){
-                plugin.getAdm().addCoins(p, gp.getCoins());
+                plugin.getAdm().addCoins(p, gp.getCoins(), GainSource.GAME_END);
                 sw.addSouls(gp.getSouls());
                 sw.addXp(gp.getXP());
             }

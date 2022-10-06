@@ -1,5 +1,6 @@
 package io.github.Leonardo0013YT.UltraSkyWars.menus;
 
+import com.podcrash.commissions.yandere.core.common.data.user.props.GainSource;
 import io.github.Leonardo0013YT.UltraSkyWars.UltraSkyWars;
 import io.github.Leonardo0013YT.UltraSkyWars.cosmetics.Balloon;
 import io.github.Leonardo0013YT.UltraSkyWars.cosmetics.Glass;
@@ -1601,7 +1602,7 @@ public class UltraInventoryMenu {
                     return;
                 }
                 sw.getPerksData().put(id, level + 1);
-                plugin.getAdm().removeCoins(p, next.getPrice());
+                plugin.getAdm().removeCoins(p, next.getPrice(), GainSource.BUY);
                 p.sendMessage(plugin.getLang().get("messages.perks.buyed").replace("<level>", String.valueOf(level + 1)));
                 CustomSound.PERK_BUY.reproduce(p);
             }

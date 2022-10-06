@@ -1,5 +1,6 @@
 package io.github.Leonardo0013YT.UltraSkyWars.managers;
 
+import com.podcrash.commissions.yandere.core.common.data.user.props.GainSource;
 import com.podcrash.commissions.yandere.core.spigot.Main;
 import io.github.Leonardo0013YT.UltraSkyWars.UltraSkyWars;
 import io.github.Leonardo0013YT.UltraSkyWars.addons.PartiesAddon;
@@ -111,10 +112,10 @@ public class AddonManager {
         return parties;
     }
     
-    public void addCoins(Player p, double amount){
+    public void addCoins(Player p, double amount, GainSource source){
         UltraSkyWars plugin = UltraSkyWars.get();
         if (economy != null){
-            economy.addCoins(p, amount);
+            economy.addCoins(p, amount, source);
         } else {
             SWPlayer sw = plugin.getDb().getSWPlayer(p);
             if (sw == null) return;
@@ -123,10 +124,10 @@ public class AddonManager {
         Utils.updateSB(p);
     }
     
-    public void setCoins(Player p, double amount){
+    public void setCoins(Player p, double amount, GainSource source){
         UltraSkyWars plugin = UltraSkyWars.get();
         if (economy != null){
-            economy.setCoins(p, amount);
+            economy.setCoins(p, amount, source);
         } else {
             SWPlayer sw = plugin.getDb().getSWPlayer(p);
             if (sw == null) return;
@@ -135,10 +136,10 @@ public class AddonManager {
         Utils.updateSB(p);
     }
     
-    public void removeCoins(Player p, double amount){
+    public void removeCoins(Player p, double amount, GainSource source){
         UltraSkyWars plugin = UltraSkyWars.get();
         if (economy != null){
-            economy.removeCoins(p, amount);
+            economy.removeCoins(p, amount, source);
         } else {
             SWPlayer sw = plugin.getDb().getSWPlayer(p);
             if (sw == null) return;
