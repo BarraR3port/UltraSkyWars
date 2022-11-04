@@ -38,7 +38,7 @@ public class SoulWellRewardSetup {
     public ItemStack getIcon(){
         ItemStack icon = this.icon.clone();
         ItemMeta iconM = icon.getItemMeta();
-        iconM.setDisplayName(name.replaceAll("&", "§"));
+        //iconM.setDisplayName(name.replaceAll("&", "§"));
         String s = UltraSkyWars.get().getLang().get(null, "menus.soulwellmenu.item.loreItem").replace("<rarity>", UltraSkyWars.get().getLang().get(null, "soulwell.rarity." + type.name().toLowerCase())).replaceAll("<chance>", String.valueOf(chance));
         iconM.setLore(s.isEmpty() ? new ArrayList<>() : Arrays.asList(s.split("\\n")));
         icon.setItemMeta(iconM);

@@ -7,6 +7,7 @@ import io.github.Leonardo0013YT.UltraSkyWars.utils.ItemBuilder;
 import io.github.Leonardo0013YT.UltraSkyWars.utils.NBTEditor;
 import io.github.Leonardo0013YT.UltraSkyWars.utils.Utils;
 import io.github.Leonardo0013YT.UltraSkyWars.xseries.XMaterial;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Giant;
 import org.bukkit.entity.Player;
@@ -25,6 +26,21 @@ public class Balloon extends Cosmetic {
     private final HashMap<UUID, Giant> giants = new HashMap<>();
     private String url;
     private int animation = 0;
+    
+    @Override
+    public ItemStack getIcon(){
+        return ItemBuilder.createSkull(icon.getItemMeta().getDisplayName(), icon.getItemMeta().getLore(), url).clone();
+    }
+    
+    @Override
+    public String getTypeFormatted(){
+        return "balloon";
+    }
+    
+    @Override
+    public String getDisplayName(){
+        return ChatColor.translateAlternateColorCodes('&', icon.getItemMeta().getDisplayName());
+    }
     
     public Balloon(UltraSkyWars plugin, String path){
         super(plugin.getBalloon(), path, "balloon");

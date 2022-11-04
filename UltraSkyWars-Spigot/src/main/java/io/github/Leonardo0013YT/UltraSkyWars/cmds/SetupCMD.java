@@ -117,6 +117,12 @@ public class SetupCMD implements CommandExecutor {
                     }
                     plugin.getSem().createSoulWellMenu(p);
                     break;
+                case "autorewards":
+                    if (!plugin.getSm().isSetupSoulWell(p)){
+                        plugin.getSm().setSetupSoulWell(p, new SoulWellSetup(plugin));
+                    }
+                    plugin.getSm().getSetupSoulWell(p).autoCreateRewards(p);
+                    break;
                 case "create":
                     if (args.length < 2){
                         sendHelp(p);

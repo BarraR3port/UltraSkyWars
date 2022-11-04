@@ -1,7 +1,7 @@
 name: UltraSkyWars
 main: io.github.Leonardo0013YT.UltraSkyWars.UltraSkyWars
 version: 9.0.0
-author: Leonardo0013YT
+authors: [ "Leonardo0013YT", "BarraR3port" ]
 load: POSTWORLD
 softdepend:
   - AnimatedNames

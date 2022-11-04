@@ -28,6 +28,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.UUID;
 
 public class CosmeticManager {
@@ -202,6 +203,21 @@ public class CosmeticManager {
     
     public int getNextTrailsId(){
         return trails.size();
+    }
+    
+    public LinkedList<Cosmetic> getCosmetics(){
+        LinkedList<Cosmetic> cosmetics = new LinkedList<>();
+        cosmetics.addAll(partings.values());
+        cosmetics.addAll(winEffects.values());
+        cosmetics.addAll(winDance.values());
+        cosmetics.addAll(trails.values());
+        cosmetics.addAll(taunts.values());
+        cosmetics.addAll(killSounds.values());
+        cosmetics.addAll(balloons.values());
+        cosmetics.addAll(animatedBalloons.values());
+        cosmetics.addAll(killEffect.values());
+        cosmetics.addAll(glasses.values());
+        return cosmetics;
     }
     
     public Glass getGlass(int id){

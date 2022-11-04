@@ -10,6 +10,7 @@ import io.github.Leonardo0013YT.UltraSkyWars.utils.ItemBuilder;
 import io.github.Leonardo0013YT.UltraSkyWars.utils.NBTEditor;
 import io.github.Leonardo0013YT.UltraSkyWars.utils.Utils;
 import io.github.Leonardo0013YT.UltraSkyWars.xseries.XMaterial;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -29,6 +30,21 @@ public class Glass extends Cosmetic implements Purchasable {
     private final boolean isBuy;
     private final boolean needPermToBuy;
     private HashMap<Vector, GlassBlock> preview = new HashMap<>();
+    
+    @Override
+    public ItemStack getIcon(){
+        return item.clone();
+    }
+    
+    @Override
+    public String getTypeFormatted(){
+        return "glass";
+    }
+    
+    @Override
+    public String getDisplayName(){
+        return ChatColor.translateAlternateColorCodes('&', item.getItemMeta().getDisplayName());
+    }
     
     public Glass(UltraSkyWars plugin, String path){
         super(plugin.getGlass(), path, "glass");

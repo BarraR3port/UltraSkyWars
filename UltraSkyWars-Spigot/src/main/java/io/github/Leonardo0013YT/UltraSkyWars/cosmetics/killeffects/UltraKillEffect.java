@@ -7,6 +7,7 @@ import io.github.Leonardo0013YT.UltraSkyWars.utils.ItemBuilder;
 import io.github.Leonardo0013YT.UltraSkyWars.utils.NBTEditor;
 import io.github.Leonardo0013YT.UltraSkyWars.utils.Utils;
 import io.github.Leonardo0013YT.UltraSkyWars.xseries.XMaterial;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -23,6 +24,21 @@ public class UltraKillEffect extends Cosmetic {
         this.type = plugin.getKilleffect().get(s + ".type");
         this.icon = Utils.getIcon(plugin.getKilleffect(), s);
         plugin.getCos().setLastPage("KillEffect", page);
+    }
+    
+    @Override
+    public ItemStack getIcon(){
+        return icon.clone();
+    }
+    
+    @Override
+    public String getTypeFormatted(){
+        return "killeffect";
+    }
+    
+    @Override
+    public String getDisplayName(){
+        return ChatColor.translateAlternateColorCodes('&', icon.getItemMeta().getDisplayName());
     }
     
     public ItemStack getIcon(Player p){

@@ -9,6 +9,7 @@ import io.github.Leonardo0013YT.UltraSkyWars.utils.ItemBuilder;
 import io.github.Leonardo0013YT.UltraSkyWars.utils.NBTEditor;
 import io.github.Leonardo0013YT.UltraSkyWars.utils.Utils;
 import io.github.Leonardo0013YT.UltraSkyWars.xseries.XMaterial;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -28,6 +29,21 @@ public class Taunt extends Cosmetic {
     private final String none;
     private final ItemStack icon;
     private final UltraSkyWars plugin;
+    
+    @Override
+    public ItemStack getIcon(){
+        return icon.clone();
+    }
+    
+    @Override
+    public String getTypeFormatted(){
+        return "traunt";
+    }
+    
+    @Override
+    public String getDisplayName(){
+        return ChatColor.translateAlternateColorCodes('&', icon.getItemMeta().getDisplayName());
+    }
     
     public Taunt(UltraSkyWars plugin, String s){
         super(plugin.getTaunt(), s, "taunts");

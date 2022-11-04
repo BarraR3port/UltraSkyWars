@@ -8,6 +8,7 @@ import io.github.Leonardo0013YT.UltraSkyWars.utils.NBTEditor;
 import io.github.Leonardo0013YT.UltraSkyWars.utils.Utils;
 import io.github.Leonardo0013YT.UltraSkyWars.xseries.XMaterial;
 import io.github.Leonardo0013YT.UltraSkyWars.xseries.XSound;
+import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -22,6 +23,21 @@ public class KillSound extends Cosmetic {
     private final float vol1;
     private final float vol2;
     private final ItemStack icon;
+    
+    @Override
+    public ItemStack getIcon(){
+        return icon.clone();
+    }
+    
+    @Override
+    public String getTypeFormatted(){
+        return "killsound";
+    }
+    
+    @Override
+    public String getDisplayName(){
+        return ChatColor.translateAlternateColorCodes('&', icon.getItemMeta().getDisplayName());
+    }
     
     public KillSound(UltraSkyWars plugin, String s){
         super(plugin.getKillsound(), s, "killsound");

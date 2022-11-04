@@ -1,6 +1,7 @@
 package io.github.Leonardo0013YT.UltraSkyWars.cosmetics.kits;
 
 import io.github.Leonardo0013YT.UltraSkyWars.UltraSkyWars;
+import io.github.Leonardo0013YT.UltraSkyWars.utils.Utils;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -16,6 +17,7 @@ public class Kit {
     private final int page;
     private final String name;
     private final String permission;
+    private ItemStack icon;
     
     public Kit(UltraSkyWars plugin, String path){
         this.id = plugin.getKits().getInt(path + ".id");
@@ -27,6 +29,9 @@ public class Kit {
         if (plugin.getKits().getConfig().getConfigurationSection(path + ".levels") != null){
             for ( String level : plugin.getKits().getConfig().getConfigurationSection(path + ".levels").getKeys(false) ){
                 int nivel = Integer.parseInt(level);
+                if (this.icon == null){
+                    this.icon = Utils.getIcon(plugin.getKits(), path + ".levels." + level);
+                }
                 levels.put(nivel, new KitLevel(plugin, path + ".levels." + level, this));
             }
         }
@@ -73,5 +78,9 @@ public class Kit {
     
     public String getPermission(){
         return permission;
+    }
+    
+    public ItemStack getIcon(){
+        return icon;
     }
 }

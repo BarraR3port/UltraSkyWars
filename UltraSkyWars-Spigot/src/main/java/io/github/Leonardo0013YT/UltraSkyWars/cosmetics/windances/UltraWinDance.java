@@ -8,6 +8,7 @@ import io.github.Leonardo0013YT.UltraSkyWars.utils.ItemBuilder;
 import io.github.Leonardo0013YT.UltraSkyWars.utils.NBTEditor;
 import io.github.Leonardo0013YT.UltraSkyWars.utils.Utils;
 import io.github.Leonardo0013YT.UltraSkyWars.xseries.XMaterial;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -24,6 +25,21 @@ public class UltraWinDance extends Cosmetic implements Purchasable {
         this.type = plugin.getWindance().get(s + ".type");
         this.icon = Utils.getIcon(plugin.getWindance(), s);
         plugin.getCos().setLastPage("WinDance", page);
+    }
+    
+    @Override
+    public ItemStack getIcon(){
+        return icon.clone();
+    }
+    
+    @Override
+    public String getTypeFormatted(){
+        return "windance";
+    }
+    
+    @Override
+    public String getDisplayName(){
+        return ChatColor.translateAlternateColorCodes('&', icon.getItemMeta().getDisplayName());
     }
     
     public ItemStack getIcon(Player p){

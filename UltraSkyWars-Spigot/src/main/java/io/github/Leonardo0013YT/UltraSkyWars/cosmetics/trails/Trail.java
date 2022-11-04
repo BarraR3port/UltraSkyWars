@@ -8,6 +8,7 @@ import io.github.Leonardo0013YT.UltraSkyWars.utils.ItemBuilder;
 import io.github.Leonardo0013YT.UltraSkyWars.utils.NBTEditor;
 import io.github.Leonardo0013YT.UltraSkyWars.utils.Utils;
 import io.github.Leonardo0013YT.UltraSkyWars.xseries.XMaterial;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -25,6 +26,21 @@ public class Trail extends Cosmetic {
     private final int amount;
     private final double range;
     private final double speed;
+    
+    @Override
+    public ItemStack getIcon(){
+        return icon.clone();
+    }
+    
+    @Override
+    public String getTypeFormatted(){
+        return "trail";
+    }
+    
+    @Override
+    public String getDisplayName(){
+        return ChatColor.translateAlternateColorCodes('&', icon.getItemMeta().getDisplayName());
+    }
     
     public Trail(UltraSkyWars plugin, String path){
         super(plugin.getTrail(), path, "trails");

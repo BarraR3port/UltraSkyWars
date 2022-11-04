@@ -7,6 +7,7 @@ import io.github.Leonardo0013YT.UltraSkyWars.utils.ItemBuilder;
 import io.github.Leonardo0013YT.UltraSkyWars.utils.NBTEditor;
 import io.github.Leonardo0013YT.UltraSkyWars.utils.Utils;
 import io.github.Leonardo0013YT.UltraSkyWars.xseries.XMaterial;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -23,6 +24,21 @@ public class UltraWinEffect extends Cosmetic {
         this.type = plugin.getWineffect().get(s + ".type");
         this.icon = Utils.getIcon(plugin.getWineffect(), s);
         plugin.getCos().setLastPage("WinEffect", page);
+    }
+    
+    @Override
+    public ItemStack getIcon(){
+        return icon;
+    }
+    
+    @Override
+    public String getTypeFormatted(){
+        return "winEffect";
+    }
+    
+    @Override
+    public String getDisplayName(){
+        return ChatColor.translateAlternateColorCodes('&', icon.getItemMeta().getDisplayName());
     }
     
     public ItemStack getIcon(Player p){

@@ -2,12 +2,13 @@ package io.github.Leonardo0013YT.UltraSkyWars.superclass;
 
 import io.github.Leonardo0013YT.UltraSkyWars.config.Settings;
 import io.github.Leonardo0013YT.UltraSkyWars.interfaces.Purchasable;
+import org.bukkit.inventory.ItemStack;
 
 public abstract class Cosmetic implements Purchasable {
     
-    public String name, permission, autoGivePermission;
-    public boolean isBuy, needPermToBuy;
-    public int id, slot, page, price;
+    protected final boolean isBuy, needPermToBuy;
+    protected final int id, slot, page, price;
+    protected String name, permission, autoGivePermission;
     
     public Cosmetic(Settings config, String path, String type){
         this.name = config.get(path + ".name");
@@ -20,6 +21,12 @@ public abstract class Cosmetic implements Purchasable {
         this.isBuy = config.getBoolean(path + ".isBuy");
         this.needPermToBuy = config.getBooleanOrDefault(path + ".needPermToBuy", false);
     }
+    
+    public abstract ItemStack getIcon();
+    
+    public abstract String getTypeFormatted();
+    
+    public abstract String getDisplayName();
     
     @Override
     public String getPermission(){

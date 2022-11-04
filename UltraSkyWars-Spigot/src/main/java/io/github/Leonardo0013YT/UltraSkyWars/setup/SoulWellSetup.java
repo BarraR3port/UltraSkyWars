@@ -1,6 +1,9 @@
 package io.github.Leonardo0013YT.UltraSkyWars.setup;
 
 import io.github.Leonardo0013YT.UltraSkyWars.UltraSkyWars;
+import io.github.Leonardo0013YT.UltraSkyWars.cosmetics.kits.Kit;
+import io.github.Leonardo0013YT.UltraSkyWars.enums.RewardType;
+import io.github.Leonardo0013YT.UltraSkyWars.superclass.Cosmetic;
 import io.github.Leonardo0013YT.UltraSkyWars.utils.NBTEditor;
 import io.github.Leonardo0013YT.UltraSkyWars.xseries.XMaterial;
 import org.bukkit.Material;
@@ -59,4 +62,24 @@ public class SoulWellSetup {
         p.sendMessage(plugin.getLang().get(p, "setup.soulwellreward.saveC"));
     }
     
+    public void autoCreateRewards(Player p){
+        for ( Cosmetic cosmetic : UltraSkyWars.get().getCos().getCosmetics() ){
+            if (cosmetic.getName().equalsIgnoreCase("default")) continue;
+            RewardType type = RewardType.getRandom();
+            SoulWellRewardSetup swrs = new SoulWellRewardSetup(cosmetic.getName(), type, type.getChance());
+            swrs.setIcon(cosmetic.getIcon());
+            swrs.getCmds().add("/sw " + cosmetic.getTypeFormatted() + " add <player> " + cosmetic.getId());
+            rewards.add(swrs);
+        }
+        
+        for ( Kit kit : plugin.getKm().getKits().values() ){
+            RewardType type = RewardType.getRandom();
+            SoulWellRewardSetup swrs = new SoulWellRewardSetup(kit.getName(), type, type.getChance());
+            swrs.setIcon(kit.getIcon());
+            swrs.getCmds().add("/sw kit add <player> " + kit.getId());
+            rewards.add(swrs);
+        }
+        
+        saveSoulWell(p);
+    }
 }
